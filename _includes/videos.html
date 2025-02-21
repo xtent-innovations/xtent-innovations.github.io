@@ -1,0 +1,63 @@
+<!-- Portfolio Grid -->
+{% if site.locale and site.locale != "" and site.locale != nil %}
+<section class="bg-light page-section" id="{{ site.data.sitetext.videos.section | default: "videos" }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">{{ site.data.sitetext[site.locale].videos.title | markdownify | default: "Videos" }}</h2>
+        <h3 class="section-subheading text-muted">{{ site.data.sitetext[site.locale].videos.text | markdownify }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      {% for video in site.data.sitetext[site.locale].videos.list %}
+      <div class="col-md-6 mb-4">
+        <div class="video-container">
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/{{ video.id }}"
+            title="{{ video.title }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+          <h4 class="mt-3">{{ video.title }}</h4>
+          <p class="text-muted">{{ video.subtitle }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% else %}
+<section class="bg-light page-section" id="{{ site.data.sitetext.videos.section | default: "videos" }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase">{{ site.data.sitetext.videos.title | markdownify | default: "Videos" }}</h2>
+        <h3 class="section-subheading text-muted">{{ site.data.sitetext.videos.text | markdownify }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      {% for video in site.data.sitetext.videos.list %}
+      <div class="col-md-6 mb-4">
+        <div class="video-container">
+          <iframe
+            width="100%"
+            height="315"
+            src="https://www.youtube.com/embed/{{ video.id }}"
+            title="{{ video.title }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+          <h4 class="mt-3">{{ video.title }}</h4>
+          <p class="text-muted">{{ video.subtitle }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% include modals.html %}

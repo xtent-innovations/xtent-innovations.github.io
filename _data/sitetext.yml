@@ -105,7 +105,7 @@ en: &DEFAULT_EN
           flexible, and it's here with Xtent.
 
 
-          We also provide services from conceptualization, CAD design and prototyping of new robots including specialized algorithms for
+          We provide services from conceptualization, CAD design and prototyping of new robots including specialized algorithms for
           ground and aerial robots, robot arms, motion planning and control, deep learning for object detction and simultaneous localization
           and mapping
     section: about
@@ -159,7 +159,7 @@ en: &DEFAULT_EN
 
   contact:
     title: "Contact Us"
-    text: "Nandanam, Kakkat thazham vayal, Puthiyangadi P.O., Kozhikode, Kerala 673021."
+    text: "Nandanam, Kakkat thazham vayal, Puthiyangadi P.O., Kozhikode, Kerala, India, 673021."
 #    text: "Lorem ipsum or call 2154"
     section: contact
     name: "Name*"

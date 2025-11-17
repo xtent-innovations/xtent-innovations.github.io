@@ -157,6 +157,60 @@ en: &DEFAULT_EN
           - url: https://in.linkedin.com/in/ashwin-k-prabhakaran
             icon: fab fa-linkedin-in
 
+  careers:
+    title: "Careers"
+    section: "careers"
+    text: "Apply by 5 December 2025 — short submissions preferred"
+    job_title: "CAD Internship"
+    probation: "4 weeks — allowance during probation (max Rs. 500/week), Rs. 2,000/week after successful probation"
+    closing_date: "2025-12-05"
+    apply_email: "xtent.innovations@gmail.com"
+    body: |
+      
+      We are currently looking to hire an intern who could dig deeper than what is being asked for and push
+      the boundaries of hardware design using CAD software (SolidWorks).
+      This internship would be a great opportunity to learn about the complete lifecycle of hardware development
+      and deployment for technologies that are not there in the market yet. **Preference will be given to 
+      candidates with demonstrable experience irrespective of educational qualifications**. You will be under the
+      direct supervision of our CEO.
+
+      **Work mode & hours**
+      - Mostly remote with **bi-weekly meetups** at one of our offices.
+      - **Hours:** Up to **20 hours / week**.
+      - **Probation:** 4 weeks. During probation allowance is provided (max **Rs. 500 / week**). After successful probation this increases to **Rs. 2,000 / week**.
+
+      **Location**
+      - Calicut (IIMK campus) & Kochi (Maker Village), Kerala, India.
+
+      **Duration**
+      - 3 months (possibility of extension or conversion to a full-time role).
+
+      **Essential**
+      - Proficiency in CAD software (preferably **SolidWorks**).
+      - Good communication skills.
+      - Ability to meet strict timelines / deadlines.
+      - Attention to details.
+
+      **Desirable**
+      - Degree in Mechanical / Civil Engineering (Encouraged to apply if they meet the essential 
+        requirements irrespective of education).
+      - Experience with structural analysis.
+      - Experience with engineering design.
+
+      **Interview process**
+      1. Short initial call.
+      2. Practical modelling/design task in CAD / SolidWorks (you will be asked to model basic → complex parts/assemblies).
+      3. Final discussion.
+
+      **How to apply**
+      - All that is required are as follows (max 1/2 of A4 paper).
+        - Your name and contact details.
+        - A project portfolio site / GitHub link (if any)
+        - Links to your best works in CAD / SolidWorks (max three)
+      - Fill out the form to [apply](https://forms.gle/KQHAzAULmwFNJbYK7)
+
+      **Note**: None of us are going to read a long CV. So please save yourselves some time and ours by keeping it short.
+
   contact:
     title: "Contact Us"
     text: "Nandanam, Kakkat thazham vayal, Puthiyangadi P.O., Kozhikode, Kerala, India, 673021."

@@ -23,6 +23,8 @@ en: &DEFAULT_EN
       section: videos
     - title: "Team"
       section: team
+    - title: "Careers"
+      section: careers
     - title: "Contact"
       section: contact
 #    - title: "Theme Source"

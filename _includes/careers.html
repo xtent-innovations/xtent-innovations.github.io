@@ -1,0 +1,76 @@
+{% assign ct = site.data.sitetext %}
+{% if site.locale and site.locale != "" and site.locale != nil and site.data.sitetext[site.locale] %}
+  {% assign c = site.data.sitetext[site.locale].careers %}
+{% else %}
+  {% assign c = site.data.sitetext.careers %}
+{% endif %}
+
+<section class="page-section" id="{{ c.section | default: 'careers' }}">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h1 class="section-heading text-uppercase">{{ c.title | default: "Careers" }}</h1>
+        {% if c.text %}
+          <p class="section-subheading text-muted">{{ c.text }}</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <article class="job-card">
+          <header class="job-head">
+            <h2 class="job-role">{{ c.job_title | default: "Role" }}</h2>
+            <p class="job-meta">
+              <strong>{{ c.location }}</strong>
+              {% if c.duration %} • {{ c.duration }}{% endif %}
+              {% if c.hours %} • {{ c.hours }}{% endif %}
+            </p>
+            {% if c.closing_date %}
+              <p class="apply-by">Apply by: <strong>{{ c.closing_date | date: "%-d %B %Y" }}</strong></p>
+            {% endif %}
+          </header>
+
+          <div class="job-body">
+            {{ c.body | markdownify }}
+          </div>
+
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Page-scoped minimal styles — move to main stylesheet if desired */
+.job-card {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1.25rem;
+  color: #222;
+  line-height: 1.6;
+  margin-top: 1.25rem;
+}
+.job-head { margin-bottom: .5rem; text-align: left; }
+.job-role { margin: 0 0 .25rem 0; font-size: 1.5rem; }
+.job-meta { color: #555; margin-bottom: .5rem; font-size: .95rem; text-align: left; }
+.apply-by { color: #333; margin-bottom: .75rem; text-align: left; }
+.job-body { text-align: left; margin-top: .5rem; }
+.job-body h2, .job-body h3 { margin-top: .5rem; }
+.job-body ul { margin-left: 1.15rem; }
+.apply-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .55rem .95rem;
+  border-radius: 6px;
+  background: transparent;
+  border: 1px solid #222;
+  text-decoration: none;
+  color: #222;
+}
+@media (prefers-color-scheme: dark) {
+  .job-card { background: #121212; border-color: #2b2b2b; color: #ddd; }
+  .apply-btn { border-color: #ddd; color: #ddd; }
+}
+</style>

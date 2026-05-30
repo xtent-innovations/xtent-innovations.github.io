@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company — Xtent Innovations</title>
+  <meta name="description" content="Xtent has resolved a longstanding constraint in robotic dexterity — snake-like agility with true portability. Built on more than a decade of research across India and the UK.">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════════════════════
+       XTENT INNOVATIONS — COMPANY PAGE
+       Direction: Editorial. Founder-led. Light mode.
+       Rhythm: Cinematic hero → reference strip → editorial
+       founder bios → cinematic conviction (dark inversion) →
+       editorial routing band → reference backers → cinematic CTA.
+    ══════════════════════════════════════════════════════ */
+
+    :root {
+      --bg:        #F9F9F9;
+      --text:      #05070A;
+      --text-2:    #0E1525;
+      --navy:      #13213C;
+      --silver:    #B8BCC6;
+      --red:       #721121;
+      --red-h:     #8D1528;
+      --dark-bg:   #05070A;
+      --dark-2:    #0E1525;
+      --border:    rgba(5,7,10,0.08);
+      --border-md: rgba(5,7,10,0.14);
+      --ease:      cubic-bezier(0.16,1,0.3,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      line-height: 1.7; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ──────────────────────────────────────────────────
+       NAV (mirrors other pages)
+    ────────────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 4rem;
+      transition: background 0.4s var(--ease), box-shadow 0.4s, padding 0.4s var(--ease);
+    }
+    nav.scrolled {
+      background: rgba(249,249,249,0.92);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border); padding: 0.3rem 4rem;
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo img { height: 110px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-2); text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-links a.active { color: var(--red); }
+    .nav-cta {
+      border: 1px solid var(--red) !important; padding: 0.55rem 1.4rem;
+      color: var(--red) !important;
+      transition: background 0.25s, color 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--red) !important; color: var(--bg) !important; }
+
+    /* ──────────────────────────────────────────────────
+       SHARED LAYOUT TOKENS
+    ────────────────────────────────────────────────── */
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 4rem; }
+    section { padding: 7rem 0; position: relative; }
+
+    .s-eye {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--red);
+      display: inline-block; margin-bottom: 1.2rem;
+    }
+    .s-eye::before {
+      content: ''; display: inline-block;
+      width: 24px; height: 1px; background: var(--red);
+      vertical-align: middle; margin-right: 0.8rem; margin-bottom: 3px;
+    }
+    .s-eye-dim {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(249,249,249,0.5);
+      display: inline-block; margin-bottom: 1.2rem;
+    }
+
+    .s-hl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 300;
+      color: var(--text); line-height: 1.18; letter-spacing: -0.005em;
+      margin-bottom: 1.2rem;
+    }
+    .s-hl em { font-style: italic; color: var(--navy); }
+
+    .s-hl-inv {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem); font-weight: 300;
+      color: var(--bg); line-height: 1.18; letter-spacing: -0.005em;
+      margin-bottom: 1.2rem;
+    }
+    .s-hl-inv em { font-style: italic; color: rgba(249,249,249,0.7); }
+
+    /* Reveal animation */
+    .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+    .reveal.d1 { transition-delay: 0.12s; }
+    .reveal.d2 { transition-delay: 0.24s; }
+    .reveal.d3 { transition-delay: 0.36s; }
+
+    /* ──────────────────────────────────────────────────
+       §1 — HERO (mirrors site-wide hero rhythm)
+    ────────────────────────────────────────────────── */
+    .co-hero {
+      position: relative; min-height: 100vh; display: flex; flex-direction: column;
+      background: var(--bg); overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .co-hero-graphic {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 75%; height: 100%;
+      background-image: url('assets/hero-clean.png');
+      background-size: cover; background-position: left center; pointer-events: none;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0,0,0,0.5) 25%, black 50%);
+      mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0,0,0,0.3) 25%, black 50%);
+      opacity: 0; animation: fadeIn 1.4s ease 0.3s forwards;
+    }
+    .co-hero-grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(5,7,10,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(5,7,10,0.022) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .co-hero-inner {
+      position: relative; z-index: 2; width: 100%;
+      flex: 1; display: flex; align-items: center;
+      padding: 8rem 4rem 3rem 4rem;
+    }
+    .co-hero-text { max-width: 640px; }
+    .co-hero-eye {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 2rem;
+      opacity: 0; animation: riseIn 0.9s var(--ease) 0.2s forwards;
+    }
+    .co-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 4.8vw, 4rem);
+      font-weight: 300; line-height: 1.07; letter-spacing: -0.015em;
+      color: var(--text); margin-bottom: 2rem;
+      opacity: 0; animation: riseIn 0.9s var(--ease) 0.4s forwards;
+    }
+    .co-hero h1 em { font-style: italic; color: var(--navy); }
+    .co-hero p {
+      font-size: 1.15rem; color: var(--navy); max-width: 520px;
+      line-height: 1.75;
+      opacity: 0; animation: riseIn 0.9s var(--ease) 0.6s forwards;
+    }
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes riseIn { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ──────────────────────────────────────────────────
+       §2 — AT-A-GLANCE RIBBON (inside hero bottom)
+    ────────────────────────────────────────────────── */
+    .glance-ribbon {
+      position: absolute;
+      left: 0; right: 0; bottom: 0;
+      z-index: 3;
+      padding: 1rem 4rem 1.4rem;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+      opacity: 0; animation: riseIn 0.9s var(--ease) 1s forwards;
+    }
+    .glance-strip {
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      max-width: none;
+    }
+    .glance-item {
+      padding: 0.6rem 1.6rem 0.6rem 1.6rem;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 0.35rem;
+    }
+    
+    .glance-item:last-child { border-right: none; }
+    .glance-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red);
+    }
+    .glance-value {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem; letter-spacing: 0.03em;
+      color: var(--text); line-height: 1.4;
+    }
+    .glance-value em {
+      font-style: normal; color: var(--red);
+    }
+
+    /* ──────────────────────────────────────────────────
+       §3 — FOUNDERS (editorial)
+    ────────────────────────────────────────────────── */
+    .founders-sec { background: var(--bg); padding-top: 6rem; padding-bottom: 6rem; }
+    .founders-intro {
+      max-width: 1100px; margin: 0 auto 3.5rem;
+      text-align: center;
+    }
+    .founders-intro .s-eye { display: inline-block; }
+    .founders-intro .s-hl {
+      font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+      max-width: none; margin: 0 auto 1rem;
+    }
+    .founders-intro p {
+      font-size: 1.05rem; color: var(--text-2);
+      line-height: 1.65; max-width: 78ch; margin: 0 auto;
+    }
+
+    .founders-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2.5rem; align-items: start;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .founder-card {
+      display: grid; grid-template-rows: auto auto;
+      gap: 1.6rem;
+    }
+    .founder-portrait {
+      aspect-ratio: 4 / 5;
+      max-width: 240px;
+      background: #EDEEF1;
+      position: relative; overflow: hidden;
+      border: 1px solid var(--border-md);
+    }
+    /* Typographic plate placeholder — shows founder initials until photo is dropped in */
+    .founder-portrait::before {
+      content: attr(data-initials);
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 300; font-style: italic;
+      color: rgba(5,7,10,0.10);
+      letter-spacing: 0.04em;
+    }
+    /* Faint contour overlay echoing technology aesthetic */
+    .founder-portrait::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 30% 70%, rgba(5,7,10,0.025) 0%, transparent 50%),
+        repeating-linear-gradient(
+          45deg,
+          transparent 0px, transparent 60px,
+          rgba(5,7,10,0.02) 60px, rgba(5,7,10,0.02) 61px
+        );
+      pointer-events: none;
+    }
+    .founder-portrait img {
+      width: 100%; height: 100%; object-fit: cover;
+      position: relative; z-index: 1;
+      filter: grayscale(1) contrast(1.05);
+      background: #EDEEF1;
+    }
+
+    .founder-meta-eye {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 0.7rem;
+    }
+    .founder-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 400;
+      color: var(--text); line-height: 1.15;
+      margin-bottom: 0.9rem; letter-spacing: -0.005em;
+    }
+    .founder-creds {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.74rem; letter-spacing: 0.04em;
+      color: var(--navy); line-height: 1.7;
+      margin-bottom: 1.8rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .founder-creds .cred-line { display: block; }
+    .founder-creds .cred-line + .cred-line { margin-top: 0.1rem; }
+    .founder-creds .cred-deg {
+      color: var(--text); font-weight: 400;
+    }
+    .founder-creds .cred-sep {
+      color: var(--silver); margin: 0 0.55rem;
+    }
+    .founder-creds .cred-inst {
+      color: var(--text-2);
+    }
+
+    .founder-bio {
+      font-size: 1.0rem; line-height: 1.7;
+      color: var(--text-2); margin-bottom: 1.6rem;
+    }
+    .founder-bio + .founder-bio { margin-top: -0.6rem; }
+
+    .founder-prev {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.04em;
+      line-height: 1.75;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      margin-bottom: 1.4rem;
+    }
+    .founder-prev-eye {
+      display: block;
+      font-size: 0.62rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--silver);
+      margin-bottom: 0.6rem;
+    }
+    .founder-prev .prev-line { display: block; }
+    .founder-prev .prev-line + .prev-line { margin-top: 0.15rem; }
+    .founder-prev .prev-yr {
+      color: var(--silver); margin-right: 0.8rem;
+      display: inline-block; min-width: 5.2em;
+    }
+    .founder-prev .prev-role {
+      color: var(--text); font-weight: 400;
+    }
+    .founder-prev .prev-sep {
+      color: var(--silver); margin: 0 0.45rem;
+    }
+    .founder-prev .prev-inst {
+      color: var(--text-2);
+    }
+
+    .founder-links {
+      display: flex; gap: 1.4rem; flex-wrap: wrap;
+    }
+    .founder-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.74rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--red);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .founder-link:hover { border-bottom-color: var(--red); }
+    .founder-link::after {
+      content: ' →'; margin-left: 0.2rem;
+    }
+
+    /* ──────────────────────────────────────────────────
+       FOUNDERS — inline research / publications intro
+    ────────────────────────────────────────────────── */
+    .founders-pubs-intro {
+      max-width: 920px; margin: 4.5rem auto 0;
+      text-align: center;
+    }
+    .founders-pubs-intro h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 2.1vw, 1.75rem);
+      font-weight: 300; color: var(--text);
+      line-height: 1.3; max-width: 40ch;
+      margin: 0 auto 1.6rem;
+    }
+    .founders-pubs-intro h3 em { font-style: italic; color: var(--navy); }
+
+    /* ──────────────────────────────────────────────────
+       VIEWPORT RHYTHM — major sections aim for 100vh
+       (min-height; content-driven if it exceeds)
+    ────────────────────────────────────────────────── */
+    .founders-sec,
+    .routing-sec {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+
+    /* ──────────────────────────────────────────────────
+       §5 — ROUTING BAND (editorial, 2-col)
+    ────────────────────────────────────────────────── */
+    .routing-sec { background: var(--bg); padding: 9rem 0; }
+    .routing-intro {
+      max-width: 1280px; margin: 0 auto 4rem;
+      padding: 0 4rem;
+    }
+    .routing-grid {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 4rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border-md);
+    }
+    .route-col {
+      padding: 3rem 0 0;
+      border-right: 1px solid var(--border);
+      padding-right: 3rem;
+    }
+    .route-col + .route-col {
+      padding-left: 3rem; padding-right: 0;
+      border-right: none;
+    }
+    .route-eye {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 1.2rem;
+    }
+    .route-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 300;
+      color: var(--text); line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .route-body {
+      font-size: 1.0rem; color: var(--text-2);
+      line-height: 1.65; margin-bottom: 1.6rem;
+      max-width: 38ch;
+    }
+    .route-stat {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem; letter-spacing: 0.08em;
+      color: var(--navy); margin-bottom: 2rem;
+      padding: 0.8rem 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      max-width: 38ch;
+    }
+    .route-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--red);
+      text-decoration: none;
+      border-bottom: 1px solid var(--red);
+      padding-bottom: 0.3rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .route-link::after {
+      content: ' →'; margin-left: 0.3rem;
+      transition: margin-left 0.25s var(--ease);
+      display: inline-block;
+    }
+    .route-link:hover { color: var(--red-h); border-color: var(--red-h); }
+    .route-link:hover::after { margin-left: 0.6rem; }
+
+    /* ──────────────────────────────────────────────────
+       MEDIA LIST — inline within routing band (01 · Media)
+    ────────────────────────────────────────────────── */
+    .media-list-wrap {
+	  position: relative;
+	  margin: 1.4rem 0 1.8rem;
+	  max-width: 40ch;
+	}
+	.media-list-wrap::after {
+	  content: '';
+	  position: absolute;
+	  left: 0; right: 6px; bottom: 0;
+	  height: 40px;
+	  background: linear-gradient(to bottom, transparent, var(--bg));
+	  pointer-events: none;
+	}
+	.media-list {
+	  display: flex; flex-direction: column;
+	  max-height: 260px;
+	  overflow-y: auto;
+	  padding-right: 6px;
+	  border-top: 1px solid var(--border);
+	  scrollbar-width: thin;
+	  scrollbar-color: var(--silver) transparent;
+	}
+	.media-list::-webkit-scrollbar { width: 6px; }
+	.media-list::-webkit-scrollbar-track { background: transparent; }
+	.media-list::-webkit-scrollbar-thumb {
+	background: var(--silver);
+	border-radius: 3px;
+	}
+	.media-list::-webkit-scrollbar-thumb:hover { background: var(--red); }
+    .media-item {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 1.2rem; align-items: baseline;
+      padding: 0.95rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .media-date {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--silver);
+      white-space: nowrap;
+    }
+    .media-body { display: flex; flex-direction: column; gap: 0.25rem; }
+    .media-source {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(141,21,40,0.85);
+    }
+    .media-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 400;
+      color: var(--text); line-height: 1.4;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .media-title:hover {
+      border-bottom-color: var(--text);
+    }
+    .media-title::after {
+      content: ' ↗';
+      font-size: 0.78rem;
+      color: var(--silver);
+      margin-left: 0.25rem;
+    }
+
+    /* ──────────────────────────────────────────────────
+       §6+7 — CLOSING VIEWPORT: AFFILIATIONS + STRATEGIC INQUIRY
+       (combined into a single 100vh slide)
+    ────────────────────────────────────────────────── */
+    .closing-sec {
+      min-height: 100vh;
+      background: var(--bg);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .backers-block { padding-bottom: 4rem; }
+    .backers-head {
+      max-width: 1280px; margin: 0 auto 2.5rem;
+      padding: 0 4rem;
+      display: grid; grid-template-columns: 320px 1fr;
+      gap: 3rem; align-items: baseline;
+    }
+    .backers-head .s-hl { font-size: 1.5rem; margin-bottom: 0; }
+    .backers-head p {
+      font-size: 0.95rem; color: var(--text-2);
+      line-height: 1.6; max-width: 50ch;
+    }
+    .backers-strip {
+      max-width: 1280px; margin: 0 auto;
+      padding: 0 4rem;
+      display: grid; grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border-md);
+      border-bottom: 1px solid var(--border-md);
+    }
+    .backer-item {
+      padding: 1.6rem 1.2rem;
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 0.35rem;
+      min-height: 110px;
+      justify-content: center;
+    }
+    .backer-item:last-child { border-right: none; }
+    .backer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem; font-weight: 400;
+      color: var(--text); line-height: 1.2;
+    }
+    .backer-kind {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--silver);
+    }
+
+    .cta-block {
+      text-align: center;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      max-width: 1280px; margin: 0 auto;
+    }
+    .cta-eye {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .cta-hl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 300;
+      line-height: 1.2; letter-spacing: -0.005em;
+      max-width: 30ch; margin: 0 auto 0.6rem;
+    }
+    .cta-hl em { font-style: italic; color: var(--navy); }
+    .cta-conf {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.06em;
+      color: var(--silver); margin: 0.8rem auto 1.8rem;
+      max-width: 50ch;
+    }
+    .btn-primary {
+      display: inline-block;
+      padding: 0.95rem 2.2rem;
+      border: 1px solid var(--red);
+      color: var(--red); background: transparent;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem; letter-spacing: 0.14em;
+      text-transform: uppercase; text-decoration: none;
+      transition: background 0.25s, color 0.25s;
+    }
+    .btn-primary:hover { background: var(--red); color: var(--bg); }
+
+    /* ──────────────────────────────────────────────────
+       FOOTER (mirrors other pages)
+    ────────────────────────────────────────────────── */
+    footer {
+      background: var(--dark-bg); color: var(--bg);
+      padding: 4rem 0 2rem;
+    }
+    .foot-inner {
+      display: grid; grid-template-columns: auto 1fr auto;
+      gap: 3rem; align-items: center;
+    }
+    .foot-logo img { height: 80px; width: auto; opacity: 0.85; }
+    .foot-nav {
+      display: flex; gap: 2rem; list-style: none;
+      flex-wrap: wrap; justify-content: center;
+    }
+    .foot-nav a {
+      color: rgba(249,249,249,0.65);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .foot-nav a:hover { color: var(--bg); }
+    .foot-copy {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.08em;
+      color: rgba(184,188,198,0.5);
+    }
+
+
+    /* ──────────────────────────────────────────────────
+       PUBLICATIONS REVEAL PANEL — inline on Company page
+       (Mirrors the dense table on research.html; revealed
+       on demand when "View the research record" is clicked.)
+    ────────────────────────────────────────────────── */
+    .route-link .chev {
+      display: inline-block;
+      transition: transform 0.35s var(--ease);
+    }
+    .route-link.is-open .chev {
+      transform: rotate(180deg);
+    }
+
+    .pubs-panel-wrap {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s var(--ease);
+    }
+    .pubs-panel-wrap.open {
+      max-height: 5000px; /* generous ceiling; actual height is content-driven */
+    }
+    .pubs-panel {
+      background: var(--dark-2);
+      color: var(--bg);
+      margin-top: 4rem;
+      padding: 4.5rem 4rem 5rem;
+      position: relative;
+      border-top: 1px solid var(--border-md);
+      opacity: 0;
+      transform: translateY(-8px);
+      transition: opacity 0.5s var(--ease) 0.1s, transform 0.5s var(--ease) 0.1s;
+    }
+    .pubs-panel-wrap.open .pubs-panel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .pubs-panel-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 1rem;
+      max-width: 1280px; margin-left: auto; margin-right: auto;
+    }
+    .pubs-panel-head .s-eye-dim {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: rgba(249,249,249,0.5);
+      display: inline-block;
+    }
+    .pubs-panel-head h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-weight: 300; color: var(--bg);
+      line-height: 1.2; margin-top: 0.4rem; max-width: 30ch;
+    }
+    .pubs-panel-close {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(249,249,249,0.7);
+      background: transparent;
+      border: 1px solid rgba(249,249,249,0.2);
+      padding: 0.55rem 1.1rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      flex-shrink: 0;
+    }
+    .pubs-panel-close:hover {
+      color: var(--bg);
+      border-color: rgba(249,249,249,0.5);
+      background: rgba(249,249,249,0.04);
+    }
+    .pubs-panel .pubs-clusters {
+      max-width: 1280px; margin: 2rem auto 0;
+    }
+
+    /* Publications styles — copied from research.html so the inline
+       panel renders identically to the canonical research page. */
+    .pubs-clusters {
+      display: flex; flex-direction: column;
+      gap: 3.5rem;
+    }
+    .pub-cluster { display: flex; flex-direction: column; }
+    .cluster-head {
+      display: grid; grid-template-columns: 280px 1fr;
+      gap: 3rem; align-items: baseline;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(249,249,249,0.18);
+      margin-bottom: 0;
+    }
+    .cluster-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 300;
+      color: var(--bg); line-height: 1.2;
+    }
+    .cluster-desc {
+      font-size: 0.92rem; color: rgba(249,249,249,0.55);
+      line-height: 1.55;
+    }
+    .cluster-count {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.15em;
+      color: rgba(184,188,198,0.45);
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+    .pub-table { display: flex; flex-direction: column; }
+    .pub-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 220px 60px;
+      gap: 1.4rem; align-items: baseline;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid rgba(249,249,249,0.06);
+      transition: background 0.2s;
+    }
+    .pub-row:hover { background: rgba(249,249,249,0.02); }
+    .pub-row:last-child { border-bottom: none; }
+    .pub-row-venue {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(141,21,40,0.85);
+    }
+    .pub-row-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; font-weight: 300;
+      color: rgba(249,249,249,0.92); line-height: 1.45;
+    }
+    .pub-row-title a {
+      color: inherit; text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .pub-row-title a:hover { border-bottom-color: rgba(249,249,249,0.35); }
+    .pub-row-authors {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.03em;
+      color: rgba(184,188,198,0.5); line-height: 1.45;
+    }
+    .pub-row-year {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem; letter-spacing: 0.05em;
+      color: rgba(184,188,198,0.55);
+      text-align: right;
+    }
+
+    /* ──────────────────────────────────────────────────
+       RESPONSIVE
+    ────────────────────────────────────────────────── */
+    @media (max-width: 1100px) {
+      .glance-strip { grid-template-columns: repeat(2, 1fr); }
+      .glance-item:nth-child(2n) { border-right: none; }
+      .glance-item:nth-child(-n+4) { border-bottom: 1px solid var(--border); }
+      .backers-strip { grid-template-columns: repeat(2, 1fr); }
+      .backer-item:nth-child(2n) { border-right: none; }
+      .backer-item:nth-child(-n+4) { border-bottom: 1px solid var(--border); }
+      .founders-grid { gap: 3rem; }
+    }
+
+    @media (max-width: 900px) {
+      nav { padding: 0.5rem 1.8rem; }
+      nav.scrolled { padding: 0.3rem 1.8rem; }
+      .nav-links { display: none; }
+      .nav-logo img { height: 80px; }
+      .container { padding: 0 1.8rem; }
+      .co-hero { min-height: auto; padding: 0 0 0 0; }
+      .co-hero-inner { padding: 7rem 1.8rem 3rem; }
+      .co-hero-graphic {
+        width: 100%; opacity: 0.35;
+        -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 40%, black 90%);
+        mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.4) 40%, black 90%);
+      }
+      .glance-ribbon { padding: 1rem 1.8rem 1.4rem; }
+      .glance-strip { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+      .glance-item { border-right: none; padding: 0.5rem 0; }
+      .founders-sec, .routing-sec { min-height: auto; padding: 4rem 0; }
+      .founders-intro { padding: 0 1.8rem; margin-bottom: 3rem; }
+      .founders-grid {
+        grid-template-columns: 1fr; gap: 3rem;
+        padding: 0 1.8rem;
+      }
+      .founder-portrait { max-width: 200px; margin: 0 auto; }
+      .founders-pubs-intro { padding: 0 1.8rem; margin-top: 3.5rem; }
+      .routing-grid { padding: 0 1.8rem; grid-template-columns: 1fr; }
+      .route-col {
+        border-right: none; padding-right: 0;
+        padding-bottom: 2.5rem; margin-bottom: 2.5rem;
+        border-bottom: 1px solid var(--border);
+      }
+      .route-col + .route-col {
+        padding-left: 0; padding-bottom: 0;
+        margin-bottom: 0; border-bottom: none;
+      }
+      .media-list { max-width: 100%; }
+      .media-item { grid-template-columns: 80px 1fr; gap: 0.8rem; }
+      .closing-sec { min-height: auto; padding: 3rem 0; }
+      .backers-head { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1.8rem; }
+      .backers-strip { grid-template-columns: 1fr; padding: 0 1.8rem; }
+      .backer-item { border-right: none; border-bottom: 1px solid var(--border); min-height: auto; padding: 1.4rem 0; }
+      .backer-item:last-child { border-bottom: none; }
+      .cta-block { padding: 2.5rem 1.8rem 0; }
+      .pubs-panel { padding: 3rem 1.8rem 4rem; }
+      .pubs-panel-head { flex-direction: column; gap: 1rem; }
+      .pubs-panel-close { align-self: flex-start; }
+      .cluster-head { grid-template-columns: 1fr; gap: 0.4rem; padding-bottom: 1rem; }
+      .pub-row { grid-template-columns: 56px 1fr; gap: 0.6rem 1rem; padding: 0.9rem 0; }
+      .pub-row-authors { grid-column: 2; padding-top: 0; font-size: 0.68rem; }
+      .pub-row-year { grid-column: 2; text-align: left; }
+      .foot-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════════════ -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo.png" alt="Xtent Innovations">
+    </a>
+    <ul class="nav-links">
+      <li><a href="technology.html">Technology</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="company.html" class="active">Company</a></li>
+      <li><a href="contact.html" class="nav-cta">Strategic Inquiry</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════
+       §1 — HERO
+  ══════════════════════════════════════════════════ -->
+  <section class="co-hero">
+    <div class="co-hero-grid"></div>
+    <div class="co-hero-graphic"></div>
+    <div class="co-hero-inner">
+      <div class="co-hero-text">
+        <p class="co-hero-eye">Company</p>
+        <h1>
+          A decade of <em>research</em>.<br>
+          One unprecedented <em>robotic arm</em>.
+        </h1>
+        <p>
+          Xtent Innovations is built on more than a decade of state-of-the-art R&amp;D
+          across premier institutions in India and the UK. The founders have spent
+          their careers solving the bottlenecks others worked around — and the
+          tentacle-arm platform is the direct result of that work.
+        </p>
+      </div>
+    </div>
+    <div class="glance-ribbon">
+      <div class="glance-strip">
+        <div class="glance-item">
+          <span class="glance-label">Founded</span>
+          <span class="glance-value">February 2025</span>
+        </div>
+        <div class="glance-item">
+          <span class="glance-label">Headquarters</span>
+          <span class="glance-value">Kochi </span>
+        </div>
+        <div class="glance-item">
+          <span class="glance-label">Seed funding</span>
+          <span class="glance-value">₹ 40 L in grants</span>
+        </div>
+        <div class="glance-item">
+          <span class="glance-label">IP status</span>
+          <span class="glance-value">1 patent filed · 16+ publications</span>
+        </div>
+		<div class="glance-item">
+          <span class="glance-label">Tech. status</span>
+          <span class="glance-value"><em>TRL 4</em> → TRL 5</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       §2 — FOUNDERS
+  ══════════════════════════════════════════════════ -->
+  <section class="founders-sec">
+    <div class="container">
+      <div class="founders-intro reveal">
+        <p class="s-eye">Founders</p>
+        <h2 class="s-hl">The two researchers whose synergy resolved an engineering bottleneck.</h2>
+        <p>
+          Both founders hold PhDs in Robotics from the Indian Institute of
+          Science, Bangalore, with subsequent research and industry roles
+          in India and the UK. Xtent's platform is built directly on their published
+          research and engineering work.
+        </p>
+      </div>
+
+      <div class="founders-grid">
+
+        <!-- FOUNDER 1 — ASHWIN -->
+        <div class="founder-card reveal d1">
+          <div class="founder-portrait" data-initials="A·KP">
+            <!-- When monochrome portrait is ready, replace the placeholder by uncommenting: -->
+            <img src="assets/ashwin.png" alt="Dr. Ashwin K.P.">
+          </div>
+          <div>
+            <p class="founder-meta-eye">Co-founder · CEO</p>
+            <h3 class="founder-name">Dr. Ashwin K. P.</h3>
+
+            <div class="founder-creds">
+              <span class="cred-line">
+                <span class="cred-deg">Ph.D. Robotics</span><span class="cred-sep">|</span><span class="cred-inst">Indian Institute of Science, Bangalore</span>
+              </span>
+              <span class="cred-line">
+                <span class="cred-deg">M.E. Design Engineering</span><span class="cred-sep">|</span><span class="cred-inst">BITS Pilani University</span>
+              </span>
+              <span class="cred-line">
+                <span class="cred-deg">B.Tech Mechanical Engineering</span><span class="cred-sep">|</span><span class="cred-inst">Cochin University of Sci. &amp; Tech.</span>
+              </span>
+            </div>
+
+            <p class="founder-bio">
+              Ashwin leads Xtent's business strategy, technology direction,
+              as well as India and UAE business development. His research work
+              spanning a decade focused on a question that has remained
+              consistent across: biological snakes are
+              slender throughout the body and can lift their bodies high and far, 
+	      while robots in the literature require bulky hardware that eliminate the 
+	      snake-like behaviour they aim to replicate. His research, and Xtent's 
+	      platform, address that gap directly.
+            </p>
+
+            <p class="founder-bio">
+              His published work spans kinematic modelling of cable-driven
+              continuum robots, optimization-based motion planning, and dexterous
+              remote intervention. Earlier in his career he held design and
+              avionics engineering roles in industry, followed by a faculty
+              appointment in Mechanical Engineering at BITS Pilani, Goa. He
+              founded Xtent in 2025 to build the system the research had
+              been pointing toward.
+            </p>
+
+            <div class="founder-prev">
+              <span class="founder-prev-eye">Previously</span>
+              <span class="prev-line">
+                <span class="prev-yr">2020–2023</span><span class="prev-role">Assistant Professor</span><span class="prev-sep">·</span><span class="prev-inst">BITS Pilani, K. K. Birla Goa Campus</span>
+              </span>
+              <span class="prev-line">
+                <span class="prev-yr">2018–2020</span><span class="prev-role">Avionics Engineer</span><span class="prev-sep">·</span><span class="prev-inst">Featherdyn Pvt. Ltd.</span>
+              </span>
+              <span class="prev-line">
+                <span class="prev-yr">2008–2010</span><span class="prev-role">Design Engineer, Mechanical</span><span class="prev-sep">·</span><span class="prev-inst">Emerson Network Power India</span>
+              </span>
+            </div>
+
+            <div class="founder-links">
+              <a href="#" class="founder-link" target="_blank" rel="noopener">Google Scholar</a>
+              <a href="#" class="founder-link" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOUNDER 2 — ASHITH -->
+        <div class="founder-card reveal d2">
+          <div class="founder-portrait" data-initials="A·RB">
+            <!-- When monochrome portrait is ready, replace the placeholder by uncommenting: -->
+            <img src="assets/ashith.jpg" alt="Dr. Ashith R. Babu">
+          </div>
+          <div>
+            <p class="founder-meta-eye">Co-founder · CTO</p>
+            <h3 class="founder-name">Dr. Ashith R. Babu</h3>
+
+            <div class="founder-creds">
+              <span class="cred-line">
+                <span class="cred-deg">Ph.D. Robotics</span><span class="cred-sep">|</span><span class="cred-inst">Indian Institute of Science, Bangalore</span>
+              </span>
+              <span class="cred-line">
+                <span class="cred-deg">M.E. Mechanical Engineering</span><span class="cred-sep">|</span><span class="cred-inst">Indian Institute of Science, Bangalore</span>
+              </span>
+              <span class="cred-line">
+                <span class="cred-deg">B.Tech Mechanical Engineering</span><span class="cred-sep">|</span><span class="cred-inst">College of Engineering Trivandrum</span>
+              </span>
+            </div>
+
+            <p class="founder-bio">
+              Ashith leads Xtent's control systems architecture, software
+              development, and the company's presence in the UK and European
+              subsea ecosystem. His doctoral and postdoctoral work covered
+              learning-based control, free-floating spacecraft manipulation,
+              and autonomous robotics architectures across IISc Bangalore,
+              the University of Lincoln, and the Surrey Space Centre. 
+              He subsequently moved into industrial software engineering,
+              developing end-to-end software stacks for innovative
+	      robots that are currently being sold in the European markets. 
+	      </p>
+            <p class="founder-bio">
+	      Ashith's proprietary software and learning-based control algorithms power the tentacle-arm platform that gives Xtent its competitive edge. His UK base grants the company access to the state-of-the-art research networks in the UK as well as the North Sea subsea inspection market.            </p>
+
+            <div class="founder-prev">
+              <span class="founder-prev-eye">Previously</span>
+              <span class="prev-line">
+                <span class="prev-yr">2023–2024</span><span class="prev-role">Robotics Software Engineer</span><span class="prev-sep">·</span><span class="prev-inst">Theia Robotics Ltd., UK</span>
+              </span>
+              <span class="prev-line">
+                <span class="prev-yr">2021–2023</span><span class="prev-role">Robot Control Software Engineer</span><span class="prev-sep">·</span><span class="prev-inst">Saga Robotics Ltd., UK</span>
+              </span>
+              <span class="prev-line">
+                <span class="prev-yr">2019–2021</span><span class="prev-role">Postdoctoral Researcher</span><span class="prev-sep">·</span><span class="prev-inst">Surrey Space Centre, UK</span>
+              </span>
+              <span class="prev-line">
+                <span class="prev-yr">2018–2019</span><span class="prev-role">Postdoctoral Researcher</span><span class="prev-sep">·</span><span class="prev-inst">Lincoln Centre for Autonomous Systems </span>
+              </span>
+            </div>
+
+            <div class="founder-links">
+              <a href="#" class="founder-link" target="_blank" rel="noopener">Google Scholar</a>
+              <a href="#" class="founder-link" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Publications intro — relocated from routing band -->
+      <div class="founders-pubs-intro reveal">
+        <h3>Publications by the founders, relevant to <em>continuum robotics</em>, <em>motion planning</em>, and <em>control</em>.</h3>
+        <a href="#pubs-panel" class="route-link" id="pubsTrigger" aria-expanded="false" aria-controls="pubsPanel">View the research record <span class="chev">▾</span></a>
+      </div>
+
+      <!-- Publications reveal panel — collapsed by default -->
+      <div class="pubs-panel-wrap" id="pubsPanel" aria-hidden="true">
+        <div class="pubs-panel">
+          <div class="pubs-panel-head">
+            <div>
+              <span class="s-eye-dim">Publications Index</span>
+              <h3>Full publication record, organised by research cluster.</h3>
+            </div>
+            <button type="button" class="pubs-panel-close" id="pubsClose" aria-label="Close publications panel">Close ✕</button>
+          </div>
+          <div class="pubs-clusters">
+
+            <!-- CLUSTER 1 -->
+            <div class="pub-cluster reveal d1">
+              <div class="cluster-head">
+                <div>
+                  <div class="cluster-title">Cable-Driven Continuum Robots & Mechanism Design</div>
+                  <div class="cluster-count">09 publications</div>
+                </div>
+                <p class="cluster-desc">Validating the physical architecture, profile controllability, and core mechanical design of the hyper-dexterous system.</p>
+              </div>
+              <div class="pub-table">
+                <div class="pub-row">
+                  <span class="pub-row-venue">M&MT</span>
+                  <div class="pub-row-title"><a href="#" title="Mechanism and Machine Theory">Profile and contact force estimation of cable-driven continuum robots in presence of obstacles</a></div>
+                  <div class="pub-row-authors">Ashwin, K. P., Mahapatra, S. K. & Ghosal, A.</div>
+                  <span class="pub-row-year">2021</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">M&MT</span>
+                  <div class="pub-row-title"><a href="#" title="Mechanism and Machine Theory">Kinematic models for cable-driven continuum robots with multiple segments and varying cable offsets</a></div>
+                  <div class="pub-row-authors">Bhalkikar, A., Lokesh, S. & Ashwin, K. P.</div>
+                  <span class="pub-row-year">2024</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">ASME JMR</span>
+                  <div class="pub-row-title"><a href="#" title="ASME Journal of Mechanisms and Robotics">Design of Novel Cable-driven Continuum Robot for Fish Gait Emulation Using Kinetostatic Modelling Approach</a></div>
+                  <div class="pub-row-authors">Bhalkikar, A., Ashwin, K. P. & Ganesh, M. B.</div>
+                  <span class="pub-row-year">2026 · Accepted</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">IEEE ARSO</span>
+                  <div class="pub-row-title"><a href="#" title="IEEE ARSO 2026, Vienna">A single-actuator multi-segment continuum robot for emulating anguilliform fish gait</a></div>
+                  <div class="pub-row-authors">Bhalkikar, A., Ashwin, K. P. & Ganesh, M. B.</div>
+                  <span class="pub-row-year">2026 · Accepted</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">Mechatronics</span>
+                  <div class="pub-row-title"><a href="#" title="IEEE/ASME Transactions on Mechatronics">Static modeling of miniaturized pneumatic artificial muscles, kinematic analysis, and experiments on an endoscopic end-effector</a></div>
+                  <div class="pub-row-authors">Ashwin, K. P. & Ghosal, A.</div>
+                  <span class="pub-row-year">2019</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">IFToMM</span>
+                  <div class="pub-row-title"><a href="#" title="IFToMM World Congress">Profile estimation of a cable-driven continuum robot with general cable routing</a></div>
+                  <div class="pub-row-authors">Ashwin, K. P. & Ghosal, A.</div>
+                  <span class="pub-row-year">2019</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">MAMS—</span>
+                  <div class="pub-row-title"><a href="#" title="Mechanism and Machine Science — Asian MMS Proceedings">Forward kinematics of cable-driven continuum robot using optimization method</a></div>
+                  <div class="pub-row-authors">Ashwin, K. P. & Ghosal, A.</div>
+                  <span class="pub-row-year">2020</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">IFToMM</span>
+                  <div class="pub-row-title"><a href="#" title="IFToMM Asian Conference on MMS">Modelling of cable-driven continuum robots with general cable routing: a comparison</a></div>
+                  <div class="pub-row-authors">Mahapatra, S. K., Ashwin, K. P. & Ghosal, A.</div>
+                  <span class="pub-row-year">2021</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">IIPMC</span>
+                  <div class="pub-row-title"><a href="#" title="IIPMC — Industrial Problems on Machines and Mechanisms">Profile estimation of multi-segmented cable-driven continuum robots using optimization method</a></div>
+                  <div class="pub-row-authors">Bhalkikar, A. & Ashwin, K. P.</div>
+                  <span class="pub-row-year">2022</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- CLUSTER 2 -->
+            <div class="pub-cluster reveal d1">
+              <div class="cluster-head">
+                <div>
+                  <div class="cluster-title">Motion Planning, Control & Trajectory Learning</div>
+                  <div class="cluster-count">07 publications</div>
+                </div>
+                <p class="cluster-desc">Solving the software and control challenges of navigating hyper-redundant systems through confined and partially unknown environments.</p>
+              </div>
+              <div class="pub-table">
+                <div class="pub-row">
+                  <span class="pub-row-venue">CAD</span>
+                  <div class="pub-row-title"><a href="#" title="Computer-Aided Design">Efficient representation of ducts and cluttered spaces for realistic motion planning of hyper-redundant robots through confined paths</a></div>
+                  <div class="pub-row-authors">Ashwin, K. P., Chaudhury, A. N. & Ghosal, A.</div>
+                  <span class="pub-row-year">2020</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">IROS</span>
+                  <div class="pub-row-title"><a href="#" title="IROS 2019">Improving Local Trajectory Optimisation using Probabilistic Movement Primitives</a></div>
+                  <div class="pub-row-authors">Shyam, R. B., Lightbody, P., Das, G., Liu, P., Gomez-Gonzalez, S. & Neumann, G.</div>
+                  <span class="pub-row-year">2019</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">Frontiers</span>
+                  <div class="pub-row-title"><a href="#" title="Frontiers in Robotics and AI">Autonomous robots for space: Trajectory learning and adaptation using imitation</a></div>
+                  <div class="pub-row-authors">Shyam, R. B. A., Hao, Z., Montanaro, U., Dixit, S., Rathinam, A., Gao, Y. et al.</div>
+                  <span class="pub-row-year">2021</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">Frontiers</span>
+                  <div class="pub-row-title"><a href="#" title="Frontiers in Robotics and AI">Intelligent spacecraft visual GNC architecture with state-of-the-art AI components for on-orbit manipulation</a></div>
+                  <div class="pub-row-authors">Hao, Z., Shyam, R. B. A., Rathinam, A. & Gao, Y.</div>
+                  <span class="pub-row-year">2021</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">ICRA</span>
+                  <div class="pub-row-title"><a href="#" title="ICRA 2020">Intelligent GNC Architectures and Designs for Orbital Robotic Applications</a></div>
+                  <div class="pub-row-authors">Zhou, H., Shyam, R. B. A. & Arunkumar, R.</div>
+                  <span class="pub-row-year">2020</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">UC</span>
+                  <div class="pub-row-title"><a href="#" title="UKRAS20 Conference">Trajectory Tracking and Control of Multiple Robot Arms on a Free-Floating Spacecraft for Debris Removal</a></div>
+                  <div class="pub-row-authors">Shyam, R. B. A., Rathinam, A. & Hao, Z.</div>
+                  <span class="pub-row-year">2020</span>
+                </div>
+                <div class="pub-row">
+                  <span class="pub-row-venue">PhD</span>
+                  <div class="pub-row-title"><a href="#" title="Doctoral Dissertation — IISc Bangalore">Development of a Flexible Actuator and Motion Planning for Endoscopic Robots</a></div>
+                  <div class="pub-row-authors">Ashwin, K. P.</div>
+                  <span class="pub-row-year">2018</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="routing-sec">
+    <div class="routing-grid">
+
+      <!-- ROUTE 1 — MEDIA -->
+      <div class="route-col reveal d1">
+        <p class="route-eye">01 · Media</p>
+        <h3 class="route-title">Coverage, recognition, and conversations on Xtent.</h3>
+        <p class="route-body">
+          A selection of recent press, public events, and strategic engagements
+          where Xtent's technology and direction have been featured.
+        </p>
+
+		 <div class="media-list-wrap">
+        <div class="media-list">
+          <div class="media-item">
+            <span class="media-date">Jan 2026</span>
+            <div class="media-body">
+              <span class="media-source">LinkedIn</span>
+              <a href="https://www.linkedin.com/posts/xtent-innovations_yet-another-fruitful-and-exciting-interaction-activity-7416414042464063490-mAgs" class="media-title" target="_blank" rel="noopener">Technology demonstration to the Chairman, DRDO at Maker Village, Kochi</a>
+            </div>
+          </div>
+		  <div class="media-item">
+            <span class="media-date">Nov 2025</span>
+            <div class="media-body">
+              <span class="media-source">LinkedIn</span>
+              <a href="https://www.linkedin.com/posts/xtent-innovations_%F0%9D%90%88%F0%9D%90%A7%F0%9D%90%9D%F0%9D%90%A2%F0%9D%90%9A-%F0%9D%90%8C%F0%9D%90%9A%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%AD%F0%9D%90%A2%F0%9D%90%A6%F0%9D%90%9E-%F0%9D%90%96%F0%9D%90%9E%F0%9D%90%9E%F0%9D%90%A4-%F0%9D%90%88%F0%9D%90%8C%F0%9D%90%96-activity-7395846828040167424-Ijme" class="media-title" target="_blank" rel="noopener">Xtent at India Maritime Week (IMW), Mumbai</a>
+            </div>
+          </div>
+		  <div class="media-item">
+            <span class="media-date">Jul 2025</span>
+            <div class="media-body">
+              <span class="media-source">Cochin Shipyard</span>
+              <a href="https://cochinshipyard.in/news/view/82" class="media-title" target="_blank" rel="noopener">CSL hosts the first edition of USHUS SANGAMAM — Xtent among 16 selected startups</a>
+            </div>
+          </div>
+		  <div class="media-item">
+            <span class="media-date">Jul 2025</span>
+            <div class="media-body">
+              <span class="media-source">The Hindu</span>
+              <a href="https://www.thehindu.com/news/national/kerala/iim-k-cochin-shipyard-award-18-crore-seed-funding-to-six-start-ups/article69811401.ece" class="media-title" target="_blank" rel="noopener">IIM-K, Cochin Shipyard award ₹1.8 crore seed funding to six start-ups</a>
+            </div>
+          </div>
+         </div>
+		</div>
+      </div>
+
+      <!-- ROUTE 2 — CAREERS -->
+      <div class="route-col reveal d2">
+        <p class="route-eye">02 · Careers</p>
+        <h3 class="route-title">Engineering roles in robotics, control, and embedded systems.</h3>
+        <p class="route-body">
+          Xtent hires engineers who want to work on unsolved problems in
+          dexterous remote intervention. Current openings cover robotics,
+          control systems, embedded development, and software engineering,
+          based in Kochi or with UK presence.
+        </p>
+        <p class="route-stat">
+          ROBOTICS &nbsp;·&nbsp; CONTROL &nbsp;·&nbsp; EMBEDDED SYSTEMS &nbsp;·&nbsp; KOCHI &nbsp;·&nbsp; UK
+        </p>
+        <a href="careers.html" class="route-link">View open positions</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════════════
+       §4 — CLOSING VIEWPORT: AFFILIATIONS + STRATEGIC INQUIRY
+  ══════════════════════════════════════════════════ -->
+  <section class="closing-sec">
+    <div class="backers-block">
+      <div class="backers-head reveal">
+        <div>
+          <p class="s-eye">Affiliations and partnerships</p>
+          <h2 class="s-hl">Institutional support and industry partners.</h2>
+        </div>
+        <p>
+          Xtent is incubated within IIM Kozhikode's LIVE programme and
+          Maker Village, Kochi, and is developing the platform in
+          partnership with public-sector and industrial bodies focused on
+          subsea infrastructure.
+        </p>
+      </div>
+      <div class="backers-strip reveal d1">
+        <div class="backer-item">
+          <span class="backer-name">IIMK LIVE</span>
+          <span class="backer-kind">Incubator · IIM Kozhikode</span>
+        </div>
+        <div class="backer-item">
+          <span class="backer-name">Maker Village</span>
+          <span class="backer-kind">Deep-tech incubator · Kochi</span>
+        </div>
+        <div class="backer-item">
+          <span class="backer-name">Cochin Shipyard</span>
+          <span class="backer-kind">Industrial partner · subsea</span>
+        </div>
+        <div class="backer-item">
+          <span class="backer-name">MeitY NIDHI PRAYAS</span>
+          <span class="backer-kind">Grant · Govt. of India</span>
+        </div>
+        <div class="backer-item">
+          <span class="backer-name">UK IPO</span>
+          <span class="backer-kind">Patent filed · 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-block">
+      <p class="cta-eye reveal">Strategic Inquiry</p>
+      <h2 class="cta-hl reveal d1">
+        Partnership, investment, and research inquiries.
+      </h2>
+      <p class="cta-conf reveal d2">
+        Inquiries are reviewed by the founders. NDA available on request.
+        Investor and partnership materials shared on a selective basis.
+      </p>
+      <div class="reveal d3">
+        <a href="contact.html" class="btn-primary">Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="foot-inner">
+        <a href="index.html" class="foot-logo">
+          <img src="assets/logo.png" alt="Xtent Innovations">
+        </a>
+        <ul class="foot-nav">
+          <li><a href="technology.html">Technology</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="company.html">Company</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="contact.html">Strategic Inquiry</a></li>
+        </ul>
+        <p class="foot-copy">&copy; 2025 Xtent Innovations Pvt. Ltd.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav: frosted glass on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 55);
+    }, { passive: true });
+
+    // Scroll reveal via IntersectionObserver
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    revealEls.forEach(el => revealObs.observe(el));
+
+    // ── Publications panel: click-to-open, Esc / outside / Close button to close
+    (function setupPubsPanel() {
+      const trigger = document.getElementById('pubsTrigger');
+      const panel   = document.getElementById('pubsPanel');
+      const closeBtn = document.getElementById('pubsClose');
+      if (!trigger || !panel || !closeBtn) return;
+
+      function openPanel(e) {
+        if (e) e.preventDefault();
+        panel.classList.add('open');
+        panel.setAttribute('aria-hidden', 'false');
+        trigger.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        // Smooth-scroll to panel after a brief delay (lets the height transition begin)
+        setTimeout(() => {
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 80);
+      }
+      function closePanel() {
+        panel.classList.remove('open');
+        panel.setAttribute('aria-hidden', 'true');
+        trigger.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+      function togglePanel(e) {
+        if (panel.classList.contains('open')) {
+          if (e) e.preventDefault();
+          closePanel();
+        } else {
+          openPanel(e);
+        }
+      }
+
+      trigger.addEventListener('click', togglePanel);
+      closeBtn.addEventListener('click', closePanel);
+
+      // Esc key closes
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && panel.classList.contains('open')) {
+          closePanel();
+        }
+      });
+
+      // Click outside the panel (and not on the trigger) closes
+      document.addEventListener('click', (e) => {
+        if (!panel.classList.contains('open')) return;
+        const inPanel   = panel.contains(e.target);
+        const onTrigger = trigger.contains(e.target);
+        if (!inPanel && !onTrigger) {
+          closePanel();
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

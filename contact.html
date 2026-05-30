@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategic Inquiry — Xtent Innovations</title>
+  <meta name="description" content="Open a line with Xtent Innovations. For ROV OEMs, offshore operators, investors, research institutions and partners working in subsea and confined-environment robotics.">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    /* ══════════════════════════════════════════════════════
+       XTENT INNOVATIONS — CONTACT
+       Inherits the locked v3 system: palette · type · reveal · nav.
+       Rhythm: dark hero band → light form section.
+    ══════════════════════════════════════════════════════ */
+
+    :root {
+      --bg:        #F9F9F9;
+      --text:      #05070A;
+      --text-2:    #0E1525;
+      --navy:      #13213C;
+      --silver:    #B8BCC6;
+      --red:       #721121;
+      --red-h:     #8D1528;
+      --red-bright:#E0607A;
+      --dark-bg:   #05070A;
+      --dark-2:    #0E1525;
+      --border:    rgba(5,7,10,0.08);
+      --border-md: rgba(5,7,10,0.14);
+      --ease:      cubic-bezier(0.16,1,0.3,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-weight: 300;
+      line-height: 1.7; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV (identical behaviour to homepage) */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.6rem 4rem;
+      transition: background 0.4s var(--ease), box-shadow 0.4s, padding 0.4s var(--ease);
+    }
+    nav.scrolled {
+      background: rgba(249,249,249,0.92);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border); padding: 0.3rem 4rem;
+    }
+    nav:not(.scrolled) .nav-links a { color: rgba(249,249,249,0.92); }
+    nav:not(.scrolled) .nav-links a:hover { color: #fff; }
+    nav:not(.scrolled) .nav-cta { border-color: var(--red-bright) !important; color: var(--red-bright) !important; }
+    nav:not(.scrolled) .nav-cta:hover { background: var(--red-bright) !important; color: var(--dark-bg) !important; }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; margin-left: 0.5rem; }
+    .nav-logo img { height: 90px; width: auto; display: block; transition: height 0.4s var(--ease); }
+    nav.scrolled .nav-logo img { height: 72px; }
+    .nav-logo .logo-blue { display: none; }
+    nav.scrolled .nav-logo .logo-white { display: none; }
+    nav.scrolled .nav-logo .logo-blue { display: block; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--text-2); text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta {
+      border: 1px solid var(--red) !important; padding: 0.55rem 1.4rem;
+      color: var(--red) !important;
+      transition: background 0.25s, color 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--red) !important; color: var(--bg) !important; }
+
+    /* BUTTONS (locked) */
+    .btn-primary {
+      display: inline-block; padding: 0.85rem 1.9rem;
+      background: var(--red); color: var(--bg); text-decoration: none; border: none; cursor: pointer;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s;
+    }
+    .btn-primary:hover { background: var(--red-h); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+    /* SHARED */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+    .s-eye {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+      letter-spacing: 0.26em; text-transform: uppercase; color: var(--red);
+      margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.9rem;
+    }
+    .s-eye::before {
+      content: ''; display: block; width: 26px; height: 1px;
+      background: var(--red); flex-shrink: 0;
+    }
+    .s-eye-on-dark {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; font-weight: 400;
+      letter-spacing: 0.26em; text-transform: uppercase; color: var(--red-bright);
+      margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.9rem;
+    }
+    .s-eye-on-dark::before {
+      content: ''; display: block; width: 30px; height: 2px;
+      background: var(--red-bright); flex-shrink: 0;
+    }
+
+    /* REVEAL (locked) */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1{transition-delay:.1s} .d2{transition-delay:.2s}
+    .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+
+    /* ════════ HERO BAND (dark) ════════ */
+    .c-hero {
+      position: relative; background: var(--dark-bg); overflow: hidden;
+      padding: 13rem 0 6rem;
+    }
+    /* subtle engineering-grid texture for depth (per design skill) */
+    .c-hero::before {
+      content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(184,188,198,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,188,198,0.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: radial-gradient(ellipse 80% 70% at 30% 40%, #000 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 30% 40%, #000 30%, transparent 80%);
+    }
+    .c-hero .container { position: relative; z-index: 1; }
+    .c-hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--red-bright);
+      margin-bottom: 1.8rem;
+    }
+    .c-hero-headline {
+      font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem,5.4vw,4.6rem);
+      font-weight: 300; line-height: 1.06; letter-spacing: -0.015em; color: var(--bg);
+      margin-bottom: 1.8rem; max-width: 16ch;
+    }
+    .c-hero-sub {
+      font-size: 1.2rem; color: rgba(249,249,249,0.7); max-width: 540px; line-height: 1.8;
+    }
+
+    /* ════════ BODY (light) — two columns ════════ */
+    .c-body { background: var(--bg); padding: 6rem 0 7rem; border-top: 1px solid rgba(249,249,249,0.06); }
+    .c-grid {
+      display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 5rem; align-items: start;
+    }
+
+    /* — LEFT: direct contact channels — */
+    .channels { }
+    .channel-intro {
+      font-size: 1.15rem; color: var(--navy); line-height: 1.75; max-width: 38ch;
+      margin-bottom: 3rem;
+    }
+    .channel-block { border-top: 1px solid var(--border); padding: 1.5rem 0; }
+    .channel-block:last-of-type { border-bottom: 1px solid var(--border); }
+    .channel-label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--red);
+      margin-bottom: 0.7rem;
+    }
+    .channel-value {
+      font-family: 'Cormorant Garamond', serif; font-size: 1.45rem;
+      color: var(--text); line-height: 1.3; text-decoration: none;
+      transition: color 0.25s; display: inline-block;
+    }
+    a.channel-value:hover { color: var(--red); }
+    .channel-value.addr {
+      font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 1.02rem;
+      line-height: 1.6; color: var(--text-2);
+    }
+    .copy-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; }
+    .copy-btn {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--navy);
+      background: none; border: 1px solid var(--border-md); cursor: pointer;
+      padding: 0.4rem 0.8rem; transition: border-color 0.25s, color 0.25s;
+    }
+    .copy-btn:hover { border-color: var(--text); color: var(--text); }
+    .copy-btn.copied { border-color: var(--red); color: var(--red); }
+
+    /* — RIGHT: the inquiry form — */
+    .form-shell {
+      background: #FFFFFF; border: 1px solid var(--border-md);
+      padding: 2.8rem 2.6rem; border-radius: 4px;
+      box-shadow: 0 1px 0 var(--border), 0 30px 60px -40px rgba(5,7,10,0.25);
+    }
+    .form-title {
+      font-family: 'Cormorant Garamond', serif; font-weight: 400;
+      font-size: 1.7rem; color: var(--text); margin-bottom: 0.4rem; line-height: 1.15;
+    }
+    .form-note {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy);
+      opacity: 0.7; margin-bottom: 2.2rem;
+    }
+    .field { margin-bottom: 1.5rem; }
+    .field.hidden { display: none; }
+    .field label {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-2);
+      margin-bottom: 0.6rem;
+    }
+    .field label .req { color: var(--red); margin-left: 0.25rem; }
+    .field input, .field select, .field textarea {
+      width: 100%; background: var(--bg);
+      border: 1px solid var(--border-md); border-radius: 3px;
+      padding: 0.85rem 0.95rem;
+      font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 1rem;
+      color: var(--text); transition: border-color 0.25s, background 0.25s;
+    }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(19,33,60,0.4); }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: none; border-color: var(--red); background: #fff;
+    }
+    .field textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+    .field select {
+      appearance: none; -webkit-appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2313213C' stroke-width='1.4' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 1rem center;
+      padding-right: 2.4rem;
+    }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    /* honeypot — visually removed, off-screen */
+    .hp { position: absolute; left: -9999px; top: -9999px; height: 0; overflow: hidden; }
+
+    .form-submit-row { margin-top: 0.6rem; }
+    .form-disclaimer {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem;
+      letter-spacing: 0.06em; color: var(--navy); opacity: 0.55;
+      margin-top: 1.2rem; line-height: 1.6;
+    }
+
+    /* success / error states */
+    .form-result { display: none; text-align: left; padding: 1rem 0; }
+    .form-result.show { display: block; animation: riseIn 0.7s var(--ease) forwards; }
+    .form-result .fr-eye {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--red);
+      margin-bottom: 1rem;
+    }
+    .form-result .fr-hl {
+      font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 2rem;
+      color: var(--text); line-height: 1.15; margin-bottom: 1rem;
+    }
+    .form-result .fr-body { font-size: 1.05rem; color: var(--navy); line-height: 1.7; max-width: 44ch; }
+    .form-error-msg {
+      display: none; margin-top: 1rem;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.04em; color: var(--red-h); line-height: 1.6;
+    }
+    .form-error-msg.show { display: block; }
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* FOOTER (locked) */
+    footer { background: var(--dark-bg); padding: 3rem 0; }
+    .foot-inner { display: flex; align-items: center; justify-content: space-between; }
+    .foot-logo img { height: 112px; width: auto; opacity: 0.75; }
+    .foot-nav { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
+    .foot-nav a {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--silver); opacity: 0.6; text-decoration: none;
+      transition: opacity 0.25s;
+    }
+    .foot-nav a:hover { opacity: 1; }
+    .foot-copy {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem;
+      letter-spacing: 0.08em; color: var(--silver); opacity: 0.45;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width:1024px) {
+      nav, nav.scrolled { padding-left:2.5rem; padding-right:2.5rem; }
+      .container { padding:0 2.5rem; }
+      .c-hero { padding: 11rem 0 5rem; }
+      .c-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+    }
+    @media (max-width:768px) {
+      nav, nav.scrolled { padding-left:1.5rem; padding-right:1.5rem; }
+      .nav-links { display:none; }
+      .container { padding:0 1.5rem; }
+      .c-hero { padding: 9rem 0 4rem; }
+      .nav-logo img { height:64px; }
+      nav.scrolled .nav-logo img { height:52px; }
+      .foot-logo img { height:84px; }
+      .form-shell { padding: 2rem 1.4rem; }
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+      .foot-inner { flex-direction:column; gap:1.5rem; text-align:center; }
+      .foot-nav { justify-content:center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      .reveal { opacity:1; transform:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="index.html" class="nav-logo">
+      <img src="assets/logo-paths-white.svg" alt="Xtent Innovations" class="logo-white">
+      <img src="assets/logo.png" alt="Xtent Innovations" class="logo-blue">
+    </a>
+    <ul class="nav-links">
+      <li><a href="technology.html">Technology</a></li>
+      <li><a href="industries.html">Industries</a></li>
+      <li><a href="company.html">Company</a></li>
+      <li><a href="contact.html" class="nav-cta">Strategic Inquiry</a></li>
+    </ul>
+  </nav>
+
+  <!-- ════════ HERO BAND ════════ -->
+  <section class="c-hero">
+    <div class="container">
+      <p class="c-hero-eyebrow">Strategic Inquiry</p>
+      <h1 class="c-hero-headline">Open a line with Xtent.</h1>
+      <p class="c-hero-sub">
+        If your work touches subsea or confined-environment robotics —
+        as an operator, manufacturer, investor or research partner —
+        we want to hear from you.
+      </p>
+    </div>
+  </section>
+
+  <!-- ════════ BODY ════════ -->
+  <section class="c-body">
+    <div class="container">
+      <div class="c-grid">
+
+        <!-- LEFT: direct channels -->
+        <div class="channels reveal">
+          <p class="channel-intro">
+            Reach us directly, or send a structured inquiry using the form.
+            Every message reaches the founding team.
+          </p>
+
+          <div class="channel-block">
+            <div class="channel-label">Email</div>
+            <a href="mailto:contact@xtent-innovations.com" class="channel-value">contact@xtent-innovations.com</a>
+            <div class="copy-row">
+              <button class="copy-btn" id="copyEmail" data-copy="contact@xtent-innovations.com">Copy address</button>
+            </div>
+          </div>
+
+          <div class="channel-block">
+            <div class="channel-label">Phone</div>
+            <a href="tel:+919606626527" class="channel-value">+91 96066 26527</a>
+          </div>
+
+          <div class="channel-block">
+            <div class="channel-label">Location</div>
+            <div class="channel-value addr">
+              IIMK LIVE, Indian Institute of Management Kozhikode,<br>
+              IIMK Campus P.O., Kozhikode, Kerala 673570, India
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: inquiry form -->
+        <div class="reveal d1">
+          <div class="form-shell">
+            <h2 class="form-title" id="formTitle">Send a strategic inquiry</h2>
+            <p class="form-note">Fields marked · are required</p>
+
+            <form id="inquiryForm" action="https://api.web3forms.com/submit" method="POST">
+              <!-- Web3Forms config -->
+              <input type="hidden" name="access_key" value="9134e506-1863-4a71-8f21-8b5eca0a2311">
+              <input type="hidden" name="subject" id="hiddenSubject" value="New strategic inquiry — Xtent">
+              <input type="hidden" name="from_name" value="Xtent Innovations Website">
+              <!-- honeypot -->
+              <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="name">Name</label>
+                  <input type="text" id="name" name="name" placeholder="Your name" autocomplete="name">
+                </div>
+                <div class="field">
+                  <label for="email">Email <span class="req">·</span></label>
+                  <input type="email" id="email" name="email" placeholder="you@org.com" required autocomplete="email">
+                </div>
+              </div>
+
+              <div class="field-row">
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+91 …" autocomplete="tel">
+                </div>
+                <div class="field">
+                  <label for="organization">Organization</label>
+                  <input type="text" id="organization" name="organization" placeholder="Company / institution">
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="segment">Which best describes you?</label>
+                <select id="segment" name="segment">
+                  <option value="" disabled selected>Select one…</option>
+                  <option value="Investor">Investor</option>
+                  <option value="Strategic Partner">Strategic Partner</option>
+                  <option value="Original Equipment Manufacturer (OEM)">Original Equipment Manufacturer (OEM)</option>
+                  <option value="Offshore Operator">Offshore Operator</option>
+                  <option value="Research Institution">Research Institution</option>
+                  <option value="Media">Media</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <div class="field hidden" id="otherField">
+                <label for="segmentOther">Please specify</label>
+                <input type="text" id="segmentOther" name="segment_other" placeholder="Tell us how you'd describe yourself">
+              </div>
+
+              <div class="field">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="What would you like to discuss?"></textarea>
+              </div>
+
+              <div class="form-submit-row">
+                <button type="submit" class="btn-primary" id="submitBtn">Send inquiry</button>
+              </div>
+              <p class="form-error-msg" id="formError"></p>
+              <p class="form-disclaimer">
+                Your details are sent directly to the Xtent founding team and used only to respond to your inquiry.
+              </p>
+            </form>
+
+            <!-- success state (replaces form on submit) -->
+            <div class="form-result" id="formResult">
+              <div class="fr-eye">Message received</div>
+              <div class="fr-hl">Thank you — we'll be in touch.</div>
+              <p class="fr-body">
+                Your inquiry has reached the founding team. We typically respond within a few working days.
+                For anything time-sensitive, call us directly at +91 96066 26527.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="foot-inner">
+        <a href="index.html" class="foot-logo">
+          <img src="assets/logo-paths-white.svg" alt="Xtent Innovations">
+        </a>
+        <ul class="foot-nav">
+          <li><a href="technology.html">Technology</a></li>
+          <li><a href="industries.html">Industries</a></li>
+          <li><a href="company.html">Company</a></li>
+          <li><a href="contact.html">Partner with Xtent</a></li>
+        </ul>
+        <p class="foot-copy">&copy; 2026 Xtent Innovations Pvt. Ltd.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav frosted glass on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 55);
+    }, { passive: true });
+
+    // Reveal observer
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+    // Copy-email button
+    const copyBtn = document.getElementById('copyEmail');
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(copyBtn.dataset.copy);
+        const orig = copyBtn.textContent;
+        copyBtn.textContent = 'Copied ✓';
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.textContent = orig; copyBtn.classList.remove('copied'); }, 2000);
+      } catch (e) {
+        copyBtn.textContent = 'Copy failed';
+      }
+    });
+
+    // "Other" segment → reveal specify field + update subject line
+    const segment = document.getElementById('segment');
+    const otherField = document.getElementById('otherField');
+    const hiddenSubject = document.getElementById('hiddenSubject');
+    segment.addEventListener('change', () => {
+      const isOther = segment.value === 'Other';
+      otherField.classList.toggle('hidden', !isOther);
+      const label = segment.value || 'Inquiry';
+      hiddenSubject.value = 'New strategic inquiry — ' + label;
+    });
+
+    // Form submit via Web3Forms (AJAX) → in-page success, no redirect
+    const form = document.getElementById('inquiryForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formError = document.getElementById('formError');
+    const formResult = document.getElementById('formResult');
+    const formTitle = document.getElementById('formTitle');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formError.classList.remove('show');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        const data = new FormData(form);
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        const json = await res.json();
+        if (json.success) {
+          form.style.display = 'none';
+          formTitle.style.display = 'none';
+          document.querySelector('.form-note').style.display = 'none';
+          formResult.classList.add('show');
+        } else {
+          throw new Error(json.message || 'Submission failed.');
+        }
+      } catch (err) {
+        formError.textContent = 'Something went wrong — please email contact@xtent-innovations.com directly.';
+        formError.classList.add('show');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send inquiry';
+      }
+    });
+  </script>
+
+</body>
+</html>

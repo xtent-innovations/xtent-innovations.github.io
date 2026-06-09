@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Xtent Innovations — Applications</title>
-  <meta name="description" content="The Tentacle-Arm: one hyper-dexterous access platform, deployed first in subsea, built to extend across every confined environment conventional robotics cannot reach.">
+  <meta name="description"
+    content="The Tentacle-Arm: one hyper-dexterous access platform, deployed first in subsea, built to extend across every confined environment conventional robotics cannot reach.">
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=IBM+Plex+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
   <style>
     /* ══════════════════════════════════════════════════════
        XTENT INNOVATIONS — APPLICATIONS
@@ -18,442 +22,1271 @@
     ══════════════════════════════════════════════════════ */
 
     :root {
-      --bg:#F9F9F9; --text:#05070A; --text-2:#0E1525; --navy:#13213C;
-      --silver:#B8BCC6; --red:#721121; --red-h:#8D1528; --red-bright:#E0607A;
-      --dark-bg:#05070A; --dark-2:#0E1525;
-      --border:rgba(5,7,10,0.08); --border-md:rgba(5,7,10,0.14);
-      --ease:cubic-bezier(0.16,1,0.3,1);
+      --bg: #F9F9F9;
+      --text: #05070A;
+      --text-2: #0E1525;
+      --navy: #13213C;
+      --silver: #B8BCC6;
+      --red: #721121;
+      --red-h: #8D1528;
+      --red-bright: #E0607A;
+      --dark-bg: #05070A;
+      --dark-2: #0E1525;
+      --border: rgba(5, 7, 10, 0.08);
+      --border-md: rgba(5, 7, 10, 0.14);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
-    *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
-    html { scroll-behavior:smooth; }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background:var(--bg); color:var(--text);
-      font-family:'DM Sans',sans-serif; font-weight:300;
-      line-height:1.7; overflow-x:hidden; -webkit-font-smoothing:antialiased;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ──────────── NAV (verbatim) ──────────── */
     nav {
-      position:fixed; top:0; left:0; right:0; z-index:100;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:0.6rem 4rem;
-      transition:background 0.4s var(--ease), box-shadow 0.4s, padding 0.4s var(--ease);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 4rem;
+      transition: background 0.4s var(--ease), box-shadow 0.4s, padding 0.4s var(--ease);
     }
+
     nav.scrolled {
-      background:rgba(249,249,249,0.92);
-      backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
-      box-shadow:0 1px 0 var(--border); padding:0.3rem 4rem;
+      background: rgba(249, 249, 249, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
+      padding: 0.3rem 4rem;
     }
-    .nav-logo { display:flex; align-items:center; text-decoration:none; margin-left:0.5rem; }
-    .nav-logo img { height:90px; width:auto; display:block; transition:height 0.4s var(--ease); }
-    nav.scrolled .nav-logo img { height:72px; }
-    .nav-links { display:flex; align-items:center; gap:2.5rem; list-style:none; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      margin-left: 0.5rem;
+    }
+
+    .nav-logo img {
+      height: 90px;
+      width: auto;
+      display: block;
+      transition: height 0.4s var(--ease);
+    }
+
+    nav.scrolled .nav-logo img {
+      height: 72px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
     .nav-links a {
-      color:var(--text-2); text-decoration:none;
-      font-family:'IBM Plex Mono',monospace;
-      font-size:1.1rem; letter-spacing:0.08em; text-transform:uppercase;
-      transition:color 0.25s; position:relative;
+      color: var(--text-2);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+      position: relative;
     }
-    .nav-links a:hover { color:var(--red); }
-    .nav-links a.active { color:var(--red); }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-links a.active {
+      color: var(--red);
+    }
+
     .nav-links a.active::after {
-      content:''; position:absolute; bottom:-4px; left:0; right:0;
-      height:1px; background:var(--red); opacity:0.5;
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--red);
+      opacity: 0.5;
     }
+
     .nav-cta {
-      border:1px solid var(--red) !important; padding:0.55rem 1.4rem;
-      color:var(--red) !important;
-      transition:background 0.25s, color 0.25s !important;
+      border: 1px solid var(--red) !important;
+      padding: 0.55rem 1.4rem;
+      color: var(--red) !important;
+      transition: background 0.25s, color 0.25s !important;
     }
-    .nav-cta:hover { background:var(--red) !important; color:var(--bg) !important; }
-    .nav-cta.active::after { display:none; }
+
+    .nav-cta:hover {
+      background: var(--red) !important;
+      color: var(--bg) !important;
+    }
+
+    .nav-cta.active::after {
+      display: none;
+    }
 
     /* ──────────── BUTTONS (verbatim) ──────────── */
     .btn-primary {
-      display:inline-block; padding:0.85rem 1.9rem;
-      background:var(--red); color:var(--bg); text-decoration:none;
-      font-family:'IBM Plex Mono',monospace;
-      font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase;
-      transition:background 0.25s, transform 0.25s;
+      display: inline-block;
+      padding: 0.85rem 1.9rem;
+      background: var(--red);
+      color: var(--bg);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s;
     }
-    .btn-primary:hover { background:var(--red-h); transform:translateY(-1px); }
+
+    .btn-primary:hover {
+      background: var(--red-h);
+      transform: translateY(-1px);
+    }
+
     .btn-ghost {
-      display:inline-block; padding:0.85rem 1.9rem;
-      border:1px solid var(--border-md); color:var(--text-2); text-decoration:none;
-      font-family:'IBM Plex Mono',monospace;
-      font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase;
-      transition:border-color 0.25s, color 0.25s;
+      display: inline-block;
+      padding: 0.85rem 1.9rem;
+      border: 1px solid var(--border-md);
+      color: var(--text-2);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: border-color 0.25s, color 0.25s;
     }
-    .btn-ghost:hover { border-color:var(--text); color:var(--text); }
+
+    .btn-ghost:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
     .btn-ghost-inv {
-      display:inline-block; padding:0.85rem 1.9rem;
-      border:1px solid rgba(249,249,249,0.25); color:rgba(249,249,249,0.85);
-      text-decoration:none; font-family:'IBM Plex Mono',monospace;
-      font-size:0.7rem; letter-spacing:0.12em; text-transform:uppercase;
-      transition:border-color 0.25s, color 0.25s;
+      display: inline-block;
+      padding: 0.85rem 1.9rem;
+      border: 1px solid rgba(249, 249, 249, 0.25);
+      color: rgba(249, 249, 249, 0.85);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: border-color 0.25s, color 0.25s;
     }
-    .btn-ghost-inv:hover { border-color:rgba(249,249,249,0.7); color:#fff; }
+
+    .btn-ghost-inv:hover {
+      border-color: rgba(249, 249, 249, 0.7);
+      color: #fff;
+    }
 
     /* ──────────── SHARED TYPE (verbatim) ──────────── */
-    section { padding:8rem 0; }
-    .container { max-width:1200px; margin:0 auto; padding:0 4rem; }
+    section {
+      padding: 8rem 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
     .s-eye {
-      font-family:'IBM Plex Mono',monospace; font-size:0.78rem;
-      letter-spacing:0.26em; text-transform:uppercase; color:var(--red);
-      margin-bottom:1.4rem; display:flex; align-items:center; gap:0.9rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
     }
-    .s-eye::before { content:''; display:block; width:26px; height:1px; background:var(--red); flex-shrink:0; }
+
+    .s-eye::before {
+      content: '';
+      display: block;
+      width: 26px;
+      height: 1px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
     .s-eye-on-dark {
-      font-family:'IBM Plex Mono',monospace; font-size:0.82rem; font-weight:400;
-      letter-spacing:0.26em; text-transform:uppercase; color:var(--red-bright);
-      margin-bottom:1.4rem; display:flex; align-items:center; gap:0.9rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
     }
-    .s-eye-on-dark::before { content:''; display:block; width:30px; height:2px; background:var(--red-bright); flex-shrink:0; }
+
+    .s-eye-on-dark::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--red-bright);
+      flex-shrink: 0;
+    }
+
     .s-hl {
-      font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3.2vw,2.6rem);
-      font-weight:300; line-height:1.12; color:var(--text); margin-bottom:1.5rem; letter-spacing:-0.01em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
     }
+
     .s-hl-inv {
-      font-family:'Cormorant Garamond',serif; font-size:clamp(1.8rem,3.2vw,2.6rem);
-      font-weight:300; line-height:1.12; color:var(--bg); margin-bottom:1.5rem; letter-spacing:-0.01em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--bg);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
     }
-    .s-body { font-size:1.15rem; color:var(--navy); line-height:1.8; max-width:620px; }
-    .s-body em { font-style:italic; color:var(--text); }
+
+    .s-body {
+      font-size: 1.15rem;
+      color: var(--navy);
+      line-height: 1.8;
+      max-width: 620px;
+    }
+
+    .s-body em {
+      font-style: italic;
+      color: var(--text);
+    }
 
     /* REVEAL (verbatim) */
-    .reveal { opacity:0; transform:translateY(20px); transition:opacity 0.8s var(--ease), transform 0.8s var(--ease); }
-    .reveal.in { opacity:1; transform:none; }
-    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    .d1 {
+      transition-delay: .1s
+    }
+
+    .d2 {
+      transition-delay: .2s
+    }
+
+    .d3 {
+      transition-delay: .3s
+    }
+
+    .d4 {
+      transition-delay: .4s
+    }
 
     /* ════════ SCROLL 1 — HERO (light, sparse) ════════ */
     .app-hero {
-      position:relative; min-height:92vh; display:flex; align-items:center;
-      background:var(--bg); overflow:hidden;
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      overflow: hidden;
     }
-    .app-hero-graphic {
-      position:absolute; right:0; top:0; bottom:0; width:75%; height:100%;
-      background-image:url('assets/hero-clean.png');
-      background-size:cover; background-position:left center; pointer-events:none;
-      -webkit-mask-image:linear-gradient(to right, transparent 0%, transparent 5%, rgba(0,0,0,0.5) 25%, black 50%);
-      mask-image:linear-gradient(to right, transparent 0%, transparent 5%, rgba(0,0,0,0.3) 25%, black 50%);
-      opacity:0; animation:fadeIn 1.4s ease 0.3s forwards;
-    }
-    .app-hero-grid {
-      position:absolute; inset:0; pointer-events:none;
-      background-image:
-        linear-gradient(rgba(5,7,10,0.022) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(5,7,10,0.022) 1px, transparent 1px);
-      background-size:72px 72px;
-    }
-    .app-hero-content { position:relative; z-index:2; width:100%; padding:9rem 4rem 6rem 7rem; }
-    .app-hero-text { max-width:680px; }
-    .app-hero-eyebrow {
-      font-family:'IBM Plex Mono',monospace; font-size:0.78rem;
-      letter-spacing:0.22em; text-transform:uppercase; color:var(--red);
-      margin-bottom:2rem; opacity:0; animation:riseIn 0.9s var(--ease) 0.2s forwards;
-    }
-    .app-hero-hl {
-      font-family:'Cormorant Garamond',serif; font-size:clamp(2.6rem,5.2vw,4.4rem);
-      font-weight:300; line-height:1.07; letter-spacing:-0.015em; color:var(--text);
-      margin-bottom:2.2rem; opacity:0; animation:riseIn 0.9s var(--ease) 0.4s forwards;
-    }
-    .app-hero-hl em { font-style:italic; color:var(--navy); }
-    .app-hero-sub {
-      font-size:1.2rem; color:var(--navy); max-width:500px; line-height:1.8;
-      margin-bottom:2.6rem; opacity:0; animation:riseIn 0.9s var(--ease) 0.6s forwards;
-    }
-    .app-hero-ctas { display:flex; gap:1.2rem; flex-wrap:wrap; opacity:0; animation:riseIn 0.9s var(--ease) 0.8s forwards; }
 
-    .scroll-cue { position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%); display:flex; flex-direction:column; align-items:center; gap:0.5rem; z-index:3; opacity:0; animation:fadeIn 0.8s ease 1.5s forwards; }
-    .scroll-cue span { font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--silver); }
-    .scroll-line { width:1px; height:50px; background:linear-gradient(to bottom, transparent, var(--silver)); animation:breathe 2.3s ease-in-out infinite; }
-    @keyframes breathe { 0%,100%{opacity:0.25;} 50%{opacity:0.9;} }
+    .app-hero-graphic {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 75%;
+      height: 100%;
+      background-image: url('assets/hero-clean.png');
+      background-size: cover;
+      background-position: left center;
+      pointer-events: none;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0, 0, 0, 0.5) 25%, black 50%);
+      mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0, 0, 0, 0.3) 25%, black 50%);
+      opacity: 0;
+      animation: fadeIn 1.4s ease 0.3s forwards;
+    }
+
+    .app-hero-grid {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(5, 7, 10, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(5, 7, 10, 0.022) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+
+    .app-hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      padding: 9rem 4rem 6rem 7rem;
+    }
+
+    .app-hero-text {
+      max-width: 680px;
+    }
+
+    .app-hero-eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: riseIn 0.9s var(--ease) 0.2s forwards;
+    }
+
+    .app-hero-hl {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+      font-weight: 300;
+      line-height: 1.07;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 2.2rem;
+      opacity: 0;
+      animation: riseIn 0.9s var(--ease) 0.4s forwards;
+    }
+
+    .app-hero-hl em {
+      font-style: italic;
+      color: var(--navy);
+    }
+
+    .app-hero-sub {
+      font-size: 1.2rem;
+      color: var(--navy);
+      max-width: 500px;
+      line-height: 1.8;
+      margin-bottom: 2.6rem;
+      opacity: 0;
+      animation: riseIn 0.9s var(--ease) 0.6s forwards;
+    }
+
+    .app-hero-ctas {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: riseIn 0.9s var(--ease) 0.8s forwards;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 3;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 1.5s forwards;
+    }
+
+    .scroll-cue span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, transparent, var(--silver));
+      animation: breathe 2.3s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+
+      0%,
+      100% {
+        opacity: 0.25;
+      }
+
+      50% {
+        opacity: 0.9;
+      }
+    }
 
     /* ════════ SCROLL 2 — APPLICATIONS SELECTOR (dark, 100vh) ════════ */
     .apps-sec {
-      background:var(--dark-2); border-top:1px solid rgba(249,249,249,0.06);
-      height:100vh; min-height:680px;
-      padding:0;
-      display:flex; flex-direction:column;
-      overflow:hidden;
+      background: var(--dark-2);
+      border-top: 1px solid rgba(249, 249, 249, 0.06);
+      height: 100vh;
+      min-height: 680px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
     }
+
     .apps-sec .container {
-      flex:1; display:flex; flex-direction:column;
-      padding-top:6.5rem; padding-bottom:2.5rem;
-      max-width:1400px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding-top: 6.5rem;
+      padding-bottom: 2.5rem;
+      max-width: 1400px;
     }
+
     /* compressed intro */
-    .apps-intro { flex-shrink:0; margin-bottom:1.8rem; max-width:900px; }
-    .apps-intro .s-eye-on-dark { margin-bottom:0.9rem; }
-    .apps-intro .s-hl-inv {
-      font-size:clamp(1.5rem,2.6vw,2.1rem);
-      margin-bottom:0.8rem; line-height:1.15;
+    .apps-intro {
+      flex-shrink: 0;
+      margin-bottom: 1.8rem;
+      max-width: 900px;
     }
+
+    .apps-intro .s-eye-on-dark {
+      margin-bottom: 0.9rem;
+    }
+
+    .apps-intro .s-hl-inv {
+      font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+      margin-bottom: 0.8rem;
+      line-height: 1.15;
+    }
+
     .apps-intro .s-body {
-      font-size:1rem; line-height:1.6; max-width:680px;
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 680px;
     }
 
     /* side-by-side layout: 30/70 */
     .app-layout {
-      flex:1; display:grid; grid-template-columns:30% 70%;
-      gap:0; min-height:0;
-      border:1px solid rgba(249,249,249,0.08);
-      background:rgba(249,249,249,0.06);
+      flex: 1;
+      display: grid;
+      grid-template-columns: 30% 70%;
+      gap: 0;
+      min-height: 0;
+      border: 1px solid rgba(249, 249, 249, 0.08);
+      background: rgba(249, 249, 249, 0.06);
     }
 
     /* LEFT: stacked tiles */
     .app-select {
-      display:flex; flex-direction:column;
-      gap:1px; background:rgba(249,249,249,0.08);
-      min-height:0;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(249, 249, 249, 0.08);
+      min-height: 0;
     }
+
     .app-card {
-      flex:1; background:var(--dark-2); border:none; cursor:pointer; text-align:left;
-      font-family:inherit; padding:0.9rem 1.5rem;
-      display:flex; flex-direction:column; justify-content:center; gap:0.25rem;
-      position:relative; transition:background 0.3s var(--ease), padding 0.3s var(--ease);
-      min-height:0;
+      flex: 1;
+      background: var(--dark-2);
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: inherit;
+      padding: 0.9rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.25rem;
+      position: relative;
+      transition: background 0.3s var(--ease), padding 0.3s var(--ease);
+      min-height: 0;
     }
-    .app-card:hover { background:#16243f; }
+
+    .app-card:hover {
+      background: #16243f;
+    }
+
     /* red bar accent on RIGHT edge (was bottom) */
     .app-card::after {
-      content:''; position:absolute; right:-1px; top:50%; height:0; width:3px;
-      background:var(--red-bright); transition:height 0.4s var(--ease); z-index:2;
-      transform:translateY(-50%);
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: 50%;
+      height: 0;
+      width: 3px;
+      background: var(--red-bright);
+      transition: height 0.4s var(--ease);
+      z-index: 2;
+      transform: translateY(-50%);
     }
-    .app-card.active { background:var(--dark-bg); padding-left:1.9rem; }
-    .app-card.active::after { height:100%; }
+
+    .app-card.active {
+      background: var(--dark-bg);
+      padding-left: 1.9rem;
+    }
+
+    .app-card.active::after {
+      height: 100%;
+    }
+
     .ac-index {
-      font-family:'IBM Plex Mono',monospace; font-size:0.62rem;
-      letter-spacing:0.16em; text-transform:uppercase; color:var(--red-bright);
-      transition:color 0.3s var(--ease);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      transition: color 0.3s var(--ease);
     }
+
     .ac-name {
-      font-family:'Cormorant Garamond',serif; font-weight:400;
-      font-size:clamp(1.15rem,1.6vw,1.4rem); line-height:1.05;
-      color:var(--bg); letter-spacing:-0.01em;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+      line-height: 1.05;
+      color: var(--bg);
+      letter-spacing: -0.01em;
     }
+
     .ac-tagline {
-      font-size:0.78rem; color:rgba(249,249,249,0.5); line-height:1.4;
-      margin-top:0.2rem; font-weight:300;
+      font-size: 0.78rem;
+      color: rgba(249, 249, 249, 0.5);
+      line-height: 1.4;
+      margin-top: 0.2rem;
+      font-weight: 300;
     }
-    .app-card.active .ac-tagline { color:rgba(249,249,249,0.72); }
+
+    .app-card.active .ac-tagline {
+      color: rgba(249, 249, 249, 0.72);
+    }
 
     /* RIGHT: detail panel */
     .panel-wrap {
-      background:var(--dark-bg); position:relative;
-      min-height:0; overflow:hidden;
+      background: var(--dark-bg);
+      position: relative;
+      min-height: 0;
+      overflow: hidden;
     }
+
     .panel {
-      display:none; padding:2.6rem 3rem; height:100%;
-      flex-direction:column; overflow-y:auto;
+      display: none;
+      padding: 2.6rem 3rem;
+      height: 100%;
+      flex-direction: column;
+      overflow-y: auto;
     }
-    .panel.show { display:flex; animation:fadeUp 0.5s var(--ease); }
-    @keyframes fadeUp { from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+
+    .panel.show {
+      display: flex;
+      animation: fadeUp 0.5s var(--ease);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
 
     /* prominent status chip at top of panel */
     .panel-status {
-      display:inline-flex; align-items:center; gap:0.6rem;
-      font-family:'IBM Plex Mono',monospace; font-size:0.7rem; font-weight:400;
-      letter-spacing:0.16em; text-transform:uppercase;
-      padding:0.5rem 0.9rem; border-radius:2px;
-      margin-bottom:1.4rem; align-self:flex-start;
-      border:1px solid;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.9rem;
+      border-radius: 2px;
+      margin-bottom: 1.4rem;
+      align-self: flex-start;
+      border: 1px solid;
     }
+
     .panel-status::before {
-      content:''; width:7px; height:7px; border-radius:50%; flex-shrink:0;
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }
+
     .panel-status.live {
-      color:var(--red-bright); border-color:rgba(224,96,122,0.45);
-      background:rgba(224,96,122,0.08);
+      color: var(--red-bright);
+      border-color: rgba(224, 96, 122, 0.45);
+      background: rgba(224, 96, 122, 0.08);
     }
-    .panel-status.live::before { background:var(--red-bright); box-shadow:0 0 8px rgba(224,96,122,0.7); animation:pulseDot 2.2s ease-in-out infinite; }
+
+    .panel-status.live::before {
+      background: var(--red-bright);
+      box-shadow: 0 0 8px rgba(224, 96, 122, 0.7);
+      animation: pulseDot 2.2s ease-in-out infinite;
+    }
+
     .panel-status.reachable {
-      color:#B8BCC6; border-color:rgba(184,188,198,0.3);
-      background:rgba(184,188,198,0.05);
+      color: #B8BCC6;
+      border-color: rgba(184, 188, 198, 0.3);
+      background: rgba(184, 188, 198, 0.05);
     }
-    .panel-status.reachable::before { background:#B8BCC6; }
+
+    .panel-status.reachable::before {
+      background: #B8BCC6;
+    }
+
     .panel-status.horizon {
-      color:rgba(184,188,198,0.7); border-color:rgba(184,188,198,0.2);
-      background:transparent;
+      color: rgba(184, 188, 198, 0.7);
+      border-color: rgba(184, 188, 198, 0.2);
+      background: transparent;
     }
-    .panel-status.horizon::before { background:transparent; border:1px solid rgba(184,188,198,0.7); }
-    @keyframes pulseDot { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+
+    .panel-status.horizon::before {
+      background: transparent;
+      border: 1px solid rgba(184, 188, 198, 0.7);
+    }
+
+    @keyframes pulseDot {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.5;
+      }
+    }
 
     .p-eye {
-      font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:400;
-      letter-spacing:0.22em; text-transform:uppercase; color:var(--red-bright);
-      margin-bottom:0.9rem; display:flex; align-items:center; gap:0.9rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
     }
-    .p-eye::before { content:''; width:26px; height:2px; background:var(--red-bright); flex-shrink:0; }
+
+    .p-eye::before {
+      content: '';
+      width: 26px;
+      height: 2px;
+      background: var(--red-bright);
+      flex-shrink: 0;
+    }
+
     .p-hl {
-      font-family:'Cormorant Garamond',serif; font-weight:300;
-      font-size:clamp(1.6rem,2.6vw,2.2rem); line-height:1.1;
-      color:var(--bg); letter-spacing:-0.015em; margin-bottom:1.2rem; max-width:22ch;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      line-height: 1.1;
+      color: var(--bg);
+      letter-spacing: -0.015em;
+      margin-bottom: 1.2rem;
+      max-width: 22ch;
     }
-    .p-grid { display:grid; grid-template-columns:1.3fr 0.7fr; gap:2.4rem; align-items:start; }
-    .p-body { font-size:0.98rem; color:rgba(249,249,249,0.72); line-height:1.7; }
-    .p-body + .p-body { margin-top:1rem; }
-    .p-body strong { color:#fff; font-weight:500; }
-    .p-caps { display:flex; flex-direction:column; }
+
+    .p-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 2.4rem;
+      align-items: start;
+    }
+
+    .p-body {
+      font-size: 0.98rem;
+      color: rgba(249, 249, 249, 0.72);
+      line-height: 1.7;
+    }
+
+    .p-body+.p-body {
+      margin-top: 1rem;
+    }
+
+    .p-body strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
+    .p-caps {
+      display: flex;
+      flex-direction: column;
+    }
+
     .p-cap {
-      font-family:'IBM Plex Mono',monospace; font-size:0.74rem;
-      letter-spacing:0.04em; color:rgba(249,249,249,0.82);
-      padding:0.65rem 0; border-bottom:1px solid rgba(249,249,249,0.1); line-height:1.45;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.04em;
+      color: rgba(249, 249, 249, 0.82);
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(249, 249, 249, 0.1);
+      line-height: 1.45;
     }
-    .p-cap:first-child { border-top:1px solid rgba(249,249,249,0.1); }
-    .p-cap::before { content:'— '; color:var(--red-bright); }
+
+    .p-cap:first-child {
+      border-top: 1px solid rgba(249, 249, 249, 0.1);
+    }
+
+    .p-cap::before {
+      content: '— ';
+      color: var(--red-bright);
+    }
+
     .p-seq {
-      margin-top:1.4rem; padding-top:1.1rem; border-top:1px solid rgba(249,249,249,0.08);
-      font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
-      letter-spacing:0.05em; line-height:1.65; color:rgba(184,188,198,0.55);
+      margin-top: 1.4rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid rgba(249, 249, 249, 0.08);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      line-height: 1.65;
+      color: rgba(184, 188, 198, 0.55);
     }
-    .p-seq b { color:var(--red-bright); font-weight:400; }
-    .p-cta { margin-top:1.4rem; }
+
+    .p-seq b {
+      color: var(--red-bright);
+      font-weight: 400;
+    }
+
+    .p-cta {
+      margin-top: 1.4rem;
+    }
 
     /* ════════ SCROLL 3 — APPLICATION IN FOCUS (light) ════════ */
-    .cases-sec { background:var(--bg); border-top:1px solid var(--border); }
+    .cases-sec {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
 
     /* full-width subsea hero render atop the focus scroll */
     .focus-hero {
-      margin-top:3rem; border:1px solid var(--border); border-radius:4px;
-      overflow:hidden; background:var(--dark-bg);
+      margin-top: 3rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--dark-bg);
     }
-    .focus-hero img { width:100%; height:auto; display:block; }
+
+    .focus-hero img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     .focus-hero-cap {
-      font-family:'IBM Plex Mono',monospace; font-size:0.7rem;
-      letter-spacing:0.12em; text-transform:uppercase; color:var(--silver);
-      padding:0.9rem 1.2rem; background:var(--dark-bg);
-      border-top:1px solid rgba(249,249,249,0.08); line-height:1.5;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver);
+      padding: 0.9rem 1.2rem;
+      background: var(--dark-bg);
+      border-top: 1px solid rgba(249, 249, 249, 0.08);
+      line-height: 1.5;
     }
-    .focus-hero-cap b { color:rgba(249,249,249,0.78); font-weight:400; }
+
+    .focus-hero-cap b {
+      color: rgba(249, 249, 249, 0.78);
+      font-weight: 400;
+    }
 
     /* focus intro: statement + backing */
     .focus-intro {
-      display:grid; grid-template-columns:1fr 1fr; gap:4rem;
-      margin-top:3rem; align-items:start;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 3rem;
+      align-items: start;
     }
-    .focus-statement { font-size:1.18rem; color:var(--navy); line-height:1.8; }
-    .focus-statement strong { color:var(--text); font-weight:500; }
-    .focus-statement em { font-style:italic; color:var(--text); }
+
+    .focus-statement {
+      font-size: 1.18rem;
+      color: var(--navy);
+      line-height: 1.8;
+    }
+
+    .focus-statement strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .focus-statement em {
+      font-style: italic;
+      color: var(--text);
+    }
+
     .focus-backing {
-      border-left:2px solid var(--red); padding:0.4rem 0 0.4rem 1.8rem;
+      border-left: 2px solid var(--red);
+      padding: 0.4rem 0 0.4rem 1.8rem;
     }
+
     .focus-backing-lbl {
-      font-family:'IBM Plex Mono',monospace; font-size:0.68rem;
-      letter-spacing:0.18em; text-transform:uppercase; color:var(--red);
-      margin-bottom:1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1rem;
     }
-    .focus-backing-body { font-size:1.05rem; color:var(--text-2); line-height:1.7; }
-    .focus-backing-body strong { color:var(--text); font-weight:500; }
+
+    .focus-backing-body {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    .focus-backing-body strong {
+      color: var(--text);
+      font-weight: 500;
+    }
 
     /* use-case columns: 3-up, image → title → desc → ops */
     .cases-list {
-      display:grid; grid-template-columns:repeat(3,1fr); gap:2.5rem;
-      margin-top:5rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem;
+      margin-top: 5rem;
     }
-    .case-col { display:flex; flex-direction:column; }
+
+    .case-col {
+      display: flex;
+      flex-direction: column;
+    }
+
     .case-visual {
-      width:100%; border:1px solid var(--border); border-radius:4px;
-      overflow:hidden; background:var(--dark-bg); margin-bottom:1.8rem;
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--dark-bg);
+      margin-bottom: 1.8rem;
     }
-    .case-visual img { width:100%; height:auto; display:block; aspect-ratio:3/2; object-fit:cover; }
+
+    .case-visual img {
+      width: 100%;
+      height: auto;
+      display: block;
+      aspect-ratio: 3/2;
+      object-fit: cover;
+    }
+
     .case-index {
-      font-family:'IBM Plex Mono',monospace; font-size:0.72rem;
-      letter-spacing:0.18em; text-transform:uppercase; color:var(--red);
-      margin-bottom:0.7rem; display:block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.7rem;
+      display: block;
     }
-	/* per-image brightness rebalancing — sources differ in line density */
+
+    /* per-image brightness rebalancing — sources differ in line density */
     .case-col:nth-child(1) .case-visual img {
       filter: brightness(1.55) contrast(1.25);
     }
+
     .case-col:nth-child(3) .case-visual img {
       filter: brightness(1.6) contrast(1.25);
     }
+
     .case-name {
-      font-family:'Cormorant Garamond',serif; font-size:clamp(1.4rem,2vw,1.75rem);
-      font-weight:300; line-height:1.1; color:var(--text); letter-spacing:-0.01em;
-      margin-bottom:1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 2vw, 1.75rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text);
+      letter-spacing: -0.01em;
+      margin-bottom: 1rem;
     }
-    .case-body { font-size:1rem; color:var(--navy); line-height:1.7; }
-    .case-ops { margin-top:1.3rem; }
+
+    .case-body {
+      font-size: 1rem;
+      color: var(--navy);
+      line-height: 1.7;
+    }
+
+    .case-ops {
+      margin-top: 1.3rem;
+    }
+
     .cop-row {
-      display:flex; gap:0.7rem; align-items:flex-start;
-      padding:0.6rem 0; border-bottom:1px solid var(--border);
-      font-size:0.92rem; color:var(--navy); line-height:1.5;
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.92rem;
+      color: var(--navy);
+      line-height: 1.5;
     }
-    .cop-row:first-child { border-top:1px solid var(--border); }
-    .cop-n { font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--red); flex-shrink:0; }
+
+    .cop-row:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .cop-n {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--red);
+      flex-shrink: 0;
+    }
 
     /* ════════ SCROLL 4 — CTA (dark) ════════ */
-    .cta-sec { background:var(--dark-2); padding:9rem 0; position:relative; overflow:hidden; border-top:1px solid rgba(249,249,249,0.08); }
-    .cta-inner { position:relative; z-index:2; max-width:720px; }
-    .cta-hl { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(2.4rem,5vw,3.6rem); line-height:1.05; letter-spacing:-0.015em; color:var(--bg); margin-bottom:1.6rem; }
-    .cta-hl em { font-style:italic; color:var(--red-bright); }
-    .cta-sub { font-size:1.2rem; line-height:1.7; color:rgba(249,249,249,0.72); max-width:560px; margin-bottom:2.4rem; }
-    .cta-actions { display:flex; gap:1.2rem; flex-wrap:wrap; }
+    .cta-sec {
+      background: var(--dark-2);
+      padding: 9rem 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(249, 249, 249, 0.08);
+    }
+
+    .cta-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .cta-hl {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--bg);
+      margin-bottom: 1.6rem;
+    }
+
+    .cta-hl em {
+      font-style: italic;
+      color: var(--red-bright);
+    }
+
+    .cta-sub {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: rgba(249, 249, 249, 0.72);
+      max-width: 560px;
+      margin-bottom: 2.4rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
 
     /* ──────────── FOOTER (verbatim) ──────────── */
-    footer { background:var(--dark-bg); padding:3rem 0; border-top:1px solid rgba(249,249,249,0.06); }
-    .foot-inner { display:flex; align-items:center; justify-content:space-between; }
-    .foot-logo img { height:112px; width:auto; opacity:0.75; }
-    .foot-nav { display:flex; gap:2rem; list-style:none; flex-wrap:wrap; }
-    .foot-nav a { font-family:'IBM Plex Mono',monospace; font-size:0.9rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--silver); opacity:0.6; text-decoration:none; transition:opacity 0.25s; }
-    .foot-nav a:hover { opacity:1; }
-    .foot-copy { font-family:'IBM Plex Mono',monospace; font-size:0.85rem; letter-spacing:0.08em; color:var(--silver); opacity:0.45; }
+    footer {
+      background: var(--dark-bg);
+      padding: 3rem 0;
+      border-top: 1px solid rgba(249, 249, 249, 0.06);
+    }
+
+    .foot-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .foot-logo img {
+      height: 112px;
+      width: auto;
+      opacity: 0.75;
+    }
+
+    .foot-nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .foot-nav a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.25s;
+    }
+
+    .foot-nav a:hover {
+      opacity: 1;
+    }
+
+    .foot-copy {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--silver);
+      opacity: 0.45;
+    }
 
     /* KEYFRAMES (verbatim) */
-    @keyframes riseIn { from{opacity:0; transform:translateY(16px);} to{opacity:1; transform:none;} }
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
 
     /* ──────────── RESPONSIVE ──────────── */
-    @media (max-width:1366px){ .app-hero-content{padding-left:4.5rem;} }
-    @media (max-width:1180px){
-      .app-layout{ grid-template-columns:34% 66%; }
-      .panel{ padding:2.2rem 2.2rem; }
-      .p-grid{ grid-template-columns:1fr; gap:1.4rem; }
+    @media (max-width:1366px) {
+      .app-hero-content {
+        padding-left: 4.5rem;
+      }
     }
-    @media (max-width:1024px){
-      nav,nav.scrolled{padding-left:2.5rem; padding-right:2.5rem;}
-      .container{padding:0 2.5rem;}
-      .app-hero-content{padding:8rem 2.5rem 5rem;}
-      .app-hero-graphic{width:100%; opacity:0.25;}
+
+    @media (max-width:1180px) {
+      .app-layout {
+        grid-template-columns: 34% 66%;
+      }
+
+      .panel {
+        padding: 2.2rem 2.2rem;
+      }
+
+      .p-grid {
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+      }
+    }
+
+    @media (max-width:1024px) {
+
+      nav,
+      nav.scrolled {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+
+      .container {
+        padding: 0 2.5rem;
+      }
+
+      .app-hero-content {
+        padding: 8rem 2.5rem 5rem;
+      }
+
+      .app-hero-graphic {
+        width: 100%;
+        opacity: 0.25;
+      }
+
       /* abandon 100vh — revert to stacked layout */
-      .apps-sec{ height:auto; min-height:0; padding:6rem 0; overflow:visible; }
-      .apps-sec .container{ padding-top:0; padding-bottom:0; }
-      .apps-intro{ margin-bottom:2.5rem; max-width:none; }
-      .apps-intro .s-hl-inv{ font-size:clamp(1.6rem,3vw,2.2rem); }
-      .app-layout{ grid-template-columns:1fr; }
-      .app-select{ flex-direction:row; flex-wrap:wrap; }
-      .app-card{ flex:1 1 33.333%; min-width:0; padding:1.3rem 1.2rem; }
-      .app-card::after{ right:auto; left:0; bottom:-1px; top:auto; width:0; height:3px; transform:none; transition:width 0.35s var(--ease); }
-      .app-card.active::after{ height:3px; width:100%; }
-      .app-card.active{ padding-left:1.2rem; }
-      .panel{ padding:2.4rem 2rem; overflow:visible; }
-      .focus-intro{grid-template-columns:1fr; gap:2.5rem;}
-      .cases-list{grid-template-columns:1fr; gap:3rem; max-width:520px;}
+      .apps-sec {
+        height: auto;
+        min-height: 0;
+        padding: 6rem 0;
+        overflow: visible;
+      }
+
+      .apps-sec .container {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      .apps-intro {
+        margin-bottom: 2.5rem;
+        max-width: none;
+      }
+
+      .apps-intro .s-hl-inv {
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+      }
+
+      .app-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .app-select {
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+
+      .app-card {
+        flex: 1 1 33.333%;
+        min-width: 0;
+        padding: 1.3rem 1.2rem;
+      }
+
+      .app-card::after {
+        right: auto;
+        left: 0;
+        bottom: -1px;
+        top: auto;
+        width: 0;
+        height: 3px;
+        transform: none;
+        transition: width 0.35s var(--ease);
+      }
+
+      .app-card.active::after {
+        height: 3px;
+        width: 100%;
+      }
+
+      .app-card.active {
+        padding-left: 1.2rem;
+      }
+
+      .panel {
+        padding: 2.4rem 2rem;
+        overflow: visible;
+      }
+
+      .focus-intro {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .cases-list {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        max-width: 520px;
+      }
     }
-    @media (max-width:768px){
-      nav,nav.scrolled{padding-left:1.5rem; padding-right:1.5rem;}
-      .nav-links{display:none;}
-      .container{padding:0 1.5rem;}
-      .app-hero-content{padding:7rem 1.5rem 4rem;}
-      .nav-logo img{height:64px;} nav.scrolled .nav-logo img{height:52px;}
-      .foot-logo img{height:84px;}
-      section{padding:5rem 0;}
-      .apps-sec{ padding:5rem 0; }
-      .app-card{ flex:1 1 50%; }
-      .panel{padding:1.8rem 1.4rem;}
-      .foot-inner{flex-direction:column; gap:1.5rem; text-align:center;}
-      .foot-nav{justify-content:center;}
+
+    @media (max-width:768px) {
+
+      nav,
+      nav.scrolled {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .app-hero-content {
+        padding: 7rem 1.5rem 4rem;
+      }
+
+      .nav-logo img {
+        height: 64px;
+      }
+
+      nav.scrolled .nav-logo img {
+        height: 52px;
+      }
+
+      .foot-logo img {
+        height: 84px;
+      }
+
+      section {
+        padding: 5rem 0;
+      }
+
+      .apps-sec {
+        padding: 5rem 0;
+      }
+
+      .app-card {
+        flex: 1 1 50%;
+      }
+
+      .panel {
+        padding: 1.8rem 1.4rem;
+      }
+
+      .foot-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .foot-nav {
+        justify-content: center;
+      }
     }
-    @media (prefers-reduced-motion:reduce){
-      *,*::before,*::after{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
-      .reveal{opacity:1; transform:none;}
-      .app-hero-graphic{opacity:0.4 !important;}
+
+    @media (prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      .app-hero-graphic {
+        opacity: 0.4 !important;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAV -->
@@ -488,7 +1321,9 @@
         </div>
       </div>
     </div>
-    <div class="scroll-cue"><div class="scroll-line"></div><span>Scroll</span></div>
+    <div class="scroll-cue">
+      <div class="scroll-line"></div><span>Scroll</span>
+    </div>
   </section>
 
   <!-- ════════ SCROLL 2 — APPLICATIONS SELECTOR ════════ -->
@@ -543,158 +1378,158 @@
         <!-- RIGHT: detail panel -->
         <div class="panel-wrap">
 
-        <!-- SUBSEA (default) -->
-        <div class="panel show" id="p-subsea" role="tabpanel" aria-label="Subsea">
-          <span class="panel-status live">Current Deployment</span>
-          <p class="p-eye">Current Deployment Frontier</p>
-          <h3 class="p-hl">Subsea. The hardest access problem in the field.</h3>
-          <div class="p-grid">
-            <div>
-              <p class="p-body">
-                Offshore infrastructure — pipelines, risers, manifolds, hull structures,
-                subsea valves — demands inspection and intervention in geometry that is
-                dark, pressurised, and hazardous. <strong>Conventional ROVs lack the
-                dexterity to operate inside it. Divers carry unacceptable risk.</strong>
-              </p>
-              <p class="p-seq">
-                The platform's base architecture and current deployment environment —
-                the most demanding access problem we solve. <b>Every other environment
-                is a variant of this.</b>
-              </p>
-            </div>
-            <div class="p-caps">
-              <div class="p-cap">Confined manifold, riser &amp; hull inspection</div>
-              <div class="p-cap">Valve actuation &amp; connector intervention</div>
-              <div class="p-cap">Search &amp; recovery from obstructed geometry</div>
+          <!-- SUBSEA (default) -->
+          <div class="panel show" id="p-subsea" role="tabpanel" aria-label="Subsea">
+            <span class="panel-status live">Current Deployment</span>
+            <p class="p-eye">Current Deployment Frontier</p>
+            <h3 class="p-hl">Subsea. The hardest access problem in the field.</h3>
+            <div class="p-grid">
+              <div>
+                <p class="p-body">
+                  Offshore infrastructure — pipelines, risers, manifolds, hull structures,
+                  subsea valves — demands inspection and intervention in geometry that is
+                  dark, pressurised, and hazardous. <strong>Conventional ROVs lack the
+                    dexterity to operate inside it. Divers carry unacceptable risk.</strong>
+                </p>
+                <p class="p-seq">
+                  The platform's base architecture and current deployment environment —
+                  the most demanding access problem we solve. <b>Every other environment
+                    is a variant of this.</b>
+                </p>
+              </div>
+              <div class="p-caps">
+                <div class="p-cap">Confined manifold, riser &amp; hull inspection</div>
+                <div class="p-cap">Valve actuation &amp; connector intervention</div>
+                <div class="p-cap">Search &amp; recovery from obstructed geometry</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- INDUSTRIAL -->
-        <div class="panel" id="p-industrial" role="tabpanel" aria-label="Industrial">
-          <span class="panel-status reachable">Architecturally Reachable</span>
-          <p class="p-eye">Architecturally Reachable</p>
-          <h3 class="p-hl">Industrial. The platform on land.</h3>
-          <div class="p-grid">
-            <div>
-              <p class="p-body">
-                Confined inspection inside plant, pressure vessels, and machinery —
-                heat exchangers, pipe runs, and valve assemblies where human access
-                carries high risk and downtime cost. <strong>The access problem is
-                structurally identical to subsea, without the water.</strong>
-              </p>
-              <p class="p-seq">
-                The subsea platform, lightened. <b>Subsea − weight = industrial</b> —
-                the same conforming architecture, freed of depth-rating mass.
-              </p>
-            </div>
-            <div class="p-caps">
-              <div class="p-cap">Pressure-vessel internal inspection</div>
-              <div class="p-cap">Heat-exchanger &amp; pipe-run access</div>
-              <div class="p-cap">Confined valve-assembly inspection</div>
+          <!-- INDUSTRIAL -->
+          <div class="panel" id="p-industrial" role="tabpanel" aria-label="Industrial">
+            <span class="panel-status reachable">Architecturally Reachable</span>
+            <p class="p-eye">Architecturally Reachable</p>
+            <h3 class="p-hl">Industrial. The platform on land.</h3>
+            <div class="p-grid">
+              <div>
+                <p class="p-body">
+                  Confined inspection inside plant, pressure vessels, and machinery —
+                  heat exchangers, pipe runs, and valve assemblies where human access
+                  carries high risk and downtime cost. <strong>The access problem is
+                    structurally identical to subsea, without the water.</strong>
+                </p>
+                <p class="p-seq">
+                  The subsea platform, lightened. <b>Subsea − weight = industrial</b> —
+                  the same conforming architecture, freed of depth-rating mass.
+                </p>
+              </div>
+              <div class="p-caps">
+                <div class="p-cap">Pressure-vessel internal inspection</div>
+                <div class="p-cap">Heat-exchanger &amp; pipe-run access</div>
+                <div class="p-cap">Confined valve-assembly inspection</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- DEFENSE -->
-        <div class="panel" id="p-defense" role="tabpanel" aria-label="Defense">
-          <span class="panel-status reachable">Architecturally Reachable</span>
-          <p class="p-eye">Architecturally Reachable</p>
-          <h3 class="p-hl">Defense &amp; material handling.</h3>
-          <div class="p-grid">
-            <div>
-              <p class="p-body">
-                Remote handling of heavy or hazardous objects in unstructured field
-                environments, where a conforming arm reaches what rigid manipulators
-                cannot — mounted on ground platforms for standoff operation.
-              </p>
-              <p class="p-seq">
-                Planned development stage. <b>Industrial + significant payload = defense</b> —
-                scaling actuation and load capacity on the proven platform.
-              </p>
-            </div>
-            <div class="p-caps">
-              <div class="p-cap">Standoff remote manipulation</div>
-              <div class="p-cap">Heavy / hazardous object handling</div>
-              <div class="p-cap">Ground-platform integration</div>
+          <!-- DEFENSE -->
+          <div class="panel" id="p-defense" role="tabpanel" aria-label="Defense">
+            <span class="panel-status reachable">Architecturally Reachable</span>
+            <p class="p-eye">Architecturally Reachable</p>
+            <h3 class="p-hl">Defense &amp; material handling.</h3>
+            <div class="p-grid">
+              <div>
+                <p class="p-body">
+                  Remote handling of heavy or hazardous objects in unstructured field
+                  environments, where a conforming arm reaches what rigid manipulators
+                  cannot — mounted on ground platforms for standoff operation.
+                </p>
+                <p class="p-seq">
+                  Planned development stage. <b>Industrial + significant payload = defense</b> —
+                  scaling actuation and load capacity on the proven platform.
+                </p>
+              </div>
+              <div class="p-caps">
+                <div class="p-cap">Standoff remote manipulation</div>
+                <div class="p-cap">Heavy / hazardous object handling</div>
+                <div class="p-cap">Ground-platform integration</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- NUCLEAR -->
-        <div class="panel" id="p-nuclear" role="tabpanel" aria-label="Nuclear">
-          <span class="panel-status horizon">Horizon</span>
-          <p class="p-eye">Horizon</p>
-          <h3 class="p-hl">Nuclear access &amp; intervention.</h3>
-          <div class="p-grid">
-            <div>
-              <p class="p-body">
-                One of robotics' classic hyper-redundant-arm markets: in-containment
-                inspection and decommissioning where human exposure is unacceptable and
-                access geometry is punishing.
-              </p>
-              <p class="p-seq">
-                Planned development stage. <b>Builds on the defense-stage platform with
-                radiation-hardened electronics and materials.</b>
-              </p>
-            </div>
-            <div class="p-caps">
-              <div class="p-cap">In-containment inspection</div>
-              <div class="p-cap">Decommissioning intervention</div>
-              <div class="p-cap">Radiation-hardened configuration</div>
+          <!-- NUCLEAR -->
+          <div class="panel" id="p-nuclear" role="tabpanel" aria-label="Nuclear">
+            <span class="panel-status horizon">Horizon</span>
+            <p class="p-eye">Horizon</p>
+            <h3 class="p-hl">Nuclear access &amp; intervention.</h3>
+            <div class="p-grid">
+              <div>
+                <p class="p-body">
+                  One of robotics' classic hyper-redundant-arm markets: in-containment
+                  inspection and decommissioning where human exposure is unacceptable and
+                  access geometry is punishing.
+                </p>
+                <p class="p-seq">
+                  Planned development stage. <b>Builds on the defense-stage platform with
+                    radiation-hardened electronics and materials.</b>
+                </p>
+              </div>
+              <div class="p-caps">
+                <div class="p-cap">In-containment inspection</div>
+                <div class="p-cap">Decommissioning intervention</div>
+                <div class="p-cap">Radiation-hardened configuration</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- SPACE -->
-        <div class="panel" id="p-space" role="tabpanel" aria-label="Space and Orbital">
-          <span class="panel-status horizon">Horizon</span>
-          <p class="p-eye">Horizon</p>
-          <h3 class="p-hl">Space &amp; orbital infrastructure.</h3>
-          <div class="p-grid">
-            <div>
-              <p class="p-body">
-                In-orbit servicing and structure assembly — satellite maintenance where a
-                slender, dexterous manipulator solves access constraints identical to those
-                on Earth, in vacuum and thermal extremes.
-              </p>
-              <p class="p-seq">
-                Long-horizon development stage. <b>Adapts the qualified platform for
-                orbital-environment compatibility.</b>
-              </p>
-            </div>
-            <div class="p-caps">
-              <div class="p-cap">In-orbit servicing</div>
-              <div class="p-cap">Satellite maintenance</div>
-              <div class="p-cap">Structure assembly</div>
+          <!-- SPACE -->
+          <div class="panel" id="p-space" role="tabpanel" aria-label="Space and Orbital">
+            <span class="panel-status horizon">Horizon</span>
+            <p class="p-eye">Horizon</p>
+            <h3 class="p-hl">Space &amp; orbital infrastructure.</h3>
+            <div class="p-grid">
+              <div>
+                <p class="p-body">
+                  In-orbit servicing and structure assembly — satellite maintenance where a
+                  slender, dexterous manipulator solves access constraints identical to those
+                  on Earth, in vacuum and thermal extremes.
+                </p>
+                <p class="p-seq">
+                  Long-horizon development stage. <b>Adapts the qualified platform for
+                    orbital-environment compatibility.</b>
+                </p>
+              </div>
+              <div class="p-caps">
+                <div class="p-cap">In-orbit servicing</div>
+                <div class="p-cap">Satellite maintenance</div>
+                <div class="p-cap">Structure assembly</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- AVIATION -->
-        <div class="panel" id="p-aviation" role="tabpanel" aria-label="Aviation">
-          <span class="panel-status horizon">Horizon</span>
-          <p class="p-eye">Horizon</p>
-          <h3 class="p-hl">Aviation &amp; aero-engine inspection.</h3>
-          <div class="p-grid">
-            <div>
-              <p class="p-body">
-                Threading inside aero-engines, wing structures, and fuel systems for
-                in-situ inspection without teardown — the smallest, most intricate confined
-                geometries the architecture will reach.
-              </p>
-              <p class="p-seq">
-                Long-horizon development stage. <b>The platform's extreme-miniaturization
-                endpoint.</b>
-              </p>
-            </div>
-            <div class="p-caps">
-              <div class="p-cap">In-situ aero-engine inspection</div>
-              <div class="p-cap">Airframe &amp; fuel-system access</div>
-              <div class="p-cap">Teardown-free maintenance</div>
+          <!-- AVIATION -->
+          <div class="panel" id="p-aviation" role="tabpanel" aria-label="Aviation">
+            <span class="panel-status horizon">Horizon</span>
+            <p class="p-eye">Horizon</p>
+            <h3 class="p-hl">Aviation &amp; aero-engine inspection.</h3>
+            <div class="p-grid">
+              <div>
+                <p class="p-body">
+                  Threading inside aero-engines, wing structures, and fuel systems for
+                  in-situ inspection without teardown — the smallest, most intricate confined
+                  geometries the architecture will reach.
+                </p>
+                <p class="p-seq">
+                  Long-horizon development stage. <b>The platform's extreme-miniaturization
+                    endpoint.</b>
+                </p>
+              </div>
+              <div class="p-caps">
+                <div class="p-cap">In-situ aero-engine inspection</div>
+                <div class="p-cap">Airframe &amp; fuel-system access</div>
+                <div class="p-cap">Teardown-free maintenance</div>
+              </div>
             </div>
           </div>
-        </div>
 
         </div><!-- /.panel-wrap -->
       </div><!-- /.app-layout -->
@@ -710,8 +1545,10 @@
       </div>
 
       <div class="focus-hero reveal">
-        <img src="assets/product-underwater-black.png" alt="The Tentacle-Arm integrated on an observation-class ROV, operating at depth above the seabed">
-        <p class="focus-hero-cap">The Tentacle-Arm — <b>integrated on an observation-class ROV</b>, operating at depth.</p>
+        <img src="assets/product-underwater-black.png"
+          alt="The Tentacle-Arm integrated on an observation-class ROV, operating at depth above the seabed">
+        <p class="focus-hero-cap">The Tentacle-Arm — <b>integrated on an observation-class ROV</b>, operating at depth.
+        </p>
       </div>
 
       <div class="focus-intro" style="margin-top:4rem;">
@@ -721,7 +1558,7 @@
             Offshore assets are ageing, inspection and intervention demand is
             climbing, and the confined geometry where failures begin is exactly
             where conventional systems cannot operate. <strong>This is where the
-            Tentacle-Arm's portability becomes decisive</strong> — a deployable,
+              Tentacle-Arm's portability becomes decisive</strong> — a deployable,
             conforming arm that reaches inside structures without a vessel-scale
             intervention spread or diver risk.
           </p>
@@ -743,7 +1580,8 @@
         <!-- CASE 01 — INSPECTION -->
         <div class="case-col reveal">
           <div class="case-visual">
-            <img src="assets/asset1.png" alt="Tentacle-Arm threading into a subsea manifold to inspect internal pipework">
+            <img src="assets/asset1.png"
+              alt="Tentacle-Arm threading into a subsea manifold to inspect internal pipework">
           </div>
           <span class="case-index">Use Case 01</span>
           <div class="case-name">Subsea Inspection</div>
@@ -753,9 +1591,12 @@
             skipped or inspected at high diver risk and cost.
           </p>
           <div class="case-ops">
-            <div class="cop-row"><span class="cop-n">—</span><span>Internal pipeline &amp; riser inspection via flanged access</span></div>
-            <div class="cop-row"><span class="cop-n">—</span><span>Confined manifold &amp; valve-assembly inspection</span></div>
-            <div class="cop-row"><span class="cop-n">—</span><span>Hull &amp; structural inspection of confined sections</span></div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Internal pipeline &amp; riser inspection via flanged
+                access</span></div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Confined manifold &amp; valve-assembly
+                inspection</span></div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Hull &amp; structural inspection of confined
+                sections</span></div>
           </div>
         </div>
 
@@ -772,16 +1613,20 @@
             structures conventional ROVs cannot reach.
           </p>
           <div class="case-ops">
-            <div class="cop-row"><span class="cop-n">—</span><span>Confined valve actuation &amp; torque application</span></div>
-            <div class="cop-row"><span class="cop-n">—</span><span>Connector engagement in restricted-access zones</span></div>
-            <div class="cop-row"><span class="cop-n">—</span><span>Light maintenance within confined geometry</span></div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Confined valve actuation &amp; torque
+                application</span></div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Connector engagement in restricted-access
+                zones</span></div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Light maintenance within confined geometry</span>
+            </div>
           </div>
         </div>
 
         <!-- CASE 03 — SEARCH & RECOVERY -->
         <div class="case-col reveal d2">
           <div class="case-visual">
-            <img src="assets/asset3.png" alt="Tentacle-Arm recovering an object from inside a debris-filled subsea wreck structure">
+            <img src="assets/asset3.png"
+              alt="Tentacle-Arm recovering an object from inside a debris-filled subsea wreck structure">
           </div>
           <span class="case-index">Use Case 03</span>
           <div class="case-name">Search &amp; Recovery</div>
@@ -791,9 +1636,12 @@
             scenarios neither ROVs nor divers handle reliably.
           </p>
           <div class="case-ops">
-            <div class="cop-row"><span class="cop-n">—</span><span>Foreign-object retrieval from confined sections</span></div>
-            <div class="cop-row"><span class="cop-n">—</span><span>Dropped-equipment recovery in obstructed zones</span></div>
-            <div class="cop-row"><span class="cop-n">—</span><span>Recovery inside otherwise-inaccessible structures</span></div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Foreign-object retrieval from confined
+                sections</span></div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Dropped-equipment recovery in obstructed zones</span>
+            </div>
+            <div class="cop-row"><span class="cop-n">—</span><span>Recovery inside otherwise-inaccessible
+                structures</span></div>
           </div>
         </div>
 
@@ -842,26 +1690,27 @@
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 55);
-    }, { passive:true });
+    }, { passive: true });
 
     // Scroll reveal
     const revealObs = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) { entry.target.classList.add('in'); revealObs.unobserve(entry.target); }
       });
-    }, { threshold:0.1, rootMargin:'0px 0px -30px 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
     // Application selector — tab pattern
     const cards = document.querySelectorAll('.app-card');
     const panels = document.querySelectorAll('.panel');
     cards.forEach(c => c.addEventListener('click', () => {
-      cards.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
-      c.classList.add('active'); c.setAttribute('aria-selected','true');
+      cards.forEach(x => { x.classList.remove('active'); x.setAttribute('aria-selected', 'false'); });
+      c.classList.add('active'); c.setAttribute('aria-selected', 'true');
       panels.forEach(p => p.classList.remove('show'));
       document.getElementById(c.dataset.target).classList.add('show');
     }));
   </script>
 
 </body>
+
 </html>

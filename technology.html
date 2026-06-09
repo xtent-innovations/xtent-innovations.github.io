@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Xtent Innovations — Technology</title>
-  <meta name="description" content="The Tentacle-Arm: a portable, hyper-redundant continuum manipulator with profile controllability. Built for confined-environment access conventional robotics cannot reach.">
+  <meta name="description"
+    content="The Tentacle-Arm: a portable, hyper-redundant continuum manipulator with profile controllability. Built for confined-environment access conventional robotics cannot reach.">
   <link rel="icon" href="assets/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=IBM+Plex+Mono:wght@300;400&display=swap"
+    rel="stylesheet">
   <style>
     /* ══════════════════════════════════════════════════════
        XTENT INNOVATIONS — TECHNOLOGY v2
@@ -18,432 +22,1396 @@
     ══════════════════════════════════════════════════════ */
 
     :root {
-      --bg:        #F9F9F9;
-      --text:      #05070A;
-      --text-2:    #0E1525;
-      --navy:      #13213C;
-      --silver:    #B8BCC6;
-      --red:       #721121;
-      --red-h:     #8D1528;
-      --red-bright:#E0607A;
-      --dark-bg:   #05070A;
-      --dark-2:    #0E1525;
-      --border:    rgba(5,7,10,0.08);
-      --border-md: rgba(5,7,10,0.14);
-      --ease:      cubic-bezier(0.16,1,0.3,1);
+      --bg: #F9F9F9;
+      --text: #05070A;
+      --text-2: #0E1525;
+      --navy: #13213C;
+      --silver: #B8BCC6;
+      --red: #721121;
+      --red-h: #8D1528;
+      --red-bright: #E0607A;
+      --dark-bg: #05070A;
+      --dark-2: #0E1525;
+      --border: rgba(5, 7, 10, 0.08);
+      --border-md: rgba(5, 7, 10, 0.14);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: var(--bg); color: var(--text);
-      font-family: 'DM Sans', sans-serif; font-weight: 300;
-      line-height: 1.7; overflow-x: hidden;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
     /* ──────────── NAV (verbatim from homepage) ──────────── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 0.6rem 4rem;
       transition: background 0.4s var(--ease), box-shadow 0.4s, padding 0.4s var(--ease);
     }
+
     nav.scrolled {
-      background: rgba(249,249,249,0.92);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 1px 0 var(--border); padding: 0.3rem 4rem;
+      background: rgba(249, 249, 249, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--border);
+      padding: 0.3rem 4rem;
     }
-    .nav-logo { display: flex; align-items: center; text-decoration: none; }
-    .nav-logo img { height: 110px; width: auto; display: block; transition: height 0.4s var(--ease); }
-    nav.scrolled .nav-logo img { height: 72px; }
-    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .nav-logo img {
+      height: 110px;
+      width: auto;
+      display: block;
+      transition: height 0.4s var(--ease);
+    }
+
+    nav.scrolled .nav-logo img {
+      height: 72px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
     .nav-links a {
-      color: var(--text-2); text-decoration: none;
+      color: var(--text-2);
+      text-decoration: none;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
       transition: color 0.25s;
     }
-    .nav-links a:hover { color: var(--red); }
-    .nav-links a.active { color: var(--red); }
+
+    .nav-links a:hover {
+      color: var(--red);
+    }
+
+    .nav-links a.active {
+      color: var(--red);
+    }
+
     .nav-cta {
-      border: 1px solid var(--red) !important; padding: 0.55rem 1.4rem;
+      border: 1px solid var(--red) !important;
+      padding: 0.55rem 1.4rem;
       color: var(--red) !important;
       transition: background 0.25s, color 0.25s !important;
     }
-    .nav-cta:hover { background: var(--red) !important; color: var(--bg) !important; }
+
+    .nav-cta:hover {
+      background: var(--red) !important;
+      color: var(--bg) !important;
+    }
 
     /* ──────────── BUTTONS (verbatim) ──────────── */
     .btn-primary {
-      display: inline-block; padding: 0.85rem 1.9rem;
-      background: var(--red); color: var(--bg); text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-      transition: background 0.25s, transform 0.25s;
-    }
-    .btn-primary:hover { background: var(--red-h); transform: translateY(-1px); }
-    .btn-ghost {
-      display: inline-block; padding: 0.85rem 1.9rem;
-      border: 1px solid var(--border-md); color: var(--text-2); text-decoration: none;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
-      transition: border-color 0.25s, color 0.25s;
-    }
-    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
-    .btn-ghost-inv {
-      display: inline-block; padding: 0.85rem 1.9rem;
-      border: 1px solid rgba(249,249,249,0.25); color: rgba(249,249,249,0.85);
+      display: inline-block;
+      padding: 0.85rem 1.9rem;
+      background: var(--red);
+      color: var(--bg);
       text-decoration: none;
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .btn-primary:hover {
+      background: var(--red-h);
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.85rem 1.9rem;
+      border: 1px solid var(--border-md);
+      color: var(--text-2);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       transition: border-color 0.25s, color 0.25s;
     }
-    .btn-ghost-inv:hover { border-color: rgba(249,249,249,0.7); color: #fff; }
+
+    .btn-ghost:hover {
+      border-color: var(--text);
+      color: var(--text);
+    }
+
+    .btn-ghost-inv {
+      display: inline-block;
+      padding: 0.85rem 1.9rem;
+      border: 1px solid rgba(249, 249, 249, 0.25);
+      color: rgba(249, 249, 249, 0.85);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: border-color 0.25s, color 0.25s;
+    }
+
+    .btn-ghost-inv:hover {
+      border-color: rgba(249, 249, 249, 0.7);
+      color: #fff;
+    }
 
     /* ──────────── SHARED TYPE (verbatim) ──────────── */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 4rem; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 4rem;
+    }
+
     .s-eye {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.78rem;
-      letter-spacing: 0.26em; text-transform: uppercase; color: var(--red);
-      margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.9rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
     }
-    .s-eye::before { content: ''; display: block; width: 26px; height: 1px; background: var(--red); flex-shrink: 0; }
+
+    .s-eye::before {
+      content: '';
+      display: block;
+      width: 26px;
+      height: 1px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
     .s-eye-on-dark {
-      font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; font-weight: 400;
-      letter-spacing: 0.26em; text-transform: uppercase; color: var(--red-bright);
-      margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.9rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
     }
-    .s-eye-on-dark::before { content: ''; display: block; width: 30px; height: 2px; background: var(--red-bright); flex-shrink: 0; }
+
+    .s-eye-on-dark::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--red-bright);
+      flex-shrink: 0;
+    }
+
     .s-hl {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem,3.2vw,2.6rem); font-weight: 300;
-      line-height: 1.12; color: var(--text); margin-bottom: 1.5rem; letter-spacing: -0.01em;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
     }
+
     .s-hl-inv {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.8rem,3.2vw,2.6rem); font-weight: 300;
-      line-height: 1.12; color: var(--bg); margin-bottom: 1.5rem; letter-spacing: -0.01em;
+      font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--bg);
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
     }
-    .s-body { font-size: 1.15rem; color: var(--navy); line-height: 1.8; max-width: 620px; }
-    .s-body-inv { font-size: 1.15rem; color: rgba(249,249,249,0.72); line-height: 1.8; max-width: 620px; }
+
+    .s-body {
+      font-size: 1.15rem;
+      color: var(--navy);
+      line-height: 1.8;
+      max-width: 620px;
+    }
+
+    .s-body-inv {
+      font-size: 1.15rem;
+      color: rgba(249, 249, 249, 0.72);
+      line-height: 1.8;
+      max-width: 620px;
+    }
 
     /* REVEAL (verbatim) */
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
-    .reveal.in { opacity: 1; transform: none; }
-    .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s} .d4{transition-delay:.4s}
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
 
-    section { padding: 8rem 0; }
+    .reveal.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    .d1 {
+      transition-delay: .1s
+    }
+
+    .d2 {
+      transition-delay: .2s
+    }
+
+    .d3 {
+      transition-delay: .3s
+    }
+
+    .d4 {
+      transition-delay: .4s
+    }
+
+    section {
+      padding: 8rem 0;
+    }
 
     /* ════════════════════════════════════════════════
        PAGE-SPECIFIC
        ════════════════════════════════════════════════ */
 
     /* Reading-progress rail */
-    .progress-rail { position: fixed; top: 0; left: 0; height: 2px; width: 100%; background: transparent; z-index: 99; pointer-events: none; }
-    .progress-rail i { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--red), var(--red-bright)); transition: width 0.1s linear; }
+    .progress-rail {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background: transparent;
+      z-index: 99;
+      pointer-events: none;
+    }
+
+    .progress-rail i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--red), var(--red-bright));
+      transition: width 0.1s linear;
+    }
 
     /* ── ARCHITECTURE (dark, 100vh, the patent claim beat) ── */
     .summary-sec {
       background: var(--dark-bg);
-      border-top: 1px solid rgba(249,249,249,0.06);
+      border-top: 1px solid rgba(249, 249, 249, 0.06);
       min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       padding: 6rem 0;
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
-    .summary-sec > .container { width: 100%; }
-    .summary-inner { max-width: 980px; }
+
+    .summary-sec>.container {
+      width: 100%;
+    }
+
+    .summary-inner {
+      max-width: 980px;
+    }
+
     .summary-headline {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2.2rem, 4.4vw, 3.6rem);
-      font-weight: 300; line-height: 1.08; letter-spacing: -0.015em;
-      color: var(--bg); margin-bottom: 2.4rem; max-width: 22ch;
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      color: var(--bg);
+      margin-bottom: 2.4rem;
+      max-width: 22ch;
     }
+
     .summary-lead {
-      font-size: 1.18rem; line-height: 1.8;
-      color: rgba(249,249,249,0.78);
-      max-width: 62ch; margin-bottom: 2rem;
+      font-size: 1.18rem;
+      line-height: 1.8;
+      color: rgba(249, 249, 249, 0.78);
+      max-width: 62ch;
+      margin-bottom: 2rem;
     }
-    .summary-lead strong { color: #fff; font-weight: 500; }
+
+    .summary-lead strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
     .summary-secondary {
-      font-size: 1.02rem; line-height: 1.75;
-      color: rgba(249,249,249,0.55);
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: rgba(249, 249, 249, 0.55);
       max-width: 60ch;
-      padding-top: 1.6rem; margin-top: 1.6rem;
-      border-top: 1px solid rgba(249,249,249,0.1);
+      padding-top: 1.6rem;
+      margin-top: 1.6rem;
+      border-top: 1px solid rgba(249, 249, 249, 0.1);
     }
-    .summary-secondary strong { color: rgba(249,249,249,0.92); font-weight: 500; }
+
+    .summary-secondary strong {
+      color: rgba(249, 249, 249, 0.92);
+      font-weight: 500;
+    }
 
     /* ── HERO (light, sparse) ── */
     .hero {
-      position: relative; min-height: 100vh;
-      display: flex; align-items: center;
-      background: var(--bg); overflow: hidden;
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--bg);
+      overflow: hidden;
     }
+
     .hero-graphic {
-      position: absolute; right: 0; top: 0; bottom: 0;
-      width: 75%; height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 75%;
+      height: 100%;
       background-image: url('assets/hero-clean.png');
       background-size: cover;
       background-position: left center;
       pointer-events: none;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0,0,0,0.5) 25%, black 50%);
-      mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0,0,0,0.3) 25%, black 50%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0, 0, 0, 0.5) 25%, black 50%);
+      mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0, 0, 0, 0.3) 25%, black 50%);
     }
+
     .hero-content {
-      position: relative; z-index: 2;
+      position: relative;
+      z-index: 2;
       width: 100%;
-      padding: 9rem 4rem 6rem 7rem; /* ~7rem left breathing room, no centered rail */
+      padding: 9rem 4rem 6rem 7rem;
+      /* ~7rem left breathing room, no centered rail */
     }
-    .hero-text { max-width: 680px; }
+
+    .hero-text {
+      max-width: 680px;
+    }
+
     .hero-eyebrow {
       font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.78rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--red); margin-bottom: 2rem;
-      opacity: 0; animation: riseIn 0.9s var(--ease) 0.2s forwards;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: riseIn 0.9s var(--ease) 0.2s forwards;
     }
+
     .hero-headline {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.6rem,5vw,4.4rem);
-      font-weight: 300; line-height: 1.08; letter-spacing: -0.015em;
-      color: var(--text); margin-bottom: 2.5rem;
-      opacity: 0; animation: riseIn 0.9s var(--ease) 0.4s forwards;
-    }
-    .hero-sub {
-      font-size: 1.25rem; color: var(--navy);
-      max-width: 460px; line-height: 1.88; margin-bottom: 3rem;
-      opacity: 0; animation: riseIn 0.9s var(--ease) 0.6s forwards;
-    }
-    .hero-ctas {
-      display: flex; gap: 1.2rem; flex-wrap: wrap; align-items: center;
-      opacity: 0; animation: riseIn 0.9s var(--ease) 0.8s forwards;
+      font-size: clamp(2.6rem, 5vw, 4.4rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.015em;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: riseIn 0.9s var(--ease) 0.4s forwards;
     }
 
-    .scroll-cue { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; z-index: 3; opacity: 0; animation: fadeIn 0.8s ease 1.5s forwards; }
-    .scroll-cue span { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.24em; text-transform: uppercase; color: var(--silver); }
-    .scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, transparent, var(--silver)); animation: breathe 2.3s ease-in-out infinite; }
-    @keyframes breathe { 0%,100%{opacity:0.25;} 50%{opacity:0.9;} }
+    .hero-sub {
+      font-size: 1.25rem;
+      color: var(--navy);
+      max-width: 460px;
+      line-height: 1.88;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: riseIn 0.9s var(--ease) 0.6s forwards;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      align-items: center;
+      opacity: 0;
+      animation: riseIn 0.9s var(--ease) 0.8s forwards;
+    }
+
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 3;
+      opacity: 0;
+      animation: fadeIn 0.8s ease 1.5s forwards;
+    }
+
+    .scroll-cue span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, transparent, var(--silver));
+      animation: breathe 2.3s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+
+      0%,
+      100% {
+        opacity: 0.25;
+      }
+
+      50% {
+        opacity: 0.9;
+      }
+    }
 
     /* ── THE TECHNOLOGY — merged section (dark, tonal step from hero) ── */
-    .tech-sec { background: var(--dark-2); border-top: 1px solid rgba(249,249,249,0.06); }
-    .tech-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 4rem; align-items: center; margin-top: 2.6rem; }
-    .tech-copy .dark-quote {
-      font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic;
-      font-size: clamp(1.4rem,2.4vw,1.9rem); line-height: 1.3; color: var(--bg);
-      border-left: 2px solid var(--red-bright); padding-left: 1.4rem; margin: 0 0 1.6rem;
+    .tech-sec {
+      background: var(--dark-2);
+      border-top: 1px solid rgba(249, 249, 249, 0.06);
     }
-    .profile-caption { font-size: 1.05rem; color: rgba(249,249,249,0.72); line-height: 1.75; max-width: 560px; }
-    .profile-caption strong { color: #fff; font-weight: 500; }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 2.6rem;
+    }
+
+    .tech-copy .dark-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1.4rem, 2.4vw, 1.9rem);
+      line-height: 1.3;
+      color: var(--bg);
+      border-left: 2px solid var(--red-bright);
+      padding-left: 1.4rem;
+      margin: 0 0 1.6rem;
+    }
+
+    .profile-caption {
+      font-size: 1.05rem;
+      color: rgba(249, 249, 249, 0.72);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    .profile-caption strong {
+      color: #fff;
+      font-weight: 500;
+    }
+
     /* Simulation frame — scaled to fit the right column */
     .sim-frame {
-      background: var(--dark-bg); border: 1px solid rgba(249,249,249,0.1);
-      border-radius: 8px; padding: 1rem 1rem 0.7rem; overflow: hidden;
+      background: var(--dark-bg);
+      border: 1px solid rgba(249, 249, 249, 0.1);
+      border-radius: 8px;
+      padding: 1rem 1rem 0.7rem;
+      overflow: hidden;
     }
-    .sim-frame svg { width: 100%; height: auto; display: block; }
-    .sim-meta { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px solid rgba(249,249,249,0.08); }
-    .sim-meta span { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(184,188,198,0.55); line-height: 1.5; }
-    .sim-meta .lit { color: var(--red-bright); }
-    .sim-fig { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.04em; line-height: 1.6; color: rgba(184,188,198,0.5); margin-top: 1rem; }
+
+    .sim-frame svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .sim-meta {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid rgba(249, 249, 249, 0.08);
+    }
+
+    .sim-meta span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(184, 188, 198, 0.55);
+      line-height: 1.5;
+    }
+
+    .sim-meta .lit {
+      color: var(--red-bright);
+    }
+
+    .sim-fig {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+      color: rgba(184, 188, 198, 0.5);
+      margin-top: 1rem;
+    }
 
     /* ── ENGINEERING PILLARS (light) ── */
-    .pillars-sec { background: var(--bg); border-top: 1px solid var(--border); }
-    .pillars-list { margin-top: 3rem; }
-    .pillars-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 3rem; }
-    .pillar-col { background: var(--bg); padding: 2.4rem 2rem; display: flex; flex-direction: column; }
-    .pillar-index { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); }
-    .pillar-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.5rem,2.2vw,1.9rem); line-height: 1.08; color: var(--text); margin: 0.7rem 0 1.2rem; letter-spacing: -0.01em; }
-    .pillar-body { font-size: 0.98rem; color: var(--navy); line-height: 1.7; margin-bottom: 1.6rem; }
-    .pillar-body strong { color: var(--text); font-weight: 500; }
-    .pillar-tags { display: flex; flex-direction: column; gap: 0.5rem; margin-top: auto; }
-    .p-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2); padding-bottom: 0.45rem; border-bottom: 1px solid var(--border); }
-    .p-tag:last-child { border-bottom: none; padding-bottom: 0; }
-    .p-tag::before { content: '— '; color: var(--red); }
+    .pillars-sec {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+
+    .pillars-list {
+      margin-top: 3rem;
+    }
+
+    .pillars-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .pillar-col {
+      background: var(--bg);
+      padding: 2.4rem 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-index {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .pillar-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+      line-height: 1.08;
+      color: var(--text);
+      margin: 0.7rem 0 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .pillar-body {
+      font-size: 0.98rem;
+      color: var(--navy);
+      line-height: 1.7;
+      margin-bottom: 1.6rem;
+    }
+
+    .pillar-body strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .pillar-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .p-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      padding-bottom: 0.45rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .p-tag:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .p-tag::before {
+      content: '— ';
+      color: var(--red);
+    }
 
     /* ── TIMELINE STRIP (dark, 3-column zigzag) ── */
-    .lineage-sec { background: var(--dark-bg); border-top: 1px solid rgba(249,249,249,0.06); }
-    .lineage-intro { max-width: 760px; margin: 0 auto 1rem; text-align: center; }
-    .lineage-intro .s-eye-on-dark { justify-content: center; }
-    .lineage-intro .s-body-inv { margin: 0 auto; }
-    .decade {
-      display: grid; grid-template-columns: 1fr 0.9fr 1fr;
-      grid-template-areas: "head head head" "left art right";
-      gap: 1.4rem 2.5rem; align-items: center;
-      padding: 2.8rem 0; border-top: 1px solid rgba(249,249,249,0.08);
+    .lineage-sec {
+      background: var(--dark-bg);
+      border-top: 1px solid rgba(249, 249, 249, 0.06);
     }
-    .decade:last-child { border-bottom: 1px solid rgba(249,249,249,0.08); }
+
+    .lineage-intro {
+      max-width: 760px;
+      margin: 0 auto 1rem;
+      text-align: center;
+    }
+
+    .lineage-intro .s-eye-on-dark {
+      justify-content: center;
+    }
+
+    .lineage-intro .s-body-inv {
+      margin: 0 auto;
+    }
+
+    .decade {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr 1fr;
+      grid-template-areas: "head head head" "left art right";
+      gap: 1.4rem 2.5rem;
+      align-items: center;
+      padding: 2.8rem 0;
+      border-top: 1px solid rgba(249, 249, 249, 0.08);
+    }
+
+    .decade:last-child {
+      border-bottom: 1px solid rgba(249, 249, 249, 0.08);
+    }
+
     /* centered header sitting on top of the SVG */
-    .decade-head { grid-area: head; text-align: center; max-width: 620px; margin: 0 auto; }
-    .decade-head .era { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red-bright); margin-bottom: 0.6rem; }
-    .decade-head .hl { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.3rem,2.2vw,1.8rem); line-height: 1.1; color: var(--bg); letter-spacing: -0.01em; }
-    .decade-art { grid-area: art; }
-    .decade-art svg { width: 100%; height: auto; display: block; max-height: 210px; }
-    .decade-art .art-cap { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(184,188,198,0.5); text-align: center; margin-top: 0.6rem; }
+    .decade-head {
+      grid-area: head;
+      text-align: center;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .decade-head .era {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 0.6rem;
+    }
+
+    .decade-head .hl {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+      line-height: 1.1;
+      color: var(--bg);
+      letter-spacing: -0.01em;
+    }
+
+    .decade-art {
+      grid-area: art;
+    }
+
+    .decade-art svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      max-height: 210px;
+    }
+
+    .decade-art .art-cap {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(184, 188, 198, 0.5);
+      text-align: center;
+      margin-top: 0.6rem;
+    }
+
     /* description side (body only now) */
-    .dec-desc .body { font-size: 0.92rem; color: rgba(249,249,249,0.66); line-height: 1.6; }
-    .dec-desc.left { grid-area: left; } .dec-desc.right { grid-area: right; }
+    .dec-desc .body {
+      font-size: 0.92rem;
+      color: rgba(249, 249, 249, 0.66);
+      line-height: 1.6;
+    }
+
+    .dec-desc.left {
+      grid-area: left;
+    }
+
+    .dec-desc.right {
+      grid-area: right;
+    }
+
     /* who/focus/break side */
-    .dec-wfb { display: grid; gap: 0.5rem; }
-    .dec-wfb .row { display: grid; grid-template-columns: 4.5rem 1fr; gap: 0.8rem; align-items: baseline; padding: 0.45rem 0; border-top: 1px solid rgba(249,249,249,0.08); }
-    .dec-wfb .row:first-child { border-top: none; }
-    .dec-wfb .k { font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red-bright); }
-    .dec-wfb .v { font-size: 0.82rem; color: rgba(249,249,249,0.78); line-height: 1.45; }
+    .dec-wfb {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .dec-wfb .row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: 0.8rem;
+      align-items: baseline;
+      padding: 0.45rem 0;
+      border-top: 1px solid rgba(249, 249, 249, 0.08);
+    }
+
+    .dec-wfb .row:first-child {
+      border-top: none;
+    }
+
+    .dec-wfb .k {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+    }
+
+    .dec-wfb .v {
+      font-size: 0.82rem;
+      color: rgba(249, 249, 249, 0.78);
+      line-height: 1.45;
+    }
+
     /* grid-area placement for left/right columns */
-    .dec-wfb.left { grid-area: left; } .dec-wfb.right { grid-area: right; }
-    .lineage-payoff { margin: 3rem auto 0; padding-top: 2.4rem; border-top: 1px solid rgba(249,249,249,0.12); max-width: 820px; text-align: center; }
-    .lineage-payoff .lp-line { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.5rem,2.8vw,2.1rem); line-height: 1.25; color: var(--bg); letter-spacing: -0.01em; }
-    .lineage-payoff .lp-line strong { color: var(--red-bright); font-weight: 400; }
+    .dec-wfb.left {
+      grid-area: left;
+    }
+
+    .dec-wfb.right {
+      grid-area: right;
+    }
+
+    .lineage-payoff {
+      margin: 3rem auto 0;
+      padding-top: 2.4rem;
+      border-top: 1px solid rgba(249, 249, 249, 0.12);
+      max-width: 820px;
+      text-align: center;
+    }
+
+    .lineage-payoff .lp-line {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      line-height: 1.25;
+      color: var(--bg);
+      letter-spacing: -0.01em;
+    }
+
+    .lineage-payoff .lp-line strong {
+      color: var(--red-bright);
+      font-weight: 400;
+    }
 
     /* spine draw-in for decade SVGs */
-    .spine { stroke-dasharray: 1; stroke-dashoffset: 1; }
-    .decade.in .spine, .scene.in .spine { animation: drawSpine 1.6s var(--ease) forwards; }
-    .decade.in .spine.delay1, .scene.in .spine.delay1 { animation-delay: 0.2s; }
-    @keyframes drawSpine { to { stroke-dashoffset: 0; } }
+    .spine {
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+    }
+
+    .decade.in .spine,
+    .scene.in .spine {
+      animation: drawSpine 1.6s var(--ease) forwards;
+    }
+
+    .decade.in .spine.delay1,
+    .scene.in .spine.delay1 {
+      animation-delay: 0.2s;
+    }
+
+    @keyframes drawSpine {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
 
     /* ── CTA (dark) → push to Applications ── */
-    .t-cta { background: var(--dark-2); padding: 9rem 0; position: relative; overflow: hidden; border-top: 1px solid rgba(249,249,249,0.08); }
-    .t-cta-inner { position: relative; z-index: 2; max-width: 720px; }
-    .t-cta h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2.4rem,5vw,3.6rem); line-height: 1.05; letter-spacing: -0.015em; color: var(--bg); margin-bottom: 1.6rem; }
-    .t-cta p { font-size: 1.2rem; line-height: 1.7; color: rgba(249,249,249,0.72); max-width: 560px; margin-bottom: 2.4rem; }
-    .t-cta-actions { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .t-cta {
+      background: var(--dark-2);
+      padding: 9rem 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(249, 249, 249, 0.08);
+    }
+
+    .t-cta-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+    }
+
+    .t-cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      color: var(--bg);
+      margin-bottom: 1.6rem;
+    }
+
+    .t-cta p {
+      font-size: 1.2rem;
+      line-height: 1.7;
+      color: rgba(249, 249, 249, 0.72);
+      max-width: 560px;
+      margin-bottom: 2.4rem;
+    }
+
+    .t-cta-actions {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
 
     /* ── FOOTER (verbatim) ── */
-    footer { background: var(--dark-bg); padding: 3rem 0; border-top: 1px solid rgba(249,249,249,0.06); }
-    .foot-inner { display: flex; align-items: center; justify-content: space-between; }
-    .foot-logo img { height: 112px; width: auto; opacity: 0.75; }
-    .foot-nav { display: flex; gap: 2rem; list-style: none; flex-wrap: wrap; }
-    .foot-nav a { font-family: 'IBM Plex Mono', monospace; font-size: 0.9rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--silver); opacity: 0.6; text-decoration: none; transition: opacity 0.25s; }
-    .foot-nav a:hover { opacity: 1; }
-    .foot-copy { font-family: 'IBM Plex Mono', monospace; font-size: 0.85rem; letter-spacing: 0.08em; color: var(--silver); opacity: 0.45; }
+    footer {
+      background: var(--dark-bg);
+      padding: 3rem 0;
+      border-top: 1px solid rgba(249, 249, 249, 0.06);
+    }
+
+    .foot-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .foot-logo img {
+      height: 112px;
+      width: auto;
+      opacity: 0.75;
+    }
+
+    .foot-nav {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .foot-nav a {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--silver);
+      opacity: 0.6;
+      text-decoration: none;
+      transition: opacity 0.25s;
+    }
+
+    .foot-nav a:hover {
+      opacity: 1;
+    }
+
+    .foot-copy {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--silver);
+      opacity: 0.45;
+    }
 
     /* KEYFRAMES (verbatim) */
-    @keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width:1366px) {
-      .hero-content { padding-left:4.5rem; }
-      .hero-text { max-width: 540px; }
-      .hero-headline { font-size: clamp(2.4rem,4.5vw,3.6rem); }
+      .hero-content {
+        padding-left: 4.5rem;
+      }
+
+      .hero-text {
+        max-width: 540px;
+      }
+
+      .hero-headline {
+        font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      }
     }
+
     @media (max-width:1024px) {
-      nav, nav.scrolled { padding-left:2.5rem; padding-right:2.5rem; }
-      .container { padding:0 2.5rem; }
-      .hero-content { padding:8rem 2.5rem 5rem; }
-      .hero-graphic { width: 75%; -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0,0,0,0.3) 25%, black 50%); mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0,0,0,0.3) 25%, black 50%); }
-      .hero-text { max-width: 460px; }
-      .tech-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .pillars-list { grid-template-columns: 1fr; }
-      .pillar-tags { flex-flow: row wrap; gap: 0.5rem 1.2rem; }
-      .p-tag { border-bottom: none; padding-bottom: 0; }
+
+      nav,
+      nav.scrolled {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+      }
+
+      .container {
+        padding: 0 2.5rem;
+      }
+
+      .hero-content {
+        padding: 8rem 2.5rem 5rem;
+      }
+
+      .hero-graphic {
+        width: 75%;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0, 0, 0, 0.3) 25%, black 50%);
+        mask-image: linear-gradient(to right, transparent 0%, transparent 5%, rgba(0, 0, 0, 0.3) 25%, black 50%);
+      }
+
+      .hero-text {
+        max-width: 460px;
+      }
+
+      .tech-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .pillars-list {
+        grid-template-columns: 1fr;
+      }
+
+      .pillar-tags {
+        flex-flow: row wrap;
+        gap: 0.5rem 1.2rem;
+      }
+
+      .p-tag {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
       .decade {
-        grid-template-columns: 1fr; gap: 1rem;
+        grid-template-columns: 1fr;
+        gap: 1rem;
         grid-template-areas: "head" "art" "left" "right";
       }
-      .decade-art { max-width: 340px; margin: 0 auto; }
+
+      .decade-art {
+        max-width: 340px;
+        margin: 0 auto;
+      }
     }
+
     @media (max-width:768px) {
-      nav, nav.scrolled { padding-left:1.5rem; padding-right:1.5rem; }
-      .nav-links { display:none; }
-      .container { padding:0 1.5rem; }
-      .hero-content { padding:7rem 1.5rem 4rem; }
-      .hero-graphic { display:none; }
-      .nav-logo img { height:64px; }
-      nav.scrolled .nav-logo img { height:52px; }
-      .foot-logo img { height:84px; }
-      section { padding:5rem 0; }
-      .foot-inner { flex-direction:column; gap:1.5rem; text-align:center; }
-      .foot-nav { justify-content:center; }
+
+      nav,
+      nav.scrolled {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .container {
+        padding: 0 1.5rem;
+      }
+
+      .hero-content {
+        padding: 7rem 1.5rem 4rem;
+      }
+
+      .hero-graphic {
+        display: none;
+      }
+
+      .nav-logo img {
+        height: 64px;
+      }
+
+      nav.scrolled .nav-logo img {
+        height: 52px;
+      }
+
+      .foot-logo img {
+        height: 84px;
+      }
+
+      section {
+        padding: 5rem 0;
+      }
+
+      .foot-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+      }
+
+      .foot-nav {
+        justify-content: center;
+      }
     }
+
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
-      .reveal { opacity:1; transform:none; }
-      .spine { stroke-dashoffset: 0 !important; }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+
+      .spine {
+        stroke-dashoffset: 0 !important;
+      }
     }
-  
+
     /* ════════════════════════════════════════════════
        PILLARS — selector + expanding panel (Stage 2)
        ════════════════════════════════════════════════ */
-    .pillars-sec { background: var(--bg); border-top: 1px solid var(--border); }
+    .pillars-sec {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
 
     .pillar-select {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 1px; background: var(--border); border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
       margin-top: 3rem;
     }
+
     .pillar-card {
-      background: var(--bg); padding: 2.4rem 2rem; text-align: left;
-      border: none; cursor: pointer; position: relative;
-      display: flex; flex-direction: column; gap: 0.7rem; min-height: 190px;
-      transition: background 0.35s var(--ease); font-family: inherit;
+      background: var(--bg);
+      padding: 2.4rem 2rem;
+      text-align: left;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      min-height: 190px;
+      transition: background 0.35s var(--ease);
+      font-family: inherit;
     }
+
     .pillar-card::before {
-      content: ''; position: absolute; top: 0; left: 0; height: 2px; width: 0;
-      background: var(--red); transition: width 0.45s var(--ease);
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2px;
+      width: 0;
+      background: var(--red);
+      transition: width 0.45s var(--ease);
     }
-    .pillar-card:hover { background: #fff; }
-    .pillar-card:hover::before { width: 100%; }
-    .pillar-card.active { background: #fff; }
-    .pillar-card.active::before { width: 100%; background: linear-gradient(90deg, var(--red), var(--red-bright)); }
-    .pc-index { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--red); }
-    .pc-name { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.4rem,2.1vw,1.85rem); line-height: 1.08; color: var(--text); letter-spacing: -0.01em; }
-    .pc-cue { margin-top: auto; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver); display: flex; align-items: center; gap: 0.4rem; transition: color 0.3s; }
-    .pillar-card.active .pc-cue { color: var(--red); }
-    .pc-cue .chev { transition: transform 0.4s var(--ease); }
-    .pillar-card.active .pc-cue .chev { transform: rotate(180deg); }
 
-    .pillar-panel-wrap { border: 1px solid var(--border); border-top: none; overflow: hidden; }
-    .pillar-panel { display: none; padding: 4rem 3rem; background: var(--dark-2); animation: panelIn 0.55s var(--ease); }
-    .pillar-panel.show { display: block; }
-    @keyframes panelIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+    .pillar-card:hover {
+      background: #fff;
+    }
 
-    .panel-lead { margin-top: 2.2rem; padding-top: 1.4rem; border-top: 1px solid rgba(249,249,249,0.1); font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(249,249,249,0.55); }
-    .panel-lead b { color: #fff; font-weight: 400; }
+    .pillar-card:hover::before {
+      width: 100%;
+    }
+
+    .pillar-card.active {
+      background: #fff;
+    }
+
+    .pillar-card.active::before {
+      width: 100%;
+      background: linear-gradient(90deg, var(--red), var(--red-bright));
+    }
+
+    .pc-index {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red);
+    }
+
+    .pc-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1.4rem, 2.1vw, 1.85rem);
+      line-height: 1.08;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .pc-cue {
+      margin-top: auto;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--silver);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.3s;
+    }
+
+    .pillar-card.active .pc-cue {
+      color: var(--red);
+    }
+
+    .pc-cue .chev {
+      transition: transform 0.4s var(--ease);
+    }
+
+    .pillar-card.active .pc-cue .chev {
+      transform: rotate(180deg);
+    }
+
+    .pillar-panel-wrap {
+      border: 1px solid var(--border);
+      border-top: none;
+      overflow: hidden;
+    }
+
+    .pillar-panel {
+      display: none;
+      padding: 4rem 3rem;
+      background: var(--dark-2);
+      animation: panelIn 0.55s var(--ease);
+    }
+
+    .pillar-panel.show {
+      display: block;
+    }
+
+    @keyframes panelIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .panel-lead {
+      margin-top: 2.2rem;
+      padding-top: 1.4rem;
+      border-top: 1px solid rgba(249, 249, 249, 0.1);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(249, 249, 249, 0.55);
+    }
+
+    .panel-lead b {
+      color: #fff;
+      font-weight: 400;
+    }
 
     /* in-panel 2-column (mirrors .tech-grid but scoped to panels) */
-    .panel-grid { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 4rem; align-items: center; margin-top: 2.4rem; }
+    .panel-grid {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 2.4rem;
+    }
 
     /* SVG placeholder frame (matches .sim-frame footprint) */
     .svg-ph {
-      background: var(--dark-bg); border: 1px dashed rgba(184,188,198,0.28);
-      border-radius: 8px; min-height: 320px; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 0.6rem; text-align: center; padding: 2rem;
+      background: var(--dark-bg);
+      border: 1px dashed rgba(184, 188, 198, 0.28);
+      border-radius: 8px;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      text-align: center;
+      padding: 2rem;
     }
-    .svg-ph .ph-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red-bright); }
-    .svg-ph .ph-note { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.08em; color: rgba(184,188,198,0.5); line-height: 1.6; max-width: 320px; }
+
+    .svg-ph .ph-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+    }
+
+    .svg-ph .ph-note {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: rgba(184, 188, 198, 0.5);
+      line-height: 1.6;
+      max-width: 320px;
+    }
 
     /* perception sensing tags */
-    .sense-tags { display: flex; flex-wrap: wrap; gap: 0.5rem 0.7rem; margin-top: 1.6rem; }
-    .sense-tags .st { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(249,249,249,0.7); border: 1px solid rgba(249,249,249,0.16); border-radius: 3px; padding: 0.34rem 0.7rem; }
-    .sense-tags .st::before { content: '— '; color: var(--red-bright); }
+    .sense-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.7rem;
+      margin-top: 1.6rem;
+    }
+
+    .sense-tags .st {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(249, 249, 249, 0.7);
+      border: 1px solid rgba(249, 249, 249, 0.16);
+      border-radius: 3px;
+      padding: 0.34rem 0.7rem;
+    }
+
+    .sense-tags .st::before {
+      content: '— ';
+      color: var(--red-bright);
+    }
 
     /* collapsible disclosure (lineage + video) — one layer only */
-    .disclose { margin-top: 2.4rem; border-top: 1px solid rgba(249,249,249,0.1); }
-    .disclose-btn {
-      width: 100%; background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      padding: 1.3rem 0; font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem;
-      letter-spacing: 0.16em; text-transform: uppercase; color: var(--red-bright); text-align: left;
+    .disclose {
+      margin-top: 2.4rem;
+      border-top: 1px solid rgba(249, 249, 249, 0.1);
     }
-    .disclose-btn .dc-chev { transition: transform 0.4s var(--ease); font-size: 0.9rem; }
-    .disclose.open .disclose-btn .dc-chev { transform: rotate(180deg); }
-    .disclose-body { max-height: 0; overflow: hidden; transition: max-height 0.7s var(--ease); }
-    .disclose.open .disclose-body { max-height: 6000px; }
-    .disclose-body-inner { padding: 0.5rem 0 1.5rem; }
+
+    .disclose-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.3rem 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.74rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      text-align: left;
+    }
+
+    .disclose-btn .dc-chev {
+      transition: transform 0.4s var(--ease);
+      font-size: 0.9rem;
+    }
+
+    .disclose.open .disclose-btn .dc-chev {
+      transform: rotate(180deg);
+    }
+
+    .disclose-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.7s var(--ease);
+    }
+
+    .disclose.open .disclose-body {
+      max-height: 6000px;
+    }
+
+    .disclose-body-inner {
+      padding: 0.5rem 0 1.5rem;
+    }
 
     /* video slot stub */
-    .video-slot { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--dark-bg); border: 1px dashed rgba(184,188,198,0.28); border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-    .video-slot .vs-tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(184,188,198,0.55); }
+    .video-slot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--dark-bg);
+      border: 1px dashed rgba(184, 188, 198, 0.28);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-slot .vs-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.66rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(184, 188, 198, 0.55);
+    }
 
     @media (max-width:1024px) {
-      .panel-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-    }
-    @media (max-width:768px) {
-      .pillar-select { grid-template-columns: 1fr; }
-      .pillar-panel { padding: 2.4rem 1.5rem; }
+      .panel-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
     }
 
+    @media (max-width:768px) {
+      .pillar-select {
+        grid-template-columns: 1fr;
+      }
+
+      .pillar-panel {
+        padding: 2.4rem 1.5rem;
+      }
+    }
   </style>
 </head>
+
 <body>
 
   <div class="progress-rail"><i id="prog"></i></div>
@@ -466,17 +1434,17 @@
     <div class="hero-graphic" role="presentation"></div>
     <div class="hero-content">
       <div class="hero-text">
-      <p class="hero-eyebrow">Tentacle-Arm</p>
-      <h1 class="hero-headline">A hyper-dexterous robotic arm for confined-environment access.</h1>
-      <p class="hero-sub">
-        One platform for environments conventional robotics cannot reach.
-        First application: subsea inspection and repair, integrated with
-        observation-class ROVs.
-      </p>
-      <div class="hero-ctas">
-        <a href="contact.html" class="btn-primary">Partner with Xtent</a>
-        <a href="#pillars" class="btn-ghost">The technology</a>
-      </div>
+        <p class="hero-eyebrow">Tentacle-Arm</p>
+        <h1 class="hero-headline">A hyper-dexterous robotic arm for confined-environment access.</h1>
+        <p class="hero-sub">
+          One platform for environments conventional robotics cannot reach.
+          First application: subsea inspection and repair, integrated with
+          observation-class ROVs.
+        </p>
+        <div class="hero-ctas">
+          <a href="contact.html" class="btn-primary">Partner with Xtent</a>
+          <a href="#pillars" class="btn-ghost">The technology</a>
+        </div>
       </div><!-- /.hero-text -->
     </div>
     <div class="scroll-cue">
@@ -497,17 +1465,17 @@
           Hyper-redundant arms are usually built with <strong>cable-driven actuation</strong>
           &mdash; long tendons that run from base-mounted motors to each joint. The standard
           design uses <strong>two to three cables per joint and an equal number of motors at
-          the base</strong>, so the base scales with the arm and portability suffers.
+            the base</strong>, so the base scales with the arm and portability suffers.
         </p>
         <p class="summary-lead reveal d2">
           Our patent-pending actuation works differently: <strong>four to eight cables drive
-          the full system</strong>, with sequentially orthogonal joints that decouple how
+            the full system</strong>, with sequentially orthogonal joints that decouple how
           each segment moves. The base stays compact. The arm stays dexterous.
         </p>
         <p class="summary-secondary reveal d3">
           Above the hardware, a physics-based model with neural-network error correction
           gives the control system precision today &mdash; and <strong>measurable improvement
-          with every deployment</strong>.
+            with every deployment</strong>.
         </p>
       </div>
     </div>
@@ -528,7 +1496,8 @@
 
       <!-- SELECTOR -->
       <div class="pillar-select reveal d1" role="tablist" aria-label="Engineering pillars">
-        <button class="pillar-card active" role="tab" aria-selected="true" aria-controls="panel-01" data-target="panel-01">
+        <button class="pillar-card active" role="tab" aria-selected="true" aria-controls="panel-01"
+          data-target="panel-01">
           <span class="pc-index">Pillar 01</span>
           <span class="pc-name">Mechanical<br>Architecture</span>
           <span class="pc-cue"><span class="chev">&#9662;</span> View detail</span>
@@ -550,67 +1519,74 @@
 
         <!-- ───── PANEL 01 — Mechanical Architecture ───── -->
         <div class="pillar-panel show" id="panel-01" role="tabpanel" aria-label="Mechanical Architecture">
-      <div class="reveal">
-        <p class="s-eye-on-dark">Profile Controllability</p>
-        <h2 class="s-hl-inv">The robot conforms to the environment.</h2>
-      </div>
-      <div class="tech-grid">
-        <div class="tech-copy">
-          <p class="dark-quote reveal d1">It does not force its way through a constrained space. It navigates it.</p>
-          <p class="profile-caption reveal d1">
-            The Tentacle-Arm is a cable-actuated continuum manipulator. Its defining
-            capability is <strong>profile controllability</strong> — it actively shapes
-            its own curvature to thread through confined paths.
-          </p>
-          <p class="profile-caption reveal d1" style="margin-top:1.2rem;">
-            Conventional continuum robots produce single-curvature arcs. The Xtent
-            architecture shapes <strong>non-constant curvature profiles</strong> —
-            adapting body geometry to clear apertures, bends, and offset passages
-            while holding tip control and payload.
-          </p>
-          <p class="profile-caption reveal d1" style="margin-top:1.2rem;">
-            First application: subsea inspection and intervention, integrated with
-            observation-class ROVs. The architecture is environment-agnostic.
-          </p>
-        </div>
+          <div class="reveal">
+            <p class="s-eye-on-dark">Profile Controllability</p>
+            <h2 class="s-hl-inv">The robot conforms to the environment.</h2>
+          </div>
+          <div class="tech-grid">
+            <div class="tech-copy">
+              <p class="dark-quote reveal d1">It does not force its way through a constrained space. It navigates it.
+              </p>
+              <p class="profile-caption reveal d1">
+                The Tentacle-Arm is a cable-actuated continuum manipulator. Its defining
+                capability is <strong>profile controllability</strong> — it actively shapes
+                its own curvature to thread through confined paths.
+              </p>
+              <p class="profile-caption reveal d1" style="margin-top:1.2rem;">
+                Conventional continuum robots produce single-curvature arcs. The Xtent
+                architecture shapes <strong>non-constant curvature profiles</strong> —
+                adapting body geometry to clear apertures, bends, and offset passages
+                while holding tip control and payload.
+              </p>
+              <p class="profile-caption reveal d1" style="margin-top:1.2rem;">
+                First application: subsea inspection and intervention, integrated with
+                observation-class ROVs. The architecture is environment-agnostic.
+              </p>
+            </div>
 
-        <div class="tech-sim reveal d2">
-          <div class="sim-frame">
-            <svg id="simCanvas" viewBox="0 0 4700 3000" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kinematics simulation: a fourteen-link manipulator on a moving gantry base threads its body through a series of wall apertures, continuously reshaping its curvature.">
-              <g stroke="rgba(184,188,198,0.07)" stroke-width="2" stroke-dasharray="10,10">
-                <line x1="0" y1="1500" x2="4700" y2="1500" stroke="rgba(184,188,198,0.12)" stroke-width="3" stroke-dasharray="0"/>
-                <line x1="1000" y1="0" x2="1000" y2="3000"/>
-                <line x1="2000" y1="0" x2="2000" y2="3000"/>
-                <line x1="3000" y1="0" x2="3000" y2="3000"/>
-                <line x1="4000" y1="0" x2="4000" y2="3000"/>
-              </g>
-              <g fill="rgba(184,188,198,0.18)" stroke="rgba(184,188,198,0.3)">
-                <rect x="2862.68" y="1986.87" width="123" height="1755" stroke-width="2"/>
-                <rect x="2862.68" y="-457.30" width="123" height="1755" stroke-width="2"/>
-                <rect x="3832.67" y="-506.22" width="123" height="2490" stroke-width="1" opacity="0.7"/>
-                <rect x="3832.67" y="2606.22" width="123" height="2490" stroke-width="1" opacity="0.7"/>
-                <rect x="2862.68" y="2786.13" width="123" height="213.87" stroke-width="2"/>
-                <rect x="3832.67" y="0" width="123" height="816.22" stroke-width="1" opacity="0.7"/>
-              </g>
-              <g id="gantryBase">
-                <rect id="baseBlock" width="400" height="200" rx="6" fill="var(--navy)" stroke="var(--silver)" stroke-width="3"/>
-                <circle id="basePivot" r="8" fill="var(--silver)"/>
-              </g>
-              <g id="manipulatorGroup">
-                <path id="spineCore" fill="none" stroke="var(--red)" stroke-width="130" opacity="0.92" stroke-linecap="round" stroke-linejoin="round"/>
-                <path id="spineCenterline" fill="none" stroke="rgba(249,249,249,0.85)" stroke-width="4" opacity="0.85" stroke-linecap="round" stroke-linejoin="round"/>
-                <g id="jointNodes"></g>
-              </g>
-            </svg>
-            <div class="sim-meta">
-              <span>14 links · 200 mm base + 170 mm pitch · Ø 130 mm</span>
-              <span class="lit">Rigid-link · world-frame aligned</span>
+            <div class="tech-sim reveal d2">
+              <div class="sim-frame">
+                <svg id="simCanvas" viewBox="0 0 4700 3000" xmlns="http://www.w3.org/2000/svg" role="img"
+                  aria-label="Kinematics simulation: a fourteen-link manipulator on a moving gantry base threads its body through a series of wall apertures, continuously reshaping its curvature.">
+                  <g stroke="rgba(184,188,198,0.07)" stroke-width="2" stroke-dasharray="10,10">
+                    <line x1="0" y1="1500" x2="4700" y2="1500" stroke="rgba(184,188,198,0.12)" stroke-width="3"
+                      stroke-dasharray="0" />
+                    <line x1="1000" y1="0" x2="1000" y2="3000" />
+                    <line x1="2000" y1="0" x2="2000" y2="3000" />
+                    <line x1="3000" y1="0" x2="3000" y2="3000" />
+                    <line x1="4000" y1="0" x2="4000" y2="3000" />
+                  </g>
+                  <g fill="rgba(184,188,198,0.18)" stroke="rgba(184,188,198,0.3)">
+                    <rect x="2862.68" y="1986.87" width="123" height="1755" stroke-width="2" />
+                    <rect x="2862.68" y="-457.30" width="123" height="1755" stroke-width="2" />
+                    <rect x="3832.67" y="-506.22" width="123" height="2490" stroke-width="1" opacity="0.7" />
+                    <rect x="3832.67" y="2606.22" width="123" height="2490" stroke-width="1" opacity="0.7" />
+                    <rect x="2862.68" y="2786.13" width="123" height="213.87" stroke-width="2" />
+                    <rect x="3832.67" y="0" width="123" height="816.22" stroke-width="1" opacity="0.7" />
+                  </g>
+                  <g id="gantryBase">
+                    <rect id="baseBlock" width="400" height="200" rx="6" fill="var(--navy)" stroke="var(--silver)"
+                      stroke-width="3" />
+                    <circle id="basePivot" r="8" fill="var(--silver)" />
+                  </g>
+                  <g id="manipulatorGroup">
+                    <path id="spineCore" fill="none" stroke="var(--red)" stroke-width="130" opacity="0.92"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                    <path id="spineCenterline" fill="none" stroke="rgba(249,249,249,0.85)" stroke-width="4"
+                      opacity="0.85" stroke-linecap="round" stroke-linejoin="round" />
+                    <g id="jointNodes"></g>
+                  </g>
+                </svg>
+                <div class="sim-meta">
+                  <span>14 links · 200 mm base + 170 mm pitch · Ø 130 mm</span>
+                  <span class="lit">Rigid-link · world-frame aligned</span>
+                </div>
+              </div>
+              <p class="sim-fig">Fig. — Profile controllability. The arm reshapes its curvature to pass staggered
+                apertures as the base translates. Illustrative kinematics.</p>
             </div>
           </div>
-          <p class="sim-fig">Fig. — Profile controllability. The arm reshapes its curvature to pass staggered apertures as the base translates. Illustrative kinematics.</p>
-        </div>
-      </div>
-    
+
           <!-- collapsed lineage -->
           <div class="disclose" id="lineageDisclose">
             <button class="disclose-btn" aria-expanded="false" aria-controls="lineageBody">
@@ -619,211 +1595,287 @@
             </button>
             <div class="disclose-body" id="lineageBody">
               <div class="disclose-body-inner">
-      <div class="reveal lineage-intro">
-        <p class="s-eye-on-dark">The Lineage</p>
-        <h2 class="s-hl-inv">Six decades of slender robots.<br>Each solved one piece.</h2>
-        <p class="s-body-inv">
-          The continuum-robot field advanced one constraint at a time. Xtent is
-          the first to hold all of it at once: slender, portable, locally dexterous,
-          practical to control.
-        </p>
-      </div>
+                <div class="reveal lineage-intro">
+                  <p class="s-eye-on-dark">The Lineage</p>
+                  <h2 class="s-hl-inv">Six decades of slender robots.<br>Each solved one piece.</h2>
+                  <p class="s-body-inv">
+                    The continuum-robot field advanced one constraint at a time. Xtent is
+                    the first to hold all of it at once: slender, portable, locally dexterous,
+                    practical to control.
+                  </p>
+                </div>
 
-      <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-        <linearGradient id="spineGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stop-color="#8D1528"/><stop offset="55%" stop-color="#721121"/><stop offset="100%" stop-color="#E0607A"/>
-        </linearGradient>
-      </defs></svg>
+                <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="spineGrad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#8D1528" />
+                      <stop offset="55%" stop-color="#721121" />
+                      <stop offset="100%" stop-color="#E0607A" />
+                    </linearGradient>
+                  </defs>
+                </svg>
 
-      <!-- DECADE 1 — desc left, wfb right -->
-      <div class="decade reveal">
-        <div class="decade-head">
-          <p class="era">1968 — 1979 · Origins</p>
-          <p class="hl">Robots that bend like a living thing.</p>
-        </div>
-        <div class="dec-desc left">
-          <p class="body">Anderson's Tensor Arm used tendon-like filaments. Hirose built the first snake robot. Many-DOF slender bodies proved buildable.</p>
-        </div>
-        <div class="decade-art">
-          <svg viewBox="0 0 800 360" role="img" aria-label="Segmented snake robot in an S-curve with passive wheels">
-            <line x1="40" y1="300" x2="760" y2="300" stroke="rgba(184,188,198,0.18)" stroke-width="1"/>
-            <path class="spine" d="M70,270 C170,150 250,150 340,250 C430,350 510,340 600,235 C660,165 700,180 740,250" fill="none" stroke="rgba(184,188,198,0.85)" stroke-width="2"/>
-            <g fill="none" stroke="rgba(184,188,198,0.85)" stroke-width="2">
-              <rect x="92" y="222" width="36" height="22" rx="3" transform="rotate(-38 110 233)"/>
-              <rect x="220" y="158" width="36" height="22" rx="3" transform="rotate(6 238 169)"/>
-              <rect x="380" y="280" width="36" height="22" rx="3" transform="rotate(18 398 291)"/>
-              <rect x="540" y="232" width="36" height="22" rx="3" transform="rotate(-36 558 243)"/>
-              <rect x="690" y="208" width="36" height="22" rx="3" transform="rotate(16 708 219)"/>
-            </g>
-            <g fill="var(--red)">
-              <circle cx="110" cy="288" r="6"/><circle cx="238" cy="288" r="6"/><circle cx="398" cy="288" r="6"/><circle cx="558" cy="288" r="6"/><circle cx="708" cy="288" r="6"/>
-            </g>
-            <circle cx="70" cy="270" r="6" fill="#E0607A"/>
-          </svg>
-          <p class="art-cap">Active Cord Mechanism · discrete segments</p>
-        </div>
-        <div class="dec-wfb right">
-          <div class="row"><span class="k">Who</span><span class="v">Anderson (Scripps); Hirose (Tokyo Tech)</span></div>
-          <div class="row"><span class="k">Focus</span><span class="v">Bio-inspired locomotion; tendon arms</span></div>
-          <div class="row"><span class="k">Break</span><span class="v">Many-DOF slender bodies are controllable</span></div>
-        </div>
-      </div>
+                <!-- DECADE 1 — desc left, wfb right -->
+                <div class="decade reveal">
+                  <div class="decade-head">
+                    <p class="era">1968 — 1979 · Origins</p>
+                    <p class="hl">Robots that bend like a living thing.</p>
+                  </div>
+                  <div class="dec-desc left">
+                    <p class="body">Anderson's Tensor Arm used tendon-like filaments. Hirose built the first snake
+                      robot. Many-DOF slender bodies proved buildable.</p>
+                  </div>
+                  <div class="decade-art">
+                    <svg viewBox="0 0 800 360" role="img"
+                      aria-label="Segmented snake robot in an S-curve with passive wheels">
+                      <line x1="40" y1="300" x2="760" y2="300" stroke="rgba(184,188,198,0.18)" stroke-width="1" />
+                      <path class="spine"
+                        d="M70,270 C170,150 250,150 340,250 C430,350 510,340 600,235 C660,165 700,180 740,250"
+                        fill="none" stroke="rgba(184,188,198,0.85)" stroke-width="2" />
+                      <g fill="none" stroke="rgba(184,188,198,0.85)" stroke-width="2">
+                        <rect x="92" y="222" width="36" height="22" rx="3" transform="rotate(-38 110 233)" />
+                        <rect x="220" y="158" width="36" height="22" rx="3" transform="rotate(6 238 169)" />
+                        <rect x="380" y="280" width="36" height="22" rx="3" transform="rotate(18 398 291)" />
+                        <rect x="540" y="232" width="36" height="22" rx="3" transform="rotate(-36 558 243)" />
+                        <rect x="690" y="208" width="36" height="22" rx="3" transform="rotate(16 708 219)" />
+                      </g>
+                      <g fill="var(--red)">
+                        <circle cx="110" cy="288" r="6" />
+                        <circle cx="238" cy="288" r="6" />
+                        <circle cx="398" cy="288" r="6" />
+                        <circle cx="558" cy="288" r="6" />
+                        <circle cx="708" cy="288" r="6" />
+                      </g>
+                      <circle cx="70" cy="270" r="6" fill="#E0607A" />
+                    </svg>
+                    <p class="art-cap">Active Cord Mechanism · discrete segments</p>
+                  </div>
+                  <div class="dec-wfb right">
+                    <div class="row"><span class="k">Who</span><span class="v">Anderson (Scripps); Hirose (Tokyo
+                        Tech)</span></div>
+                    <div class="row"><span class="k">Focus</span><span class="v">Bio-inspired locomotion; tendon
+                        arms</span></div>
+                    <div class="row"><span class="k">Break</span><span class="v">Many-DOF slender bodies are
+                        controllable</span></div>
+                  </div>
+                </div>
 
-      <!-- DECADE 2 — wfb left, desc right -->
-      <div class="decade reveal">
-        <div class="decade-head">
-          <p class="era">1980s — 1999 · Theory</p>
-          <p class="hl">The field gets its mathematics and its name.</p>
-        </div>
-        <div class="dec-wfb left">
-          <div class="row"><span class="k">Who</span><span class="v">Chirikjian &amp; Burdick; Robinson &amp; Davies</span></div>
-          <div class="row"><span class="k">Focus</span><span class="v">Kinematic theory; actuation taxonomy</span></div>
-          <div class="row"><span class="k">Break</span><span class="v">The backbone curve; the term "continuum robot"</span></div>
-        </div>
-        <div class="decade-art">
-          <svg viewBox="0 0 800 360" role="img" aria-label="A smooth continuum backbone curve with a dashed mathematical centerline">
-            <rect x="320" y="320" width="160" height="14" rx="3" fill="rgba(249,249,249,0.18)"/>
-            <path class="spine delay1" d="M400,322 C400,230 300,200 320,120 C336,55 470,70 470,28" fill="none" stroke="#E0607A" stroke-width="1" stroke-dasharray="3 6" opacity="0.7"/>
-            <path class="spine" d="M380,322 C380,232 280,202 300,122 C318,57 452,72 452,30" fill="none" stroke="rgba(184,188,198,0.85)" stroke-width="13" stroke-linecap="round"/>
-            <path class="spine" d="M400,322 C400,230 300,200 320,120 C336,55 470,70 470,28" fill="none" stroke="url(#spineGrad)" stroke-width="3" stroke-linecap="round"/>
-            <text x="150" y="190" fill="rgba(224,96,122,0.8)" font-family="'IBM Plex Mono',monospace" font-size="16">&#954;(s)</text>
-            <circle cx="470" cy="28" r="5" fill="#fff"/>
-          </svg>
-          <p class="art-cap">Backbone curve · continuous, not jointed</p>
-        </div>
-        <div class="dec-desc right">
-          <p class="body">The backbone-curve model described shape with a few parameters. Robinson &amp; Davies classified actuation, including the cable-driven class Xtent builds on.</p>
-        </div>
-      </div>
+                <!-- DECADE 2 — wfb left, desc right -->
+                <div class="decade reveal">
+                  <div class="decade-head">
+                    <p class="era">1980s — 1999 · Theory</p>
+                    <p class="hl">The field gets its mathematics and its name.</p>
+                  </div>
+                  <div class="dec-wfb left">
+                    <div class="row"><span class="k">Who</span><span class="v">Chirikjian &amp; Burdick; Robinson &amp;
+                        Davies</span></div>
+                    <div class="row"><span class="k">Focus</span><span class="v">Kinematic theory; actuation
+                        taxonomy</span></div>
+                    <div class="row"><span class="k">Break</span><span class="v">The backbone curve; the term "continuum
+                        robot"</span></div>
+                  </div>
+                  <div class="decade-art">
+                    <svg viewBox="0 0 800 360" role="img"
+                      aria-label="A smooth continuum backbone curve with a dashed mathematical centerline">
+                      <rect x="320" y="320" width="160" height="14" rx="3" fill="rgba(249,249,249,0.18)" />
+                      <path class="spine delay1" d="M400,322 C400,230 300,200 320,120 C336,55 470,70 470,28" fill="none"
+                        stroke="#E0607A" stroke-width="1" stroke-dasharray="3 6" opacity="0.7" />
+                      <path class="spine" d="M380,322 C380,232 280,202 300,122 C318,57 452,72 452,30" fill="none"
+                        stroke="rgba(184,188,198,0.85)" stroke-width="13" stroke-linecap="round" />
+                      <path class="spine" d="M400,322 C400,230 300,200 320,120 C336,55 470,70 470,28" fill="none"
+                        stroke="url(#spineGrad)" stroke-width="3" stroke-linecap="round" />
+                      <text x="150" y="190" fill="rgba(224,96,122,0.8)" font-family="'IBM Plex Mono',monospace"
+                        font-size="16">&#954;(s)</text>
+                      <circle cx="470" cy="28" r="5" fill="#fff" />
+                    </svg>
+                    <p class="art-cap">Backbone curve · continuous, not jointed</p>
+                  </div>
+                  <div class="dec-desc right">
+                    <p class="body">The backbone-curve model described shape with a few parameters. Robinson &amp;
+                      Davies classified actuation, including the cable-driven class Xtent builds on.</p>
+                  </div>
+                </div>
 
-      <!-- DECADE 3 — desc left, wfb right -->
-      <div class="decade reveal">
-        <div class="decade-head">
-          <p class="era">2000s · Trunks &amp; Surgery</p>
-          <p class="hl">Whole-body grasping and millimetre access.</p>
-        </div>
-        <div class="dec-desc left">
-          <p class="body">Walker's OctArm grasped with its whole body. Surgical continuum robots reached millimetre scales. Constant-curvature became the standard model.</p>
-        </div>
-        <div class="decade-art">
-          <svg viewBox="0 0 800 360" role="img" aria-label="A tapering elephant-trunk style arm curling to grasp a sphere">
-            <circle cx="610" cy="200" r="40" fill="none" stroke="rgba(184,188,198,0.35)" stroke-width="2"/>
-            <path class="spine" d="M165,330 C165,250 175,200 230,170" fill="none" stroke="rgba(184,188,198,0.8)" stroke-width="30" stroke-linecap="round"/>
-            <path class="spine delay1" d="M230,170 C320,118 420,120 470,150 C540,190 560,170 575,182 C600,200 580,232 560,224" fill="none" stroke="url(#spineGrad)" stroke-width="15" stroke-linecap="round"/>
-            <circle cx="560" cy="224" r="5" fill="var(--red)"/>
-          </svg>
-          <p class="art-cap">Multi-section trunk · whole-body grasp</p>
-        </div>
-        <div class="dec-wfb right">
-          <div class="row"><span class="k">Who</span><span class="v">Walker (Clemson); Webster, Simaan</span></div>
-          <div class="row"><span class="k">Focus</span><span class="v">Whole-body grasp; surgical access</span></div>
-          <div class="row"><span class="k">Break</span><span class="v">Continuum robots leave the lab</span></div>
-        </div>
-      </div>
+                <!-- DECADE 3 — desc left, wfb right -->
+                <div class="decade reveal">
+                  <div class="decade-head">
+                    <p class="era">2000s · Trunks &amp; Surgery</p>
+                    <p class="hl">Whole-body grasping and millimetre access.</p>
+                  </div>
+                  <div class="dec-desc left">
+                    <p class="body">Walker's OctArm grasped with its whole body. Surgical continuum robots reached
+                      millimetre scales. Constant-curvature became the standard model.</p>
+                  </div>
+                  <div class="decade-art">
+                    <svg viewBox="0 0 800 360" role="img"
+                      aria-label="A tapering elephant-trunk style arm curling to grasp a sphere">
+                      <circle cx="610" cy="200" r="40" fill="none" stroke="rgba(184,188,198,0.35)" stroke-width="2" />
+                      <path class="spine" d="M165,330 C165,250 175,200 230,170" fill="none"
+                        stroke="rgba(184,188,198,0.8)" stroke-width="30" stroke-linecap="round" />
+                      <path class="spine delay1"
+                        d="M230,170 C320,118 420,120 470,150 C540,190 560,170 575,182 C600,200 580,232 560,224"
+                        fill="none" stroke="url(#spineGrad)" stroke-width="15" stroke-linecap="round" />
+                      <circle cx="560" cy="224" r="5" fill="var(--red)" />
+                    </svg>
+                    <p class="art-cap">Multi-section trunk · whole-body grasp</p>
+                  </div>
+                  <div class="dec-wfb right">
+                    <div class="row"><span class="k">Who</span><span class="v">Walker (Clemson); Webster, Simaan</span>
+                    </div>
+                    <div class="row"><span class="k">Focus</span><span class="v">Whole-body grasp; surgical
+                        access</span></div>
+                    <div class="row"><span class="k">Break</span><span class="v">Continuum robots leave the lab</span>
+                    </div>
+                  </div>
+                </div>
 
-      <!-- DECADE 4 — wfb left, desc right · the BULKY BASE -->
-      <div class="decade reveal">
-        <div class="decade-head">
-          <p class="era">2010s · Commercialization</p>
-          <p class="hl">From the lab to the reactor.</p>
-        </div>
-        <div class="dec-wfb left">
-          <div class="row"><span class="k">Who</span><span class="v">CMU lineage; OC Robotics; soft-robotics groups</span></div>
-          <div class="row"><span class="k">Focus</span><span class="v">Commercialization; accurate mechanics</span></div>
-          <div class="row"><span class="k">Break</span><span class="v">They ship — at the cost of a large base</span></div>
-        </div>
-        <div class="decade-art">
-          <svg viewBox="0 0 800 360" role="img" aria-label="A slender cable-driven snake-arm emerging from a deliberately bulky motor base">
-            <rect x="60" y="120" width="200" height="200" rx="5" fill="rgba(249,249,249,0.06)" stroke="rgba(249,249,249,0.25)" stroke-width="2"/>
-            <g stroke="rgba(224,96,122,0.5)" stroke-width="2" fill="none">
-              <circle cx="100" cy="160" r="13"/><circle cx="140" cy="160" r="13"/><circle cx="180" cy="160" r="13"/><circle cx="220" cy="160" r="13"/>
-              <circle cx="100" cy="210" r="13"/><circle cx="140" cy="210" r="13"/><circle cx="180" cy="210" r="13"/><circle cx="220" cy="210" r="13"/>
-              <circle cx="100" cy="260" r="13"/><circle cx="140" cy="260" r="13"/><circle cx="180" cy="260" r="13"/><circle cx="220" cy="260" r="13"/>
-            </g>
-            <text x="160" y="108" text-anchor="middle" fill="rgba(184,188,198,0.7)" font-family="'IBM Plex Mono',monospace" font-size="13">30+ MOTORS</text>
-            <path class="spine" d="M260,200 C400,190 460,230 560,180 C660,130 700,180 760,150" fill="none" stroke="url(#spineGrad)" stroke-width="8" stroke-linecap="round"/>
-            <circle cx="760" cy="150" r="6" fill="#fff"/>
-          </svg>
-          <p class="art-cap" style="color:var(--red-bright)">Big base = the problem</p>
-        </div>
-        <div class="dec-desc right">
-          <p class="body">Cable-driven snake-arms inspected reactors and engines. Cosserat-rod mechanics matured. But the systems stayed bulky — many cables, many motors, a heavy base.</p>
-        </div>
-      </div>
+                <!-- DECADE 4 — wfb left, desc right · the BULKY BASE -->
+                <div class="decade reveal">
+                  <div class="decade-head">
+                    <p class="era">2010s · Commercialization</p>
+                    <p class="hl">From the lab to the reactor.</p>
+                  </div>
+                  <div class="dec-wfb left">
+                    <div class="row"><span class="k">Who</span><span class="v">CMU lineage; OC Robotics; soft-robotics
+                        groups</span></div>
+                    <div class="row"><span class="k">Focus</span><span class="v">Commercialization; accurate
+                        mechanics</span></div>
+                    <div class="row"><span class="k">Break</span><span class="v">They ship — at the cost of a large
+                        base</span></div>
+                  </div>
+                  <div class="decade-art">
+                    <svg viewBox="0 0 800 360" role="img"
+                      aria-label="A slender cable-driven snake-arm emerging from a deliberately bulky motor base">
+                      <rect x="60" y="120" width="200" height="200" rx="5" fill="rgba(249,249,249,0.06)"
+                        stroke="rgba(249,249,249,0.25)" stroke-width="2" />
+                      <g stroke="rgba(224,96,122,0.5)" stroke-width="2" fill="none">
+                        <circle cx="100" cy="160" r="13" />
+                        <circle cx="140" cy="160" r="13" />
+                        <circle cx="180" cy="160" r="13" />
+                        <circle cx="220" cy="160" r="13" />
+                        <circle cx="100" cy="210" r="13" />
+                        <circle cx="140" cy="210" r="13" />
+                        <circle cx="180" cy="210" r="13" />
+                        <circle cx="220" cy="210" r="13" />
+                        <circle cx="100" cy="260" r="13" />
+                        <circle cx="140" cy="260" r="13" />
+                        <circle cx="180" cy="260" r="13" />
+                        <circle cx="220" cy="260" r="13" />
+                      </g>
+                      <text x="160" y="108" text-anchor="middle" fill="rgba(184,188,198,0.7)"
+                        font-family="'IBM Plex Mono',monospace" font-size="13">30+ MOTORS</text>
+                      <path class="spine" d="M260,200 C400,190 460,230 560,180 C660,130 700,180 760,150" fill="none"
+                        stroke="url(#spineGrad)" stroke-width="8" stroke-linecap="round" />
+                      <circle cx="760" cy="150" r="6" fill="#fff" />
+                    </svg>
+                    <p class="art-cap" style="color:var(--red-bright)">Big base = the problem</p>
+                  </div>
+                  <div class="dec-desc right">
+                    <p class="body">Cable-driven snake-arms inspected reactors and engines. Cosserat-rod mechanics
+                      matured. But the systems stayed bulky — many cables, many motors, a heavy base.</p>
+                  </div>
+                </div>
 
-      <!-- DECADE 5 — desc left, wfb right · Ashwin's model -->
-      <div class="decade reveal">
-        <div class="decade-head">
-          <p class="era">2015 — 2024 · A new model</p>
-          <p class="hl">Simpler math. Shapes beyond arcs.</p>
-        </div>
-        <div class="dec-desc left">
-          <p class="body">Ashwin K. P. (IISc) modelled the arm as four-bar linkages solved by optimization. Within ~2% of Cosserat-rod, far faster. General routing yields local, variable curvature.</p>
-        </div>
-        <div class="decade-art">
-          <svg viewBox="0 0 800 360" role="img" aria-label="Four-bar-linkage discretization beside a single spiral-routed cable producing local curvature">
-            <g stroke="#E0607A" stroke-width="2" fill="none">
-              <polygon points="120,300 160,300 168,266 128,266"/>
-              <polygon points="128,266 168,266 180,232 140,232"/>
-              <polygon points="140,232 180,232 196,198 156,198"/>
-              <polygon points="156,198 196,198 216,166 176,166"/>
-            </g>
-            <g fill="#E0607A"><circle cx="140" cy="300" r="3"/><circle cx="148" cy="266" r="3"/><circle cx="160" cy="232" r="3"/><circle cx="176" cy="198" r="3"/><circle cx="196" cy="166" r="3"/></g>
-            <path class="spine delay1" d="M520,330 C520,288 470,272 500,240 C530,210 480,184 520,158 C558,132 500,110 540,88" fill="none" stroke="url(#spineGrad)" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="540" cy="88" r="5" fill="#fff"/>
-            <text x="170" y="338" text-anchor="middle" fill="rgba(184,188,198,0.55)" font-family="'IBM Plex Mono',monospace" font-size="11">FOUR-BAR</text>
-            <text x="520" y="352" text-anchor="middle" fill="rgba(224,96,122,0.8)" font-family="'IBM Plex Mono',monospace" font-size="11">SPIRAL CABLE</text>
-          </svg>
-          <p class="art-cap">Optimization model · local curvature</p>
-        </div>
-        <div class="dec-wfb right">
-          <div class="row"><span class="k">Who</span><span class="v">Ashwin K. P. &amp; collaborators (IISc)</span></div>
-          <div class="row"><span class="k">Focus</span><span class="v">Optimization kinematics; general routing</span></div>
-          <div class="row"><span class="k">Break</span><span class="v">Fast first-principles model; non-constant shapes</span></div>
-        </div>
-      </div>
+                <!-- DECADE 5 — desc left, wfb right · Ashwin's model -->
+                <div class="decade reveal">
+                  <div class="decade-head">
+                    <p class="era">2015 — 2024 · A new model</p>
+                    <p class="hl">Simpler math. Shapes beyond arcs.</p>
+                  </div>
+                  <div class="dec-desc left">
+                    <p class="body">Ashwin K. P. (IISc) modelled the arm as four-bar linkages solved by optimization.
+                      Within ~2% of Cosserat-rod, far faster. General routing yields local, variable curvature.</p>
+                  </div>
+                  <div class="decade-art">
+                    <svg viewBox="0 0 800 360" role="img"
+                      aria-label="Four-bar-linkage discretization beside a single spiral-routed cable producing local curvature">
+                      <g stroke="#E0607A" stroke-width="2" fill="none">
+                        <polygon points="120,300 160,300 168,266 128,266" />
+                        <polygon points="128,266 168,266 180,232 140,232" />
+                        <polygon points="140,232 180,232 196,198 156,198" />
+                        <polygon points="156,198 196,198 216,166 176,166" />
+                      </g>
+                      <g fill="#E0607A">
+                        <circle cx="140" cy="300" r="3" />
+                        <circle cx="148" cy="266" r="3" />
+                        <circle cx="160" cy="232" r="3" />
+                        <circle cx="176" cy="198" r="3" />
+                        <circle cx="196" cy="166" r="3" />
+                      </g>
+                      <path class="spine delay1"
+                        d="M520,330 C520,288 470,272 500,240 C530,210 480,184 520,158 C558,132 500,110 540,88"
+                        fill="none" stroke="url(#spineGrad)" stroke-width="6" stroke-linecap="round" />
+                      <circle cx="540" cy="88" r="5" fill="#fff" />
+                      <text x="170" y="338" text-anchor="middle" fill="rgba(184,188,198,0.55)"
+                        font-family="'IBM Plex Mono',monospace" font-size="11">FOUR-BAR</text>
+                      <text x="520" y="352" text-anchor="middle" fill="rgba(224,96,122,0.8)"
+                        font-family="'IBM Plex Mono',monospace" font-size="11">SPIRAL CABLE</text>
+                    </svg>
+                    <p class="art-cap">Optimization model · local curvature</p>
+                  </div>
+                  <div class="dec-wfb right">
+                    <div class="row"><span class="k">Who</span><span class="v">Ashwin K. P. &amp; collaborators
+                        (IISc)</span></div>
+                    <div class="row"><span class="k">Focus</span><span class="v">Optimization kinematics; general
+                        routing</span></div>
+                    <div class="row"><span class="k">Break</span><span class="v">Fast first-principles model;
+                        non-constant shapes</span></div>
+                  </div>
+                </div>
 
-      <!-- DECADE 6 — wfb left, desc right · XTENT today -->
-      <div class="decade reveal">
-        <div class="decade-head">
-          <p class="era">Today · Xtent</p>
-          <p class="hl">Portable. Precise. Finally practical.</p>
-        </div>
-        <div class="dec-wfb left">
-          <div class="row"><span class="k">Who</span><span class="v">Xtent Innovations (Ashwin K. P. &amp; team)</span></div>
-          <div class="row"><span class="k">Focus</span><span class="v">Portability; local dexterity; real-time control</span></div>
-          <div class="row"><span class="k">Break</span><span class="v">Slender, portable, locally dexterous, practical</span></div>
-        </div>
-        <div class="decade-art">
-          <svg viewBox="0 0 800 360" role="img" aria-label="The Xtent arm with a local curl at its tip emerging from a small portable base, a human silhouette for scale">
-            <line x1="40" y1="320" x2="760" y2="320" stroke="rgba(184,188,198,0.18)" stroke-width="1"/>
-            <g fill="rgba(184,188,198,0.28)">
-              <circle cx="110" cy="210" r="15"/>
-              <path d="M110,226 C95,229 92,272 95,302 L98,320 L107,320 L109,266 L111,266 L113,320 L122,320 L125,302 C128,272 125,229 110,226 Z"/>
-            </g>
-            <rect x="230" y="286" width="74" height="34" rx="4" fill="rgba(249,249,249,0.08)" stroke="#E0607A" stroke-width="2"/>
-            <path d="M252,286 C252,275 282,275 282,286" fill="none" stroke="#E0607A" stroke-width="2"/>
-            <text x="267" y="308" text-anchor="middle" fill="rgba(184,188,198,0.7)" font-family="'IBM Plex Mono',monospace" font-size="9">PORTABLE</text>
-            <path class="spine" d="M267,286 C267,220 330,200 390,180 C470,155 520,140 560,90" fill="none" stroke="url(#spineGrad)" stroke-width="8" stroke-linecap="round"/>
-            <path class="spine delay1" d="M560,90 C580,56 560,30 528,32 C500,34 494,66 520,74 C540,80 548,56 534,50" fill="none" stroke="url(#spineGrad)" stroke-width="6" stroke-linecap="round"/>
-            <circle cx="534" cy="50" r="5" fill="#fff"/>
-            <text x="610" y="56" fill="rgba(224,96,122,0.85)" font-family="'IBM Plex Mono',monospace" font-size="11">LOCAL CURL</text>
-          </svg>
-          <p class="art-cap" style="color:var(--red-bright)">Small base + local curvature = the solution</p>
-        </div>
-        <div class="dec-desc right">
-          <p class="body">No multiple cables per segment — the bulky base collapses. General routing gives local, variable curvature. A fast model makes it controllable and shippable.</p>
-        </div>
-      </div>
+                <!-- DECADE 6 — wfb left, desc right · XTENT today -->
+                <div class="decade reveal">
+                  <div class="decade-head">
+                    <p class="era">Today · Xtent</p>
+                    <p class="hl">Portable. Precise. Finally practical.</p>
+                  </div>
+                  <div class="dec-wfb left">
+                    <div class="row"><span class="k">Who</span><span class="v">Xtent Innovations (Ashwin K. P. &amp;
+                        team)</span></div>
+                    <div class="row"><span class="k">Focus</span><span class="v">Portability; local dexterity; real-time
+                        control</span></div>
+                    <div class="row"><span class="k">Break</span><span class="v">Slender, portable, locally dexterous,
+                        practical</span></div>
+                  </div>
+                  <div class="decade-art">
+                    <svg viewBox="0 0 800 360" role="img"
+                      aria-label="The Xtent arm with a local curl at its tip emerging from a small portable base, a human silhouette for scale">
+                      <line x1="40" y1="320" x2="760" y2="320" stroke="rgba(184,188,198,0.18)" stroke-width="1" />
+                      <g fill="rgba(184,188,198,0.28)">
+                        <circle cx="110" cy="210" r="15" />
+                        <path
+                          d="M110,226 C95,229 92,272 95,302 L98,320 L107,320 L109,266 L111,266 L113,320 L122,320 L125,302 C128,272 125,229 110,226 Z" />
+                      </g>
+                      <rect x="230" y="286" width="74" height="34" rx="4" fill="rgba(249,249,249,0.08)" stroke="#E0607A"
+                        stroke-width="2" />
+                      <path d="M252,286 C252,275 282,275 282,286" fill="none" stroke="#E0607A" stroke-width="2" />
+                      <text x="267" y="308" text-anchor="middle" fill="rgba(184,188,198,0.7)"
+                        font-family="'IBM Plex Mono',monospace" font-size="9">PORTABLE</text>
+                      <path class="spine" d="M267,286 C267,220 330,200 390,180 C470,155 520,140 560,90" fill="none"
+                        stroke="url(#spineGrad)" stroke-width="8" stroke-linecap="round" />
+                      <path class="spine delay1"
+                        d="M560,90 C580,56 560,30 528,32 C500,34 494,66 520,74 C540,80 548,56 534,50" fill="none"
+                        stroke="url(#spineGrad)" stroke-width="6" stroke-linecap="round" />
+                      <circle cx="534" cy="50" r="5" fill="#fff" />
+                      <text x="610" y="56" fill="rgba(224,96,122,0.85)" font-family="'IBM Plex Mono',monospace"
+                        font-size="11">LOCAL CURL</text>
+                    </svg>
+                    <p class="art-cap" style="color:var(--red-bright)">Small base + local curvature = the solution</p>
+                  </div>
+                  <div class="dec-desc right">
+                    <p class="body">No multiple cables per segment — the bulky base collapses. General routing gives
+                      local, variable curvature. A fast model makes it controllable and shippable.</p>
+                  </div>
+                </div>
 
-      <div class="reveal lineage-payoff">
-        <p class="lp-line">
-          Every prior era solved one constraint. The Xtent Tentacle-Arm is the
-          <strong>first of its kind</strong> — slender, portable, locally dexterous,
-          and practical to control, all at once.
-        </p>
-      </div>
-    
+                <div class="reveal lineage-payoff">
+                  <p class="lp-line">
+                    Every prior era solved one constraint. The Xtent Tentacle-Arm is the
+                    <strong>first of its kind</strong> — slender, portable, locally dexterous,
+                    and practical to control, all at once.
+                  </p>
+                </div>
+
               </div>
             </div>
           </div>
@@ -858,61 +1910,71 @@
                 <span class="st">Operator AR Overlay</span>
               </div>
             </div>
-        <div class="tech-sim reveal d1">
-          <div class="sim-frame">
-            <svg id="percCanvas" viewBox="0 0 4700 3000" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Body-distributed SLAM: a fourteen-link manipulator snakes through an unknown cluttered environment while distributed range sensors reveal the surrounding surfaces as an accumulating point cloud.">
-              <defs>
-                <filter id="percPtGlow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="6" result="b"/>
-                  <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
+            <div class="tech-sim reveal d1">
+              <div class="sim-frame">
+                <svg id="percCanvas" viewBox="0 0 4700 3000" xmlns="http://www.w3.org/2000/svg" role="img"
+                  aria-label="Body-distributed SLAM: a fourteen-link manipulator snakes through an unknown cluttered environment while distributed range sensors reveal the surrounding surfaces as an accumulating point cloud.">
+                  <defs>
+                    <filter id="percPtGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="6" result="b" />
+                      <feMerge>
+                        <feMergeNode in="b" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
 
-              <!-- Reference grid (faint silver, dark-panel treatment) -->
-              <g stroke="rgba(184,188,198,0.07)" stroke-width="2">
-                <line x1="0" y1="0"    x2="0" y2="3000"/>
-                <line x1="940" y1="0"  x2="940" y2="3000"/>
-                <line x1="1880" y1="0" x2="1880" y2="3000"/>
-                <line x1="2820" y1="0" x2="2820" y2="3000"/>
-                <line x1="3760" y1="0" x2="3760" y2="3000"/>
-                <line x1="4700" y1="0" x2="4700" y2="3000"/>
-                <line x1="0" y1="600"  x2="4700" y2="600"/>
-                <line x1="0" y1="1200" x2="4700" y2="1200"/>
-                <line x1="0" y1="1800" x2="4700" y2="1800"/>
-                <line x1="0" y1="2400" x2="4700" y2="2400"/>
-              </g>
+                  <!-- Reference grid (faint silver, dark-panel treatment) -->
+                  <g stroke="rgba(184,188,198,0.07)" stroke-width="2">
+                    <line x1="0" y1="0" x2="0" y2="3000" />
+                    <line x1="940" y1="0" x2="940" y2="3000" />
+                    <line x1="1880" y1="0" x2="1880" y2="3000" />
+                    <line x1="2820" y1="0" x2="2820" y2="3000" />
+                    <line x1="3760" y1="0" x2="3760" y2="3000" />
+                    <line x1="4700" y1="0" x2="4700" y2="3000" />
+                    <line x1="0" y1="600" x2="4700" y2="600" />
+                    <line x1="0" y1="1200" x2="4700" y2="1200" />
+                    <line x1="0" y1="1800" x2="4700" y2="1800" />
+                    <line x1="0" y1="2400" x2="4700" y2="2400" />
+                  </g>
 
-              <!-- true environment walls (faint; revealed by the point cloud) -->
-              <g id="percTrueWalls"></g>
-              <!-- accumulated SLAM point cloud -->
-              <g id="percPointCloud" filter="url(#percPtGlow)"></g>
-              <!-- distributed sensor range halos -->
-              <g id="percSensorField"></g>
-              <!-- traversed trajectory breadcrumb -->
-              <path id="percHeadTrail" fill="none" stroke="var(--red-bright)" stroke-width="6"
-                    stroke-linecap="round" opacity="0.4" stroke-dasharray="2,18"/>
+                  <!-- true environment walls (faint; revealed by the point cloud) -->
+                  <g id="percTrueWalls"></g>
+                  <!-- accumulated SLAM point cloud -->
+                  <g id="percPointCloud" filter="url(#percPtGlow)"></g>
+                  <!-- distributed sensor range halos -->
+                  <g id="percSensorField"></g>
+                  <!-- traversed trajectory breadcrumb -->
+                  <path id="percHeadTrail" fill="none" stroke="var(--red-bright)" stroke-width="6"
+                    stroke-linecap="round" opacity="0.4" stroke-dasharray="2,18" />
 
-              <!-- moving gantry base (tail) -->
-              <g id="percGantryBase">
-                <rect id="percBaseBlock" width="300" height="160" rx="6" fill="var(--navy)" stroke="var(--silver)" stroke-width="3"/>
-                <circle id="percBasePivot" r="8" fill="var(--silver)"/>
-              </g>
+                  <!-- moving gantry base (tail) -->
+                  <g id="percGantryBase">
+                    <rect id="percBaseBlock" width="300" height="160" rx="6" fill="var(--navy)" stroke="var(--silver)"
+                      stroke-width="3" />
+                    <circle id="percBasePivot" r="8" fill="var(--silver)" />
+                  </g>
 
-              <!-- continuum body: red core + white centerline -->
-              <g id="percManipulatorGroup">
-                <path id="percSpineCore" fill="none" stroke="var(--red)" stroke-width="130" opacity="0.92" stroke-linecap="round" stroke-linejoin="round"/>
-                <path id="percSpineCenterline" fill="none" stroke="rgba(249,249,249,0.85)" stroke-width="4" opacity="0.85" stroke-linecap="round" stroke-linejoin="round"/>
-                <g id="percJointNodes"></g>
-                <circle id="percHeadMarker" r="34" fill="var(--red)" stroke="rgba(249,249,249,0.9)" stroke-width="4"/>
-              </g>
-            </svg>
-            <div class="sim-meta">
-              <span>14 links · 200 mm base + 170 mm pitch · Ø 130 mm · distributed range sensing</span>
-              <span class="lit">Mapped points: <b id="percPtCount">0</b> · <span id="percStatusTxt">Traversing &amp; mapping</span></span>
+                  <!-- continuum body: red core + white centerline -->
+                  <g id="percManipulatorGroup">
+                    <path id="percSpineCore" fill="none" stroke="var(--red)" stroke-width="130" opacity="0.92"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                    <path id="percSpineCenterline" fill="none" stroke="rgba(249,249,249,0.85)" stroke-width="4"
+                      opacity="0.85" stroke-linecap="round" stroke-linejoin="round" />
+                    <g id="percJointNodes"></g>
+                    <circle id="percHeadMarker" r="34" fill="var(--red)" stroke="rgba(249,249,249,0.9)"
+                      stroke-width="4" />
+                  </g>
+                </svg>
+                <div class="sim-meta">
+                  <span>14 links · 200 mm base + 170 mm pitch · Ø 130 mm · distributed range sensing</span>
+                  <span class="lit">Mapped points: <b id="percPtCount">0</b> · <span id="percStatusTxt">Traversing &amp;
+                      mapping</span></span>
+                </div>
+              </div>
+              <p class="sim-fig">Fig. — Body-distributed SLAM. Range sensors along the body and tip reveal an unmeasured
+                environment as the arm threads it. Illustrative.</p>
             </div>
-          </div>
-          <p class="sim-fig">Fig. — Body-distributed SLAM. Range sensors along the body and tip reveal an unmeasured environment as the arm threads it. Illustrative.</p>
-        </div>
           </div>
           <!-- collapsed SLAM video -->
           <div class="disclose" id="videoDisclose">
@@ -928,7 +1990,8 @@
               </div>
             </div>
           </div>
-          <p class="panel-lead">Perception lead &middot; <b>Dr. Ashith R. Babu</b> &mdash; SLAM systems refined through deployments at previous companies.</p>
+          <p class="panel-lead">Perception lead &middot; <b>Dr. Ashith R. Babu</b> &mdash; SLAM systems refined through
+            deployments at previous companies.</p>
         </div>
 
         <!-- ───── PANEL 03 — Control & Learning ───── -->
@@ -958,219 +2021,240 @@
                 <span class="st">Deployment Data Flywheel</span>
               </div>
             </div>
-        <div class="tech-sim reveal d1">
-          <div class="sim-frame">
-      <svg id="rcCanvas" viewBox="0 0 4700 3000" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <!-- soft glow for environment particles / stars -->
-          <filter id="rcSoftGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="5" result="b"/>
-            <feMerge>
-              <feMergeNode in="b"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-          <!-- subtle seabed gradient for subsea -->
-          <linearGradient id="rcSubseaWash" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="#13213C" stop-opacity="0.05"/>
-            <stop offset="100%" stop-color="#13213C" stop-opacity="0.16"/>
-          </linearGradient>
-          <!-- ground hatch for land -->
-          <pattern id="rcGroundHatch" width="60" height="60" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-            <line x1="0" y1="0" x2="0" y2="60" stroke="var(--silver)" stroke-width="6" opacity="0.5"/>
-          </pattern>
-        </defs>
+            <div class="tech-sim reveal d1">
+              <div class="sim-frame">
+                <svg id="rcCanvas" viewBox="0 0 4700 3000" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <!-- soft glow for environment particles / stars -->
+                    <filter id="rcSoftGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur stdDeviation="5" result="b" />
+                      <feMerge>
+                        <feMergeNode in="b" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                    <!-- subtle seabed gradient for subsea -->
+                    <linearGradient id="rcSubseaWash" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="#13213C" stop-opacity="0.05" />
+                      <stop offset="100%" stop-color="#13213C" stop-opacity="0.16" />
+                    </linearGradient>
+                    <!-- ground hatch for land -->
+                    <pattern id="rcGroundHatch" width="60" height="60" patternUnits="userSpaceOnUse"
+                      patternTransform="rotate(45)">
+                      <line x1="0" y1="0" x2="0" y2="60" stroke="var(--silver)" stroke-width="6" opacity="0.5" />
+                    </pattern>
+                  </defs>
 
-        <!-- ============ ENVIRONMENT FIELD (behind everything) ============ -->
-        <!-- Space backdrop: dark navy field that fades in during the space beat -->
-        <rect id="rc_spaceField" x="0" y="0" width="4700" height="3000" fill="var(--navy)" opacity="0"/>
-        <g id="rc_starLayer" opacity="0"></g>
+                  <!-- ============ ENVIRONMENT FIELD (behind everything) ============ -->
+                  <!-- Space backdrop: dark navy field that fades in during the space beat -->
+                  <rect id="rc_spaceField" x="0" y="0" width="4700" height="3000" fill="var(--navy)" opacity="0" />
+                  <g id="rc_starLayer" opacity="0"></g>
 
-        <!-- Static satellite (upper-right, clear of the arm). Schematic: central
+                  <!-- Static satellite (upper-right, clear of the arm). Schematic: central
              bus + twin solar arrays + dish, drawn in silver line / navy fill. -->
-        <g id="rc_satellite" opacity="0">
-          <g transform="translate(3760,560) rotate(-12)">
-            <!-- faint signal glow -->
-            <circle cx="0" cy="0" r="150" fill="var(--silver)" opacity="0.05"/>
-            <!-- solar arrays -->
-            <g stroke="var(--silver)" stroke-width="4" fill="var(--navy)">
-              <rect x="-300" y="-46" width="200" height="92" opacity="0.9"/>
-              <line x1="-300" y1="-15" x2="-100" y2="-15"/>
-              <line x1="-300" y1="15"  x2="-100" y2="15"/>
-              <line x1="-233" y1="-46" x2="-233" y2="46"/>
-              <line x1="-167" y1="-46" x2="-167" y2="46"/>
-              <rect x="100" y="-46" width="200" height="92" opacity="0.9"/>
-              <line x1="100" y1="-15" x2="300" y2="-15"/>
-              <line x1="100" y1="15"  x2="300" y2="15"/>
-              <line x1="167" y1="-46" x2="167" y2="46"/>
-              <line x1="233" y1="-46" x2="233" y2="46"/>
-            </g>
-            <!-- connecting booms -->
-            <line x1="-100" y1="0" x2="-55" y2="0" stroke="var(--silver)" stroke-width="6"/>
-            <line x1="100" y1="0"  x2="55" y2="0"  stroke="var(--silver)" stroke-width="6"/>
-            <!-- central bus -->
-            <rect x="-55" y="-60" width="110" height="120" rx="8" fill="var(--navy)" stroke="var(--silver)" stroke-width="6"/>
-            <line x1="-55" y1="-20" x2="55" y2="-20" stroke="var(--silver)" stroke-width="3" opacity="0.6"/>
-            <line x1="-55" y1="20"  x2="55" y2="20"  stroke="var(--silver)" stroke-width="3" opacity="0.6"/>
-            <!-- communications dish on a short mast -->
-            <line x1="0" y1="-60" x2="0" y2="-110" stroke="var(--silver)" stroke-width="5"/>
-            <ellipse cx="0" cy="-128" rx="46" ry="26" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <circle cx="0" cy="-128" r="6" fill="var(--silver)"/>
-          </g>
-        </g>
+                  <g id="rc_satellite" opacity="0">
+                    <g transform="translate(3760,560) rotate(-12)">
+                      <!-- faint signal glow -->
+                      <circle cx="0" cy="0" r="150" fill="var(--silver)" opacity="0.05" />
+                      <!-- solar arrays -->
+                      <g stroke="var(--silver)" stroke-width="4" fill="var(--navy)">
+                        <rect x="-300" y="-46" width="200" height="92" opacity="0.9" />
+                        <line x1="-300" y1="-15" x2="-100" y2="-15" />
+                        <line x1="-300" y1="15" x2="-100" y2="15" />
+                        <line x1="-233" y1="-46" x2="-233" y2="46" />
+                        <line x1="-167" y1="-46" x2="-167" y2="46" />
+                        <rect x="100" y="-46" width="200" height="92" opacity="0.9" />
+                        <line x1="100" y1="-15" x2="300" y2="-15" />
+                        <line x1="100" y1="15" x2="300" y2="15" />
+                        <line x1="167" y1="-46" x2="167" y2="46" />
+                        <line x1="233" y1="-46" x2="233" y2="46" />
+                      </g>
+                      <!-- connecting booms -->
+                      <line x1="-100" y1="0" x2="-55" y2="0" stroke="var(--silver)" stroke-width="6" />
+                      <line x1="100" y1="0" x2="55" y2="0" stroke="var(--silver)" stroke-width="6" />
+                      <!-- central bus -->
+                      <rect x="-55" y="-60" width="110" height="120" rx="8" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="6" />
+                      <line x1="-55" y1="-20" x2="55" y2="-20" stroke="var(--silver)" stroke-width="3" opacity="0.6" />
+                      <line x1="-55" y1="20" x2="55" y2="20" stroke="var(--silver)" stroke-width="3" opacity="0.6" />
+                      <!-- communications dish on a short mast -->
+                      <line x1="0" y1="-60" x2="0" y2="-110" stroke="var(--silver)" stroke-width="5" />
+                      <ellipse cx="0" cy="-128" rx="46" ry="26" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
+                      <circle cx="0" cy="-128" r="6" fill="var(--silver)" />
+                    </g>
+                  </g>
 
-        <!-- Subsea backdrop: blue wash + current streamlines + rising bubbles -->
-        <rect id="rc_subseaFieldRect" x="0" y="0" width="4700" height="3000" fill="url(#rcSubseaWash)" opacity="0"/>
-        <g id="rc_streamLayer" opacity="0"></g>
+                  <!-- Subsea backdrop: blue wash + current streamlines + rising bubbles -->
+                  <rect id="rc_subseaFieldRect" x="0" y="0" width="4700" height="3000" fill="url(#rcSubseaWash)"
+                    opacity="0" />
+                  <g id="rc_streamLayer" opacity="0"></g>
 
-        <!-- Static submarine (upper area, clear of the arm). Side-profile hull +
+                  <!-- Static submarine (upper area, clear of the arm). Side-profile hull +
              conning tower + portholes + propeller, silver line / navy fill. -->
-        <g id="rc_submarine" opacity="0">
-          <g transform="translate(3560,640)">
-            <!-- hull -->
-            <path d="M -440,0
+                  <g id="rc_submarine" opacity="0">
+                    <g transform="translate(3560,640)">
+                      <!-- hull -->
+                      <path d="M -440,0
                      C -440,-70 -300,-104 -120,-104
                      L 300,-104
                      C 410,-104 470,-66 470,0
                      C 470,66 410,104 300,104
                      L -120,104
-                     C -300,104 -440,70 -440,0 Z"
-                  fill="var(--navy)" stroke="var(--silver)" stroke-width="6"/>
-            <!-- waterline detail -->
-            <line x1="-400" y1="0" x2="440" y2="0" stroke="var(--silver)" stroke-width="3" opacity="0.5"/>
-            <!-- conning tower (sail) -->
-            <path d="M -60,-104 L -40,-200 L 120,-200 L 150,-104 Z"
-                  fill="var(--navy)" stroke="var(--silver)" stroke-width="6"/>
-            <!-- periscope masts -->
-            <line x1="10" y1="-200" x2="10" y2="-256" stroke="var(--silver)" stroke-width="5"/>
-            <line x1="60" y1="-200" x2="60" y2="-240" stroke="var(--silver)" stroke-width="5"/>
-            <!-- portholes -->
-            <circle cx="-200" cy="0" r="22" fill="none" stroke="var(--silver)" stroke-width="5"/>
-            <circle cx="-100" cy="0" r="22" fill="none" stroke="var(--silver)" stroke-width="5"/>
-            <circle cx="0"    cy="0" r="22" fill="none" stroke="var(--silver)" stroke-width="5"/>
-            <circle cx="100"  cy="0" r="22" fill="none" stroke="var(--silver)" stroke-width="5"/>
-            <!-- bow planes -->
-            <line x1="300" y1="40" x2="400" y2="80" stroke="var(--silver)" stroke-width="6"/>
-            <!-- stern shaft + propeller -->
-            <line x1="-440" y1="0" x2="-520" y2="0" stroke="var(--silver)" stroke-width="6"/>
-            <g stroke="var(--silver)" stroke-width="6" fill="var(--navy)">
-              <ellipse cx="-520" cy="-40" rx="14" ry="40"/>
-              <ellipse cx="-520" cy="40"  rx="14" ry="40"/>
-            </g>
-          </g>
-        </g>
+                     C -300,104 -440,70 -440,0 Z" fill="var(--navy)" stroke="var(--silver)" stroke-width="6" />
+                      <!-- waterline detail -->
+                      <line x1="-400" y1="0" x2="440" y2="0" stroke="var(--silver)" stroke-width="3" opacity="0.5" />
+                      <!-- conning tower (sail) -->
+                      <path d="M -60,-104 L -40,-200 L 120,-200 L 150,-104 Z" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="6" />
+                      <!-- periscope masts -->
+                      <line x1="10" y1="-200" x2="10" y2="-256" stroke="var(--silver)" stroke-width="5" />
+                      <line x1="60" y1="-200" x2="60" y2="-240" stroke="var(--silver)" stroke-width="5" />
+                      <!-- portholes -->
+                      <circle cx="-200" cy="0" r="22" fill="none" stroke="var(--silver)" stroke-width="5" />
+                      <circle cx="-100" cy="0" r="22" fill="none" stroke="var(--silver)" stroke-width="5" />
+                      <circle cx="0" cy="0" r="22" fill="none" stroke="var(--silver)" stroke-width="5" />
+                      <circle cx="100" cy="0" r="22" fill="none" stroke="var(--silver)" stroke-width="5" />
+                      <!-- bow planes -->
+                      <line x1="300" y1="40" x2="400" y2="80" stroke="var(--silver)" stroke-width="6" />
+                      <!-- stern shaft + propeller -->
+                      <line x1="-440" y1="0" x2="-520" y2="0" stroke="var(--silver)" stroke-width="6" />
+                      <g stroke="var(--silver)" stroke-width="6" fill="var(--navy)">
+                        <ellipse cx="-520" cy="-40" rx="14" ry="40" />
+                        <ellipse cx="-520" cy="40" rx="14" ry="40" />
+                      </g>
+                    </g>
+                  </g>
 
-        <g id="rc_bubbleLayer" opacity="0"></g>
+                  <g id="rc_bubbleLayer" opacity="0"></g>
 
-        <!-- Land backdrop: ground line + hatched terrain + settling dust -->
-        <g id="rc_landLayer" opacity="0">
-          <rect id="rc_groundFill" x="0" y="2520" width="4700" height="480" fill="url(#rcGroundHatch)"/>
-          <line id="rc_groundLine" x1="0" y1="2520" x2="4700" y2="2520" stroke="var(--silver)" stroke-width="6" opacity="0.85"/>
+                  <!-- Land backdrop: ground line + hatched terrain + settling dust -->
+                  <g id="rc_landLayer" opacity="0">
+                    <rect id="rc_groundFill" x="0" y="2520" width="4700" height="480" fill="url(#rcGroundHatch)" />
+                    <line id="rc_groundLine" x1="0" y1="2520" x2="4700" y2="2520" stroke="var(--silver)"
+                      stroke-width="6" opacity="0.85" />
 
-          <!-- Distant industrial plant sitting ON the ground line (right side,
+                    <!-- Distant industrial plant sitting ON the ground line (right side,
                clear of the arm). Towers + tanks + stacks tied together by an
                overhead pipeline rack. Silver line / navy fill, kept "distant". -->
-          <g id="rc_plant" transform="translate(3380,2520)" opacity="0.92">
-            <!-- distillation columns -->
-            <rect x="40"  y="-520" width="70"  height="520" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <ellipse cx="75" cy="-520" rx="35" ry="14" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <line x1="40" y1="-400" x2="110" y2="-400" stroke="var(--silver)" stroke-width="3" opacity="0.6"/>
-            <line x1="40" y1="-280" x2="110" y2="-280" stroke="var(--silver)" stroke-width="3" opacity="0.6"/>
-            <line x1="40" y1="-160" x2="110" y2="-160" stroke="var(--silver)" stroke-width="3" opacity="0.6"/>
+                    <g id="rc_plant" transform="translate(3380,2520)" opacity="0.92">
+                      <!-- distillation columns -->
+                      <rect x="40" y="-520" width="70" height="520" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
+                      <ellipse cx="75" cy="-520" rx="35" ry="14" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
+                      <line x1="40" y1="-400" x2="110" y2="-400" stroke="var(--silver)" stroke-width="3"
+                        opacity="0.6" />
+                      <line x1="40" y1="-280" x2="110" y2="-280" stroke="var(--silver)" stroke-width="3"
+                        opacity="0.6" />
+                      <line x1="40" y1="-160" x2="110" y2="-160" stroke="var(--silver)" stroke-width="3"
+                        opacity="0.6" />
 
-            <rect x="150" y="-410" width="56" height="410" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <ellipse cx="178" cy="-410" rx="28" ry="11" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
+                      <rect x="150" y="-410" width="56" height="410" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
+                      <ellipse cx="178" cy="-410" rx="28" ry="11" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
 
-            <!-- chimney stack with faint plume -->
-            <path d="M 280,0 L 292,-560 L 330,-560 L 342,0 Z" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <ellipse cx="311" cy="-600" rx="46" ry="30" fill="var(--silver)" opacity="0.10"/>
-            <ellipse cx="318" cy="-650" rx="60" ry="38" fill="var(--silver)" opacity="0.06"/>
+                      <!-- chimney stack with faint plume -->
+                      <path d="M 280,0 L 292,-560 L 330,-560 L 342,0 Z" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
+                      <ellipse cx="311" cy="-600" rx="46" ry="30" fill="var(--silver)" opacity="0.10" />
+                      <ellipse cx="318" cy="-650" rx="60" ry="38" fill="var(--silver)" opacity="0.06" />
 
-            <!-- spherical pressure tank -->
-            <circle cx="470" cy="-95" r="95" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <line x1="420" y1="0" x2="420" y2="-40" stroke="var(--silver)" stroke-width="5"/>
-            <line x1="520" y1="0" x2="520" y2="-40" stroke="var(--silver)" stroke-width="5"/>
-            <line x1="470" y1="0" x2="470" y2="-25" stroke="var(--silver)" stroke-width="5"/>
+                      <!-- spherical pressure tank -->
+                      <circle cx="470" cy="-95" r="95" fill="var(--navy)" stroke="var(--silver)" stroke-width="5" />
+                      <line x1="420" y1="0" x2="420" y2="-40" stroke="var(--silver)" stroke-width="5" />
+                      <line x1="520" y1="0" x2="520" y2="-40" stroke="var(--silver)" stroke-width="5" />
+                      <line x1="470" y1="0" x2="470" y2="-25" stroke="var(--silver)" stroke-width="5" />
 
-            <!-- cylindrical storage tanks -->
-            <rect x="610" y="-150" width="200" height="150" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <ellipse cx="710" cy="-150" rx="100" ry="22" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <rect x="850" y="-110" width="150" height="110" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
-            <ellipse cx="925" cy="-110" rx="75" ry="16" fill="var(--navy)" stroke="var(--silver)" stroke-width="5"/>
+                      <!-- cylindrical storage tanks -->
+                      <rect x="610" y="-150" width="200" height="150" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
+                      <ellipse cx="710" cy="-150" rx="100" ry="22" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
+                      <rect x="850" y="-110" width="150" height="110" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
+                      <ellipse cx="925" cy="-110" rx="75" ry="16" fill="var(--navy)" stroke="var(--silver)"
+                        stroke-width="5" />
 
-            <!-- overhead pipeline rack tying units together -->
-            <g stroke="var(--silver)" stroke-width="6" fill="none" opacity="0.85">
-              <line x1="0" y1="-225" x2="1000" y2="-225"/>
-              <line x1="0" y1="-255" x2="1000" y2="-255"/>
-              <!-- pipe-rack support legs -->
-              <line x1="60"  y1="-225" x2="60"  y2="0"/>
-              <line x1="240" y1="-225" x2="240" y2="0"/>
-              <line x1="470" y1="-225" x2="470" y2="0"/>
-              <line x1="710" y1="-255" x2="710" y2="-150"/>
-              <line x1="930" y1="-255" x2="930" y2="-110"/>
-              <!-- riser tie-ins -->
-              <path d="M 311,-225 L 311,-200"/>
-            </g>
-            <!-- ground pipeline running off toward the foreground -->
-            <g stroke="var(--silver)" stroke-width="6" fill="none" opacity="0.7">
-              <line x1="1000" y1="-30" x2="1240" y2="-30"/>
-              <line x1="1000" y1="-60" x2="1240" y2="-60"/>
-              <line x1="1110" y1="-30" x2="1110" y2="-60"/>
-            </g>
-          </g>
-        </g>
-        <g id="rc_dustLayer" opacity="0"></g>
+                      <!-- overhead pipeline rack tying units together -->
+                      <g stroke="var(--silver)" stroke-width="6" fill="none" opacity="0.85">
+                        <line x1="0" y1="-225" x2="1000" y2="-225" />
+                        <line x1="0" y1="-255" x2="1000" y2="-255" />
+                        <!-- pipe-rack support legs -->
+                        <line x1="60" y1="-225" x2="60" y2="0" />
+                        <line x1="240" y1="-225" x2="240" y2="0" />
+                        <line x1="470" y1="-225" x2="470" y2="0" />
+                        <line x1="710" y1="-255" x2="710" y2="-150" />
+                        <line x1="930" y1="-255" x2="930" y2="-110" />
+                        <!-- riser tie-ins -->
+                        <path d="M 311,-225 L 311,-200" />
+                      </g>
+                      <!-- ground pipeline running off toward the foreground -->
+                      <g stroke="var(--silver)" stroke-width="6" fill="none" opacity="0.7">
+                        <line x1="1000" y1="-30" x2="1240" y2="-30" />
+                        <line x1="1000" y1="-60" x2="1240" y2="-60" />
+                        <line x1="1110" y1="-30" x2="1110" y2="-60" />
+                      </g>
+                    </g>
+                  </g>
+                  <g id="rc_dustLayer" opacity="0"></g>
 
-        <!-- Reference grid on white background (fades down on the dark space field) -->
-        <g id="rc_gridLayer" stroke="rgba(184,188,198,0.07)" stroke-width="2">
-          <line x1="0" y1="0"    x2="0" y2="3000"/>
-          <line x1="940" y1="0"  x2="940" y2="3000"/>
-          <line x1="1880" y1="0" x2="1880" y2="3000"/>
-          <line x1="2820" y1="0" x2="2820" y2="3000"/>
-          <line x1="3760" y1="0" x2="3760" y2="3000"/>
-          <line x1="4700" y1="0" x2="4700" y2="3000"/>
-          <line x1="0" y1="600"  x2="4700" y2="600"/>
-          <line x1="0" y1="1200" x2="4700" y2="1200"/>
-          <line x1="0" y1="1800" x2="4700" y2="1800"/>
-          <line x1="0" y1="2400" x2="4700" y2="2400"/>
-        </g>
+                  <!-- Reference grid on white background (fades down on the dark space field) -->
+                  <g id="rc_gridLayer" stroke="rgba(184,188,198,0.07)" stroke-width="2">
+                    <line x1="0" y1="0" x2="0" y2="3000" />
+                    <line x1="940" y1="0" x2="940" y2="3000" />
+                    <line x1="1880" y1="0" x2="1880" y2="3000" />
+                    <line x1="2820" y1="0" x2="2820" y2="3000" />
+                    <line x1="3760" y1="0" x2="3760" y2="3000" />
+                    <line x1="4700" y1="0" x2="4700" y2="3000" />
+                    <line x1="0" y1="600" x2="4700" y2="600" />
+                    <line x1="0" y1="1200" x2="4700" y2="1200" />
+                    <line x1="0" y1="1800" x2="4700" y2="1800" />
+                    <line x1="0" y1="2400" x2="4700" y2="2400" />
+                  </g>
 
-        <!-- ============ COMMANDED-POSE REFERENCE (the setpoint) ============ -->
-        <!-- Faint outline of the S-curve the arm is TOLD to hold. The red arm
+                  <!-- ============ COMMANDED-POSE REFERENCE (the setpoint) ============ -->
+                  <!-- Faint outline of the S-curve the arm is TOLD to hold. The red arm
              tracks this; the ghost deforms away from it. -->
-        <path id="rc_refOutline" fill="none" stroke="rgba(249,249,249,0.55)" stroke-width="6"
-              opacity="0.22" stroke-dasharray="4,22" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path id="rc_refOutline" fill="none" stroke="rgba(249,249,249,0.55)" stroke-width="6" opacity="0.22"
+                    stroke-dasharray="4,22" stroke-linecap="round" stroke-linejoin="round" />
 
-        <!-- ============ GHOST ARM (open-loop / uncontrolled) ============ -->
-        <g id="rc_ghostGroup" opacity="0.85">
-          <path id="rc_ghostCore" fill="none" stroke="var(--silver)" stroke-width="118"
-                opacity="0.40" stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="rc_ghostCenter" fill="none" stroke="var(--silver)" stroke-width="3"
-                opacity="0.7" stroke-dasharray="10,10" stroke-linecap="round" stroke-linejoin="round"/>
-          <g id="rc_ghostNodes"></g>
-        </g>
+                  <!-- ============ GHOST ARM (open-loop / uncontrolled) ============ -->
+                  <g id="rc_ghostGroup" opacity="0.85">
+                    <path id="rc_ghostCore" fill="none" stroke="var(--silver)" stroke-width="118" opacity="0.40"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                    <path id="rc_ghostCenter" fill="none" stroke="var(--silver)" stroke-width="3" opacity="0.7"
+                      stroke-dasharray="10,10" stroke-linecap="round" stroke-linejoin="round" />
+                    <g id="rc_ghostNodes"></g>
+                  </g>
 
-        <!-- ============ GANTRY BASE (shared anchor) ============ -->
-        <g id="rc_gantryBase">
-          <rect id="rc_baseBlock" width="400" height="200" rx="6" fill="var(--navy)" stroke="var(--silver)" stroke-width="3"/>
-          <circle id="rc_basePivot" r="8" fill="var(--silver)"/>
-        </g>
+                  <!-- ============ GANTRY BASE (shared anchor) ============ -->
+                  <g id="rc_gantryBase">
+                    <rect id="rc_baseBlock" width="400" height="200" rx="6" fill="var(--navy)" stroke="var(--silver)"
+                      stroke-width="3" />
+                    <circle id="rc_basePivot" r="8" fill="var(--silver)" />
+                  </g>
 
-        <!-- ============ CONTROLLED ARM (the hero) ============ -->
-        <g id="rc_manipulatorGroup">
-          <path id="rc_spineCore" fill="none" stroke="var(--red)" stroke-width="130" opacity="0.9" stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="rc_spineCenterline" fill="none" stroke="rgba(249,249,249,0.85)" stroke-width="4" opacity="0.85" stroke-linecap="round" stroke-linejoin="round"/>
-          <g id="rc_jointNodes"></g>
-        </g>
+                  <!-- ============ CONTROLLED ARM (the hero) ============ -->
+                  <g id="rc_manipulatorGroup">
+                    <path id="rc_spineCore" fill="none" stroke="var(--red)" stroke-width="130" opacity="0.9"
+                      stroke-linecap="round" stroke-linejoin="round" />
+                    <path id="rc_spineCenterline" fill="none" stroke="rgba(249,249,249,0.85)" stroke-width="4"
+                      opacity="0.85" stroke-linecap="round" stroke-linejoin="round" />
+                    <g id="rc_jointNodes"></g>
+                  </g>
 
-      </svg>
-            <div class="sim-meta">
-              <span>14 links · 200 mm base + 170 mm pitch · Ø 130 mm · commanded S-pose held</span>
-              <span class="lit"><span id="rc_envTxt">&mdash;</span> · controlled dev <b id="rc_ctrlErr">0.0</b>mm vs open-loop <b id="rc_openErr">0</b>mm</span>
+                </svg>
+                <div class="sim-meta">
+                  <span>14 links · 200 mm base + 170 mm pitch · Ø 130 mm · commanded S-pose held</span>
+                  <span class="lit"><span id="rc_envTxt">&mdash;</span> · controlled dev <b id="rc_ctrlErr">0.0</b>mm vs
+                    open-loop <b id="rc_openErr">0</b>mm</span>
+                </div>
+              </div>
+              <p class="sim-fig">Fig. — Robust disturbance rejection. The commanded pose (dashed) holds across space,
+                subsea and land while the open-loop ghost deforms. Illustrative.</p>
             </div>
-          </div>
-          <p class="sim-fig">Fig. — Robust disturbance rejection. The commanded pose (dashed) holds across space, subsea and land while the open-loop ghost deforms. Illustrative.</p>
-        </div>
           </div>
           <p class="panel-lead">Control lead &middot; <b>Dr. Akhil Gopalan</b></p>
         </div>
@@ -1242,12 +2326,12 @@
 
   <!-- Simulation driver (verbatim from sandbox v3) -->
   <script>
-    (function() {
-      const baseBlock        = document.getElementById('baseBlock');
-      const basePivot        = document.getElementById('basePivot');
-      const spineCore        = document.getElementById('spineCore');
-      const spineCenterline  = document.getElementById('spineCenterline');
-      const jointNodesGroup  = document.getElementById('jointNodes');
+    (function () {
+      const baseBlock = document.getElementById('baseBlock');
+      const basePivot = document.getElementById('basePivot');
+      const spineCore = document.getElementById('spineCore');
+      const spineCenterline = document.getElementById('spineCenterline');
+      const jointNodesGroup = document.getElementById('jointNodes');
 
       const N = 14;
       const Y_OFFSET = 1500;
@@ -1261,8 +2345,8 @@
       // heading (deg, data-space +Y up) of link i. Converted exactly from the
       // original absolute-coordinate keyframes (reconstruction error 0.01mm).
       const POSES = [
-        { baseX: 233.44,  ang: [0.0, -2.036, -1.362, 2.289, 0.239, 0.206, -0.583, 0.87, -1.099, -0.492, -0.189, -0.445, -1.062, -2.488] },
-        { baseX: 967.51,  ang: [0.0, -2.319, -1.551, -1.308, -1.294, -0.984, -0.506, -2.566, -0.907, 1.082, 0.293, 2.35, 3.244, -2.255] },
+        { baseX: 233.44, ang: [0.0, -2.036, -1.362, 2.289, 0.239, 0.206, -0.583, 0.87, -1.099, -0.492, -0.189, -0.445, -1.062, -2.488] },
+        { baseX: 967.51, ang: [0.0, -2.319, -1.551, -1.308, -1.294, -0.984, -0.506, -2.566, -0.907, 1.082, 0.293, 2.35, 3.244, -2.255] },
         { baseX: 1345.84, ang: [0.0, 2.38, -0.816, -2.441, -3.848, -6.214, -9.145, -12.081, -14.823, -16.742, -18.36, -28.164, -49.989, -55.968] },
         { baseX: 1635.81, ang: [0.0, -0.209, 0.118, -0.694, -3.281, -8.508, -17.232, -25.172, -33.133, -37.548, -40.135, -43.999, -49.04, -50.336] },
         { baseX: 2009.40, ang: [0.0, -5.093, -3.889, -4.629, -6.536, -12.326, -27.212, -44.399, -48.928, -50.38, -50.097, -45.379, -38.06, -32.414] },
@@ -1307,14 +2391,14 @@
           nodes[i].setAttribute('cy', sy.toFixed(1));
         }
 
-	let d = `M${pts[1][0].toFixed(1)},${pts[1][1].toFixed(1)}`;
+        let d = `M${pts[1][0].toFixed(1)},${pts[1][1].toFixed(1)}`;
         for (let i = 2; i < pts.length; i++) d += ` L${pts[i][0].toFixed(1)},${pts[i][1].toFixed(1)}`;
         spineCore.setAttribute('d', d);
         spineCenterline.setAttribute('d', d);
       }
 
       // Motion: slow continuous loop with brief pauses at each pose.
-      const HOLD_TIME  = 700;    // brief settle at each pose
+      const HOLD_TIME = 700;    // brief settle at each pose
       const MORPH_TIME = 4200;   // slow transition
 
       let poseIndex = 0;
@@ -1322,7 +2406,7 @@
       let t0 = performance.now();
 
       function loop(now) {
-        const cur  = POSES[poseIndex];
+        const cur = POSES[poseIndex];
         const next = POSES[(poseIndex + 1) % POSES.length];
         const isWrap = (poseIndex === POSES.length - 1); // last → first
         const dt = now - t0;
@@ -1354,27 +2438,27 @@
 
   <!-- Pillar selector + disclosure toggles (Stage 2) -->
   <script>
-    (function(){
-      const cards  = document.querySelectorAll('.pillar-card');
+    (function () {
+      const cards = document.querySelectorAll('.pillar-card');
       const panels = document.querySelectorAll('.pillar-panel');
-      function select(id){
-        cards.forEach(c=>{const on=c.dataset.target===id;c.classList.toggle('active',on);c.setAttribute('aria-selected',on?'true':'false');});
-        panels.forEach(p=>p.classList.toggle('show',p.id===id));
+      function select(id) {
+        cards.forEach(c => { const on = c.dataset.target === id; c.classList.toggle('active', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
+        panels.forEach(p => p.classList.toggle('show', p.id === id));
       }
-      cards.forEach(c=>{
-        c.addEventListener('click',()=>select(c.dataset.target));
-        c.addEventListener('keydown',e=>{
-          const L=[...cards],i=L.indexOf(c);
-          if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();const n=L[(i+1)%L.length];n.focus();select(n.dataset.target);}
-          if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();const n=L[(i-1+L.length)%L.length];n.focus();select(n.dataset.target);}
+      cards.forEach(c => {
+        c.addEventListener('click', () => select(c.dataset.target));
+        c.addEventListener('keydown', e => {
+          const L = [...cards], i = L.indexOf(c);
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { e.preventDefault(); const n = L[(i + 1) % L.length]; n.focus(); select(n.dataset.target); }
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { e.preventDefault(); const n = L[(i - 1 + L.length) % L.length]; n.focus(); select(n.dataset.target); }
         });
       });
       // disclosure toggles (lineage + video) — one layer each
-      document.querySelectorAll('.disclose').forEach(d=>{
-        const btn=d.querySelector('.disclose-btn');
-        btn.addEventListener('click',()=>{
-          const open=d.classList.toggle('open');
-          btn.setAttribute('aria-expanded',open?'true':'false');
+      document.querySelectorAll('.disclose').forEach(d => {
+        const btn = d.querySelector('.disclose-btn');
+        btn.addEventListener('click', () => {
+          const open = d.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
       });
     })();
@@ -1387,38 +2471,38 @@
       const NS = 'http://www.w3.org/2000/svg';
       const $ = id => document.getElementById(id);
 
-      const baseBlock   = $('percBaseBlock');
-      const basePivot   = $('percBasePivot');
-      const gantryBase  = $('percGantryBase');
-      const spineCore   = $('percSpineCore');
-      const spineCent   = $('percSpineCenterline');
-      const jointGroup  = $('percJointNodes');
-      const headMarker  = $('percHeadMarker');
-      const cloudGroup  = $('percPointCloud');
+      const baseBlock = $('percBaseBlock');
+      const basePivot = $('percBasePivot');
+      const gantryBase = $('percGantryBase');
+      const spineCore = $('percSpineCore');
+      const spineCent = $('percSpineCenterline');
+      const jointGroup = $('percJointNodes');
+      const headMarker = $('percHeadMarker');
+      const cloudGroup = $('percPointCloud');
       const sensorGroup = $('percSensorField');
-      const wallGroup   = $('percTrueWalls');
-      const trailPath   = $('percHeadTrail');
-      const ptCountEl   = $('percPtCount');
-      const statusEl    = $('percStatusTxt');
+      const wallGroup = $('percTrueWalls');
+      const trailPath = $('percHeadTrail');
+      const ptCountEl = $('percPtCount');
+      const statusEl = $('percStatusTxt');
 
       // ---- Robot structure (identical to the uploaded build) -----------------
-      const PITCH = [200,170,170,170,170,170,170,170,170,170,170,170,170,170]; // 14 links
+      const PITCH = [200, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170]; // 14 links
       const N = PITCH.length;
-      const BODY_LEN = PITCH.reduce((a,b)=>a+b,0); // 2410mm
+      const BODY_LEN = PITCH.reduce((a, b) => a + b, 0); // 2410mm
 
       // ---- The COMPLEX route through the cluttered environment ---------------
       // A multi-turn S-curve weaving between obstacle blocks. Coordinates are in
       // the 4700x3000 data space. The head follows this; the body trails it.
       const ROUTE = [
-        [ 280, 1500],[ 620, 1500],[ 980, 1480],
-        [1280, 1320],[1480, 1060],[1560,  820],   // up-left into first gap
-        [1720,  720],[1980,  760],[2180,  980],
-        [2300, 1300],[2300, 1640],[2200, 1940],   // down through pinch
-        [2060, 2180],[2180, 2420],[2480, 2520],
-        [2820, 2480],[3060, 2280],[3140, 1980],   // sweep right + up
-        [3120, 1640],[3260, 1380],[3540, 1280],
-        [3820, 1320],[4040, 1500],[4180, 1760],
-        [4360, 1980],[4520, 2040]
+        [280, 1500], [620, 1500], [980, 1480],
+        [1280, 1320], [1480, 1060], [1560, 820],   // up-left into first gap
+        [1720, 720], [1980, 760], [2180, 980],
+        [2300, 1300], [2300, 1640], [2200, 1940],   // down through pinch
+        [2060, 2180], [2180, 2420], [2480, 2520],
+        [2820, 2480], [3060, 2280], [3140, 1980],   // sweep right + up
+        [3120, 1640], [3260, 1380], [3540, 1280],
+        [3820, 1320], [4040, 1500], [4180, 1760],
+        [4360, 1980], [4520, 2040]
       ];
 
       // ---- Obstacle walls defining the corridors the route threads through ---
@@ -1426,36 +2510,36 @@
       // segments when a sensor is near. Drawn faintly as the "true" map.
       const WALLS = [
         // outer arena frame — top wall nudged out for base clearance
-        [[128,1100],[128,340],[1708,340],[1908,440]],
-        [[120,1820],[120,2760],[1700,2760],[1980,2640]],
+        [[128, 1100], [128, 340], [1708, 340], [1908, 440]],
+        [[120, 1820], [120, 2760], [1700, 2760], [1980, 2640]],
         // first chamber pillars (top-left gap) — moved clear of the base sweep
-        [[1491,407],[1291,627],[1171,907]],
-        [[2162,431],[2342,671],[2462,971]],
+        [[1491, 407], [1291, 627], [1171, 907]],
+        [[2162, 431], [2342, 671], [2462, 971]],
         // central pinch walls
-        [[1880,1320],[1860,1700],[1760,1980],[1640,2160]],
-        [[2540,1240],[2560,1640],[2660,1980],[2780,2200]],
+        [[1880, 1320], [1860, 1700], [1760, 1980], [1640, 2160]],
+        [[2540, 1240], [2560, 1640], [2660, 1980], [2780, 2200]],
         // lower chamber — nudged out for base clearance
-        [[2135,2688],[2535,2808],[2995,2748],[3275,2528]],
+        [[2135, 2688], [2535, 2808], [2995, 2748], [3275, 2528]],
         // right sweep walls — right-hand wall moved out (away from head sweep)
-        [[3440,2160],[3520,1840],[3460,1520]],
-        [[3830,2240],[3930,1960],[3950,1640]],
+        [[3440, 2160], [3520, 1840], [3460, 1520]],
+        [[3830, 2240], [3930, 1960], [3950, 1640]],
         // upper-right exit channel — lower guide moved down off the head path
-        [[3380,1160],[3720,1080],[4080,1140]],
-        [[3640,1680],[3980,1620]],
+        [[3380, 1160], [3720, 1080], [4080, 1140]],
+        [[3640, 1680], [3980, 1620]],
         // far right boundary — moved out off the head path
-        [[4650,1200],[4650,2400]]
+        [[4650, 1200], [4650, 2400]]
       ];
 
       // Render the faint true walls
       WALLS.forEach(w => {
-        const p = document.createElementNS(NS,'polyline');
-        p.setAttribute('points', w.map(pt=>pt.join(',')).join(' '));
-        p.setAttribute('fill','none');
-        p.setAttribute('stroke','var(--silver)');
-        p.setAttribute('stroke-width','26');
-        p.setAttribute('opacity','0.12');
-        p.setAttribute('stroke-linecap','round');
-        p.setAttribute('stroke-linejoin','round');
+        const p = document.createElementNS(NS, 'polyline');
+        p.setAttribute('points', w.map(pt => pt.join(',')).join(' '));
+        p.setAttribute('fill', 'none');
+        p.setAttribute('stroke', 'var(--silver)');
+        p.setAttribute('stroke-width', '26');
+        p.setAttribute('opacity', '0.12');
+        p.setAttribute('stroke-linecap', 'round');
+        p.setAttribute('stroke-linejoin', 'round');
         wallGroup.appendChild(p);
       });
 
@@ -1463,126 +2547,126 @@
       // ground-truth surface points that SLAM can "discover").
       const WALL_PTS = [];
       WALLS.forEach((w, wi) => {
-        for (let i=1;i<w.length;i++){
-          const [x0,y0]=w[i-1], [x1,y1]=w[i];
-          const d=Math.hypot(x1-x0,y1-y0);
-          const n=Math.max(2,Math.round(d/26)); // ~26mm spacing
-          for (let k=0;k<=n;k++){
-            const t=k/n;
-            WALL_PTS.push({x:x0+t*(x1-x0), y:y0+t*(y1-y0), seen:false});
+        for (let i = 1; i < w.length; i++) {
+          const [x0, y0] = w[i - 1], [x1, y1] = w[i];
+          const d = Math.hypot(x1 - x0, y1 - y0);
+          const n = Math.max(2, Math.round(d / 26)); // ~26mm spacing
+          for (let k = 0; k <= n; k++) {
+            const t = k / n;
+            WALL_PTS.push({ x: x0 + t * (x1 - x0), y: y0 + t * (y1 - y0), seen: false });
           }
         }
       });
 
       // ---- Build the dense head trail (breadcrumb) we walk the body along ----
-      function densify(poly, step){
-        const out=[poly[0].slice()];
-        for(let i=1;i<poly.length;i++){
-          const [x0,y0]=poly[i-1], [x1,y1]=poly[i];
-          const d=Math.hypot(x1-x0,y1-y0), n=Math.max(1,Math.round(d/step));
-          for(let k=1;k<=n;k++){const t=k/n; out.push([x0+t*(x1-x0), y0+t*(y1-y0)]);}
+      function densify(poly, step) {
+        const out = [poly[0].slice()];
+        for (let i = 1; i < poly.length; i++) {
+          const [x0, y0] = poly[i - 1], [x1, y1] = poly[i];
+          const d = Math.hypot(x1 - x0, y1 - y0), n = Math.max(1, Math.round(d / step));
+          for (let k = 1; k <= n; k++) { const t = k / n; out.push([x0 + t * (x1 - x0), y0 + t * (y1 - y0)]); }
         }
         return out;
       }
       const TRAIL = densify(ROUTE, 4);            // dense breadcrumb, index 0 = start
       // cumulative arc length along trail
       const TRAIL_S = [0];
-      for(let i=1;i<TRAIL.length;i++){
-        TRAIL_S.push(TRAIL_S[i-1]+Math.hypot(TRAIL[i][0]-TRAIL[i-1][0], TRAIL[i][1]-TRAIL[i-1][1]));
+      for (let i = 1; i < TRAIL.length; i++) {
+        TRAIL_S.push(TRAIL_S[i - 1] + Math.hypot(TRAIL[i][0] - TRAIL[i - 1][0], TRAIL[i][1] - TRAIL[i - 1][1]));
       }
-      const ROUTE_LEN = TRAIL_S[TRAIL_S.length-1];
+      const ROUTE_LEN = TRAIL_S[TRAIL_S.length - 1];
 
-      function trailPointAt(s){
-        if(s<=0) return TRAIL[0];
-        if(s>=ROUTE_LEN) return TRAIL[TRAIL.length-1];
+      function trailPointAt(s) {
+        if (s <= 0) return TRAIL[0];
+        if (s >= ROUTE_LEN) return TRAIL[TRAIL.length - 1];
         // binary search
-        let lo=0, hi=TRAIL_S.length-1;
-        while(lo<hi){const mid=(lo+hi)>>1; if(TRAIL_S[mid]<s) lo=mid+1; else hi=mid;}
-        const i=Math.max(1,lo);
-        const t=(s-TRAIL_S[i-1])/(TRAIL_S[i]-TRAIL_S[i-1]);
-        return [TRAIL[i-1][0]+t*(TRAIL[i][0]-TRAIL[i-1][0]),
-                TRAIL[i-1][1]+t*(TRAIL[i][1]-TRAIL[i-1][1])];
+        let lo = 0, hi = TRAIL_S.length - 1;
+        while (lo < hi) { const mid = (lo + hi) >> 1; if (TRAIL_S[mid] < s) lo = mid + 1; else hi = mid; }
+        const i = Math.max(1, lo);
+        const t = (s - TRAIL_S[i - 1]) / (TRAIL_S[i] - TRAIL_S[i - 1]);
+        return [TRAIL[i - 1][0] + t * (TRAIL[i][0] - TRAIL[i - 1][0]),
+        TRAIL[i - 1][1] + t * (TRAIL[i][1] - TRAIL[i - 1][1])];
       }
 
       // EXACT-CHORD follower placement: head at arc-length sHead, each successive
       // joint placed at exact PITCH chord distance walking back along the trail.
       // Guarantees rigid links (verified 0.0mm error).
-      function placeChain(sHead){
-        const joints=[];
-        let head=trailPointAt(sHead);
+      function placeChain(sHead) {
+        const joints = [];
+        let head = trailPointAt(sHead);
         joints.push(head);
         // find trail index at sHead
-        let idx=0; while(idx<TRAIL_S.length-1 && TRAIL_S[idx]<sHead) idx++;
-        let cx=head[0], cy=head[1];
-        for(let li=0; li<N; li++){
-          const link=PITCH[li];
-          let found=null, j=idx;
-          while(j>0){
-            const ax=TRAIL[j][0], ay=TRAIL[j][1];
-            const bx=TRAIL[j-1][0], by=TRAIL[j-1][1];
+        let idx = 0; while (idx < TRAIL_S.length - 1 && TRAIL_S[idx] < sHead) idx++;
+        let cx = head[0], cy = head[1];
+        for (let li = 0; li < N; li++) {
+          const link = PITCH[li];
+          let found = null, j = idx;
+          while (j > 0) {
+            const ax = TRAIL[j][0], ay = TRAIL[j][1];
+            const bx = TRAIL[j - 1][0], by = TRAIL[j - 1][1];
             // does segment (b->a) reach chord 'link' from (cx,cy)?
-            if(Math.hypot(bx-cx,by-cy)>=link){
-              const dx=bx-ax, dy=by-ay, fx=ax-cx, fy=ay-cy;
-              const A=dx*dx+dy*dy, B=2*(fx*dx+fy*dy), C=fx*fx+fy*fy-link*link;
-              const disc=B*B-4*A*C;
-              if(disc>=0){
-                let u=(-B+Math.sqrt(disc))/(2*A); u=Math.max(0,Math.min(1,u));
-                found=[ax+u*dx, ay+u*dy]; idx=j; break;
+            if (Math.hypot(bx - cx, by - cy) >= link) {
+              const dx = bx - ax, dy = by - ay, fx = ax - cx, fy = ay - cy;
+              const A = dx * dx + dy * dy, B = 2 * (fx * dx + fy * dy), C = fx * fx + fy * fy - link * link;
+              const disc = B * B - 4 * A * C;
+              if (disc >= 0) {
+                let u = (-B + Math.sqrt(disc)) / (2 * A); u = Math.max(0, Math.min(1, u));
+                found = [ax + u * dx, ay + u * dy]; idx = j; break;
               }
             }
             j--;
           }
-          if(!found){ found=TRAIL[0].slice(); idx=0; }
+          if (!found) { found = TRAIL[0].slice(); idx = 0; }
           joints.push(found);
-          cx=found[0]; cy=found[1];
+          cx = found[0]; cy = found[1];
         }
         return joints; // [head, j1, ..., tail]  (N+1 points)
       }
 
       // ---- Joint node circles + sensor halos ---------------------------------
-      const nodes=[];
-      for(let i=0;i<=N;i++){
-        const c=document.createElementNS(NS,'circle');
-        c.setAttribute('r','12');
-        c.setAttribute('fill','var(--bg)');
-        c.setAttribute('stroke','var(--silver)');
-        c.setAttribute('stroke-width','4');
+      const nodes = [];
+      for (let i = 0; i <= N; i++) {
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('r', '12');
+        c.setAttribute('fill', 'var(--bg)');
+        c.setAttribute('stroke', 'var(--silver)');
+        c.setAttribute('stroke-width', '4');
         jointGroup.appendChild(c); nodes.push(c);
       }
       // distributed sensors: head + every 2nd joint
-      const SENSOR_IDX=[]; for(let i=0;i<=N;i+=2) SENSOR_IDX.push(i);
+      const SENSOR_IDX = []; for (let i = 0; i <= N; i += 2) SENSOR_IDX.push(i);
       const SENSE_R = 360; // sensing radius (mm)
-      const halos=[];
-      SENSOR_IDX.forEach(()=>{
-        const h=document.createElementNS(NS,'circle');
-        h.setAttribute('r',SENSE_R);
-        h.setAttribute('fill','var(--red)');
-        h.setAttribute('opacity','0.04');
-        h.setAttribute('stroke','var(--red)');
-        h.setAttribute('stroke-width','2');
-        h.setAttribute('stroke-opacity','0.18');
+      const halos = [];
+      SENSOR_IDX.forEach(() => {
+        const h = document.createElementNS(NS, 'circle');
+        h.setAttribute('r', SENSE_R);
+        h.setAttribute('fill', 'var(--red)');
+        h.setAttribute('opacity', '0.04');
+        h.setAttribute('stroke', 'var(--red)');
+        h.setAttribute('stroke-width', '2');
+        h.setAttribute('stroke-opacity', '0.18');
         sensorGroup.appendChild(h); halos.push(h);
       });
 
       // ---- SLAM point emission -----------------------------------------------
-      let mappedCount=0;
-      function emitPointsNear(sensors){
-        for(let p of WALL_PTS){
-          if(p.seen) continue;
-          for(let s of sensors){
-            const dx=p.x-s[0], dy=p.y-s[1];
-            if(dx*dx+dy*dy <= SENSE_R*SENSE_R){
-              p.seen=true;
+      let mappedCount = 0;
+      function emitPointsNear(sensors) {
+        for (let p of WALL_PTS) {
+          if (p.seen) continue;
+          for (let s of sensors) {
+            const dx = p.x - s[0], dy = p.y - s[1];
+            if (dx * dx + dy * dy <= SENSE_R * SENSE_R) {
+              p.seen = true;
               // scatter cluster of 1-3 dots near the surface point for realism
-              const k=1+Math.floor(Math.random()*3);
-              for(let m=0;m<k;m++){
-                const jx=(Math.random()-0.5)*22, jy=(Math.random()-0.5)*22;
-                const dot=document.createElementNS(NS,'circle');
-                dot.setAttribute('cx',(p.x+jx).toFixed(1));
-                dot.setAttribute('cy',(p.y+jy).toFixed(1));
-                dot.setAttribute('r',(2.5+Math.random()*3).toFixed(1));
-                dot.setAttribute('fill','var(--red-bright)');
-                dot.setAttribute('opacity',(0.7+Math.random()*0.3).toFixed(2));
+              const k = 1 + Math.floor(Math.random() * 3);
+              for (let m = 0; m < k; m++) {
+                const jx = (Math.random() - 0.5) * 22, jy = (Math.random() - 0.5) * 22;
+                const dot = document.createElementNS(NS, 'circle');
+                dot.setAttribute('cx', (p.x + jx).toFixed(1));
+                dot.setAttribute('cy', (p.y + jy).toFixed(1));
+                dot.setAttribute('r', (2.5 + Math.random() * 3).toFixed(1));
+                dot.setAttribute('fill', 'var(--red-bright)');
+                dot.setAttribute('opacity', (0.7 + Math.random() * 0.3).toFixed(2));
                 cloudGroup.appendChild(dot);
                 mappedCount++;
               }
@@ -1594,21 +2678,21 @@
       }
 
       // ---- Render one frame given head arc-length ----------------------------
-      function render(sHead){
-        const joints=placeChain(sHead);     // head-first
-        const head=joints[0], tail=joints[N];
+      function render(sHead) {
+        const joints = placeChain(sHead);     // head-first
+        const head = joints[0], tail = joints[N];
 
         // base block sits at the TAIL, extending BEHIND the tail joint (away
         // from the body) along the tail link axis, and rotated to share the
         // EXACT heading of the tail link it connects to.
-        const prev = joints[N-1];
+        const prev = joints[N - 1];
         // heading of the tail link, pointing FROM the body OUT to the tail:
-        const outAng = Math.atan2(tail[1]-prev[1], tail[0]-prev[0]); // body->tail dir
-        const outDeg = outAng * 180/Math.PI;
+        const outAng = Math.atan2(tail[1] - prev[1], tail[0] - prev[0]); // body->tail dir
+        const outDeg = outAng * 180 / Math.PI;
         // anchor the block's near edge at the tail joint, body-side; the block
         // (400 long) extends outward behind the tail along outAng.
         baseBlock.setAttribute('x', tail[0]);
-        baseBlock.setAttribute('y', tail[1]-80);   // centred across the axis (height 160)
+        baseBlock.setAttribute('y', tail[1] - 80);   // centred across the axis (height 160)
         basePivot.setAttribute('cx', tail[0]);
         basePivot.setAttribute('cy', tail[1]);
         // rotate the whole group about the tail joint so the block's local +x
@@ -1617,33 +2701,33 @@
           `rotate(${outDeg.toFixed(2)} ${tail[0].toFixed(1)} ${tail[1].toFixed(1)})`);
 
         // spine path (tail -> head reads same either way)
-        let d=`M${joints[N][0].toFixed(1)},${joints[N][1].toFixed(1)}`;
-        for(let i=N-1;i>=0;i--) d+=` L${joints[i][0].toFixed(1)},${joints[i][1].toFixed(1)}`;
-        spineCore.setAttribute('d',d);
-        spineCent.setAttribute('d',d);
+        let d = `M${joints[N][0].toFixed(1)},${joints[N][1].toFixed(1)}`;
+        for (let i = N - 1; i >= 0; i--) d += ` L${joints[i][0].toFixed(1)},${joints[i][1].toFixed(1)}`;
+        spineCore.setAttribute('d', d);
+        spineCent.setAttribute('d', d);
 
         // joint nodes
-        for(let i=0;i<=N;i++){
-          nodes[i].setAttribute('cx',joints[i][0].toFixed(1));
-          nodes[i].setAttribute('cy',joints[i][1].toFixed(1));
+        for (let i = 0; i <= N; i++) {
+          nodes[i].setAttribute('cx', joints[i][0].toFixed(1));
+          nodes[i].setAttribute('cy', joints[i][1].toFixed(1));
         }
-        headMarker.setAttribute('cx',head[0].toFixed(1));
-        headMarker.setAttribute('cy',head[1].toFixed(1));
+        headMarker.setAttribute('cx', head[0].toFixed(1));
+        headMarker.setAttribute('cy', head[1].toFixed(1));
 
         // sensors + emission
-        const sensors=SENSOR_IDX.map(i=>joints[i]);
-        SENSOR_IDX.forEach((ji,k)=>{
-          halos[k].setAttribute('cx',joints[ji][0].toFixed(1));
-          halos[k].setAttribute('cy',joints[ji][1].toFixed(1));
+        const sensors = SENSOR_IDX.map(i => joints[i]);
+        SENSOR_IDX.forEach((ji, k) => {
+          halos[k].setAttribute('cx', joints[ji][0].toFixed(1));
+          halos[k].setAttribute('cy', joints[ji][1].toFixed(1));
         });
         emitPointsNear(sensors);
 
         // grow the traversed-trajectory dashed line up to the head
-        let td=`M${TRAIL[0][0]},${TRAIL[0][1]}`;
-        let si=0; while(si<TRAIL_S.length-1 && TRAIL_S[si]<sHead) si++;
-        for(let i=1;i<=si;i++) td+=` L${TRAIL[i][0].toFixed(1)},${TRAIL[i][1].toFixed(1)}`;
-        td+=` L${head[0].toFixed(1)},${head[1].toFixed(1)}`;
-        trailPath.setAttribute('d',td);
+        let td = `M${TRAIL[0][0]},${TRAIL[0][1]}`;
+        let si = 0; while (si < TRAIL_S.length - 1 && TRAIL_S[si] < sHead) si++;
+        for (let i = 1; i <= si; i++) td += ` L${TRAIL[i][0].toFixed(1)},${TRAIL[i][1].toFixed(1)}`;
+        td += ` L${head[0].toFixed(1)},${head[1].toFixed(1)}`;
+        trailPath.setAttribute('d', td);
       }
 
       // ---- Animation loop -----------------------------------------------------
@@ -1653,23 +2737,23 @@
       // snakes through the entire complex path.
       const SPEED = 360;            // mm per second of head travel
       const S_START = BODY_LEN;     // body fully on the route at start
-      const S_END   = ROUTE_LEN;
+      const S_END = ROUTE_LEN;
       let sHead = S_START;
       let last = performance.now();
       let paused = false;
       let done = false;
 
-      function frame(now){
-        const dt=(now-last)/1000; last=now;
-        if(!paused){
-          sHead += SPEED*dt;
-          if(sHead>=S_END){
-			// clear the accumulated point cloud and start the run again
-			while(cloudGroup.firstChild) cloudGroup.removeChild(cloudGroup.firstChild);
-			WALL_PTS.forEach(p=>p.seen=false);
-			mappedCount=0; ptCountEl.textContent='0';
-			sHead=S_START;
-			}
+      function frame(now) {
+        const dt = (now - last) / 1000; last = now;
+        if (!paused) {
+          sHead += SPEED * dt;
+          if (sHead >= S_END) {
+            // clear the accumulated point cloud and start the run again
+            while (cloudGroup.firstChild) cloudGroup.removeChild(cloudGroup.firstChild);
+            WALL_PTS.forEach(p => p.seen = false);
+            mappedCount = 0; ptCountEl.textContent = '0';
+            sHead = S_START;
+          }
           render(sHead);
           statusEl.textContent = done ? 'Map complete' : 'Traversing & mapping';
         }
@@ -1688,34 +2772,34 @@
       const NS = 'http://www.w3.org/2000/svg';
       const $ = id => document.getElementById(id);
 
-      const baseBlock   = $('rc_baseBlock');
-      const basePivot   = $('rc_basePivot');
-      const spineCore   = $('rc_spineCore');
-      const spineCent   = $('rc_spineCenterline');
-      const jointGroup  = $('rc_jointNodes');
-      const ghostCore   = $('rc_ghostCore');
-      const ghostCent   = $('rc_ghostCenter');
-      const ghostNodes  = $('rc_ghostNodes');
-      const refOutline  = $('rc_refOutline');
+      const baseBlock = $('rc_baseBlock');
+      const basePivot = $('rc_basePivot');
+      const spineCore = $('rc_spineCore');
+      const spineCent = $('rc_spineCenterline');
+      const jointGroup = $('rc_jointNodes');
+      const ghostCore = $('rc_ghostCore');
+      const ghostCent = $('rc_ghostCenter');
+      const ghostNodes = $('rc_ghostNodes');
+      const refOutline = $('rc_refOutline');
 
       // Environment layer handles
-      const spaceField  = $('rc_spaceField');
-      const starLayer   = $('rc_starLayer');
-      const satellite   = $('rc_satellite');
-      const subseaRect  = $('rc_subseaFieldRect');
+      const spaceField = $('rc_spaceField');
+      const starLayer = $('rc_starLayer');
+      const satellite = $('rc_satellite');
+      const subseaRect = $('rc_subseaFieldRect');
       const streamLayer = $('rc_streamLayer');
-      const submarine   = $('rc_submarine');
+      const submarine = $('rc_submarine');
       const bubbleLayer = $('rc_bubbleLayer');
-      const landLayer   = $('rc_landLayer');
-      const dustLayer   = $('rc_dustLayer');
-      const gridLayer   = $('rc_gridLayer');
+      const landLayer = $('rc_landLayer');
+      const dustLayer = $('rc_dustLayer');
+      const gridLayer = $('rc_gridLayer');
 
-      const envTxt   = $('rc_envTxt');
-      const ctrlErr  = $('rc_ctrlErr');
-      const openErr  = $('rc_openErr');
+      const envTxt = $('rc_envTxt');
+      const ctrlErr = $('rc_ctrlErr');
+      const openErr = $('rc_openErr');
 
       // ---- Robot structure (identical to the uploaded build) -----------------
-      const PITCH = [200,170,170,170,170,170,170,170,170,170,170,170,170,170]; // 14 links
+      const PITCH = [200, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170, 170]; // 14 links
       const N = PITCH.length;
       const Y_OFFSET = 1500;            // data-space origin row (screenY = Y_OFFSET - dataY)
 
@@ -1750,15 +2834,15 @@
       // ---- Build joint node circles (controlled + ghost) ---------------------
       const ctrlNodes = [], ghNodes = [];
       for (let i = 0; i < N; i++) {
-        const c = document.createElementNS(NS,'circle');
-        c.setAttribute('r','12'); c.setAttribute('fill','var(--bg)');
-        c.setAttribute('stroke','var(--silver)'); c.setAttribute('stroke-width','4');
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('r', '12'); c.setAttribute('fill', 'var(--bg)');
+        c.setAttribute('stroke', 'var(--silver)'); c.setAttribute('stroke-width', '4');
         jointGroup.appendChild(c); ctrlNodes.push(c);
 
-        const g = document.createElementNS(NS,'circle');
-        g.setAttribute('r','9'); g.setAttribute('fill','none');
-        g.setAttribute('stroke','var(--silver)'); g.setAttribute('stroke-width','3');
-        g.setAttribute('opacity','0.5');
+        const g = document.createElementNS(NS, 'circle');
+        g.setAttribute('r', '9'); g.setAttribute('fill', 'none');
+        g.setAttribute('stroke', 'var(--silver)'); g.setAttribute('stroke-width', '3');
+        g.setAttribute('opacity', '0.5');
         ghostNodes.appendChild(g); ghNodes.push(g);
       }
 
@@ -1779,7 +2863,7 @@
             // lingering oscillation, amplitude grows toward the tip, multi-mode
             const grow = (i + 1) / N;
             return grow * (10 * Math.sin(t * 1.6 + i * 0.5)
-                         + 5 * Math.sin(t * 2.7 + i * 0.9));
+              + 5 * Math.sin(t * 2.7 + i * 0.9));
           },
           ctrl(i, t) { return 0.25 * Math.sin(t * 3 + i); }
         },
@@ -1810,25 +2894,25 @@
 
       // stars
       for (let i = 0; i < 90; i++) {
-        const s = document.createElementNS(NS,'circle');
-        s.setAttribute('cx', rnd(0,4700).toFixed(0));
-        s.setAttribute('cy', rnd(0,3000).toFixed(0));
-        s.setAttribute('r', rnd(2,7).toFixed(1));
-        s.setAttribute('fill','var(--silver)');
-        s.setAttribute('opacity', rnd(0.3,0.9).toFixed(2));
+        const s = document.createElementNS(NS, 'circle');
+        s.setAttribute('cx', rnd(0, 4700).toFixed(0));
+        s.setAttribute('cy', rnd(0, 3000).toFixed(0));
+        s.setAttribute('r', rnd(2, 7).toFixed(1));
+        s.setAttribute('fill', 'var(--silver)');
+        s.setAttribute('opacity', rnd(0.3, 0.9).toFixed(2));
         starLayer.appendChild(s);
       }
-      starLayer.setAttribute('filter','url(#softGlow)');
+      starLayer.setAttribute('filter', 'url(#softGlow)');
 
       // current streamlines (horizontal wavy lines)
       const streamPaths = [];
       for (let i = 0; i < 9; i++) {
         const yBase = 300 + i * 300;
-        const p = document.createElementNS(NS,'path');
-        p.setAttribute('fill','none');
-        p.setAttribute('stroke','var(--silver)');
-        p.setAttribute('stroke-width','4');
-        p.setAttribute('opacity','0.6');
+        const p = document.createElementNS(NS, 'path');
+        p.setAttribute('fill', 'none');
+        p.setAttribute('stroke', 'var(--silver)');
+        p.setAttribute('stroke-width', '4');
+        p.setAttribute('opacity', '0.6');
         p.dataset.y = yBase;
         p.dataset.phase = (i * 0.7).toFixed(2);
         streamLayer.appendChild(p);
@@ -1838,26 +2922,26 @@
       // rising bubbles
       const bubbles = [];
       for (let i = 0; i < 26; i++) {
-        const b = document.createElementNS(NS,'circle');
-        const r = rnd(5,16);
+        const b = document.createElementNS(NS, 'circle');
+        const r = rnd(5, 16);
         b.setAttribute('r', r.toFixed(1));
-        b.setAttribute('fill','none');
-        b.setAttribute('stroke','var(--silver)');
-        b.setAttribute('stroke-width','3');
-        b.setAttribute('opacity','0.65');
+        b.setAttribute('fill', 'none');
+        b.setAttribute('stroke', 'var(--silver)');
+        b.setAttribute('stroke-width', '3');
+        b.setAttribute('opacity', '0.65');
         bubbleLayer.appendChild(b);
-        bubbles.push({ el:b, x:rnd(0,4700), y:rnd(0,3000), r, sp:rnd(120,300), sw:rnd(0.5,1.6), ph:rnd(0,6.28) });
+        bubbles.push({ el: b, x: rnd(0, 4700), y: rnd(0, 3000), r, sp: rnd(120, 300), sw: rnd(0.5, 1.6), ph: rnd(0, 6.28) });
       }
 
       // settling dust near ground
       const dust = [];
       for (let i = 0; i < 30; i++) {
-        const d = document.createElementNS(NS,'circle');
-        d.setAttribute('r', rnd(2,5).toFixed(1));
-        d.setAttribute('fill','var(--silver)');
-        d.setAttribute('opacity','0.5');
+        const d = document.createElementNS(NS, 'circle');
+        d.setAttribute('r', rnd(2, 5).toFixed(1));
+        d.setAttribute('fill', 'var(--silver)');
+        d.setAttribute('opacity', '0.5');
         dustLayer.appendChild(d);
-        dust.push({ el:d, x:rnd(0,4700), y:rnd(2400,2540), sp:rnd(20,70), ph:rnd(0,6.28) });
+        dust.push({ el: d, x: rnd(0, 4700), y: rnd(2400, 2540), sp: rnd(20, 70), ph: rnd(0, 6.28) });
       }
 
       // ---- Path builder from a chain of points -------------------------------
@@ -1909,7 +2993,7 @@
           });
           bubbles.forEach(b => {
             b.y -= b.sp * 0.016;
-            if (b.y < -20) { b.y = 3020; b.x = rnd(0,4700); }
+            if (b.y < -20) { b.y = 3020; b.x = rnd(0, 4700); }
             const wob = b.x + Math.sin(t * b.sw + b.ph) * 40;
             b.el.setAttribute('cx', wob.toFixed(1));
             b.el.setAttribute('cy', b.y.toFixed(1));
@@ -1933,7 +3017,7 @@
       function render(t, weights) {
         // controlled arm: commanded angles + tiny residual tremble (blended)
         const ctrlAng = CMD_ANG.slice();
-        const ghAng   = CMD_ANG.slice();
+        const ghAng = CMD_ANG.slice();
         for (let i = 0; i < N; i++) {
           let cAdd = 0, gAdd = 0;
           for (let k = 0; k < ENVS.length; k++) {
@@ -1942,19 +3026,19 @@
             gAdd += weights[k] * ENVS[k].ghost(i, t);
           }
           ctrlAng[i] += cAdd;
-          ghAng[i]   += gAdd;
+          ghAng[i] += gAdd;
         }
 
         const ctrlPts = chainFromAngles(ctrlAng);
-        const ghPts   = chainFromAngles(ghAng);
+        const ghPts = chainFromAngles(ghAng);
 
         // draw controlled
         const cd = pathD(ctrlPts, 1);
         spineCore.setAttribute('d', cd);
         spineCent.setAttribute('d', cd);
         for (let i = 0; i < N; i++) {
-          ctrlNodes[i].setAttribute('cx', ctrlPts[i+1][0].toFixed(1));
-          ctrlNodes[i].setAttribute('cy', ctrlPts[i+1][1].toFixed(1));
+          ctrlNodes[i].setAttribute('cx', ctrlPts[i + 1][0].toFixed(1));
+          ctrlNodes[i].setAttribute('cy', ctrlPts[i + 1][1].toFixed(1));
         }
 
         // draw ghost
@@ -1962,15 +3046,15 @@
         ghostCore.setAttribute('d', gd);
         ghostCent.setAttribute('d', gd);
         for (let i = 0; i < N; i++) {
-          ghNodes[i].setAttribute('cx', ghPts[i+1][0].toFixed(1));
-          ghNodes[i].setAttribute('cy', ghPts[i+1][1].toFixed(1));
+          ghNodes[i].setAttribute('cx', ghPts[i + 1][0].toFixed(1));
+          ghNodes[i].setAttribute('cy', ghPts[i + 1][1].toFixed(1));
         }
 
         // deviation readouts: max joint distance from the commanded pose
         let cMax = 0, gMax = 0;
         for (let i = 1; i <= N; i++) {
-          const cdx = ctrlPts[i][0]-CMD_PTS[i][0], cdy = ctrlPts[i][1]-CMD_PTS[i][1];
-          const gdx = ghPts[i][0]-CMD_PTS[i][0],   gdy = ghPts[i][1]-CMD_PTS[i][1];
+          const cdx = ctrlPts[i][0] - CMD_PTS[i][0], cdy = ctrlPts[i][1] - CMD_PTS[i][1];
+          const gdx = ghPts[i][0] - CMD_PTS[i][0], gdy = ghPts[i][1] - CMD_PTS[i][1];
           cMax = Math.max(cMax, Math.hypot(cdx, cdy));
           gMax = Math.max(gMax, Math.hypot(gdx, gdy));
         }
@@ -1979,10 +3063,10 @@
       }
 
       // ---- Timeline: hold each env, smooth morph between (smootherstep) ------
-      const HOLD  = 3200;   // ms dwell on each environment
+      const HOLD = 3200;   // ms dwell on each environment
       const MORPH = 2600;   // ms crossfade between environments
       const CYCLE = HOLD + MORPH;
-      const smoother = p => p*p*p*(p*(p*6-15)+10);
+      const smoother = p => p * p * p * (p * (p * 6 - 15) + 10);
 
       const startT = performance.now();
       function frame(now) {
@@ -2021,4 +3105,5 @@
   </script>
 
 </body>
+
 </html>

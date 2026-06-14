@@ -1,0 +1,3101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Dashboard · Xtent Innovations</title>
+<style>
+  /* ===================== Design tokens ===================== */
+  :root{
+    --paper:#f4f6fb;        /* cool app background        */
+    --paper-2:#e8ecf5;      /* hover wash                 */
+    --card:#ffffff;         /* panel surface              */
+    --ink:#0e1726;          /* near-black navy text       */
+    --ink-soft:#5b6678;     /* secondary text             */
+    --line:#e3e8f1;         /* hairline rules             */
+    --line-strong:#cfd6e4;
+    --navy:#0b1b3a;         /* deep midnight navy         */
+    --navy-2:#12244d;
+    --accent:#1746e0;       /* electric indigo-blue       */
+    --accent-soft:#4f74ff;
+    --brand:#9b1c2e;        /* brand accent — dark red */
+    --brand-deep:#7a1424;   /* deeper dark red for hover/press */
+    --teal:#1746e0;         /* calendar / today accent (blue)        */
+    --teal-soft:#4f74ff;
+    --done:#0bbf8e;         /* completed → green (kept green on purpose:
+                               red is the brand + "abandoned" colour, so a
+                               red "completed" would be ambiguous)    */
+    --postpone:#f5a524;     /* postponed → amber          */
+    --abandon:#f1486b;      /* abandoned → coral-pink     */
+    --shadow:0 12px 34px rgba(11,27,58,.16);
+    --r:14px;
+    --r-sm:9px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Inter","SF Pro Display",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+    background:
+      radial-gradient(900px 500px at 88% -10%, #e6ecfb 0%, transparent 55%),
+      radial-gradient(700px 500px at 0% 110%, #fdecef 0%, transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-0.01em;
+  }
+  button{font-family:inherit;cursor:pointer}
+  ::-webkit-scrollbar{width:11px;height:11px}
+  ::-webkit-scrollbar-thumb{background:var(--line-strong);border-radius:20px;border:3px solid transparent;background-clip:content-box}
+  ::-webkit-scrollbar-thumb:hover{background:#b0a487;background-clip:content-box}
+
+  /* ===================== App shell ===================== */
+  .topbar{
+    display:flex;align-items:center;gap:14px;
+    padding:12px 20px;
+    background:linear-gradient(110deg,var(--navy) 0%,var(--navy-2) 100%);
+    border-bottom:1px solid rgba(255,255,255,.06);
+    color:#fff;
+  }
+  .brand{display:flex;align-items:center;gap:12px;font-weight:600;letter-spacing:-0.01em}
+  .brand .mark{
+    width:38px;height:38px;border-radius:10px;flex:none;
+    background:#fff;display:grid;place-items:center;padding:4px;
+    box-shadow:0 4px 14px rgba(0,0,0,.22)
+  }
+  .brand .mark img{width:100%;height:100%;object-fit:contain;display:block}
+  .brand h1{font-size:18px;margin:0;font-weight:700;color:#fff}
+  .brand small{display:block;font-size:10.5px;color:#8ea2c8;font-weight:600;letter-spacing:1.2px}
+  .topbar .spacer{flex:1}
+  .file-controls{display:flex;align-items:center;gap:8px}
+  .file-status{font-size:12px;color:#9fb2d6;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .file-status b{color:#ff9aae}
+  .btn{
+    border:1px solid var(--line-strong);background:var(--card);color:var(--ink);
+    padding:8px 13px;border-radius:var(--r-sm);font-size:13px;font-weight:600;
+    display:inline-flex;align-items:center;gap:7px;transition:.15s
+  }
+  .btn:hover{background:#fff;border-color:var(--accent-soft);box-shadow:0 2px 8px rgba(23,70,224,.12)}
+  .btn svg{width:15px;height:15px}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn.primary:hover{background:#1238c0;box-shadow:0 4px 14px rgba(23,70,224,.32)}
+  .topbar .btn{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.14);color:#eaf0fb}
+  .topbar .btn:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.28);box-shadow:none}
+  .topbar .btn.brandbtn{background:var(--brand);color:#fff;border-color:var(--brand);font-weight:700}
+  .topbar .btn.brandbtn:hover{background:var(--brand-deep)}
+  .btn.ghost{border-color:transparent;background:transparent}
+  .btn.ghost:hover{background:var(--paper-2)}
+
+  /* ===================== Layout grid ===================== */
+  .layout{
+    display:grid;
+    grid-template-columns:minmax(380px,1fr) minmax(400px,1.05fr);
+    grid-template-rows:minmax(0,0.82fr) minmax(0,1.18fr);
+    gap:14px;padding:14px;
+    height:calc(100vh - 57px);
+  }
+  .panel{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+    box-shadow:0 1px 2px rgba(11,27,58,.04), 0 8px 24px rgba(11,27,58,.05);
+    display:flex;flex-direction:column;min-height:0;overflow:hidden
+  }
+  #projectPanel{grid-row:1 / span 2}
+  #todoPanel{grid-column:2;grid-row:1}
+  #calPanel{grid-column:2;grid-row:2}
+
+  .panel-head{
+    display:flex;align-items:center;gap:10px;
+    padding:13px 16px;border-bottom:1px solid var(--line);
+    background:#fff
+  }
+  .panel-head .title{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px}
+  .panel-head .title .dot{width:8px;height:8px;border-radius:50%}
+  .panel-head .spacer{flex:1}
+  .panel-body{flex:1;min-height:0;overflow:auto;padding:14px 16px}
+
+  /* ===================== Project switcher (dropdown) ===================== */
+  .proj-select{
+    font-family:inherit;font-size:14.5px;font-weight:700;color:var(--ink);
+    background:#fff;border:1px solid var(--line-strong);border-radius:var(--r-sm);
+    padding:6px 30px 6px 11px;max-width:230px;cursor:pointer;
+    appearance:none;-webkit-appearance:none;-moz-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235b6b8c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat:no-repeat;background-position:right 9px center;background-size:15px
+  }
+  .proj-select:focus{outline:2px solid var(--accent-soft);outline-offset:-1px}
+
+  /* ===================== Projects manager modal ===================== */
+  .proj-mgr-add{display:flex;gap:8px;margin-bottom:16px}
+  .proj-mgr-add input{
+    flex:1;min-width:0;padding:9px 11px;border:1px solid var(--line-strong);border-radius:var(--r-sm);
+    font-family:inherit;font-size:14px;background:#fff;color:var(--ink)
+  }
+  .proj-mgr-add input:focus{outline:2px solid var(--accent-soft);outline-offset:-1px}
+  .pm-head{margin:14px 0 8px;font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:var(--ink-soft)}
+  .pm-head:first-child{margin-top:0}
+  .pm-empty{font-size:13.5px;color:var(--ink-soft);padding:4px 2px}
+  .proj-row{
+    display:flex;align-items:center;gap:10px;padding:9px 11px;margin-bottom:7px;
+    border:1px solid var(--line);border-radius:9px;background:#fff
+  }
+  .proj-row.archived{background:var(--paper-2)}
+  .proj-row .pr-name{flex:1;min-width:0;font-size:14px;font-weight:600;color:var(--ink);outline:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .proj-row.archived .pr-name{color:var(--ink-soft)}
+  .proj-row .pr-name[contenteditable="true"]:focus{background:var(--paper-2);border-radius:5px;padding:1px 5px}
+  .proj-row .pr-count{font-size:12px;color:var(--ink-soft);flex:none}
+  .proj-row .btn{flex:none}
+
+  /* tiny round icon buttons */
+  .ibtn{
+    width:28px;height:28px;border-radius:7px;border:1px solid transparent;
+    background:transparent;color:var(--ink-soft);display:inline-grid;place-items:center;transition:.13s
+  }
+  .ibtn:hover{background:var(--paper-2);color:var(--ink)}
+  .ibtn svg{width:16px;height:16px}
+  .ibtn.accent:hover{color:var(--accent)}
+
+  /* ===================== Project tree ===================== */
+  .proj-empty{color:var(--ink-soft);font-style:italic;padding:18px 6px;text-align:center;font-size:14px}
+  .node{margin:1px 0}
+  .node-row{
+    display:flex;align-items:center;gap:4px;padding:4px 6px;border-radius:var(--r-sm);
+    border:1px solid transparent;position:relative
+  }
+  .node-row:hover{background:#fffdf7;border-color:var(--line)}
+  .node-row.dragover-into{background:#f0e9d8;border-color:var(--accent-soft)}
+  .node-row.drop-before::before,
+  .node-row.drop-after::after{
+    content:"";position:absolute;left:8px;right:8px;height:2px;background:var(--accent);border-radius:2px
+  }
+  .node-row.drop-before::before{top:-1px}
+  .node-row.drop-after::after{bottom:-1px}
+
+  .drag-handle{cursor:grab;color:var(--line-strong);display:grid;place-items:center;width:16px;flex:none}
+  .drag-handle:hover{color:var(--ink-soft)}
+  .twirl{
+    width:20px;height:20px;flex:none;border:none;background:transparent;color:var(--ink-soft);
+    display:grid;place-items:center;border-radius:5px
+  }
+  .twirl:hover{background:var(--paper-2)}
+  .twirl svg{width:13px;height:13px;transition:transform .15s}
+  .node.collapsed > .node-row .twirl svg{transform:rotate(-90deg)}
+  .twirl.leaf{visibility:hidden}
+
+  .node-label{
+    flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    padding:2px 4px;border-radius:5px;font-size:15px
+  }
+  .node-label:focus{outline:2px solid var(--accent-soft);background:#fff}
+  .node-actions{display:flex;align-items:center;gap:1px;opacity:0;transition:.12s;flex:none}
+  .node-row:hover .node-actions,.node-row:focus-within .node-actions{opacity:1}
+
+  /* calendar checkbox + per-branch colour dot + date/time badge */
+  .node-check{width:14px;height:14px;flex:none;margin:0;accent-color:var(--accent);cursor:pointer}
+  .node-dot{width:9px;height:9px;border-radius:50%;flex:none;box-shadow:0 0 0 1px rgba(11,27,58,.08)}
+  .node-when{
+    font-size:11px;font-weight:600;color:var(--ink-soft);white-space:nowrap;flex:none;
+    padding:1px 6px;border-radius:6px;background:var(--paper)
+  }
+  .node-when.conflict,.node-when .conflict{color:var(--abandon)}
+  .node-when .when-sep{color:var(--line-strong);font-weight:600}
+
+  /* depth styling: H1 walnut/bold, deeper = lighter + smaller */
+  .node[data-depth="0"] > .node-row > .node-label{font-weight:600;color:var(--accent);font-size:16px}
+  .node[data-depth="1"] > .node-row > .node-label{font-weight:600;color:var(--ink)}
+  .node[data-depth="2"] > .node-row > .node-label{color:var(--ink);font-size:14px}
+  .node[data-depth="3"] > .node-row > .node-label{color:var(--ink-soft);font-size:14px}
+  .children{margin-left:18px;border-left:1px solid var(--line);padding-left:6px}
+  .node.collapsed > .children{display:none}
+
+  /* task state chips on a node */
+  .state-chip{font-size:10px;font-weight:600;padding:1px 7px;border-radius:20px;letter-spacing:.3px;flex:none}
+  .state-chip.completed{background:#e3efe5;color:var(--done)}
+  .state-chip.postponed{background:#f6edd2;color:#9a7715}
+  .state-chip.abandoned{background:#f3ddd8;color:var(--abandon)}
+  .node-row.completed .node-label{text-decoration:line-through;text-decoration-color:var(--done);color:var(--ink-soft)}
+  .node-row.abandoned .node-label{text-decoration:line-through;text-decoration-color:var(--abandon);color:var(--ink-soft)}
+
+  /* ===================== To-do panel ===================== */
+  .todo-date{font-size:13px;color:var(--ink-soft);font-weight:500}
+  .todo-date b{color:var(--ink);font-weight:600}
+  .viewing-banner{
+    margin:0 0 10px;padding:8px 12px;border-radius:var(--r-sm);font-size:12.5px;
+    background:#eef3ff;border:1px solid #d4e0ff;color:var(--accent);
+    display:flex;align-items:center;gap:8px;font-weight:600
+  }
+  .viewing-banner svg{width:16px;height:16px;flex:none}
+  .viewing-banner button{margin-left:auto}
+  .todo-add{display:flex;gap:8px;margin-bottom:12px}
+  .todo-add input{
+    flex:1;padding:9px 12px;border:1px solid var(--line-strong);border-radius:var(--r-sm);
+    font-family:inherit;font-size:14px;background:#fff;color:var(--ink)
+  }
+  .todo-add input:focus{outline:2px solid var(--accent-soft);outline-offset:-1px}
+  .todo-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+  .todo-item{
+    display:flex;align-items:center;gap:8px;padding:8px 9px;border-radius:var(--r-sm);
+    border:1px solid transparent
+  }
+  .todo-item:hover{background:#f6f9ff;border-color:var(--line)}
+  .todo-item.dragging{opacity:.4}
+  .todo-item.drop-before{box-shadow:0 -2px 0 var(--accent)}
+  .todo-item.drop-after{box-shadow:0 2px 0 var(--accent)}
+  .todo-grip{cursor:grab;color:var(--line-strong);display:grid;place-items:center;width:16px;flex:none}
+  .todo-grip:hover{color:var(--ink-soft)}
+  .todo-grip svg{width:15px;height:15px}
+  .todo-text{flex:1;font-size:14.5px;cursor:text;padding:2px 3px;border-radius:5px}
+  .todo-text:focus{outline:2px solid var(--accent-soft);background:#fff}
+  .todo-item.completed .todo-text{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--done);color:var(--ink-soft)}
+  .todo-item.postponed .todo-text{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--postpone);color:var(--ink-soft)}
+  .todo-item.abandoned .todo-text{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--abandon);color:var(--ink-soft)}
+  .todo-item .carried{font-size:10px;color:#b97b09;border:1px solid #f3dca6;background:#fef6e3;padding:1px 7px;border-radius:20px;font-weight:600;flex:none}
+  .todo-states{display:flex;gap:2px;opacity:0;transition:.12s}
+  .todo-item:hover .todo-states,.todo-item:focus-within .todo-states{opacity:1}
+  .sbtn{width:26px;height:26px;border-radius:6px;border:1px solid transparent;background:transparent;display:grid;place-items:center}
+  .sbtn svg{width:15px;height:15px}
+  .sbtn.done{color:var(--done)}      .sbtn.done:hover{background:#e3efe5}
+  .sbtn.post{color:var(--postpone)}  .sbtn.post:hover{background:#f6edd2}
+  .sbtn.aband{color:var(--abandon)}  .sbtn.aband:hover{background:#f3ddd8}
+  .sbtn.del{color:var(--ink-soft)}   .sbtn.del:hover{background:var(--paper-2)}
+  .sbtn.active.done{background:var(--done);color:#fff;border-color:var(--done)}
+  .sbtn.active.post{background:var(--postpone);color:#fff;border-color:var(--postpone)}
+  .sbtn.active.aband{background:var(--abandon);color:#fff;border-color:var(--abandon)}
+  .todo-empty{color:var(--ink-soft);font-style:italic;text-align:center;padding:16px;font-size:14px}
+
+  /* legend */
+  .legend{display:flex;gap:14px;margin-top:12px;padding-top:10px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-soft);flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:5px}
+  .legend i{width:16px;height:3px;border-radius:2px;display:inline-block}
+
+  /* ===================== Calendar ===================== */
+  .cal-head{display:flex;align-items:center;gap:8px}
+  .cal-nav{display:flex;align-items:center;gap:2px}
+  .cal-title{font-weight:600;font-size:15px;min-width:130px;text-align:center}
+  .seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:var(--r-sm);overflow:hidden}
+  .seg button{border:none;background:transparent;padding:5px 11px;font-size:12.5px;color:var(--ink-soft)}
+  .seg button.active{background:var(--teal);color:#fff}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .cal-dow{text-align:center;font-size:10.5px;color:var(--ink-soft);font-weight:700;padding:3px 0;letter-spacing:.6px}
+  .cal-cell{
+    min-height:46px;border:1px solid var(--line);border-radius:9px;background:#fff;
+    display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;
+    padding:5px 7px;font-size:13px;font-weight:600;position:relative;transition:.12s;color:var(--ink)
+  }
+  .cal-cell:hover{border-color:var(--accent-soft);background:#f5f8ff}
+  .cal-cell.muted{color:var(--line-strong);background:#fafbfe;font-weight:500}
+  .cal-cell.today{border-color:var(--accent);background:#eef3ff;box-shadow:0 0 0 1px var(--accent) inset}
+  .cal-cell.selected{background:#fdebef;border-color:var(--brand);box-shadow:0 0 0 1px var(--brand) inset}
+  .cal-cell.today.selected{box-shadow:0 0 0 1px var(--brand) inset}
+  .cal-cell .pip{position:absolute;bottom:6px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--brand-deep)}
+  /* coloured project-task dots (replace the old to-do pip) */
+  .cal-cell .tdots{
+    position:absolute;bottom:4px;left:0;right:0;display:flex;gap:3px;
+    justify-content:center;align-items:center;flex-wrap:wrap;padding:0 4px;pointer-events:none
+  }
+  .cal-cell .tdot{width:6px;height:6px;border-radius:50%;box-shadow:0 0 0 1px rgba(11,27,58,.06)}
+  .cal-cell .tmore{font-size:8.5px;font-weight:800;color:var(--ink-soft);line-height:1}
+
+  /* full-year view: 12 mini month grids showing every day */
+  .year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .mini-month{border:1px solid var(--line);border-radius:11px;background:#fff;padding:10px 10px 12px;transition:.12s}
+  .mini-month:hover{border-color:var(--accent-soft);box-shadow:0 4px 14px rgba(23,70,224,.08)}
+  .mini-title{font-size:12.5px;font-weight:700;margin:0 2px 7px;color:var(--ink);display:flex;align-items:center;gap:6px}
+  .mini-title.cur{color:var(--accent)}
+  .mini-dow-row,.mini-week{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+  .mini-dow{font-size:8.5px;font-weight:700;color:var(--ink-soft);text-align:center;padding-bottom:3px}
+  .mini-day{
+    font-size:10px;font-weight:600;aspect-ratio:1;display:grid;place-items:center;border-radius:5px;
+    color:var(--ink);position:relative;cursor:pointer;transition:.1s
+  }
+  .mini-day:hover{background:var(--paper-2)}
+  .mini-day.muted{color:var(--line-strong);font-weight:500}
+  .mini-day.today{background:var(--accent);color:#fff}
+  .mini-day.selected{outline:1.5px solid var(--brand);outline-offset:-1px}
+  .mini-day .mpip{position:absolute;bottom:1px;left:50%;transform:translateX(-50%);width:3px;height:3px;border-radius:50%;background:var(--brand-deep)}
+  .mini-day.today .mpip{background:#fff}
+  .mini-day .mtdots{position:absolute;bottom:0;left:0;right:0;display:flex;gap:1.5px;justify-content:center;align-items:center;pointer-events:none}
+  .mini-day .mtdot{width:3.5px;height:3.5px;border-radius:50%}
+
+  /* ===================== Modal ===================== */
+  .scrim{position:fixed;inset:0;background:rgba(40,32,20,.42);backdrop-filter:blur(2px);
+    display:none;align-items:center;justify-content:center;z-index:50;padding:20px}
+  .scrim.open{display:flex}
+  .modal{
+    width:540px;max-width:100%;max-height:90vh;overflow:auto;background:var(--card);
+    border-radius:14px;box-shadow:var(--shadow);border:1px solid var(--line-strong);
+    animation:pop .16s ease
+  }
+  @keyframes pop{from{transform:translateY(8px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+  .modal-head{display:flex;align-items:center;gap:10px;padding:15px 18px;border-bottom:1px solid var(--line)}
+  .modal-head h3{margin:0;font-size:17px}
+  .modal-head .modal-title-input{
+    flex:1;min-width:0;font:inherit;font-size:17px;font-weight:700;color:var(--ink);
+    border:1px solid transparent;background:transparent;border-radius:7px;padding:5px 9px;margin:-3px 0;transition:.13s
+  }
+  .modal-head .modal-title-input:hover{border-color:var(--line);background:#fff}
+  .modal-head .modal-title-input:focus{outline:none;border-color:var(--accent-soft);background:#fff;box-shadow:0 0 0 3px rgba(23,70,224,.14)}
+  .modal-head .modal-title-input::placeholder{color:var(--ink-soft);font-weight:600}
+  .modal-head .spacer{flex:1}
+  .modal-body{padding:16px 18px;display:flex;flex-direction:column;gap:14px}
+  /* two-panel task modal: existing fields left, per-task to-do right */
+  #taskScrim .modal{width:760px}
+  .modal-cols{display:flex;gap:18px;align-items:stretch;width:100%}
+  .modal-col{display:flex;flex-direction:column;gap:14px;min-width:0}
+  .modal-col.left{flex:1.25}
+  .modal-col.right{flex:1;border-left:1px solid var(--line);padding-left:18px}
+  .checklist-field{flex:1;display:flex;flex-direction:column;min-height:0}
+  .checklist{display:flex;flex-direction:column;gap:4px;overflow:auto;max-height:300px;flex:1;margin-bottom:4px}
+  .check-item{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:var(--r-sm);border:1px solid transparent}
+  .check-item:hover{background:#f6f9ff;border-color:var(--line)}
+  .check-item input[type=checkbox]{width:15px;height:15px;flex:none;accent-color:var(--accent);cursor:pointer;margin:0}
+  .check-item .ci-text{flex:1;min-width:0;font-size:14px;padding:2px 3px;border-radius:5px;word-break:break-word}
+  .check-item .ci-text:focus{outline:2px solid var(--accent-soft);background:#fff}
+  .check-item.done .ci-text{text-decoration:line-through;text-decoration-color:var(--done);color:var(--ink-soft)}
+  .check-rem{width:24px;height:24px;flex:none;border:1px solid transparent;background:transparent;color:var(--ink-soft);display:grid;place-items:center;border-radius:6px;opacity:0;transition:.12s}
+  .check-item:hover .check-rem,.check-item:focus-within .check-rem{opacity:1}
+  .check-rem:hover{background:#f3ddd8;color:var(--abandon)}
+  .check-rem svg{width:14px;height:14px}
+  .checklist-empty{color:var(--ink-soft);font-style:italic;font-size:13px;padding:10px 4px;text-align:center}
+  .checklist-add{display:flex;gap:8px;flex:none}
+  .checklist-add input{flex:1;min-width:0;padding:8px 11px;border:1px solid var(--line-strong);border-radius:var(--r-sm);font-family:inherit;font-size:14px;background:#fff;color:var(--ink)}
+  .checklist-add input:focus{outline:2px solid var(--accent-soft);outline-offset:-1px}
+  @media (max-width:700px){
+    #taskScrim .modal{width:540px}
+    .modal-cols{flex-direction:column}
+    .modal-col.right{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:14px}
+    .checklist{max-height:200px}
+  }
+  .field label{display:block;font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:5px;letter-spacing:.3px;text-transform:uppercase}
+  .field input[type=text],.field textarea{
+    width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:var(--r-sm);
+    font-family:inherit;font-size:14px;background:#fff;color:var(--ink);resize:vertical
+  }
+  .field input:focus,.field textarea:focus{outline:2px solid var(--accent-soft);outline-offset:-1px}
+  .field input[type=date],.field input[type=time]{
+    width:auto;padding:9px 11px;border:1px solid var(--line-strong);border-radius:var(--r-sm);
+    font-family:inherit;font-size:14px;background:#fff;color:var(--ink)
+  }
+  .field .time-toggle{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--ink);text-transform:none;letter-spacing:0;cursor:pointer}
+  .field .time-toggle input{width:15px;height:15px;accent-color:var(--accent);cursor:pointer}
+  .dt-row{display:flex;align-items:center;gap:10px}
+  .color-hint{font-size:12.5px;color:var(--ink-soft)}
+  .date-row{display:flex;gap:12px;align-items:flex-end}
+  .dc-col{display:flex;flex-direction:column;flex:1;min-width:0}
+  .dc-col label{margin-bottom:5px}
+  .dc-col input[type=date]{width:100%}
+  .dc-color{display:flex;flex-direction:column}
+  .dc-color label{margin-bottom:5px}
+  .circle-wrap{display:flex;align-items:center;gap:6px;height:38px}
+  .color-circle{
+    width:30px;height:30px;border-radius:50%;border:2px solid #fff;padding:0;cursor:pointer;
+    box-shadow:0 0 0 1px var(--line-strong),0 1px 3px rgba(11,27,58,.2);transition:.13s
+  }
+  .color-circle:hover{box-shadow:0 0 0 2px var(--accent-soft),0 1px 3px rgba(11,27,58,.2)}
+  .color-reset{
+    width:26px;height:26px;border-radius:7px;border:1px solid transparent;background:transparent;
+    color:var(--ink-soft);display:grid;place-items:center
+  }
+  .color-reset:hover{background:var(--paper-2);color:var(--ink)}
+  .color-reset svg{width:15px;height:15px}
+  .state-row{display:flex;gap:8px;flex-wrap:wrap}
+  .state-pick{
+    flex:1;min-width:120px;border:1px solid var(--line-strong);background:#fff;border-radius:var(--r-sm);
+    padding:10px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:7px;color:var(--ink-soft)
+  }
+  .state-pick svg{width:16px;height:16px}
+  .state-pick.sel.completed{background:var(--done);color:#fff;border-color:var(--done)}
+  .state-pick.sel.postponed{background:var(--postpone);color:#fff;border-color:var(--postpone)}
+  .state-pick.sel.abandoned{background:var(--abandon);color:#fff;border-color:var(--abandon)}
+  .conditional{display:none}
+  .conditional.show{display:block}
+  .modal-foot{display:flex;align-items:center;gap:10px;padding:14px 18px;border-top:1px solid var(--line)}
+  .modal-foot .spacer{flex:1}
+  .btn.danger{color:var(--abandon);border-color:#e0bcb4}
+  .btn.danger:hover{background:#f3ddd8}
+
+  .confirm .modal{width:400px}
+  .confirm p{margin:0;font-size:14.5px;line-height:1.5}
+  .confirm .warn{color:var(--abandon);font-weight:600}
+
+  /* history list */
+  .hist-day{margin-bottom:16px}
+  .hist-day h4{margin:0 0 7px;font-size:13px;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:4px}
+  .hist-item{display:flex;align-items:center;gap:9px;padding:4px 2px;font-size:14px}
+  .hist-item .tag{font-size:10px;font-weight:600;padding:1px 7px;border-radius:20px;flex:none}
+  .hist-item.completed .txt{text-decoration:line-through;text-decoration-color:var(--done);color:var(--ink-soft)}
+  .hist-item.postponed .txt{text-decoration:line-through;text-decoration-color:var(--postpone);color:var(--ink-soft)}
+  .hist-item.abandoned .txt{text-decoration:line-through;text-decoration-color:var(--abandon);color:var(--ink-soft)}
+  .tag.completed{background:#e3efe5;color:var(--done)}
+  .tag.postponed{background:#f6edd2;color:#9a7715}
+  .tag.abandoned{background:#f3ddd8;color:var(--abandon)}
+  .tag.open{background:var(--paper-2);color:var(--ink-soft)}
+
+  .toast{
+    position:fixed;bottom:18px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:var(--ink);color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;
+    box-shadow:var(--shadow);opacity:0;transition:.25s;z-index:80;pointer-events:none
+  }
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:880px){
+    .layout{grid-template-columns:1fr;grid-template-rows:auto auto auto;height:auto}
+    #projectPanel,#todoPanel,#calPanel{grid-column:1;grid-row:auto;min-height:340px}
+  }
+  /* ===================== Auth gate + Supabase additions ===================== */
+  .user-email{font-size:12px;color:#cdd9f0;font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .ro-pill{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:11.5px;font-weight:700;letter-spacing:.02em;
+    color:var(--brand-deep);background:#fdecef;border:1px solid #f3c7cf;
+    padding:4px 10px;border-radius:999px;white-space:nowrap;
+  }
+  .ro-pill svg{width:13px;height:13px}
+
+  .auth-gate{
+    position:fixed;inset:0;z-index:9999;
+    display:grid;place-items:center;padding:24px;
+    background:
+      radial-gradient(900px 600px at 85% -10%, #16306a 0%, transparent 55%),
+      radial-gradient(700px 600px at 0% 110%, #5a0f1c 0%, transparent 55%),
+      linear-gradient(160deg,var(--navy) 0%,#0a1530 100%);
+  }
+  .auth-card{
+    width:100%;max-width:380px;background:var(--card);
+    border:1px solid var(--line);border-radius:18px;
+    box-shadow:0 26px 70px rgba(5,12,30,.5);
+    padding:30px 28px 24px;
+  }
+  .auth-brand{display:flex;align-items:center;gap:13px;margin-bottom:22px}
+  .auth-mark{
+    width:46px;height:46px;border-radius:12px;flex:none;
+    display:grid;place-items:center;color:#fff;font-weight:800;font-size:18px;letter-spacing:.5px;
+    background:linear-gradient(150deg,var(--brand) 0%,var(--brand-deep) 100%);
+    box-shadow:0 6px 18px rgba(122,20,36,.4);
+  }
+  .auth-title{font-size:18px;font-weight:800;color:var(--ink);line-height:1.1}
+  .auth-sub{font-size:10.5px;font-weight:700;letter-spacing:1.4px;color:var(--ink-soft);margin-top:3px}
+  .auth-label{display:block;font-size:12px;font-weight:700;color:var(--ink-soft);margin:14px 0 6px}
+  .auth-input{
+    width:100%;font:inherit;font-size:14px;color:var(--ink);
+    padding:11px 13px;border:1px solid var(--line-strong);border-radius:10px;
+    background:#fbfcfe;outline:none;transition:border-color .15s,box-shadow .15s;
+  }
+  .auth-input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(155,28,46,.14)}
+  .auth-err{
+    margin-top:14px;font-size:13px;color:var(--brand-deep);
+    background:#fdecef;border:1px solid #f3c7cf;border-radius:9px;padding:9px 12px;
+  }
+  .auth-btn{
+    width:100%;margin-top:18px;font:inherit;font-size:14.5px;font-weight:700;color:#fff;
+    padding:12px 14px;border:none;border-radius:11px;cursor:pointer;
+    background:linear-gradient(150deg,var(--brand) 0%,var(--brand-deep) 100%);
+    box-shadow:0 8px 20px rgba(122,20,36,.32);transition:filter .15s,transform .05s;
+  }
+  .auth-btn:hover{filter:brightness(1.06)}
+  .auth-btn:active{transform:translateY(1px)}
+  .auth-btn:disabled{opacity:.65;cursor:default}
+  .auth-foot{margin-top:18px;font-size:11.5px;line-height:1.5;color:var(--ink-soft);text-align:center}
+
+  /* ===================== Top-right panel tabs ===================== */
+  .todo-tabs{display:inline-flex;border:1px solid var(--line-strong);border-radius:var(--r-sm);overflow:hidden;margin-right:4px}
+  .todo-tabs button{border:none;background:transparent;padding:6px 12px;font-size:12.5px;font-weight:700;color:var(--ink-soft);display:inline-flex;align-items:center;gap:6px}
+  .todo-tabs button svg{width:14px;height:14px}
+  .todo-tabs button.active{background:var(--accent);color:#fff}
+  .todo-tabs .pill{font-size:10px;font-weight:800;background:rgba(255,255,255,.25);border-radius:20px;padding:0 6px;min-width:16px;text-align:center}
+  .todo-tabs button:not(.active) .pill{background:var(--paper-2);color:var(--ink-soft)}
+
+  /* ===================== Assignee chips & picker (checklist items) ===================== */
+  .assignees{display:inline-flex;align-items:center;gap:3px;flex-wrap:wrap}
+  .ini-chip{
+    font-size:10px;font-weight:800;letter-spacing:.02em;color:#fff;background:var(--accent);
+    border-radius:20px;padding:2px 7px;line-height:1.4;white-space:nowrap;flex:none
+  }
+  .ini-chip.muted{background:var(--ink-soft)}
+  .ini-chip.mine{background:var(--brand)}
+  .assign-btn{
+    width:24px;height:24px;flex:none;border:1px dashed var(--line-strong);background:#fff;color:var(--ink-soft);
+    display:grid;place-items:center;border-radius:20px;font-size:13px;font-weight:800
+  }
+  .assign-btn:hover{border-color:var(--accent-soft);color:var(--accent)}
+  .assign-btn svg{width:13px;height:13px}
+  .check-item{flex-wrap:wrap}
+  .assign-editor{flex-basis:100%;width:100%;margin:6px 0 2px;padding:8px;border:1px solid var(--line);border-radius:9px;background:#fbfcfe}
+  .assign-editor .ae-empty{font-size:12.5px;color:var(--ink-soft);font-style:italic}
+  .assign-opt{display:flex;align-items:center;gap:8px;padding:4px 5px;border-radius:6px;font-size:13.5px}
+  .assign-opt:hover{background:#fff}
+  .assign-opt input{width:15px;height:15px;accent-color:var(--accent);cursor:pointer;margin:0;flex:none}
+  .assign-opt .ao-ini{font-size:10px;font-weight:800;color:#fff;background:var(--ink-soft);border-radius:20px;padding:2px 7px;flex:none}
+  .assign-opt .ao-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+  /* ===================== "Assigned to me" list ===================== */
+  .assigned-proj{margin-bottom:14px}
+  .assigned-proj h4{
+    margin:0 0 6px;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);
+    border-bottom:1px solid var(--line);padding-bottom:4px;display:flex;align-items:center;gap:7px
+  }
+  .assigned-item{display:flex;align-items:flex-start;gap:9px;padding:8px 9px;border-radius:var(--r-sm);border:1px solid transparent}
+  .assigned-item:hover{background:#f6f9ff;border-color:var(--line)}
+  .assigned-item.done .ai-text{text-decoration:line-through;text-decoration-color:var(--done);color:var(--ink-soft)}
+  .assigned-item input.ai-check{width:16px;height:16px;flex:none;margin-top:2px;accent-color:var(--accent);cursor:pointer}
+  .assigned-item .ai-main{flex:1;min-width:0}
+  .assigned-item .ai-text{font-size:14.5px;word-break:break-word}
+  .assigned-item .ai-path{font-size:11px;color:var(--ink-soft);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .assigned-item .ai-who{display:inline-flex;gap:3px;margin-top:4px;flex-wrap:wrap}
+  .assigned-item .ai-pull{
+    flex:none;border:1px solid var(--line-strong);background:#fff;color:var(--accent);font-weight:700;font-size:12px;
+    border-radius:var(--r-sm);padding:5px 9px;display:inline-flex;align-items:center;gap:5px;align-self:center
+  }
+  .assigned-item .ai-pull:hover{border-color:var(--accent-soft);box-shadow:0 2px 8px rgba(23,70,224,.12)}
+  .assigned-item .ai-pull.added{color:var(--done);border-color:#bfe6d6;background:#f0faf6}
+  .assigned-item .ai-pull svg{width:14px;height:14px}
+  .assigned-empty{color:var(--ink-soft);font-style:italic;text-align:center;padding:22px 10px;font-size:14px;line-height:1.5}
+
+  /* linked (pulled-in) personal to-do marker */
+  .todo-item .linked{font-size:10px;color:var(--accent);border:1px solid #cfdcff;background:#eef3ff;padding:1px 7px;border-radius:20px;font-weight:700;flex:none;display:inline-flex;align-items:center;gap:4px}
+  .todo-item .linked svg{width:11px;height:11px}
+
+  /* ===================== Members (people) & project-members modals ===================== */
+  .mem-row{display:flex;align-items:center;gap:10px;padding:9px 10px;margin-bottom:7px;border:1px solid var(--line);border-radius:9px;background:#fff}
+  .mem-row .mr-email{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12.5px;color:var(--ink-soft)}
+  .mem-row .mr-mgr{font-size:10px;font-weight:800;color:var(--brand-deep);background:#fdecef;border:1px solid #f3c7cf;border-radius:20px;padding:1px 8px;flex:none}
+  .mem-row input.mr-name{width:150px;flex:none;padding:7px 9px;border:1px solid var(--line-strong);border-radius:var(--r-sm);font-family:inherit;font-size:13.5px;background:#fff;color:var(--ink)}
+  .mem-row input.mr-ini{width:74px;flex:none;text-align:center;text-transform:uppercase;font-weight:800;letter-spacing:.04em;padding:7px 6px;border:1px solid var(--line-strong);border-radius:var(--r-sm);font-family:inherit;font-size:13.5px;background:#fff;color:var(--ink)}
+  .mem-row input.mr-ini.dupe{border-color:var(--abandon);background:#fdebef}
+  .mem-hint{font-size:12.5px;color:var(--ink-soft);margin:2px 0 12px;line-height:1.5}
+
+  .picker-filter{width:100%;padding:9px 11px;border:1px solid var(--line-strong);border-radius:var(--r-sm);font-family:inherit;font-size:14px;background:#fff;color:var(--ink);margin-bottom:8px}
+  .picker-filter:focus{outline:2px solid var(--accent-soft);outline-offset:-1px}
+  .picker-list{display:flex;flex-direction:column;gap:2px;max-height:46vh;overflow:auto;border:1px solid var(--line);border-radius:9px;padding:6px}
+  .picker-opt{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:7px;cursor:pointer}
+  .picker-opt:hover{background:#f6f9ff}
+  .picker-opt input{width:16px;height:16px;accent-color:var(--accent);cursor:pointer;flex:none;margin:0}
+  .picker-opt .po-ini{font-size:10px;font-weight:800;color:#fff;background:var(--accent);border-radius:20px;padding:2px 8px;flex:none}
+  .picker-opt .po-name{font-weight:600;font-size:14px}
+  .picker-opt .po-email{font-size:12px;color:var(--ink-soft)}
+  .picker-opt .po-col{min-width:0;display:flex;flex-direction:column;line-height:1.25;overflow:hidden}
+  .picker-opt .po-col *{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .picker-empty{font-size:13.5px;color:var(--ink-soft);font-style:italic;padding:12px;text-align:center}
+  .proj-row .pr-members{flex:none;font-size:12px;color:var(--ink-soft)}
+
+  /* ===================== Guide / Start-here page ===================== */
+  .guide{max-width:720px;margin:0 auto;padding:6px 6px 24px}
+  .guide-bar{display:flex;align-items:center;margin-bottom:14px}
+  .guide-bar .spacer{flex:1}
+  .guide h1.g-h1{font-size:22px;margin:18px 0 8px;color:var(--ink)}
+  .guide h2.g-h2{font-size:17px;margin:18px 0 6px;color:var(--accent)}
+  .guide p.g-p{font-size:14.5px;line-height:1.6;margin:0 0 10px;color:var(--ink)}
+  .guide li.g-li{font-size:14.5px;line-height:1.55;margin:0 0 5px 4px;color:var(--ink);list-style:none;display:flex;gap:8px}
+  .guide li.g-li::before{content:"›";color:var(--accent);font-weight:800;flex:none}
+  .guide .g-edit textarea{
+    width:100%;min-height:50vh;padding:13px 15px;border:1px solid var(--line-strong);border-radius:11px;
+    font-family:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;line-height:1.55;
+    background:#fbfcfe;color:var(--ink);resize:vertical
+  }
+  .guide .g-edit textarea:focus{outline:2px solid var(--accent-soft);outline-offset:-1px}
+  .guide .g-edit-foot{display:flex;gap:8px;align-items:center;margin-top:10px}
+  .guide .g-edit-hint{font-size:12px;color:var(--ink-soft);flex:1}
+
+  /* abandoned checklist item (red cross-out) — in the task modal */
+  .check-item.abandoned .ci-text{text-decoration:line-through;text-decoration-color:var(--abandon);text-decoration-thickness:2px;color:var(--abandon)}
+  /* abandoned item in the "Assigned to me" list */
+  .assigned-item.abandoned .ai-text{text-decoration:line-through;text-decoration-color:var(--abandon);text-decoration-thickness:2px;color:var(--abandon)}
+
+  /* read-only notepad balloon launched from a tree row */
+  .note-balloon{
+    position:fixed;z-index:90;width:300px;max-width:86vw;max-height:60vh;overflow:auto;
+    background:var(--card);border:1px solid var(--line-strong);border-radius:12px;
+    box-shadow:var(--shadow);padding:13px 15px;animation:pop .14s ease
+  }
+  .note-balloon .nb-title{font-weight:700;font-size:14.5px;margin-bottom:8px;color:var(--ink)}
+  .note-balloon .nb-sec{margin-top:11px}
+  .note-balloon .nb-sec:first-of-type{margin-top:0}
+  .note-balloon .nb-h{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+  .note-balloon .nb-body{font-size:13.5px;line-height:1.5;color:var(--ink);word-break:break-word}
+  .note-balloon .nb-empty{color:var(--ink-soft);font-style:italic}
+</style>
+</head>
+<body>
+  <!-- topbar / panels / modals injected below -->
+  <div id="root" style="display:none"></div>
+
+  <!-- LOGIN GATE: shown until the user signs in -->
+  <div id="authGate" class="auth-gate" style="display:none">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <div class="auth-mark">XI</div>
+        <div>
+          <div class="auth-title">Project Dashboard</div>
+          <div class="auth-sub">XTENT INNOVATIONS</div>
+        </div>
+      </div>
+      <label class="auth-label" for="authEmail">Email</label>
+      <input id="authEmail" class="auth-input" type="email" autocomplete="username" placeholder="you@xtent-innovations.com">
+      <label class="auth-label" for="authPass">Password</label>
+      <input id="authPass" class="auth-input" type="password" autocomplete="current-password" placeholder="••••••••">
+      <div id="authErr" class="auth-err" style="display:none"></div>
+      <button id="authBtn" class="auth-btn">Sign in</button>
+      <div class="auth-foot">Accounts are created by your manager. Trouble signing in? Ask a manager to reset your password.</div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+<!-- Supabase JS client (v2). Loads before the app script so window.supabase exists. -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* ============================================================
+   Project Dashboard (Xtent Innovations) — single-file app logic
+   Data lives in Supabase (Postgres + Auth + Row-Level Security):
+     • projects  → one row per project (task tree + calendar in `data` jsonb)
+     • user_todos→ one row per user  (personal to-do map in `data` jsonb)
+   Access is login-gated; project management is role-gated (manager vs member)
+   and enforced server-side by RLS as well as in this UI.
+   ============================================================ */
+(function(){
+"use strict";
+
+/* ============================================================
+   ⚙️  SUPABASE CONFIG  —  FILL THESE TWO IN  ⚙️
+   From Supabase dashboard → Settings → API Keys.
+   Use the PUBLISHABLE key (sb_publishable_…). NEVER the secret key.
+   ============================================================ */
+const SUPABASE_URL             = "https://jhusmaritcsluoxljamf.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_SHxNDw5MFd9hcpGJb44z5Q_gzfDUwTX";
+
+/* ------------------------------------------------------------
+   PRODUCT DECISION — who may edit a project's CONTENTS (task tree + calendar)?
+   This deployment: EVERY signed-in engineer may edit the contents of EVERY
+   project. Creating, renaming and archiving projects stays restricted to the
+   manager (the CEO) — enforced in this UI AND in the database (the
+   projects_insert policy + the projects_meta_guard trigger; see the SQL steps).
+   If you ever want to make contents manager-only again, set this to false.
+   ------------------------------------------------------------ */
+const MEMBERS_CAN_EDIT_PROJECTS = true;
+
+/* The Supabase client. createClient comes from the CDN script (window.supabase). */
+const sb = (window.supabase && SUPABASE_URL.indexOf("http")===0)
+  ? window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+  : null;
+
+/* Session-scoped globals, populated after login. */
+let currentUser  = null;      // the signed-in Supabase auth user
+let currentRole  = 'member';  // 'member' | 'manager', read from profiles
+let dbProjectIds = new Set();  // ids of projects that actually exist as DB rows
+
+/* People & membership (loaded after login):
+   memberMap      : userId -> { id, email, full_name, initials, role }   (everyone in the company)
+   allProfiles    : array of the same, for the manager's pickers
+   projectMembers : projectId -> [ userId, ... ]   (who is assigned to each project the user can see) */
+let memberMap = {};
+let allProfiles = [];
+let projectMembers = {};
+
+/* The built-in, read-only "Start here / Guide" page. It is NOT a real project row —
+   it is always available to everyone and is the default landing page when a person has
+   no projects assigned. Its text is editable by the manager and stored in app_content. */
+const GUIDE_ID = '__guide__';
+let guideText = '';                 // raw guide text (simple markdown-ish), editable by the manager
+let guideEditing = false;
+
+/* Which tab the top-right panel shows: 'personal' (calendar-linked to-dos) or
+   'assigned' (the checklist items assigned to me across all my projects). */
+let activeTab = 'personal';
+
+function isGuideActive(){ return state.activeProjectId === GUIDE_ID; }
+function myId(){ return currentUser ? currentUser.id : null; }
+function profileOf(uid){ return memberMap[uid] || null; }
+function initialsOf(uid){
+  const p = memberMap[uid];
+  if(p && p.initials) return p.initials;
+  if(p && p.email) return p.email.slice(0,3).toUpperCase();
+  return '??';
+}
+function nameOf(uid){
+  const p = memberMap[uid];
+  if(p && p.full_name) return p.full_name;
+  if(p && p.email) return p.email;
+  return 'Unknown';
+}
+function projectMemberIds(pid){ return Array.isArray(projectMembers[pid]) ? projectMembers[pid] : []; }
+function isProjectMember(pid, uid){ return projectMemberIds(pid).indexOf(uid) >= 0; }
+
+/* ---------- inline SVG icons (Feather-style, stroke based) ---------- */
+const I = {
+  book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  save:'<path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>',
+  folder:'<path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>',
+  download:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>',
+  upload:'<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>',
+  plus:'<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+  subPlus:'<polyline points="9 10 4 15 9 20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/>', /* corner-down-left-ish for subheading */
+  chevron:'<polyline points="6 9 12 15 18 9"/>',
+  grip:'<circle cx="9" cy="6" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="18" r="1"/><circle cx="15" cy="6" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="18" r="1"/>',
+  gear:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>',
+  check:'<polyline points="20 6 9 17 4 12"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  ban:'<circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>',
+  trash:'<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  x:'<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+  list:'<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>',
+  calendar:'<rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  chevL:'<polyline points="15 18 9 12 15 6"/>',
+  chevR:'<polyline points="9 18 15 12 9 6"/>',
+  history:'<path d="M3 3v5h5"/><path d="M3.05 13A9 9 0 1 0 6 5.3L3 8"/><polyline points="12 7 12 12 15 15"/>',
+  edit:'<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>',
+  layers:'<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+  archive:'<polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/><line x1="10" y1="12" x2="14" y2="12"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  notepad:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>'
+};
+function svg(name,cls){
+  return '<svg class="'+(cls||'')+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" '+
+         'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+I[name]+'</svg>';
+}
+
+/* ---------- date helpers ---------- */
+const pad = n => String(n).padStart(2,'0');
+function ymd(d){ return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function todayKey(){ return ymd(new Date()); }
+function addDaysKey(key,n){
+  const [y,m,d]=key.split('-').map(Number);
+  const dt=new Date(y,m-1,d); dt.setDate(dt.getDate()+n); return ymd(dt);
+}
+function prettyDate(key){
+  const [y,m,d]=key.split('-').map(Number);
+  return new Date(y,m-1,d).toLocaleDateString(undefined,
+    {weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+const uid = ()=> Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+
+/* ---------- application state ---------- */
+let state = {
+  version:1,
+  /* Each project is its own tab: { id, name, tree:[nodes], calendarSelection:{nodeId:true} }.
+     The to-do list (state.todos) is intentionally OUTSIDE projects — it is per-person
+     and stays the same while switching project tabs. */
+  projects:[],             // [ {id, name, tree:[...], calendarSelection:{...}} ]
+  activeProjectId:null,    // id of the project currently shown in the left panel + calendar
+  todos:{},                // { 'YYYY-MM-DD': [ {id,text,state,carriedFrom,note} ] }  (per-employee)
+  lastOpened:null          // last app-open date key, for postponed roll-forward
+};
+let saveTimer = null;
+
+/* default task object for a tree node */
+function newTask(){ return {state:'open', details:'', notes:'', completionNote:'', reason:'', startDate:'', endDate:'', startTime:'', endTime:''}; }
+
+/* ---------- projects (tabs) ----------
+   Normalises state.projects, migrating the old single-tree format, and guarantees
+   there is always at least one project and a valid activeProjectId. */
+function ensureProjects(){
+  // migrate the legacy single-tree format (projectTree / calendarSelection at top level)
+  if((!Array.isArray(state.projects) || state.projects.length===0) &&
+     Array.isArray(state.projectTree) && state.projectTree.length){
+    state.projects=[{
+      id: uid(), name:'Project 1',
+      tree: state.projectTree,
+      calendarSelection:(state.calendarSelection && typeof state.calendarSelection==='object') ? state.calendarSelection : {}
+    }];
+  }
+  if(!Array.isArray(state.projects)) state.projects=[];
+  delete state.projectTree; delete state.calendarSelection;   // drop legacy keys
+  // Local/demo mode only (no Supabase): keep a starter project so the file works offline.
+  if(!state.projects.length && !sb){
+    state.projects.push({id:uid(), name:'Project 1', tree:[], calendarSelection:{}});
+  }
+  state.projects.forEach(p=>{
+    if(!p.id) p.id=uid();
+    if(typeof p.name!=='string' || !p.name.trim()) p.name='Untitled project';
+    if(!Array.isArray(p.tree)) p.tree=[];
+    if(!p.calendarSelection || typeof p.calendarSelection!=='object') p.calendarSelection={};
+    p.archived = !!p.archived;
+  });
+  // The built-in guide page is always a valid place to be.
+  if(isGuideActive()) return;
+  const actives = state.projects.filter(p=>!p.archived);
+  if(!actives.length){
+    // Nothing to show (e.g. a teammate not yet assigned to any project) → land on the guide.
+    state.activeProjectId = GUIDE_ID;
+    return;
+  }
+  // the active project must exist AND be non-archived
+  if(!state.activeProjectId || !actives.some(p=>p.id===state.activeProjectId)){
+    state.activeProjectId = actives[0].id;
+  }
+}
+function guideProject(){ return {id:GUIDE_ID, name:'Start here / Guide', tree:[], calendarSelection:{}, archived:false, _guide:true}; }
+function activeProject(){
+  ensureProjects();
+  if(isGuideActive()) return guideProject();
+  return state.projects.find(p=>p.id===state.activeProjectId)
+      || state.projects.find(p=>!p.archived)
+      || guideProject();
+}
+function activeTree(){ return activeProject().tree; }                 // the tree the UI currently edits
+function activeCalSel(){ return activeProject().calendarSelection; }  // calendar selection for the active project
+
+/* Who may add / archive / rename projects — managers only.
+   Backed by profiles.role and ALSO enforced server-side by Supabase RLS. */
+function canManageProjects(){ return currentRole === 'manager'; }
+
+/* Who may edit a project's CONTENTS (task tree + calendar).
+   Managers always can; members only if MEMBERS_CAN_EDIT_PROJECTS is on
+   (and the matching RLS policies have been relaxed — see the SQL). */
+function canEditProjects(){ return !isGuideActive() && (canManageProjects() || MEMBERS_CAN_EDIT_PROJECTS); }
+
+/* Gate for tree/calendar mutations. Returns false (and nudges the user) when read-only. */
+function requireProjectEdit(){
+  if(canEditProjects()) return true;
+  toast('View only — projects are managed by a manager.');
+  return false;
+}
+
+/* Show/hide role-dependent controls after we know the signed-in user's role. */
+function reflectPermissions(){
+  const bP=document.getElementById('btnProjects');
+  if(bP) bP.style.display = canManageProjects() ? '' : 'none';
+  const bPeople=document.getElementById('btnPeople');
+  if(bPeople) bPeople.style.display = canManageProjects() ? '' : 'none';
+  const bAdd=document.getElementById('btnAddRoot');
+  if(bAdd) bAdd.style.display = canEditProjects() ? '' : 'none';
+  const ro=document.getElementById('roBanner');
+  if(ro) ro.style.display = (!isGuideActive() && !canEditProjects()) ? '' : 'none';
+}
+
+/* ============================================================
+   SUPABASE DATA LAYER  (replaces the old local file / localStorage layer)
+   ============================================================ */
+
+/* remove transient underscore-prefixed keys (e.g. _color, _autoHex) before saving */
+function strip(obj){
+  return JSON.parse(JSON.stringify(obj, (k,v)=> k.startsWith('_')? undefined : v));
+}
+
+/* a projects-table row → the in-memory project shape the UI expects */
+function rowToProject(r){
+  const d = (r.data && typeof r.data==='object') ? r.data : {};
+  return {
+    id: r.id,
+    name: r.name || 'Untitled project',
+    archived: !!r.archived,
+    tree: Array.isArray(d.tree) ? d.tree : [],
+    calendarSelection: (d.calendarSelection && typeof d.calendarSelection==='object') ? d.calendarSelection : {}
+  };
+}
+
+/* ---------- save (debounced) ----------
+   Every edit in the app already calls scheduleSave(); here that becomes a
+   debounced push to Supabase: the user's to-do row + (if changed) the active
+   project's CONTENTS. Manager-only actions (rename / archive / restore) save the
+   project's name/archived separately. */
+function scheduleSave(){
+  clearTimeout(saveTimer);
+  setSyncStatus('Saving…');
+  saveTimer = setTimeout(pushNow, 1200);
+}
+async function pushNow(){
+  if(!sb || !currentUser) return;
+  await supaSaveTodos();
+  if(canEditProjects()){
+    const p = activeProject();
+    if(p && dbProjectIds.has(p.id)) await supaSaveProjectData(p);
+  }
+  flashSaved();
+}
+
+/* Remember the last contents we saved per project, so a to-do-only edit (or a
+   project switch) doesn't needlessly re-write the tree and clobber a teammate's
+   concurrent edit. Each project's tree is one document, so true simultaneous
+   edits to the SAME project are still last-write-wins. */
+let lastProjData = {};
+function projDataJSON(p){ return JSON.stringify(strip({ tree:p.tree, calendarSelection:p.calendarSelection })); }
+function rememberProjData(p){ if(p) lastProjData[p.id] = projDataJSON(p); }
+
+/* Save a project's CONTENTS (the `data` column only). Allowed for anyone who
+   may edit projects — this never touches name/archived, so it can't rename or
+   archive, and won't trip the database guard. */
+async function supaSaveProjectData(p){
+  if(!sb || !p || !dbProjectIds.has(p.id)) return;
+  if(!canEditProjectId(p.id)) return;
+  const json = projDataJSON(p);
+  if(lastProjData[p.id] === json) return;            // nothing actually changed
+  const { error } = await sb.from('projects').update({ data: JSON.parse(json) }).eq('id', p.id);
+  if(error){ toast('Project save failed: '+error.message); setSyncStatus('Save error'); }
+  else lastProjData[p.id] = json;
+}
+
+/* Save a project's NAME / ARCHIVED flag — manager-only (create/archive/rename).
+   The database enforces this too, via the projects_meta_guard trigger. */
+async function supaSaveProjectMeta(p){
+  if(!sb || !p || !dbProjectIds.has(p.id)) return;
+  if(!canManageProjects()) return;
+  const { error } = await sb.from('projects')
+    .update({ name: p.name, archived: !!p.archived })
+    .eq('id', p.id);
+  if(error){ toast('Project update failed: '+error.message); setSyncStatus('Save error'); }
+}
+
+/* Save THIS user's to-do row. Keeps the _rolled/_origin markers so postponed
+   items aren't rolled forward again after a reload on another device. */
+async function supaSaveTodos(){
+  if(!sb || !currentUser) return;
+  const { error } = await sb.from('user_todos')
+    .upsert({ user_id: currentUser.id, data: state.todos }, { onConflict:'user_id' });
+  if(error){ toast('To-do save failed: '+error.message); setSyncStatus('Save error'); }
+}
+
+/* Insert a new project row; returns the in-memory project (with its DB UUID). */
+async function supaInsertProject(name){
+  if(!sb) return null;
+  const { data, error } = await sb.from('projects')
+    .insert({ name: (name||'').trim() || 'Untitled project' })
+    .select('id,name,archived,data').single();
+  if(error){ toast('Could not add project: '+error.message); return null; }
+  const p = rowToProject(data);
+  state.projects.push(p);
+  dbProjectIds.add(p.id);
+  rememberProjData(p);
+  state.activeProjectId = p.id;
+  return p;
+}
+
+/* ============================================================
+   PEOPLE DIRECTORY, PROJECT MEMBERSHIP & GUIDE (data layer)
+   ============================================================ */
+
+/* A project's contents may be edited by its members (everyone who can SEE it is a
+   member, because the database only hands a project to its members or a manager).
+   The guide page is never editable as a tree. */
+function canEditProjectId(pid){
+  if(pid===GUIDE_ID) return false;
+  if(canManageProjects()) return true;
+  return dbProjectIds.has(pid);   // visible ⇒ I'm a member ⇒ I may edit its contents
+}
+
+/* Save one project's contents by id (used by the "Assigned to me" tab, which can touch
+   a project other than the one open on the left). */
+async function saveProjectById(pid){
+  const p = state.projects.find(x=>x.id===pid);
+  if(p){ await supaSaveProjectData(p); rememberProjData(p); flashSaved(); }
+}
+
+/* Locate a checklist item anywhere in a project tree. */
+function findCheckItem(projectId, nodeId, checkId){
+  const p = state.projects.find(x=>x.id===projectId);
+  if(!p) return null;
+  let found=null;
+  (function walk(list){
+    for(const n of (list||[])){
+      if(found) return;
+      if(n.id===nodeId && Array.isArray(n.checklist)){
+        const c=n.checklist.find(x=>x.id===checkId);
+        if(c){ found={project:p, node:n, item:c}; return; }
+      }
+      walk(n.children);
+    }
+  })(p.tree);
+  return found;
+}
+
+/* Load the company people directory + per-project membership. */
+async function loadPeople(){
+  memberMap = {}; allProfiles = []; projectMembers = {};
+  try{
+    const { data, error } = await sb.from('profiles').select('id,email,full_name,initials,role');
+    if(error) throw error;
+    allProfiles = (data||[]).slice().sort((a,b)=>
+      ((a.full_name||a.email||'')+'').toLowerCase().localeCompare(((b.full_name||b.email||'')+'').toLowerCase()));
+    allProfiles.forEach(p=>{ memberMap[p.id]=p; });
+  }catch(e){ /* directory is best-effort; initials fall back to the email */ }
+  try{
+    const { data, error } = await sb.from('project_members').select('project_id,user_id');
+    if(error) throw error;
+    (data||[]).forEach(r=>{ (projectMembers[r.project_id]||(projectMembers[r.project_id]=[])).push(r.user_id); });
+  }catch(e){ /* membership is best-effort */ }
+}
+
+/* Manager: save a person's full name + initials. */
+async function supaSetProfile(id, full_name, initials){
+  if(!sb) return false;
+  const { error } = await sb.from('profiles').update({ full_name:full_name, initials:initials }).eq('id', id);
+  if(error){ toast('Could not save member: '+error.message); return false; }
+  if(memberMap[id]){ memberMap[id].full_name=full_name; memberMap[id].initials=initials; }
+  return true;
+}
+
+/* Manager: set exactly who belongs to a project (adds + removes the difference). */
+async function supaSetProjectMembers(projectId, desiredIds){
+  if(!sb) return;
+  const current = projectMemberIds(projectId);
+  const toAdd = desiredIds.filter(u=>current.indexOf(u)<0);
+  const toRemove = current.filter(u=>desiredIds.indexOf(u)<0);
+  try{
+    if(toAdd.length){
+      const { error } = await sb.from('project_members').insert(toAdd.map(u=>({project_id:projectId, user_id:u})));
+      if(error) throw error;
+    }
+    for(const u of toRemove){
+      const { error } = await sb.from('project_members').delete().eq('project_id',projectId).eq('user_id',u);
+      if(error) throw error;
+    }
+    projectMembers[projectId] = desiredIds.slice();
+  }catch(e){ toast('Could not update members: '+(e.message||e)); }
+}
+
+/* ---------- the guide / start-here page text ---------- */
+const DEFAULT_GUIDE =
+`# Welcome to the Xtent project dashboard
+
+This is your starting point. Pick a project from the dropdown at the top-left to open its
+task tree, or read on for how everything works.
+
+## The project tree (left panel)
+- A project is made of headings and sub-headings — a tree you build yourself.
+- Use "Add heading" for a top-level item, and the small icons on each row to add a
+  sub-heading under it or to open its task details.
+- Open a task (the gear icon) to set dates, a colour, a status, and a checklist of
+  to-do items. Tick the little calendar box on a row to show that task's dates on the
+  calendar below.
+
+## Checklists & who does what
+- Inside a task you can add checklist items (for example: 3D modelling, 3D printing,
+  review, revision).
+- Each checklist item can be assigned to one or more people. Whoever creates the item is
+  added automatically; tick more names to share the work.
+
+## Your personal space (top-right panel)
+- "Personal" is your own daily to-do list, linked to the calendar. Only you can see it.
+- "Assigned to me" gathers every checklist item assigned to you across all your projects.
+  Use the « button on any item to pull it into your personal list for the day so you can
+  focus on what matters today.
+
+## Need access to a project you can't see?
+Projects are private to the people assigned to them. If you need to join one, ask your
+manager to add you.`;
+
+async function loadGuide(){
+  guideText = DEFAULT_GUIDE;
+  try{
+    const { data } = await sb.from('app_content').select('data').eq('key','guide').maybeSingle();
+    if(data && data.data && typeof data.data.text==='string' && data.data.text.trim()) guideText = data.data.text;
+  }catch(e){ /* fall back to the built-in default */ }
+}
+async function saveGuide(text){
+  guideText = text;
+  if(!sb) return;
+  const { error } = await sb.from('app_content')
+    .upsert({ key:'guide', data:{ text:text }, updated_at:new Date().toISOString() }, { onConflict:'key' });
+  if(error) toast('Could not save the guide: '+error.message);
+  else toast('Guide saved.');
+}
+
+/* ============================================================
+   GUIDE PAGE (rendered in the left panel)
+   ============================================================ */
+function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* very small, safe formatter: "# " → H1, "## " → H2, "- " → bullet, blank line → new paragraph */
+function guideToHtml(text){
+  const lines=(text||'').split(/\r?\n/);
+  let html=''; let para=[]; let inList=false;
+  const flushPara=()=>{ if(para.length){ html+='<p class="g-p">'+para.join(' ')+'</p>'; para=[]; } };
+  const flushList=()=>{ if(inList){ html+='</ul>'; inList=false; } };
+  lines.forEach(raw=>{
+    const line=raw.trim();
+    if(line===''){ flushPara(); flushList(); return; }
+    if(line.indexOf('## ')===0){ flushPara(); flushList(); html+='<h2 class="g-h2">'+escapeHtml(line.slice(3))+'</h2>'; return; }
+    if(line.indexOf('# ')===0){ flushPara(); flushList(); html+='<h1 class="g-h1">'+escapeHtml(line.slice(2))+'</h1>'; return; }
+    if(line.indexOf('- ')===0){ flushPara(); if(!inList){ html+='<ul style="margin:0 0 10px;padding:0">'; inList=true; } html+='<li class="g-li">'+escapeHtml(line.slice(2))+'</li>'; return; }
+    para.push(escapeHtml(line));
+  });
+  flushPara(); flushList();
+  return html || '<p class="g-p">No guide text yet.</p>';
+}
+
+function renderGuide(){
+  const wrap=document.createElement('div'); wrap.className='guide';
+  const bar=document.createElement('div'); bar.className='guide-bar';
+  bar.innerHTML='<div class="spacer"></div>';
+  if(canManageProjects() && !guideEditing){
+    const eb=document.createElement('button'); eb.className='btn'; eb.innerHTML=svg('edit')+'Edit guide';
+    eb.onclick=()=>{ guideEditing=true; renderTree(); };
+    bar.appendChild(eb);
+  }
+  wrap.appendChild(bar);
+
+  if(guideEditing){
+    const ed=document.createElement('div'); ed.className='g-edit';
+    const ta=document.createElement('textarea'); ta.value=guideText; ta.spellcheck=false;
+    ed.appendChild(ta);
+    const foot=document.createElement('div'); foot.className='g-edit-foot';
+    const hint=document.createElement('div'); hint.className='g-edit-hint';
+    hint.textContent='Tip: start a line with "# " for a big heading, "## " for a smaller one, and "- " for a bullet.';
+    const cancel=document.createElement('button'); cancel.className='btn'; cancel.textContent='Cancel';
+    cancel.onclick=()=>{ guideEditing=false; renderTree(); };
+    const save=document.createElement('button'); save.className='btn primary'; save.innerHTML=svg('check')+'Save guide';
+    save.onclick=async()=>{ await saveGuide(ta.value); guideEditing=false; renderTree(); };
+    foot.appendChild(hint); foot.appendChild(cancel); foot.appendChild(save);
+    ed.appendChild(foot);
+    wrap.appendChild(ed);
+  }else{
+    const body=document.createElement('div');
+    body.innerHTML=guideToHtml(guideText);
+    wrap.appendChild(body);
+  }
+  projContainer.innerHTML='';
+  projContainer.appendChild(wrap);
+}
+
+/* ============================================================
+   PEOPLE MODAL (manager: set each person's name + initials)
+   ============================================================ */
+function genInitials(fullName, takenSet){
+  const words=(fullName||'').trim().split(/\s+/).filter(Boolean);
+  let base='';
+  if(words.length>=2) base=words.slice(0,3).map(w=>w[0]).join('');
+  else if(words.length===1) base=words[0].slice(0,3);
+  base=base.toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(!base) return '';
+  let out=base, n=2;
+  while(takenSet && takenSet.has(out)){ out=base+n; n++; }   // "AKP" taken → "AKP2", "AKP3"…
+  return out;
+}
+function openMembersModal(){
+  if(!canManageProjects()){ toast('Only a manager can manage members.'); return; }
+  renderMembersModal();
+  document.getElementById('memScrim').classList.add('open');
+}
+function closeMembersModal(){ document.getElementById('memScrim').classList.remove('open'); }
+function renderMembersModal(){
+  const box=document.getElementById('memBody'); if(!box) return;
+  box.innerHTML='';
+  if(!allProfiles.length){
+    box.innerHTML='<div class="pm-empty">No people found. Create logins in Supabase → Authentication → Users, then refresh.</div>';
+    return;
+  }
+  // recompute duplicate flags live
+  const refreshDupes=()=>{
+    const counts={};
+    box.querySelectorAll('input.mr-ini').forEach(i=>{ const v=i.value.trim().toUpperCase(); if(v) counts[v]=(counts[v]||0)+1; });
+    box.querySelectorAll('input.mr-ini').forEach(i=>{ const v=i.value.trim().toUpperCase(); i.classList.toggle('dupe', !!v && counts[v]>1); });
+  };
+  allProfiles.forEach(p=>{
+    const row=document.createElement('div'); row.className='mem-row';
+    const nameI=document.createElement('input'); nameI.className='mr-name'; nameI.type='text';
+    nameI.placeholder='Full name'; nameI.value=p.full_name||'';
+    const iniI=document.createElement('input'); iniI.className='mr-ini'; iniI.type='text'; iniI.maxLength=4;
+    iniI.placeholder='INI'; iniI.value=p.initials||'';
+    let iniTouched = !!(p.initials);
+    nameI.addEventListener('input',()=>{
+      if(!iniTouched){
+        const taken=new Set(allProfiles.filter(o=>o.id!==p.id).map(o=>(memberMap[o.id]&&memberMap[o.id].initials||'').toUpperCase()).filter(Boolean));
+        iniI.value=genInitials(nameI.value, taken);
+        refreshDupes();
+      }
+    });
+    iniI.addEventListener('input',()=>{ iniTouched=true; iniI.value=iniI.value.toUpperCase(); refreshDupes(); });
+
+    const email=document.createElement('div'); email.className='mr-email'; email.textContent=p.email||''; email.title=p.email||'';
+
+    const save=document.createElement('button'); save.className='btn primary'; save.textContent='Save'; save.style.flex='none';
+    save.onclick=async()=>{
+      const nm=nameI.value.trim();
+      const ini=(iniI.value.trim().toUpperCase())||genInitials(nm)||'';
+      iniI.value=ini;
+      save.disabled=true; save.textContent='…';
+      const ok=await supaSetProfile(p.id, nm, ini);
+      save.disabled=false; save.textContent='Save';
+      if(ok){ p.full_name=nm; p.initials=ini; toast('Saved '+(nm||p.email)+'.'); renderAll(); }
+    };
+
+    row.appendChild(nameI); row.appendChild(iniI); row.appendChild(email);
+    if(p.role==='manager'){ const m=document.createElement('span'); m.className='mr-mgr'; m.textContent='manager'; row.appendChild(m); }
+    row.appendChild(save);
+    box.appendChild(row);
+  });
+  refreshDupes();
+}
+
+/* ============================================================
+   PROJECT-MEMBERS MODAL (manager: who is on this project)
+   ============================================================ */
+let pmTargetProject=null;
+let pmSelected=new Set();
+function openProjMembers(projectId){
+  if(!canManageProjects()){ toast('Only a manager can assign project members.'); return; }
+  pmTargetProject=projectId;
+  pmSelected=new Set(projectMemberIds(projectId));
+  const p=state.projects.find(x=>x.id===projectId);
+  document.getElementById('pmemTitle').textContent='Members of “'+((p&&p.name)||'project')+'”';
+  const f=document.getElementById('pmemFilter'); if(f) f.value='';
+  renderProjMembers('');
+  document.getElementById('pmemScrim').classList.add('open');
+}
+function closeProjMembers(){ document.getElementById('pmemScrim').classList.remove('open'); pmTargetProject=null; }
+function renderProjMembers(filter){
+  const list=document.getElementById('pmemList'); if(!list) return;
+  list.innerHTML='';
+  const q=(filter||'').trim().toLowerCase();
+  const matches=allProfiles.filter(p=>{
+    if(!q) return true;
+    return ((p.full_name||'').toLowerCase().indexOf(q)>=0) ||
+           ((p.email||'').toLowerCase().indexOf(q)>=0) ||
+           ((p.initials||'').toLowerCase().indexOf(q)>=0);
+  });
+  if(!matches.length){ list.innerHTML='<div class="picker-empty">No people match “'+escapeHtml(filter)+'”.</div>'; return; }
+  matches.forEach(p=>{
+    const lab=document.createElement('label'); lab.className='picker-opt';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=pmSelected.has(p.id);
+    cb.onchange=()=>{ if(cb.checked) pmSelected.add(p.id); else pmSelected.delete(p.id); };
+    const ini=document.createElement('span'); ini.className='po-ini'; ini.textContent=p.initials||(p.email||'').slice(0,3).toUpperCase();
+    const col=document.createElement('span'); col.className='po-col';
+    const nm=document.createElement('span'); nm.className='po-name'; nm.textContent=p.full_name||p.email||'Unknown';
+    const em=document.createElement('span'); em.className='po-email'; em.textContent=p.email||'';
+    col.appendChild(nm); col.appendChild(em);
+    lab.appendChild(cb); lab.appendChild(ini); lab.appendChild(col);
+    list.appendChild(lab);
+  });
+}
+async function saveProjMembers(){
+  if(!pmTargetProject) return closeProjMembers();
+  await supaSetProjectMembers(pmTargetProject, Array.from(pmSelected));
+  toast('Project members updated.');
+  closeProjMembers();
+  renderProjectManager(); renderAll();
+}
+
+/* ============================================================
+   CHECKLIST ASSIGNEES (inline editor inside the task modal)
+   ============================================================ */
+function buildAssignEditor(item){
+  const ed=document.createElement('div'); ed.className='assign-editor';
+  const pid=activeProject().id;
+  const ids=projectMemberIds(pid);
+  // always offer the current user even if membership hasn't loaded a manager in
+  const opts=ids.slice();
+  if(myId() && opts.indexOf(myId())<0 && canManageProjects()) opts.push(myId());
+  if(!opts.length){
+    ed.innerHTML='<div class="ae-empty">No members on this project yet. A manager can add members from “Projects”.</div>';
+    return ed;
+  }
+  if(!Array.isArray(item.assignees)) item.assignees=[];
+  opts.forEach(uid=>{
+    const lab=document.createElement('label'); lab.className='assign-opt';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=item.assignees.indexOf(uid)>=0;
+    cb.onchange=()=>{
+      if(cb.checked){ if(item.assignees.indexOf(uid)<0) item.assignees.push(uid); }
+      else item.assignees=item.assignees.filter(x=>x!==uid);
+      renderChecklist();
+    };
+    const ini=document.createElement('span'); ini.className='ao-ini'; ini.textContent=initialsOf(uid);
+    const nm=document.createElement('span'); nm.className='ao-name'; nm.textContent=nameOf(uid)+(uid===myId()?' (you)':'');
+    lab.appendChild(cb); lab.appendChild(ini); lab.appendChild(nm);
+    ed.appendChild(lab);
+  });
+  return ed;
+}
+
+/* ============================================================
+   "ASSIGNED TO ME" TAB
+   ============================================================ */
+function setPanelTab(tab){
+  activeTab = tab==='assigned' ? 'assigned' : 'personal';
+  const tp=document.getElementById('tabPersonal'), ta=document.getElementById('tabAssigned');
+  if(tp) tp.classList.toggle('active', activeTab==='personal');
+  if(ta) ta.classList.toggle('active', activeTab==='assigned');
+  const dp=document.getElementById('todoPersonal'), da=document.getElementById('todoAssigned');
+  if(dp) dp.style.display = activeTab==='personal' ? '' : 'none';
+  if(da) da.style.display = activeTab==='assigned' ? '' : 'none';
+  if(activeTab==='assigned') renderAssigned(); else renderTodos();
+}
+
+/* every checklist item assigned to me, across all my projects, with its task path */
+function collectAssignedToMe(){
+  const me=myId(); const out=[];
+  state.projects.filter(p=>!p.archived).forEach(p=>{
+    (function walk(list, path){
+      (list||[]).forEach(n=>{
+        const here=path.concat(n.name||'Untitled');
+        if(Array.isArray(n.checklist)){
+          n.checklist.forEach(c=>{
+            if(Array.isArray(c.assignees) && c.assignees.indexOf(me)>=0){
+              out.push({ projectId:p.id, projectName:p.name, nodeId:n.id, checkId:c.id,
+                         text:c.text, done:!!c.done, abandoned:!!c.abandoned, reason:c.abandonReason||'',
+                         assignees:c.assignees.slice(), path:here });
+            }
+          });
+        }
+        walk(n.children, here);
+      });
+    })(p.tree, []);
+  });
+  return out;
+}
+
+function assignedCount(){ return collectAssignedToMe().filter(x=>!x.done && !x.abandoned).length; }
+
+function todoLinkExists(viewKey, projectId, nodeId, checkId){
+  return (state.todos[viewKey]||[]).some(t=> t.linked && t.src &&
+    t.src.p===projectId && t.src.n===nodeId && t.src.c===checkId);
+}
+
+/* pull a project checklist item into my personal to-dos for the day I'm viewing */
+function pullToTodos(it){
+  if(todoLinkExists(viewDate, it.projectId, it.nodeId, it.checkId)){
+    toast('Already in your to-dos for this day.'); return;
+  }
+  todosFor(viewDate).push({
+    id:uid(), text:it.text, state: it.done?'completed':'open', note:'',
+    linked:true, src:{ p:it.projectId, n:it.nodeId, c:it.checkId }
+  });
+  toast('Added to your to-dos.');
+  renderAssigned();
+  if(activeTab==='personal') renderTodos();
+  scheduleSave();
+}
+
+/* toggle the real checklist item's done state from the assigned tab (writes to the tree) */
+async function setAssignedDone(it, done){
+  const hit=findCheckItem(it.projectId, it.nodeId, it.checkId);
+  if(!hit) return;
+  hit.item.done=done;
+  if(state.activeProjectId===it.projectId) renderTree();
+  renderAssigned();
+  renderTodos();   // keep any linked personal copy in sync
+  await saveProjectById(it.projectId);
+}
+
+function renderAssigned(){
+  const box=document.getElementById('todoAssigned'); if(!box) return;
+  box.innerHTML='';
+  const items=collectAssignedToMe();
+  // refresh the count pill
+  const pill=document.getElementById('assignedPill'); if(pill){ const n=items.filter(x=>!x.done && !x.abandoned).length; pill.textContent=String(n); pill.style.display=n?'':'none'; }
+  if(!items.length){
+    box.innerHTML='<div class="assigned-empty">Nothing is assigned to you yet.<br>Open a task in a project, add a checklist item, and tick your name to assign it.</div>';
+    return;
+  }
+  // group by project
+  const groups={};
+  items.forEach(it=>{ (groups[it.projectId]||(groups[it.projectId]={name:it.projectName, list:[]})).list.push(it); });
+  Object.keys(groups).forEach(pid=>{
+    const g=groups[pid];
+    const sec=document.createElement('div'); sec.className='assigned-proj';
+    const h=document.createElement('h4'); h.innerHTML='<span class="dot" style="width:8px;height:8px;border-radius:50%;background:var(--accent)"></span>'+escapeHtml(g.name);
+    sec.appendChild(h);
+    g.list.forEach(it=>{
+      const row=document.createElement('div'); row.className='assigned-item'+(it.done?' done':'')+(it.abandoned?' abandoned':'');
+      if(it.abandoned && it.reason) row.title='Abandoned — reason: '+it.reason;
+      const cb=document.createElement('input'); cb.type='checkbox'; cb.className='ai-check'; cb.checked=it.done; cb.disabled=it.abandoned;
+      cb.title= it.abandoned ? 'Abandoned' : 'Mark done (updates the project)';
+      cb.onchange=()=>setAssignedDone(it, cb.checked);
+
+      const main=document.createElement('div'); main.className='ai-main';
+      const txt=document.createElement('div'); txt.className='ai-text'; txt.textContent=it.text;
+      const path=document.createElement('div'); path.className='ai-path';
+      path.textContent=it.path.join('  ›  '); path.title=it.path.join('  ›  ');
+      const who=document.createElement('div'); who.className='ai-who';
+      it.assignees.forEach(uid=>{
+        const c=document.createElement('span'); c.className='ini-chip'+(uid===myId()?' mine':' muted');
+        c.textContent=initialsOf(uid); c.title=nameOf(uid); who.appendChild(c);
+      });
+      main.appendChild(txt); main.appendChild(path); main.appendChild(who);
+
+      const pull=document.createElement('button');
+      const added=todoLinkExists(viewDate, it.projectId, it.nodeId, it.checkId);
+      pull.className='ai-pull'+(added?' added':'');
+      pull.innerHTML = added ? (svg('check')+'Added') : (svg('chevL')+'To my to-dos');
+      pull.title = added ? 'Already in your personal to-dos for the day you are viewing'
+                         : 'Add this to your personal to-dos for the day you are viewing';
+      if(!added) pull.onclick=()=>pullToTodos(it);
+
+      row.appendChild(cb); row.appendChild(main); row.appendChild(pull);
+      sec.appendChild(row);
+    });
+    box.appendChild(sec);
+  });
+}
+
+/* ============================================================
+   ABANDONING A PERSONAL TO-DO (with an optional reason)
+   ============================================================ */
+function abandonBlock(text, reason){ return "'"+text+"' abandoned.\nReason: \""+(reason||'')+"\""; }
+function appendBlock(notes, block){ notes=(notes||'').replace(/\s+$/,''); return notes ? (notes+"\n\n"+block) : block; }
+function removeBlock(notes, block){
+  notes=notes||''; const i=notes.indexOf(block); if(i<0) return notes;
+  const res=notes.slice(0,i)+notes.slice(i+block.length);
+  return res.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').replace(/^\s+|\s+$/g,'');
+}
+/* mark the SOURCE checklist item abandoned (red cross-out) and (re)write its line in the task's Notes */
+function applyAbandonToTask(node, item, reason){
+  if(!node.task) node.task=newTask();
+  if(item.abandoned && item.abandonText!==undefined){              // editing an existing reason → replace its line
+    node.task.notes = removeBlock(node.task.notes, abandonBlock(item.abandonText, item.abandonReason));
+  }
+  item.abandoned=true; item.done=false;
+  item.abandonText=item.text; item.abandonReason=reason||'';
+  node.task.notes = appendBlock(node.task.notes, abandonBlock(item.abandonText, item.abandonReason));
+}
+/* un-abandon: remove the Notes line and clear the red cross-out */
+function clearAbandonFromTask(node, item){
+  if(node.task && item.abandoned){
+    const txt=(item.abandonText!==undefined)?item.abandonText:item.text;
+    node.task.notes = removeBlock(node.task.notes, abandonBlock(txt, item.abandonReason));
+  }
+  item.abandoned=false; delete item.abandonReason; delete item.abandonText;
+}
+
+let abandonTodoId=null;
+function requestAbandon(id){
+  const it=todosFor(viewDate).find(x=>x.id===id); if(!it) return;
+  abandonTodoId=id;
+  const already = it.state==='abandoned';
+  const linked  = !!(it.linked && it.src && findCheckItem(it.src.p,it.src.n,it.src.c));
+  document.getElementById('abTitle').textContent   = already ? 'Abandoned to-do' : 'Abandon this to-do?';
+  document.getElementById('abItemText').textContent= it.text || '(empty to-do)';
+  document.getElementById('abReason').value        = it.reason || '';
+  document.getElementById('abLinkedNote').style.display = linked ? '' : 'none';
+  document.getElementById('abRestore').style.display    = already ? '' : 'none';
+  document.getElementById('abConfirm').innerHTML   = already ? (svg('check')+'Save reason') : (svg('ban')+'Abandon');
+  document.getElementById('abandonScrim').classList.add('open');
+  setTimeout(()=>{ const r=document.getElementById('abReason'); if(r) r.focus(); },30);
+}
+function closeAbandon(){ document.getElementById('abandonScrim').classList.remove('open'); abandonTodoId=null; }
+function confirmAbandon(){
+  const it=todosFor(viewDate).find(x=>x.id===abandonTodoId); if(!it){ closeAbandon(); return; }
+  const reason=document.getElementById('abReason').value.trim();
+  it.state='abandoned'; it.reason=reason;
+  if(it.linked && it.src){
+    const hit=findCheckItem(it.src.p,it.src.n,it.src.c);
+    if(hit){ applyAbandonToTask(hit.node, hit.item, reason); if(state.activeProjectId===it.src.p) renderTree(); saveProjectById(it.src.p); }
+  }
+  closeAbandon(); renderTodos(); renderAssigned(); scheduleSave();
+}
+function restoreAbandon(){
+  const it=todosFor(viewDate).find(x=>x.id===abandonTodoId); if(!it){ closeAbandon(); return; }
+  it.state='open'; delete it.reason;
+  if(it.linked && it.src){
+    const hit=findCheckItem(it.src.p,it.src.n,it.src.c);
+    if(hit){ clearAbandonFromTask(hit.node, hit.item); if(state.activeProjectId===it.src.p) renderTree(); saveProjectById(it.src.p); }
+  }
+  closeAbandon(); renderTodos(); renderAssigned(); scheduleSave();
+}
+
+/* ============================================================
+   NOTEPAD BALLOON  (read-only Details + Notes, opened from a tree row)
+   ============================================================ */
+function openNoteBalloon(nodeId, anchorEl){
+  closeNoteBalloon();
+  const f=findNode(nodeId); if(!f) return;
+  const t=f.node.task||{};
+  const details=(t.details||'').trim(), notes=(t.notes||'').trim();
+  const fmt=s=>escapeHtml(s).replace(/\n/g,'<br>');
+  const bal=document.createElement('div'); bal.className='note-balloon'; bal.id='noteBalloon';
+  bal.innerHTML =
+    '<div class="nb-title">'+escapeHtml(f.node.name||'Task')+'</div>'+
+    '<div class="nb-sec"><div class="nb-h">Details</div><div class="nb-body">'+(details?fmt(details):'<span class="nb-empty">No details yet.</span>')+'</div></div>'+
+    '<div class="nb-sec"><div class="nb-h">Notes</div><div class="nb-body">'+(notes?fmt(notes):'<span class="nb-empty">No notes yet.</span>')+'</div></div>';
+  document.body.appendChild(bal);
+  const r=anchorEl.getBoundingClientRect();
+  const bw=bal.offsetWidth, bh=bal.offsetHeight;
+  let left=r.right+8, top=r.top;
+  if(left+bw>window.innerWidth-10) left=Math.max(10, r.left-bw-8);
+  if(top+bh>window.innerHeight-10)  top=Math.max(10, window.innerHeight-bh-10);
+  bal.style.left=left+'px'; bal.style.top=top+'px';
+  setTimeout(()=>{ document.addEventListener('mousedown',noteBalloonOutside,true); document.addEventListener('keydown',noteBalloonEsc,true); },0);
+}
+function noteBalloonOutside(e){ const b=document.getElementById('noteBalloon'); if(b && !b.contains(e.target)) closeNoteBalloon(); }
+function noteBalloonEsc(e){ if(e.key==='Escape') closeNoteBalloon(); }
+function closeNoteBalloon(){
+  const b=document.getElementById('noteBalloon'); if(b) b.remove();
+  document.removeEventListener('mousedown',noteBalloonOutside,true);
+  document.removeEventListener('keydown',noteBalloonEsc,true);
+}
+
+/* ---------- load (after login) ---------- */
+async function supaLoad(){
+  setSyncStatus('Loading…');
+  const { data:{ user } } = await sb.auth.getUser();
+  currentUser = user;
+
+  // role
+  try{
+    const { data: prof } = await sb.from('profiles').select('role').eq('id', user.id).maybeSingle();
+    currentRole = (prof && prof.role==='manager') ? 'manager' : 'member';
+  }catch(e){ currentRole = 'member'; }
+
+  // projects (RLS auto-filters: members see active only; managers also see archived)
+  let projRows = [];
+  try{
+    const { data, error } = await sb.from('projects')
+      .select('id,name,archived,data,position,created_at')
+      .order('position', { ascending:true, nullsFirst:false })
+      .order('created_at', { ascending:true });
+    if(error) throw error;
+    projRows = data || [];
+  }catch(e){ toast('Could not load projects: '+(e.message||e)); }
+  state.projects = projRows.map(rowToProject);
+  dbProjectIds = new Set(state.projects.map(p=>p.id));
+  lastProjData = {};
+  state.projects.forEach(rememberProjData);
+
+  // this user's to-do list
+  try{
+    const { data: todoRow } = await sb.from('user_todos').select('data').eq('user_id', user.id).maybeSingle();
+    state.todos = (todoRow && todoRow.data && typeof todoRow.data==='object') ? todoRow.data : {};
+  }catch(e){ state.todos = state.todos || {}; }
+
+  // people directory (everyone) + per-project membership (RLS shows only what I'm allowed to see)
+  await loadPeople();
+  // the editable "Start here / Guide" page text
+  await loadGuide();
+
+  state.activeProjectId = null;
+
+  // a manager opening an empty board gets one real starter project
+  if(state.projects.length===0 && canManageProjects()){
+    await supaInsertProject('Project 1');
+  }
+
+  ensureProjects();
+  rollForwardPostponed();
+  viewDate = todayKey();
+  renderAll();
+  reflectPermissions();
+  supaSaveTodos();          // persist any roll-forward changes
+  setSyncStatus('Synced');
+}
+
+/* ---------- auth ---------- */
+async function doSignIn(email, password){
+  if(!sb){ showAuthError('App is not configured — set SUPABASE_URL and the publishable key at the top of the file.'); return; }
+  showAuthError('');
+  const btn=document.getElementById('authBtn');
+  if(btn){ btn.disabled=true; btn.textContent='Signing in…'; }
+  const { error } = await sb.auth.signInWithPassword({ email:(email||'').trim(), password:password||'' });
+  if(btn){ btn.disabled=false; btn.textContent='Sign in'; }
+  if(error){ showAuthError(error.message || 'Sign-in failed.'); return; }
+  await enterApp();
+}
+async function doSignOut(){
+  try{ if(sb) await sb.auth.signOut(); }catch(e){}
+  location.reload();
+}
+function showAuthError(msg){
+  const el=document.getElementById('authErr');
+  if(el){ el.textContent=msg||''; el.style.display = msg ? '' : 'none'; }
+}
+function showAuthGate(){
+  const gate=document.getElementById('authGate'); if(gate) gate.style.display='';
+  const root=document.getElementById('root'); if(root) root.style.display='none';
+}
+async function enterApp(){
+  const gate=document.getElementById('authGate'); if(gate) gate.style.display='none';
+  const root=document.getElementById('root'); if(root) root.style.display='';
+  try{
+    const { data:{ user } } = await sb.auth.getUser();
+    const em=document.getElementById('userEmail'); if(em) em.textContent = (user && user.email) || '';
+  }catch(e){}
+  await supaLoad();
+}
+
+/* ---------- manual backup (the “Backup” button) → download a JSON snapshot ---------- */
+function exportJSON(){
+  const snapshot = strip({ version:1, projects:state.projects, todos:state.todos, exportedAt:new Date().toISOString() });
+  const blob=new Blob([JSON.stringify(snapshot,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='dashboard-backup-'+todayKey()+'.json';
+  a.click(); URL.revokeObjectURL(a.href);
+  toast('Backup downloaded.');
+}
+
+/* ---------- sync status pill in the topbar ---------- */
+let savedFlashTimer=null;
+function setSyncStatus(msg){
+  const el=document.getElementById('fileStatus'); if(!el) return;
+  el.textContent = msg || '';
+}
+function flashSaved(){
+  setSyncStatus('Saved ✓');
+  clearTimeout(savedFlashTimer);
+  savedFlashTimer=setTimeout(()=>setSyncStatus('Synced'),1400);
+}
+
+/* ---------- toast ---------- */
+let toastTimer=null;
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+/* ============================================================
+   PROJECT TREE
+   ============================================================ */
+let projContainer;
+
+/* ============================================================
+   PROJECTS  —  switch via dropdown; add / rename / archive in the
+   manager modal (a supervised, manager-level surface). Deletion is
+   intentionally not offered: projects are archived (data is kept and
+   can be restored later), never destroyed.
+   The to-do panel is shared and does not change with the project.
+   ============================================================ */
+
+/* the dropdown that switches the active project (active = non-archived) */
+function renderProjectSelect(){
+  const sel=document.getElementById('projSelect');
+  if(!sel) return;
+  ensureProjects();
+  sel.innerHTML='';
+  const og=document.createElement('option');
+  og.value=GUIDE_ID; og.textContent='Start here / Guide';
+  sel.appendChild(og);
+  state.projects.filter(p=>!p.archived).forEach(p=>{
+    const o=document.createElement('option');
+    o.value=p.id; o.textContent=p.name;
+    sel.appendChild(o);
+  });
+  sel.value=state.activeProjectId;
+}
+
+function switchProject(id){
+  ensureProjects();
+  if(id!==GUIDE_ID && !state.projects.some(p=>p.id===id && !p.archived)) return;
+  guideEditing=false;
+  state.activeProjectId=id;
+  renderProjectSelect(); renderTree(); renderCalendar(); reflectPermissions();
+  /* No save: which project is active is a per-session view choice, not stored in the DB. */
+}
+
+async function addProject(name){
+  if(!canManageProjects()){ toast('You don’t have permission to add projects.'); return null; }
+  ensureProjects();
+  name=(name||'').trim() || ('Project '+(state.projects.length+1));
+  const p = await supaInsertProject(name);   // inserts the row, returns it with its DB UUID
+  if(!p) return null;
+  renderProjectSelect(); renderProjectManager(); renderTree(); renderCalendar();
+  toast('Project “'+p.name+'” added — now choose who can work on it.');
+  openProjMembers(p.id);   // assign members right away
+  return p;
+}
+
+/* archive instead of delete — keeps all data, retrievable via Restore */
+function archiveProject(id){
+  if(!canManageProjects()) return;
+  ensureProjects();
+  const p=state.projects.find(x=>x.id===id); if(!p || p.archived) return;
+  if(state.projects.filter(x=>!x.archived).length<=1){ toast('You need at least one active project.'); return; }
+  p.archived=true;
+  if(state.activeProjectId===id){
+    state.activeProjectId=state.projects.find(x=>!x.archived).id;
+  }
+  renderProjectSelect(); renderProjectManager(); renderTree(); renderCalendar();
+  supaSaveProjectMeta(p);
+  toast('Project archived.');
+}
+
+function restoreProject(id){
+  if(!canManageProjects()) return;
+  ensureProjects();
+  const p=state.projects.find(x=>x.id===id); if(!p || !p.archived) return;
+  p.archived=false;
+  renderProjectSelect(); renderProjectManager();
+  supaSaveProjectMeta(p);
+  toast('Project restored.');
+}
+
+/* ---------- projects manager modal ---------- */
+function openProjectManager(){
+  if(!canManageProjects()){ toast('You don’t have permission to manage projects.'); return; }
+  renderProjectManager();
+  const inp=document.getElementById('pmNewName'); if(inp) inp.value='';
+  document.getElementById('projScrim').classList.add('open');
+}
+function closeProjectManager(){ document.getElementById('projScrim').classList.remove('open'); }
+
+function renderProjectManager(){
+  const box=document.getElementById('projMgrBody');
+  if(!box) return;
+  ensureProjects();
+  box.innerHTML='';
+  const actives=state.projects.filter(p=>!p.archived);
+  const archived=state.projects.filter(p=>p.archived);
+
+  const aH=document.createElement('h4'); aH.className='pm-head'; aH.textContent='Active projects';
+  box.appendChild(aH);
+  actives.forEach(p=> box.appendChild(projRow(p,false)));
+
+  const rH=document.createElement('h4'); rH.className='pm-head'; rH.textContent='Archived';
+  box.appendChild(rH);
+  if(!archived.length){
+    const e=document.createElement('div'); e.className='pm-empty'; e.textContent='No archived projects.';
+    box.appendChild(e);
+  }else{
+    archived.forEach(p=> box.appendChild(projRow(p,true)));
+  }
+}
+
+function projRow(p, isArchived){
+  const row=document.createElement('div'); row.className='proj-row'+(isArchived?' archived':'');
+
+  const name=document.createElement('div'); name.className='pr-name'; name.textContent=p.name;
+  if(!isArchived){
+    name.contentEditable='true'; name.spellcheck=false; name.title='Click to rename';
+    name.addEventListener('blur',()=>{
+      const v=name.textContent.trim()||'Untitled project';
+      name.textContent=v; p.name=v; renderProjectSelect(); supaSaveProjectMeta(p);
+    });
+    name.addEventListener('keydown',e=>{
+      if(e.key==='Enter'){ e.preventDefault(); name.blur(); }
+      if(e.key==='Escape'){ name.textContent=p.name; name.blur(); }
+    });
+  }
+
+  const count=document.createElement('span'); count.className='pr-count';
+  const n=countNodes(p.tree); count.textContent=n+' task'+(n===1?'':'s');
+
+  let memb=null, membersBtn=null;
+  if(!isArchived){
+    const mc=projectMemberIds(p.id).length;
+    memb=document.createElement('span'); memb.className='pr-members';
+    memb.textContent=mc+' member'+(mc===1?'':'s');
+    membersBtn=document.createElement('button'); membersBtn.type='button'; membersBtn.className='btn';
+    membersBtn.innerHTML=svg('plus')+'Members'; membersBtn.title='Choose who can see and work on this project';
+    membersBtn.onclick=()=>openProjMembers(p.id);
+  }
+
+  const act=document.createElement('button'); act.type='button'; act.className='btn';
+  if(isArchived){
+    act.innerHTML=svg('history')+'Restore'; act.title='Restore this project to the active list';
+    act.onclick=()=>restoreProject(p.id);
+  }else{
+    act.innerHTML=svg('archive')+'Archive'; act.title='Archive this project (data is kept and can be restored)';
+    act.onclick=()=>archiveProject(p.id);
+  }
+
+  row.appendChild(name); row.appendChild(count);
+  if(memb) row.appendChild(memb);
+  if(membersBtn) row.appendChild(membersBtn);
+  row.appendChild(act);
+  return row;
+}
+
+function countNodes(list){
+  let c=0; (function w(a){ (a||[]).forEach(n=>{ c++; w(n.children); }); })(list); return c;
+}
+
+/* find a node + its parent array by id */
+function findNode(id, list=activeTree(), parent=null){
+  for(let i=0;i<list.length;i++){
+    if(list[i].id===id) return {node:list[i], list, index:i, parent};
+    const r=findNode(id, list[i].children, list[i]);
+    if(r) return r;
+  }
+  return null;
+}
+function makeNode(name){
+  return {id:uid(), name:name||'New heading', collapsed:false, color:'', task:newTask(), checklist:[], children:[]};
+}
+
+/* add a sibling heading after the given node (or at root if id null) */
+function addHeading(afterId){
+  if(!requireProjectEdit()) return;
+  const node=makeNode('New heading');
+  if(!afterId){ activeTree().push(node); }
+  else{
+    const f=findNode(afterId);
+    f.list.splice(f.index+1,0,node);
+  }
+  renderTree(); scheduleSave(); focusLabel(node.id);
+}
+/* add a child (subheading) under the given node */
+function addSubheading(parentId){
+  if(!requireProjectEdit()) return;
+  const f=findNode(parentId); if(!f) return;
+  f.node.collapsed=false;
+  const node=makeNode('New subheading');
+  f.node.children.push(node);
+  renderTree(); scheduleSave(); focusLabel(node.id);
+}
+function deleteNode(id){
+  if(!requireProjectEdit()) return;
+  const f=findNode(id); if(!f) return;
+  f.list.splice(f.index,1);
+  renderTree(); scheduleSave();
+}
+function toggleCollapse(id){
+  const f=findNode(id); if(!f) return;
+  f.node.collapsed=!f.node.collapsed;
+  renderTree(); scheduleSave();
+}
+function focusLabel(id){
+  requestAnimationFrame(()=>{
+    const el=projContainer.querySelector('[data-label="'+id+'"]');
+    if(el){ el.focus();
+      const r=document.createRange(); r.selectNodeContents(el);
+      const s=getSelection(); s.removeAllRanges(); s.addRange(r);
+    }
+  });
+}
+
+/* ---------- annotate the tree with transient (underscore = not saved) data ----------
+   _color      : per-branch family colour for the node
+   _conflict   : true when this node's END date is later than an ancestor's, or
+                 earlier than a descendant's (deadline contradiction)
+   _subtreeMax : max END date within this node's subtree (helper for conflict)        */
+function taskDeadline(node){                 // the date a task is "due" — its end date (fallback to start)
+  const t=node.task; if(!t) return '';
+  return t.endDate || t.startDate || '';
+}
+
+/* migrate older single-date tasks → start/end model (idempotent, cheap) */
+function migrateTasks(){
+  (function walk(list){
+    list.forEach(n=>{
+      const t=n.task;
+      if(t){
+        if(t.date!==undefined){                       // legacy field
+          if(!t.startDate) t.startDate=t.date;
+          if(!t.endDate)   t.endDate=t.date;
+          delete t.date;
+        }
+        if(t.startDate===undefined) t.startDate='';
+        if(t.endDate===undefined)   t.endDate='';
+        if(t.startTime===undefined) t.startTime='';
+        if(t.endTime===undefined)   t.endTime='';
+        if(t.notes===undefined)      t.notes='';
+      }
+      walk(n.children);
+    });
+  })(activeTree());
+}
+
+function hslToHex(h,s,l){
+  s/=100; l/=100;
+  const a=s*Math.min(l,1-l);
+  const k=n=>(n+h/30)%12;
+  const f=n=>{ const v=l - a*Math.max(-1,Math.min(k(n)-3, 9-k(n), 1)); return Math.round(255*v); };
+  const hx=x=>x.toString(16).padStart(2,'0');
+  return '#'+hx(f(0))+hx(f(8))+hx(f(4));
+}
+function assignColors(){
+  // each top-level branch gets a distinct family hue; descendants are derived from their PARENT's colour
+  activeTree().forEach((root,i)=>{
+    const hue=(i*137.508)%360;            // golden-angle spread → distinct family hue per top-level branch
+    colorWalk(root, {h:hue, s:64, l:42});
+  });
+}
+function colorWalk(node, hsl){
+  const h=(((hsl.h%360)+360)%360);
+  const auto='hsl('+h.toFixed(0)+','+hsl.s.toFixed(0)+'%,'+hsl.l.toFixed(0)+'%)';
+  node._auto=auto;
+  node._autoHex=hslToHex(h, hsl.s, hsl.l);              // for pre-filling the colour picker
+  node._color=(node.color && node.color.trim()) ? node.color : auto;   // manual override wins for display
+  const k=node.children.length;
+  node.children.forEach((c,i)=>{
+    // siblings fan slightly around the parent hue; every level gets lighter & a touch less saturated.
+    // The lineage is derived from the AUTO hue, so overriding one node only recolours that node.
+    const fan = k>1 ? (i-(k-1)/2) * Math.min(16, 70/k) : 0;
+    colorWalk(c, {
+      h: hsl.h + fan,
+      s: Math.max(38, hsl.s - 3),
+      l: Math.min(78, hsl.l + 9)
+    });
+  });
+}
+
+function computeConflicts(){
+  // pass 1: max END date in each subtree
+  (function maxWalk(list){
+    list.forEach(n=>{
+      maxWalk(n.children);
+      let m=taskDeadline(n);
+      n.children.forEach(c=>{ if(c._subtreeMax>m) m=c._subtreeMax; });
+      n._subtreeMax=m;
+    });
+  })(activeTree());
+  // pass 2: flag conflicts (minAncestor = earliest dated ancestor's end date)
+  (function walk(list, minAncestor){
+    list.forEach(n=>{
+      const d=taskDeadline(n);
+      let conflict=false;
+      if(d){
+        if(minAncestor && d>minAncestor) conflict=true;                 // ends later than an ancestor
+        n.children.forEach(c=>{ if(c._subtreeMax && c._subtreeMax>d) conflict=true; }); // a descendant ends later
+      }
+      n._conflict=conflict;
+      let childMin=minAncestor;
+      if(d && (!childMin || d<childMin)) childMin=d;
+      walk(n.children, childMin);
+    });
+  })(activeTree(), '');
+}
+
+/* run migration + annotations before any tree/calendar render */
+function annotateTree(){ migrateTasks(); assignColors(); computeConflicts(); }
+
+/* every calendar day a task occupies (start date → end date, inclusive) */
+function taskDays(task){
+  if(!task) return [];
+  let sd=task.startDate||task.endDate||'';
+  let ed=task.endDate||task.startDate||'';
+  if(!sd) return [];
+  if(ed<sd){ const t=sd; sd=ed; ed=t; }    // tolerate a reversed range
+  const out=[]; let k=sd, guard=0;
+  while(k<=ed && guard<2000){ out.push(k); k=addDaysKey(k,1); guard++; }
+  return out;
+}
+
+/* dated tasks that should appear on the calendar, grouped by date — every day in each task's range.
+   Each node is shown independently: ticking a header does NOT pull in its subheaders. */
+function calendarDots(){
+  const map={};
+  (function walk(list){
+    list.forEach(n=>{
+      if(activeCalSel()[n.id]){
+        taskDays(n.task).forEach(k=>{
+          (map[k]||(map[k]=[])).push({color:n._color, name:n.name, start:n.task.startTime, end:n.task.endTime});
+        });
+      }
+      walk(n.children);
+    });
+  })(activeTree());
+  return map;
+}
+
+/* DD/MM/YYYY */
+function fmtDMY(key){
+  if(!key) return '';
+  const [y,m,d]=key.split('-').map(Number);
+  return pad(d)+'/'+pad(m)+'/'+y;
+}
+
+function renderTree(){
+  if(isGuideActive()){ renderGuide(); return; }
+  annotateTree();
+  projContainer.innerHTML='';
+  if(!activeTree().length){
+    projContainer.innerHTML='<div class="proj-empty">No headings yet.<br>Use “Add heading” to start your project tree.</div>';
+    return;
+  }
+  activeTree().forEach(n=> projContainer.appendChild(renderNode(n,0)));
+}
+
+function renderNode(node, depth){
+  const wrap=document.createElement('div');
+  wrap.className='node'+(node.collapsed?' collapsed':'');
+  wrap.dataset.depth=depth; wrap.dataset.id=node.id;
+
+  const row=document.createElement('div');
+  row.className='node-row';
+  const st=node.task&&node.task.state;
+  if(st==='completed') row.classList.add('completed');
+  if(st==='abandoned') row.classList.add('abandoned');
+  row.draggable=false; // dragging initiated from handle
+  row.dataset.id=node.id;
+
+  const hasKids=node.children.length>0;
+
+  /* drag handle */
+  const handle=document.createElement('span');
+  handle.className='drag-handle'; handle.innerHTML=svg('grip');
+  handle.title='Drag to reorder';
+  handle.addEventListener('mousedown',()=>{ row.draggable=true; });
+  handle.addEventListener('mouseup',()=>{ row.draggable=false; });
+
+  /* twirl / collapse */
+  const tw=document.createElement('button');
+  tw.className='twirl'+(hasKids?'':' leaf');
+  tw.innerHTML=svg('chevron');
+  tw.title=node.collapsed?'Expand':'Collapse';
+  tw.onclick=()=>toggleCollapse(node.id);
+
+  /* calendar checkbox — show this branch's dated tasks as dots on the calendar */
+  const chk=document.createElement('input');
+  chk.type='checkbox'; chk.className='node-check';
+  chk.checked=!!activeCalSel()[node.id];
+  chk.title='Show this task’s dates on the calendar';
+  chk.disabled = !canEditProjects();
+  chk.onclick=e=>e.stopPropagation();
+  chk.onchange=()=>{
+    if(!requireProjectEdit()){ chk.checked=!!activeCalSel()[node.id]; return; }
+    if(chk.checked) activeCalSel()[node.id]=true;
+    else delete activeCalSel()[node.id];
+    scheduleSave(); renderCalendar();
+  };
+
+  /* per-branch colour dot (matches the calendar dot colour) */
+  const cdot=document.createElement('span');
+  cdot.className='node-dot'; cdot.style.background=node._color;
+  cdot.title='Calendar colour for this branch';
+
+  /* editable label (read-only for members when projects are manager-only) */
+  const label=document.createElement('div');
+  label.className='node-label';
+  label.contentEditable = canEditProjects() ? 'true' : 'false';
+  label.spellcheck=false;
+  label.dataset.label=node.id;
+  label.textContent=node.name;
+  if(canEditProjects()) label.title='Click to rename';
+  label.addEventListener('blur',()=>{
+    if(!canEditProjects()){ label.textContent=node.name; return; }
+    const v=label.textContent.trim()||'Untitled';
+    label.textContent=v; node.name=v; scheduleSave();
+  });
+  label.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){ e.preventDefault(); label.blur(); }
+    if(e.key==='Escape'){ label.textContent=node.name; label.blur(); }
+  });
+
+  /* state chip */
+  let chip='';
+  if(st && st!=='open'){
+    chip=document.createElement('span');
+    chip.className='state-chip '+st;
+    chip.textContent = st==='completed'?'done':st==='postponed'?'postponed':'abandoned';
+  }
+
+  /* date badge: "start: DD/MM/YYYY · end: DD/MM/YYYY" (end turns red on a deadline conflict) */
+  let when='';
+  const tk=node.task;
+  if(tk && (tk.startDate || tk.endDate)){
+    when=document.createElement('span'); when.className='node-when';
+    const parts=[];
+    if(tk.startDate){
+      const s=document.createElement('span');
+      s.textContent='start: '+fmtDMY(tk.startDate)+(tk.startTime?' '+tk.startTime:'');
+      parts.push(s);
+    }
+    if(tk.endDate){
+      const e=document.createElement('span');
+      if(node._conflict) e.className='conflict';
+      e.textContent='end: '+fmtDMY(tk.endDate)+(tk.endTime?' '+tk.endTime:'');
+      parts.push(e);
+    }
+    parts.forEach((p,i)=>{
+      if(i>0){ const sep=document.createElement('span'); sep.className='when-sep'; sep.textContent=' · '; when.appendChild(sep); }
+      when.appendChild(p);
+    });
+    when.title=node._conflict
+      ? 'Date conflict: this end date is later than a parent task’s end date, or earlier than a sub-task’s end date.'
+      : 'Task start / end dates';
+  }
+
+  /* action buttons: [+] heading  [J] subheading  [O] open task */
+  const actions=document.createElement('div');
+  actions.className='node-actions';
+  actions.appendChild(iconBtn('plus','Add heading below','accent',()=>addHeading(node.id)));
+  actions.appendChild(iconBtn('subPlus','Add subheading','accent',()=>addSubheading(node.id)));
+  actions.appendChild(iconBtn('gear','Open task details','accent',()=>openTaskModal(node.id)));
+  const noteBtn=iconBtn('notepad','View details & notes','accent',()=>{});
+  noteBtn.onclick=()=>openNoteBalloon(node.id, noteBtn);
+  actions.appendChild(noteBtn);
+
+  row.appendChild(handle);
+  row.appendChild(tw);
+  row.appendChild(chk);
+  row.appendChild(cdot);
+  row.appendChild(label);
+  if(when) row.appendChild(when);
+  if(chip) row.appendChild(chip);
+  row.appendChild(actions);
+  wrap.appendChild(row);
+
+  setupDrag(row, node);
+
+  if(hasKids){
+    const kids=document.createElement('div');
+    kids.className='children';
+    node.children.forEach(c=> kids.appendChild(renderNode(c, depth+1)));
+    wrap.appendChild(kids);
+  }
+  return wrap;
+}
+
+function iconBtn(icon,title,cls,fn){
+  const b=document.createElement('button');
+  b.className='ibtn '+(cls||''); b.title=title; b.innerHTML=svg(icon);
+  b.onclick=fn; return b;
+}
+
+/* ---------- drag & drop reordering ---------- */
+let dragId=null;
+function setupDrag(row, node){
+  row.addEventListener('dragstart',e=>{
+    dragId=node.id;
+    e.dataTransfer.effectAllowed='move';
+    e.dataTransfer.setData('text/plain',node.id);
+    setTimeout(()=>row.style.opacity='.4',0);
+  });
+  row.addEventListener('dragend',()=>{
+    row.style.opacity=''; row.draggable=false; dragId=null;
+    clearDropMarks();
+  });
+  row.addEventListener('dragover',e=>{
+    e.preventDefault();
+    if(!dragId||dragId===node.id) return;
+    if(isDescendant(dragId,node.id)) return; // can't drop into own subtree
+    clearDropMarks();
+    const r=row.getBoundingClientRect();
+    const y=e.clientY-r.top;
+    if(y < r.height*0.28) row.classList.add('drop-before');
+    else if(y > r.height*0.72) row.classList.add('drop-after');
+    else row.classList.add('dragover-into');
+  });
+  row.addEventListener('dragleave',()=>{ row.classList.remove('drop-before','drop-after','dragover-into'); });
+  row.addEventListener('drop',e=>{
+    e.preventDefault(); e.stopPropagation();
+    if(!dragId||dragId===node.id) return;
+    if(isDescendant(dragId,node.id)){ clearDropMarks(); return; }
+    let mode='into';
+    if(row.classList.contains('drop-before')) mode='before';
+    else if(row.classList.contains('drop-after')) mode='after';
+    moveNode(dragId, node.id, mode);
+    clearDropMarks();
+  });
+}
+function clearDropMarks(){
+  projContainer.querySelectorAll('.drop-before,.drop-after,.dragover-into')
+    .forEach(el=>el.classList.remove('drop-before','drop-after','dragover-into'));
+}
+function isDescendant(ancestorId, maybeChildId){
+  const f=findNode(ancestorId); if(!f) return false;
+  const stack=[...f.node.children];
+  while(stack.length){ const n=stack.pop(); if(n.id===maybeChildId) return true; stack.push(...n.children); }
+  return false;
+}
+function moveNode(dragId, targetId, mode){
+  if(!requireProjectEdit()) return;
+  const src=findNode(dragId); if(!src) return;
+  const moved=src.node;
+  src.list.splice(src.index,1);            // detach
+  const tgt=findNode(targetId); if(!tgt){ renderTree(); return; }
+  if(mode==='into'){ tgt.node.collapsed=false; tgt.node.children.push(moved); }
+  else{
+    const idx = mode==='before'? tgt.index : tgt.index+1;
+    tgt.list.splice(idx,0,moved);
+  }
+  renderTree(); scheduleSave();
+}
+
+/* ============================================================
+   TASK MODAL (the [O] button)
+   ============================================================ */
+let modalNodeId=null;
+let modalColor='';                 // current colour override for the open modal ('' = automatic)
+let modalChecklist=[];             // working copy of the task's to-do list while the modal is open
+
+function renderChecklist(){
+  const box=document.getElementById('tmChecklist');
+  box.innerHTML='';
+  if(!modalChecklist.length){
+    box.innerHTML='<div class="checklist-empty">No items yet. Add one below.</div>';
+    return;
+  }
+  modalChecklist.forEach(item=> box.appendChild(buildCheckItem(item)));
+}
+function buildCheckItem(item){
+  const row=document.createElement('div');
+  row.className='check-item'+(item.done?' done':'')+(item.abandoned?' abandoned':'');
+  if(!Array.isArray(item.assignees)) item.assignees=[];
+
+  const cb=document.createElement('input');
+  cb.type='checkbox'; cb.checked=!!item.done;
+  cb.onchange=()=>{ item.done=cb.checked; row.classList.toggle('done',cb.checked); };
+
+  const txt=document.createElement('div');
+  txt.className='ci-text'; txt.contentEditable='true'; txt.spellcheck=false;
+  txt.textContent=item.text;
+  txt.addEventListener('input',()=>{ item.text=txt.textContent; });
+  txt.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); txt.blur(); } });
+
+  const who=document.createElement('span'); who.className='assignees';
+  item.assignees.forEach(uid=>{
+    const c=document.createElement('span'); c.className='ini-chip'+(uid===myId()?' mine':'');
+    c.textContent=initialsOf(uid); c.title=nameOf(uid);
+    who.appendChild(c);
+  });
+
+  const ab=document.createElement('button');
+  ab.type='button'; ab.className='assign-btn';
+  ab.title=item._editAssignees ? 'Done assigning' : 'Assign people to this item';
+  ab.innerHTML = item._editAssignees ? svg('check') : '+';
+  ab.onclick=()=>{ item._editAssignees=!item._editAssignees; renderChecklist(); };
+
+  const rem=document.createElement('button');
+  rem.type='button'; rem.className='check-rem'; rem.title='Remove item'; rem.innerHTML=svg('x');
+  rem.onclick=()=>{
+    const i=modalChecklist.indexOf(item);
+    if(i>=0) modalChecklist.splice(i,1);
+    renderChecklist();
+  };
+
+  row.appendChild(cb); row.appendChild(txt); row.appendChild(who); row.appendChild(ab); row.appendChild(rem);
+  if(item._editAssignees) row.appendChild(buildAssignEditor(item));
+  return row;
+}
+function addCheckItem(){
+  const inp=document.getElementById('tmCheckInput');
+  const t=inp.value.trim(); if(!t) return;
+  modalChecklist.push({id:uid(), text:t, done:false, assignees: myId()?[myId()]:[]});  // creator is the default assignee
+  renderChecklist();
+  inp.value=''; inp.focus();
+}
+
+function setTimeVisible(on){
+  document.getElementById('tmTimeRow').style.display = on ? 'flex' : 'none';
+}
+function openTaskModal(id){
+  const f=findNode(id); if(!f) return;
+  modalNodeId=id;
+  const t=f.node.task||(f.node.task=newTask());
+
+  document.getElementById('tmName').value=f.node.name;
+  document.getElementById('tmDetails').value=t.details||'';
+  document.getElementById('tmNotes').value=t.notes||'';
+  document.getElementById('tmStartDate').value=t.startDate||'';
+  document.getElementById('tmEndDate').value=t.endDate||'';
+  const hasTime=!!(t.startTime||t.endTime);
+  document.getElementById('tmHasTime').checked=hasTime;
+  document.getElementById('tmStart').value=t.startTime||'';
+  document.getElementById('tmEnd').value=t.endTime||'';
+  setTimeVisible(hasTime);
+  modalColor = (f.node.color && f.node.color.trim()) ? f.node.color : '';
+  const effColor = modalColor || (f.node._autoHex||'#1746e0');
+  document.getElementById('tmColor').value = effColor;
+  document.getElementById('tmColorBtn').style.background = effColor;
+  document.getElementById('tmColorReset').style.display = modalColor ? '' : 'none';
+  modalChecklist = (f.node.checklist||[]).map(c=>({id:c.id||uid(), text:c.text||'', done:!!c.done, assignees:Array.isArray(c.assignees)?c.assignees.slice():[], abandoned:!!c.abandoned, abandonReason:c.abandonReason||'', abandonText:c.abandonText}));
+  renderChecklist();
+  document.getElementById('tmCompletion').value=t.completionNote||'';
+  document.getElementById('tmReason').value=t.reason||'';
+  setModalState(t.state||'open');
+  document.getElementById('taskScrim').classList.add('open');
+  document.getElementById('tmName').focus();
+}
+function closeTaskModal(){
+  document.getElementById('taskScrim').classList.remove('open');
+  modalNodeId=null;
+}
+let modalState='open';
+function setModalState(s){
+  modalState=s;
+  ['completed','postponed','abandoned'].forEach(k=>{
+    document.getElementById('pick-'+k).classList.toggle('sel', k===s);
+    document.getElementById('pick-'+k).classList.add(k);
+  });
+  // toggle the conditional note fields
+  document.getElementById('completionField').classList.toggle('show', s==='completed');
+  document.getElementById('reasonField').classList.toggle('show', s==='postponed'||s==='abandoned');
+  document.getElementById('reasonLabel').textContent =
+    s==='postponed' ? 'Why postponed?' : 'Why abandoned?';
+}
+function pickState(s){ setModalState(modalState===s?'open':s); }
+
+function saveTaskModal(){
+  if(!requireProjectEdit()){ closeTaskModal(); return; }
+  const f=findNode(modalNodeId); if(!f){ closeTaskModal(); return; }
+  const n=f.node;
+  n.name = document.getElementById('tmName').value.trim()||'Untitled';
+  n.task.details = document.getElementById('tmDetails').value;
+  n.task.notes = document.getElementById('tmNotes').value;
+  n.task.startDate = document.getElementById('tmStartDate').value;
+  n.task.endDate   = document.getElementById('tmEndDate').value;
+  if(document.getElementById('tmHasTime').checked){
+    n.task.startTime = document.getElementById('tmStart').value;
+    n.task.endTime   = document.getElementById('tmEnd').value;
+  }else{
+    n.task.startTime=''; n.task.endTime='';
+  }
+  n.task.completionNote = document.getElementById('tmCompletion').value;
+  n.task.reason = document.getElementById('tmReason').value;
+  n.task.state = modalState;
+  n.color = modalColor;
+  n.checklist = modalChecklist.filter(c=>c.text.trim()).map(c=>({id:c.id, text:c.text.trim(), done:!!c.done, assignees:Array.isArray(c.assignees)?c.assignees.slice():[], abandoned:!!c.abandoned, abandonReason:c.abandonReason||'', abandonText:c.abandonText}));
+  renderTree(); renderCalendar(); scheduleSave(); closeTaskModal();
+  if(activeTab==='assigned') renderAssigned();
+  toast('Task saved.');
+}
+
+/* delete from inside the modal, with confirmation */
+function requestDeleteTask(){
+  const f=findNode(modalNodeId); if(!f) return;
+  const name=f.node.name;
+  const kids=f.node.children.length;
+  confirmDialog(
+    'Delete this task?',
+    '“'+name+'”'+(kids?' and its '+kids+' sub-item'+(kids>1?'s':'')+'':'')+
+    ' will be permanently removed. This cannot be undone.',
+    'Delete',
+    ()=>{ deleteNode(modalNodeId); closeTaskModal(); toast('Task deleted.'); }
+  );
+}
+
+/* ---------- generic confirm dialog ---------- */
+let confirmFn=null;
+function confirmDialog(title, body, actionLabel, fn){
+  document.getElementById('cfTitle').textContent=title;
+  document.getElementById('cfBody').textContent=body;
+  document.getElementById('cfAction').textContent=actionLabel||'Confirm';
+  confirmFn=fn;
+  document.getElementById('confirmScrim').classList.add('open');
+}
+function closeConfirm(){ document.getElementById('confirmScrim').classList.remove('open'); confirmFn=null; }
+function runConfirm(){ const fn=confirmFn; closeConfirm(); if(fn) fn(); }
+
+/* ============================================================
+   TO-DO LIST
+   ============================================================ */
+let viewDate = todayKey();   // which day is shown in the panel
+
+function todosFor(key){ return state.todos[key] || (state.todos[key]=[]); }
+
+/* On launch / new day: carry postponed items forward to the literal next day. */
+function rollForwardPostponed(){
+  const today=todayKey();
+  const last=state.lastOpened;
+  // Walk every stored day strictly before today; push postponed items to day+1.
+  const keys=Object.keys(state.todos).filter(k=>k<today).sort();
+  keys.forEach(k=>{
+    const items=state.todos[k];
+    items.forEach(it=>{
+      if(it.state==='postponed' && !it._rolled){
+        const next=addDaysKey(k,1);
+        const dst=todosFor(next);
+        // avoid duplicating if already carried
+        if(!dst.some(d=>d._origin===it.id)){
+          dst.push({id:uid(), text:it.text, state:'open',
+                    carriedFrom:k, _origin:it.id, note:''});
+        }
+        it._rolled=true;   // mark source so we don't roll it again
+      }
+    });
+  });
+  state.lastOpened=today;
+}
+
+function addTodo(text){
+  text=text.trim(); if(!text) return;
+  todosFor(viewDate).push({id:uid(), text, state:'open', note:''});
+  renderTodos(); scheduleSave();
+}
+function setTodoState(id, s){
+  const list=todosFor(viewDate);
+  const it=list.find(x=>x.id===id); if(!it) return;
+  it.state = it.state===s ? 'open' : s;   // toggle off if same
+  // when newly postponed, immediately roll forward to next calendar day
+  if(it.state==='postponed'){
+    const next=addDaysKey(viewDate,1);
+    const dst=todosFor(next);
+    if(!dst.some(d=>d._origin===it.id)){
+      dst.push({id:uid(),text:it.text,state:'open',carriedFrom:viewDate,_origin:it.id,note:''});
+    }
+    it._rolled=true;
+  }
+  // a pulled-in (linked) item drives the real checklist item's done state both ways
+  if(it.linked && it.src){
+    const hit=findCheckItem(it.src.p, it.src.n, it.src.c);
+    if(hit){
+      if(it.state!=='abandoned' && hit.item.abandoned) clearAbandonFromTask(hit.node, hit.item);
+      hit.item.done = (it.state==='completed');
+      if(state.activeProjectId===it.src.p) renderTree();
+      saveProjectById(it.src.p);
+    }
+  }
+  renderTodos(); scheduleSave();
+}
+function deleteTodo(id){
+  state.todos[viewDate]=todosFor(viewDate).filter(x=>x.id!==id);
+  renderTodos(); scheduleSave();
+}
+function editTodoText(id, text){
+  const it=todosFor(viewDate).find(x=>x.id===id); if(!it) return;
+  it.text=text.trim()||it.text; scheduleSave();
+}
+
+function renderTodos(){
+  const isToday = viewDate===todayKey();
+  document.getElementById('todoDateLabel').innerHTML =
+    (isToday?'<b>Today</b> · ':'') + prettyDate(viewDate);
+
+  const banner=document.getElementById('viewingBanner');
+  if(isToday){ banner.style.display='none'; }
+  else{
+    banner.style.display='flex';
+    banner.querySelector('span').textContent='Viewing '+prettyDate(viewDate);
+  }
+
+  const ul=document.getElementById('todoList');
+  ul.innerHTML='';
+  const items=todosFor(viewDate);
+  if(!items.length){
+    ul.innerHTML='<div class="todo-empty">Nothing here yet. Add a task above.</div>';
+    return;
+  }
+  // keep pulled-in (linked) items in step with the real checklist item they point at
+  items.forEach(it=>{
+    if(it.linked && it.src){
+      const hit=findCheckItem(it.src.p, it.src.n, it.src.c);
+      if(!hit){ it.linked=false; delete it.src; }                         // source gone → becomes a normal to-do
+      else if(hit.item.abandoned){ it.state='abandoned'; if(!it.reason) it.reason=hit.item.abandonReason||''; }
+      else if(it.state==='abandoned'){ it.state='open'; }                 // un-abandoned in the project
+      else it.state = hit.item.done ? 'completed' : (it.state==='completed' ? 'open' : it.state);
+    }
+  });
+  items.forEach((it,idx)=>{
+    const li=document.createElement('li');
+    li.className='todo-item '+(it.state!=='open'?it.state:'');
+    li.dataset.idx=idx; li.dataset.id=it.id;
+    if(it.state==='abandoned' && it.reason) li.title='Abandoned — reason: '+it.reason;
+
+    const grip=document.createElement('span');
+    grip.className='todo-grip'; grip.innerHTML=svg('grip'); grip.title='Drag to reorder';
+    grip.addEventListener('mousedown',()=>{ li.draggable=true; });
+    grip.addEventListener('mouseup',()=>{ li.draggable=false; });
+    li.appendChild(grip);
+
+    const txt=document.createElement('div');
+    txt.className='todo-text'; txt.contentEditable='true'; txt.spellcheck=false;
+    txt.textContent=it.text;
+    txt.addEventListener('blur',()=>editTodoText(it.id,txt.textContent));
+    txt.addEventListener('keydown',e=>{ if(e.key==='Enter'){e.preventDefault();txt.blur();} });
+    li.appendChild(txt);
+
+    if(it.carriedFrom){
+      const c=document.createElement('span');
+      c.className='carried'; c.textContent='carried over';
+      c.title='Postponed from '+prettyDate(it.carriedFrom);
+      li.appendChild(c);
+    }
+
+    if(it.linked){
+      const l=document.createElement('span'); l.className='linked'; l.innerHTML=svg('layers')+'from project';
+      const hit=it.src && findCheckItem(it.src.p, it.src.n, it.src.c);
+      if(hit) l.title='Linked to “'+hit.item.text+'” in '+hit.project.name+'. Completing it here ticks it there too.';
+      li.appendChild(l);
+    }
+
+    const states=document.createElement('div');
+    states.className='todo-states';
+    states.appendChild(stateBtn('check','done','Mark completed', it.state==='completed', ()=>setTodoState(it.id,'completed')));
+    states.appendChild(stateBtn('clock','post','Defer to next day', it.state==='postponed', ()=>setTodoState(it.id,'postponed')));
+    states.appendChild(stateBtn('ban','aband','Abandon', it.state==='abandoned', ()=>requestAbandon(it.id)));
+    states.appendChild(stateBtn('trash','del','Delete', false, ()=>deleteTodo(it.id)));
+    li.appendChild(states);
+
+    setupTodoDrag(li, it.id);
+    ul.appendChild(li);
+  });
+}
+
+/* ---------- to-do drag & drop ---------- */
+let todoDragId=null;
+function setupTodoDrag(li, id){
+  li.addEventListener('dragstart',e=>{
+    todoDragId=id; e.dataTransfer.effectAllowed='move';
+    setTimeout(()=>li.classList.add('dragging'),0);
+  });
+  li.addEventListener('dragend',()=>{
+    li.classList.remove('dragging'); li.draggable=false; todoDragId=null;
+    clearTodoMarks();
+  });
+  li.addEventListener('dragover',e=>{
+    e.preventDefault(); if(!todoDragId||todoDragId===id) return;
+    clearTodoMarks();
+    const r=li.getBoundingClientRect();
+    li.classList.add((e.clientY-r.top) < r.height/2 ? 'drop-before':'drop-after');
+  });
+  li.addEventListener('dragleave',()=>li.classList.remove('drop-before','drop-after'));
+  li.addEventListener('drop',e=>{
+    e.preventDefault(); if(!todoDragId||todoDragId===id){ clearTodoMarks(); return; }
+    const before=li.classList.contains('drop-before');
+    moveTodo(todoDragId, id, before); clearTodoMarks();
+  });
+}
+function clearTodoMarks(){
+  document.querySelectorAll('.todo-item.drop-before,.todo-item.drop-after')
+    .forEach(el=>el.classList.remove('drop-before','drop-after'));
+}
+function moveTodo(dragId, targetId, before){
+  const list=todosFor(viewDate);
+  const from=list.findIndex(x=>x.id===dragId);
+  if(from<0) return;
+  const [moved]=list.splice(from,1);
+  let to=list.findIndex(x=>x.id===targetId);
+  if(to<0){ list.push(moved); }
+  else{ list.splice(before?to:to+1, 0, moved); }
+  renderTodos(); scheduleSave();
+}
+function stateBtn(icon,cls,title,active,fn){
+  const b=document.createElement('button');
+  b.className='sbtn '+cls+(active?' active':'');
+  b.title=title; b.innerHTML=svg(icon); b.onclick=fn; return b;
+}
+
+/* ---------- history popup ---------- */
+function openHistory(){
+  const box=document.getElementById('histBody');
+  box.innerHTML='';
+  const keys=Object.keys(state.todos).filter(k=>todosFor(k).length).sort().reverse();
+  if(!keys.length){ box.innerHTML='<div class="todo-empty">No past tasks recorded yet.</div>'; }
+  keys.forEach(k=>{
+    const day=document.createElement('div'); day.className='hist-day';
+    const h=document.createElement('h4'); h.textContent=prettyDate(k);
+    if(k===todayKey()) h.textContent+='  (today)';
+    day.appendChild(h);
+    todosFor(k).forEach(it=>{
+      const row=document.createElement('div');
+      row.className='hist-item '+(it.state!=='open'?it.state:'');
+      const tag=document.createElement('span');
+      tag.className='tag '+(it.state==='open'?'open':it.state);
+      tag.textContent = it.state==='open'?'open':it.state;
+      const t=document.createElement('span'); t.className='txt'; t.textContent=it.text;
+      row.appendChild(tag); row.appendChild(t);
+      day.appendChild(row);
+    });
+    box.appendChild(day);
+  });
+  document.getElementById('histScrim').classList.add('open');
+}
+function closeHistory(){ document.getElementById('histScrim').classList.remove('open'); }
+
+/* ============================================================
+   CALENDAR
+   ============================================================ */
+const MONTHS=['January','February','March','April','May','June','July',
+              'August','September','October','November','December'];
+const DOW=['Su','Mo','Tu','We','Th','Fr','Sa'];
+let calMode='month';                 // 'month' | 'year'
+let calYear=new Date().getFullYear();
+let calMonth=new Date().getMonth();   // 0-11
+
+function dayHasTodos(key){ return (state.todos[key]||[]).length>0; }
+
+/* build the 42-cell (6-week) matrix for a given year/month */
+function monthMatrix(year, month){
+  const cells=[];
+  const startDow=new Date(year,month,1).getDay();
+  const daysIn=new Date(year,month+1,0).getDate();
+  const prevDays=new Date(year,month,0).getDate();
+  for(let i=0;i<42;i++){
+    let dayNum,key,muted=false;
+    if(i<startDow){ dayNum=prevDays-startDow+1+i; muted=true; key=ymd(new Date(year,month-1,dayNum)); }
+    else if(i>=startDow+daysIn){ dayNum=i-startDow-daysIn+1; muted=true; key=ymd(new Date(year,month+1,dayNum)); }
+    else{ dayNum=i-startDow+1; key=ymd(new Date(year,month,dayNum)); }
+    cells.push({dayNum,key,muted});
+  }
+  return cells;
+}
+
+function renderCalendar(){
+  annotateTree();
+  const dots=calendarDots();
+  const title=document.getElementById('calTitle');
+  const grid=document.getElementById('calGrid');
+  const yg=document.getElementById('yearGrid');
+  document.getElementById('segMonth').classList.toggle('active',calMode==='month');
+  document.getElementById('segYear').classList.toggle('active',calMode==='year');
+  const tKey=todayKey();
+
+  if(calMode==='month'){
+    grid.style.display='grid'; yg.style.display='none';
+    title.textContent=MONTHS[calMonth]+' '+calYear;
+    grid.innerHTML='';
+    DOW.forEach(d=>{ const h=document.createElement('div'); h.className='cal-dow'; h.textContent=d; grid.appendChild(h); });
+    monthMatrix(calYear,calMonth).forEach(c=>{
+      const cell=document.createElement('button');
+      cell.className='cal-cell'+(c.muted?' muted':'')+(c.key===tKey?' today':'')+(c.key===viewDate?' selected':'');
+      cell.textContent=c.dayNum;
+      const mlist=dots[c.key];
+      if(mlist && mlist.length){
+        const wrap=document.createElement('span'); wrap.className='tdots';
+        const MAX=4;
+        mlist.slice(0,MAX).forEach(t=>{
+          const p=document.createElement('span'); p.className='tdot'; p.style.background=t.color; wrap.appendChild(p);
+        });
+        if(mlist.length>MAX){
+          const more=document.createElement('span'); more.className='tmore'; more.textContent='+'+(mlist.length-MAX); wrap.appendChild(more);
+        }
+        cell.appendChild(wrap);
+        cell.title=mlist.map(t=>t.name+(t.start?' ('+t.start+(t.end?'–'+t.end:'')+')':'')).join('\n');
+      }
+      cell.onclick=()=>selectDate(c.key);
+      grid.appendChild(cell);
+    });
+  }else{
+    grid.style.display='none'; yg.style.display='grid';
+    title.textContent=String(calYear);
+    yg.innerHTML='';
+    const now=new Date();
+    for(let m=0;m<12;m++){
+      const mm=document.createElement('div'); mm.className='mini-month';
+      const mt=document.createElement('div');
+      mt.className='mini-title'+((m===now.getMonth()&&calYear===now.getFullYear())?' cur':'');
+      mt.textContent=MONTHS[m];
+      mm.appendChild(mt);
+      const dowRow=document.createElement('div'); dowRow.className='mini-dow-row';
+      DOW.forEach(d=>{ const e=document.createElement('div'); e.className='mini-dow'; e.textContent=d[0]; dowRow.appendChild(e); });
+      mm.appendChild(dowRow);
+      const days=document.createElement('div'); days.className='mini-week';
+      monthMatrix(calYear,m).forEach(c=>{
+        const d=document.createElement('div');
+        d.className='mini-day'+(c.muted?' muted':'')+(c.key===tKey?' today':'')+(c.key===viewDate?' selected':'');
+        d.textContent=c.dayNum;
+        if(!c.muted){
+          const ylist=dots[c.key];
+          if(ylist && ylist.length){
+            const wrap=document.createElement('span'); wrap.className='mtdots';
+            const MAX=4;
+            ylist.slice(0,MAX).forEach(t=>{
+              const p=document.createElement('span'); p.className='mtdot'; p.style.background=t.color; wrap.appendChild(p);
+            });
+            d.appendChild(wrap);
+            d.title=ylist.map(t=>t.name).join('\n');
+          }
+        }
+        d.onclick=()=>{ if(!c.muted){ calMonth=m; selectDate(c.key); } };
+        days.appendChild(d);
+      });
+      mm.appendChild(days);
+      mm.querySelector('.mini-title').onclick=()=>{ calMonth=m; calMode='month'; renderCalendar(); };
+      yg.appendChild(mm);
+    }
+  }
+}
+function selectDate(key){
+  viewDate=key;
+  // sync calendar view to the selected month
+  const [y,m]=key.split('-').map(Number);
+  calYear=y; calMonth=m-1;
+  renderTodos(); renderCalendar();
+}
+function calPrev(){
+  if(calMode==='month'){ calMonth--; if(calMonth<0){calMonth=11;calYear--;} }
+  else calYear--;
+  renderCalendar();
+}
+function calNext(){
+  if(calMode==='month'){ calMonth++; if(calMonth>11){calMonth=0;calYear++;} }
+  else calYear++;
+  renderCalendar();
+}
+function calToday(){
+  const n=new Date(); calYear=n.getFullYear(); calMonth=n.getMonth(); calMode='month';
+  selectDate(todayKey());
+}
+
+/* ============================================================
+   DOM SCAFFOLD
+   ============================================================ */
+function buildShell(){
+  document.getElementById('root').innerHTML = `
+  <div class="topbar">
+    <div class="brand">
+      <span class="mark"><img src="data:image/png;base64,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" alt="Xtent Innovations"></span>
+      <div><h1>Project Dashboard</h1><small>XTENT INNOVATIONS</small></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="file-controls">
+      <span id="fileStatus" class="file-status"></span>
+      <span id="userEmail" class="user-email" title="Signed in"></span>
+      <button class="btn" id="btnPeople" title="Manage people: full names and initials" style="display:none">${svg('users')}People</button>
+      <button class="btn" id="btnProjects" title="Add, rename, archive projects, and assign members" style="display:none">${svg('layers')}Projects</button>
+      <button class="btn brandbtn" id="btnBackup" title="Download a JSON backup of everything you can see">${svg('download')}Backup</button>
+      <button class="btn" id="btnSignOut" title="Sign out of the dashboard">${svg('upload')}Sign out</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <!-- LEFT : projects -->
+    <section class="panel" id="projectPanel">
+      <div class="panel-head">
+        <div class="title"><span class="dot" style="background:var(--accent)"></span><select id="projSelect" class="proj-select" title="Switch project"></select></div>
+        <span id="roBanner" class="ro-pill" style="display:none">${svg('layers')}View only · managed by a manager</span>
+        <div class="spacer"></div>
+        <button class="btn primary" id="btnAddRoot" title="Add a top-level heading to this project" style="display:none">${svg('plus')}Add heading</button>
+      </div>
+      <div class="panel-body" id="projContainer"></div>
+    </section>
+
+    <!-- TOP RIGHT : personal space (to-do + assigned) -->
+    <section class="panel" id="todoPanel">
+      <div class="panel-head">
+        <div class="todo-tabs">
+          <button id="tabPersonal" class="active" title="Your own daily to-do list">${svg('list')}Personal</button>
+          <button id="tabAssigned" title="Checklist items assigned to you across your projects">${svg('users')}Assigned to me <span id="assignedPill" class="pill" style="display:none">0</span></button>
+        </div>
+        <div class="spacer"></div>
+        <span id="todoDateLabel" class="todo-date"></span>
+        <button class="ibtn accent" id="btnHistory" title="See all past tasks" style="margin-left:8px">${svg('history')}</button>
+      </div>
+      <div class="panel-body">
+        <div id="todoPersonal">
+          <div id="viewingBanner" class="viewing-banner" style="display:none">
+            ${svg('calendar')}<span></span>
+            <button class="btn ghost" id="btnBackToday" style="padding:3px 9px;font-size:12px">Back to today</button>
+          </div>
+          <div class="todo-add">
+            <input id="todoInput" type="text" placeholder="Add a task and press Enter…" autocomplete="off">
+            <button class="btn primary" id="btnAddTodo">${svg('plus')}Add</button>
+          </div>
+          <ul id="todoList" class="todo-list"></ul>
+          <div class="legend">
+            <span><i style="background:var(--done)"></i>Completed</span>
+            <span><i style="background:var(--postpone)"></i>Deferred to next day</span>
+            <span><i style="background:var(--abandon)"></i>Abandoned</span>
+          </div>
+        </div>
+        <div id="todoAssigned" style="display:none"></div>
+      </div>
+    </section>
+
+    <!-- BOTTOM RIGHT : calendar -->
+    <section class="panel" id="calPanel">
+      <div class="panel-head">
+        <div class="title"><span class="dot" style="background:var(--teal)"></span>Calendar</div>
+        <div class="spacer"></div>
+        <div class="seg">
+          <button id="segMonth">Month</button>
+          <button id="segYear">Year</button>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="cal-head" style="margin-bottom:10px">
+          <button class="ibtn" id="calPrev">${svg('chevL')}</button>
+          <div class="cal-title" id="calTitle"></div>
+          <button class="ibtn" id="calNext">${svg('chevR')}</button>
+          <div class="spacer" style="flex:1"></div>
+          <button class="btn ghost" id="calToday" style="font-size:12px;padding:5px 10px">Today</button>
+        </div>
+        <div id="calGrid" class="cal-grid"></div>
+        <div id="yearGrid" class="year-grid" style="display:none"></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- TASK MODAL -->
+  <div class="scrim" id="taskScrim">
+    <div class="modal">
+      <div class="modal-head">
+        <input type="text" id="tmName" class="modal-title-input" placeholder="Task name" title="Click to edit the task name"><div class="spacer"></div>
+        <button class="ibtn" id="tmClose">${svg('x')}</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-cols">
+        <div class="modal-col left">
+        <div class="field"><label>Details</label>
+          <textarea id="tmDetails" rows="5" placeholder="Specs, requirements, and a description of this task — a shared reference for everyone working on it."></textarea></div>
+        <div class="field"><label>Notes</label>
+          <textarea id="tmNotes" rows="4" placeholder="Notes that come up as the task progresses…"></textarea></div>
+        <div class="field">
+          <div class="date-row">
+            <div class="dc-col"><label>Start date</label>
+              <input type="date" id="tmStartDate"></div>
+            <div class="dc-col"><label>End date</label>
+              <input type="date" id="tmEndDate"></div>
+            <div class="dc-color"><label>Colour</label>
+              <div class="circle-wrap">
+                <button type="button" class="color-circle" id="tmColorBtn" title="Click to change the calendar colour"></button>
+                <button type="button" class="color-reset" id="tmColorReset" title="Reset to the automatic colour">${svg('history')}</button>
+                <input type="color" id="tmColor" style="display:none">
+              </div>
+            </div>
+          </div>
+          <label class="time-toggle" style="margin-top:12px;margin-bottom:0">
+            <input type="checkbox" id="tmHasTime"> Add start / end time</label>
+          <div class="dt-row" id="tmTimeRow" style="margin-top:9px;display:none">
+            <input type="time" id="tmStart"><span class="color-hint">to</span><input type="time" id="tmEnd">
+          </div>
+        </div>
+        <div class="field"><label>Status</label>
+          <div class="state-row">
+            <button class="state-pick" id="pick-completed">${svg('check')}Completed</button>
+            <button class="state-pick" id="pick-postponed">${svg('clock')}Postponed</button>
+            <button class="state-pick" id="pick-abandoned">${svg('ban')}Abandoned</button>
+          </div>
+        </div>
+        <div class="field conditional" id="completionField"><label>Completion details</label>
+          <textarea id="tmCompletion" rows="2" placeholder="How / when it was completed…"></textarea></div>
+        <div class="field conditional" id="reasonField"><label id="reasonLabel">Reason</label>
+          <textarea id="tmReason" rows="2" placeholder="Reason…"></textarea></div>
+        </div><!-- /modal-col left -->
+        <div class="modal-col right">
+          <div class="field checklist-field">
+            <label>To-do for this task</label>
+            <div class="checklist" id="tmChecklist"></div>
+            <div class="checklist-add">
+              <input type="text" id="tmCheckInput" placeholder="Add an item and press Enter…" autocomplete="off">
+              <button class="btn" id="tmCheckAdd" type="button">${svg('plus')}Add</button>
+            </div>
+          </div>
+        </div><!-- /modal-col right -->
+        </div><!-- /modal-cols -->
+      </div>
+      <div class="modal-foot">
+        <button class="btn danger" id="tmDelete">${svg('trash')}Delete task</button>
+        <div class="spacer"></div>
+        <button class="btn" id="tmCancel">Cancel</button>
+        <button class="btn primary" id="tmSave">${svg('check')}Save</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONFIRM MODAL -->
+  <div class="scrim confirm" id="confirmScrim">
+    <div class="modal">
+      <div class="modal-head"><h3 id="cfTitle">Confirm</h3></div>
+      <div class="modal-body"><p id="cfBody"></p></div>
+      <div class="modal-foot">
+        <div class="spacer"></div>
+        <button class="btn" id="cfCancel">Cancel</button>
+        <button class="btn primary" id="cfAction" style="background:var(--abandon);border-color:var(--abandon)">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORY MODAL -->
+  <div class="scrim" id="histScrim">
+    <div class="modal">
+      <div class="modal-head"><h3>Past tasks</h3><div class="spacer"></div>
+        <button class="ibtn" id="histClose">${svg('x')}</button></div>
+      <div class="modal-body" id="histBody" style="max-height:60vh"></div>
+    </div>
+  </div>
+
+  <!-- PROJECTS MANAGER MODAL -->
+  <div class="scrim" id="projScrim">
+    <div class="modal">
+      <div class="modal-head"><h3>Manage projects</h3><div class="spacer"></div>
+        <button class="ibtn" id="projMgrClose">${svg('x')}</button></div>
+      <div class="modal-body" style="max-height:62vh">
+        <div class="proj-mgr-add">
+          <input type="text" id="pmNewName" placeholder="New project name" autocomplete="off">
+          <button class="btn primary" id="pmAddBtn">${svg('plus')}Add project</button>
+        </div>
+        <div id="projMgrBody"></div>
+      </div>
+      <div class="modal-foot">
+        <div class="spacer"></div>
+        <button class="btn primary" id="projMgrDone">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PEOPLE MODAL (manager: names + initials) -->
+  <div class="scrim" id="memScrim">
+    <div class="modal">
+      <div class="modal-head"><h3>People</h3><div class="spacer"></div>
+        <button class="ibtn" id="memClose">${svg('x')}</button></div>
+      <div class="modal-body" style="max-height:64vh">
+        <div class="mem-hint">Set each person's full name and initials. Initials fill in automatically as you type a name (up to 3 letters; duplicates get a number) — you can also type your own. Logins themselves are created in Supabase → Authentication → Users.</div>
+        <div id="memBody"></div>
+      </div>
+      <div class="modal-foot">
+        <div class="spacer"></div>
+        <button class="btn primary" id="memDone">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROJECT MEMBERS MODAL (manager: who is on this project) -->
+  <div class="scrim" id="pmemScrim">
+    <div class="modal">
+      <div class="modal-head"><h3 id="pmemTitle">Project members</h3><div class="spacer"></div>
+        <button class="ibtn" id="pmemClose">${svg('x')}</button></div>
+      <div class="modal-body" style="max-height:64vh">
+        <div class="mem-hint">Tick everyone who should be able to see and work on this project. People who aren't ticked won't see it at all.</div>
+        <input type="text" id="pmemFilter" class="picker-filter" placeholder="Filter by name, initials, or email…" autocomplete="off">
+        <div id="pmemList" class="picker-list"></div>
+      </div>
+      <div class="modal-foot">
+        <div class="spacer"></div>
+        <button class="btn" id="pmemCancel">Cancel</button>
+        <button class="btn primary" id="pmemSave">${svg('check')}Save members</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABANDON REASON MODAL -->
+  <div class="scrim" id="abandonScrim">
+    <div class="modal" style="width:440px">
+      <div class="modal-head"><h3 id="abTitle">Abandon this to-do?</h3><div class="spacer"></div>
+        <button class="ibtn" id="abClose">${svg('x')}</button></div>
+      <div class="modal-body">
+        <div class="field"><label>To-do</label>
+          <div id="abItemText" style="font-size:14.5px;color:var(--ink);padding:2px 0;word-break:break-word"></div></div>
+        <div class="field"><label>Reason (optional)</label>
+          <textarea id="abReason" rows="3" placeholder="Why is this being abandoned? (you can leave this blank)"></textarea></div>
+        <div id="abLinkedNote" class="mem-hint" style="display:none;margin:0">This to-do came from a project. Abandoning it crosses it out in that project and records the reason in the task's Notes.</div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn" id="abRestore" style="display:none">${svg('history')}Restore</button>
+        <div class="spacer"></div>
+        <button class="btn" id="abCancel">Cancel</button>
+        <button class="btn primary" id="abConfirm" style="background:var(--abandon);border-color:var(--abandon)">${svg('ban')}Abandon</button>
+      </div>
+    </div>
+  </div>
+  `;
+}
+
+/* ============================================================
+   WIRING + INIT
+   ============================================================ */
+function wire(){
+  projContainer=document.getElementById('projContainer');
+
+  // account / backup
+  document.getElementById('btnBackup').onclick=exportJSON;
+  document.getElementById('btnSignOut').onclick=doSignOut;
+
+  // login gate
+  const authBtn=document.getElementById('authBtn');
+  if(authBtn) authBtn.onclick=()=>doSignIn(
+    document.getElementById('authEmail').value,
+    document.getElementById('authPass').value
+  );
+  ['authEmail','authPass'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el) el.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); authBtn && authBtn.click(); } });
+  });
+
+  // projects  (manager-only visibility is applied later by reflectPermissions(),
+  //            once the signed-in user's role is known)
+  document.getElementById('btnAddRoot').onclick=()=>addHeading(null);
+  const projSel=document.getElementById('projSelect');
+  if(projSel) projSel.onchange=()=>switchProject(projSel.value);
+  const btnProjects=document.getElementById('btnProjects');
+  if(btnProjects) btnProjects.onclick=openProjectManager;
+  const btnPeople=document.getElementById('btnPeople');
+  if(btnPeople) btnPeople.onclick=openMembersModal;
+  document.getElementById('projMgrClose').onclick=closeProjectManager;
+  document.getElementById('projMgrDone').onclick=closeProjectManager;
+  document.getElementById('pmAddBtn').onclick=()=>{
+    const inp=document.getElementById('pmNewName'); addProject(inp.value); inp.value=''; inp.focus();
+  };
+  document.getElementById('pmNewName').addEventListener('keydown',e=>{
+    if(e.key==='Enter'){ e.preventDefault(); const inp=e.target; addProject(inp.value); inp.value=''; }
+  });
+
+  // todo
+  const input=document.getElementById('todoInput');
+  document.getElementById('btnAddTodo').onclick=()=>{ addTodo(input.value); input.value=''; input.focus(); };
+  input.addEventListener('keydown',e=>{ if(e.key==='Enter'){ addTodo(input.value); input.value=''; } });
+  document.getElementById('btnHistory').onclick=openHistory;
+  document.getElementById('btnBackToday').onclick=()=>{ selectDate(todayKey()); };
+
+  // panel tabs
+  document.getElementById('tabPersonal').onclick=()=>setPanelTab('personal');
+  document.getElementById('tabAssigned').onclick=()=>setPanelTab('assigned');
+
+  // people modal
+  document.getElementById('memClose').onclick=closeMembersModal;
+  document.getElementById('memDone').onclick=closeMembersModal;
+
+  // project-members modal
+  document.getElementById('pmemClose').onclick=closeProjMembers;
+  document.getElementById('pmemCancel').onclick=closeProjMembers;
+  document.getElementById('pmemSave').onclick=saveProjMembers;
+  document.getElementById('pmemFilter').addEventListener('input',e=>renderProjMembers(e.target.value));
+
+  // abandon-reason modal
+  document.getElementById('abClose').onclick=closeAbandon;
+  document.getElementById('abCancel').onclick=closeAbandon;
+  document.getElementById('abConfirm').onclick=confirmAbandon;
+  document.getElementById('abRestore').onclick=restoreAbandon;
+
+  // calendar
+  document.getElementById('segMonth').onclick=()=>{ calMode='month'; renderCalendar(); };
+  document.getElementById('segYear').onclick=()=>{ calMode='year'; renderCalendar(); };
+  document.getElementById('calPrev').onclick=calPrev;
+  document.getElementById('calNext').onclick=calNext;
+  document.getElementById('calToday').onclick=calToday;
+
+  // task modal
+  document.getElementById('tmClose').onclick=closeTaskModal;
+  document.getElementById('tmCancel').onclick=closeTaskModal;
+  document.getElementById('tmSave').onclick=saveTaskModal;
+  document.getElementById('tmHasTime').onchange=function(){
+    setTimeVisible(this.checked);
+    if(this.checked){
+      const s=document.getElementById('tmStart'), e=document.getElementById('tmEnd');
+      if(!s.value) s.value='09:00';
+      if(!e.value) e.value='10:00';
+    }
+  };
+  document.getElementById('tmColorBtn').onclick=()=>document.getElementById('tmColor').click();
+  document.getElementById('tmColor').oninput=function(){
+    modalColor=this.value;
+    document.getElementById('tmColorBtn').style.background=modalColor;
+    document.getElementById('tmColorReset').style.display='';
+  };
+  document.getElementById('tmColorReset').onclick=()=>{
+    const f=findNode(modalNodeId); const auto=(f&&f.node._autoHex)||'#1746e0';
+    modalColor='';
+    document.getElementById('tmColor').value=auto;
+    document.getElementById('tmColorBtn').style.background=auto;
+    document.getElementById('tmColorReset').style.display='none';
+  };
+  document.getElementById('tmCheckAdd').onclick=addCheckItem;
+  document.getElementById('tmCheckInput').addEventListener('keydown',e=>{
+    if(e.key==='Enter'){ e.preventDefault(); addCheckItem(); }
+  });
+  document.getElementById('tmDelete').onclick=requestDeleteTask;
+  document.getElementById('pick-completed').onclick=()=>pickState('completed');
+  document.getElementById('pick-postponed').onclick=()=>pickState('postponed');
+  document.getElementById('pick-abandoned').onclick=()=>pickState('abandoned');
+
+  // confirm modal
+  document.getElementById('cfCancel').onclick=closeConfirm;
+  document.getElementById('cfAction').onclick=runConfirm;
+
+  // history modal
+  document.getElementById('histClose').onclick=closeHistory;
+
+  // close modals on scrim click / Esc
+  document.querySelectorAll('.scrim').forEach(s=>{
+    s.addEventListener('mousedown',e=>{ if(e.target===s) s.classList.remove('open'); });
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape') document.querySelectorAll('.scrim.open').forEach(s=>s.classList.remove('open'));
+  });
+}
+
+function renderAll(){
+  renderProjectSelect(); renderTree(); renderCalendar();
+  renderTodos(); renderAssigned();
+  setPanelTab(activeTab);
+}
+
+async function init(){
+  buildShell();
+  wire();
+
+  // No config yet → show the gate with a helpful message instead of a broken app.
+  if(!sb){
+    showAuthGate();
+    showAuthError('App is not configured. Open this file and set SUPABASE_URL and SUPABASE_PUBLISHABLE_KEY at the top of the script.');
+    return;
+  }
+
+  // Resume an existing session if there is one; otherwise show the login gate.
+  try{
+    const { data:{ session } } = await sb.auth.getSession();
+    if(session){ await enterApp(); }
+    else { showAuthGate(); }
+  }catch(e){
+    showAuthGate();
+    showAuthError('Could not reach the sign-in service. Check your connection and try again.');
+  }
+
+  // React to sign-out / token expiry happening in another tab.
+  sb.auth.onAuthStateChange((event)=>{
+    if(event==='SIGNED_OUT'){ location.reload(); }
+  });
+}
+document.addEventListener('DOMContentLoaded',init);
+})();
+
+</script>
+</body>
+</html>

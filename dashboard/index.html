@@ -87,12 +87,13 @@
   .btn.ghost:hover{background:var(--paper-2)}
 
   /* ===================== Layout grid ===================== */
+  #root{display:flex;flex-direction:column;height:100vh;min-height:0}
   .layout{
     display:grid;
-    grid-template-columns:minmax(380px,1fr) minmax(400px,1.05fr);
-    grid-template-rows:minmax(0,0.82fr) minmax(0,1.18fr);
+    grid-template-columns:minmax(300px,0.45fr) minmax(420px,0.55fr);
+    grid-template-rows:minmax(0,0.78fr) minmax(0,1.22fr);
     gap:14px;padding:14px;
-    height:calc(100vh - 57px);
+    flex:1;min-height:0;
   }
   .panel{
     background:var(--card);border:1px solid var(--line);border-radius:var(--r);
@@ -274,7 +275,8 @@
   .seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:var(--r-sm);overflow:hidden}
   .seg button{border:none;background:transparent;padding:5px 11px;font-size:12.5px;color:var(--ink-soft)}
   .seg button.active{background:var(--teal);color:#fff}
-  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  #calPanel .panel-body{display:flex;flex-direction:column}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);grid-template-rows:auto repeat(6,1fr);gap:4px;flex:1;min-height:0}
   .cal-dow{text-align:center;font-size:10.5px;color:var(--ink-soft);font-weight:700;padding:3px 0;letter-spacing:.6px}
   .cal-cell{
     min-height:46px;border:1px solid var(--line);border-radius:9px;background:#fff;
@@ -296,7 +298,7 @@
   .cal-cell .tmore{font-size:8.5px;font-weight:800;color:var(--ink-soft);line-height:1}
 
   /* full-year view: 12 mini month grids showing every day */
-  .year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;flex:1;min-height:0;align-content:start}
   .mini-month{border:1px solid var(--line);border-radius:11px;background:#fff;padding:10px 10px 12px;transition:.12s}
   .mini-month:hover{border-color:var(--accent-soft);box-shadow:0 4px 14px rgba(23,70,224,.08)}
   .mini-title{font-size:12.5px;font-weight:700;margin:0 2px 7px;color:var(--ink);display:flex;align-items:center;gap:6px}
@@ -612,6 +614,105 @@
   .note-balloon .nb-h{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
   .note-balloon .nb-body{font-size:13.5px;line-height:1.5;color:var(--ink);word-break:break-word}
   .note-balloon .nb-empty{color:var(--ink-soft);font-style:italic}
+  /* ===================== Project tabs (browser-style) ===================== */
+  .projtabs{display:flex;align-items:flex-end;gap:6px;padding:8px 14px 0;background:#fff;border-bottom:1px solid var(--line-strong);flex:none}
+  .pt-arrow{width:30px;height:34px;border:1px solid var(--line-strong);background:var(--card);color:var(--ink-soft);border-radius:var(--r-sm);display:none;place-items:center;flex:none;margin-bottom:1px}
+  .pt-arrow.show{display:grid}
+  .pt-arrow:hover{color:var(--ink);border-color:var(--accent-soft)}
+  .pt-arrow svg{width:16px;height:16px}
+  .pt-scroll{flex:1;display:flex;gap:6px;overflow-x:hidden;scroll-behavior:smooth;min-width:0}
+  .pt-tab{
+    flex:0 0 auto;min-width:96px;max-width:230px;
+    display:flex;align-items:center;gap:8px;
+    padding:9px 14px;border:1px solid var(--line-strong);border-bottom:none;
+    border-radius:10px 10px 0 0;background:var(--paper);color:var(--ink-soft);
+    font-size:13.5px;font-weight:700;cursor:pointer;position:relative;transition:.13s;white-space:nowrap
+  }
+  .pt-tab .pt-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .pt-tab .pt-dot{width:8px;height:8px;border-radius:50%;flex:none;background:var(--accent-soft)}
+  .pt-tab:hover{background:#fff;color:var(--ink)}
+  .pt-tab.active{background:var(--card);color:var(--ink);box-shadow:inset 0 2.5px 0 var(--accent)}
+  .pt-tab.guide{flex:0 0 auto;max-width:none}
+  .pt-tab.guide .pt-dot{background:var(--brand)}
+  .pt-tab.dragging{opacity:.45}
+  .pt-tab.drop-before{box-shadow:-2px 0 0 var(--accent)}
+  .pt-tab.drop-after{box-shadow:2px 0 0 var(--accent)}
+
+  /* ===================== Split personal / assigned panel ===================== */
+  .todo-split{display:grid;grid-template-columns:1fr 1fr;flex:1;min-height:0}
+  .todo-col{display:flex;flex-direction:column;min-width:0;min-height:0}
+  .todo-col + .todo-col{border-left:1px solid var(--line)}
+  .tc-head{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--line);background:#fff;flex:none;min-height:48px}
+  .tc-head .tc-title{display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px}
+  .tc-head .tc-title .dot{width:8px;height:8px;border-radius:50%}
+  .tc-head .spacer{flex:1}
+  .tc-head .todo-date{font-size:11px;text-align:right;line-height:1.3}
+  .tc-body{flex:1;min-height:0;overflow:auto;padding:13px 14px}
+  .tc-head .pill{font-size:10px;font-weight:800;background:var(--accent);color:#fff;border-radius:20px;padding:1px 7px;min-width:18px;text-align:center}
+
+  /* ===================== Meeting minutes ===================== */
+  #minScrim .modal{width:80vw;max-width:1200px;height:80vh;max-height:80vh;display:flex;flex-direction:column}
+  #minScrim .modal-body{flex:1;min-height:0;padding:0;display:flex;flex-direction:row;gap:0;flex-wrap:nowrap}
+  .mm-left{flex:1.05 1 0;display:flex;flex-direction:column;min-width:0;border-right:1px solid var(--line);padding:16px 18px;min-height:0}
+  .mm-right{flex:1 1 0;display:flex;flex-direction:column;min-width:0;background:var(--paper);min-height:0}
+  .mm-h{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;flex:none}
+  .mm-list-head{display:flex;align-items:center;padding:16px 18px 0}
+  .mm-title-input{font:inherit;font-size:15px;font-weight:700;color:var(--ink);border:1px solid var(--line-strong);border-radius:var(--r-sm);padding:9px 11px;background:#fff;margin-bottom:10px;flex:none}
+  .mm-title-input:focus{outline:2px solid var(--accent-soft);outline-offset:-1px}
+  .mm-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:6px;border:1px solid var(--line-strong);border-bottom:none;border-radius:var(--r-sm) var(--r-sm) 0 0;background:var(--paper);flex:none}
+  .mm-tool{border:1px solid transparent;background:transparent;color:var(--ink-soft);border-radius:6px;padding:5px 9px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:5px;min-width:30px;justify-content:center}
+  .mm-tool:hover{background:#fff;color:var(--ink);border-color:var(--line)}
+  .mm-tool svg{width:15px;height:15px}
+  .mm-editor{flex:1;min-height:120px;overflow:auto;border:1px solid var(--line-strong);border-radius:0 0 var(--r-sm) var(--r-sm);background:#fff;padding:12px 14px;font-size:14px;line-height:1.6;color:var(--ink)}
+  .mm-editor:focus{outline:none;border-color:var(--accent-soft);box-shadow:0 0 0 3px rgba(23,70,224,.12)}
+  .mm-editor:empty::before{content:attr(data-ph);color:var(--ink-soft);font-style:italic}
+  .mm-editor ul,.mm-editor ol,.mm-entry-body ul,.mm-entry-body ol{margin:6px 0;padding-left:22px}
+  .mm-editor h3,.mm-entry-body h3{font-size:15px;margin:10px 0 4px}
+  .mm-save-row{display:flex;gap:8px;align-items:center;margin-top:12px;flex:none}
+  .mm-save-row .spacer{flex:1}
+  .mm-editing-pill{font-size:11.5px;font-weight:700;color:var(--postpone);display:none;align-items:center;gap:5px}
+  .mm-editing .mm-editing-pill{display:inline-flex}
+  .mm-list{flex:1;min-height:0;overflow:auto;padding:12px 18px 18px;display:flex;flex-direction:column;gap:14px}
+  .mm-entry{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px 15px;box-shadow:0 1px 2px rgba(11,27,58,.04)}
+  .mm-entry-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+  .mm-entry-titles{flex:1;min-width:0}
+  .mm-entry-title{font-size:15px;font-weight:700;color:var(--ink);word-break:break-word}
+  .mm-entry-meta{font-size:11.5px;color:var(--ink-soft);margin-top:3px}
+  .mm-id{font-size:11px;font-weight:800;color:#fff;background:var(--accent);border-radius:20px;padding:2px 9px;flex:none}
+  .mm-entry-body{font-size:13.5px;line-height:1.6;color:var(--ink);word-break:break-word}
+  .mm-task{display:flex;align-items:flex-start;gap:8px;margin:3px 0}
+  .mm-task .mm-box{width:16px;height:16px;flex:none;border:1.5px solid var(--line-strong);border-radius:4px;margin-top:2px;display:inline-grid;place-items:center;cursor:pointer;background:#fff}
+  .mm-task .mm-box::after{content:"✓";font-size:11px;font-weight:900;line-height:1;color:#fff;opacity:0}
+  .mm-task[data-done="1"] .mm-box{background:var(--done);border-color:var(--done)}
+  .mm-task[data-done="1"] .mm-box::after{opacity:1}
+  .mm-task[data-done="1"] .mm-task-text{text-decoration:line-through;text-decoration-color:var(--done);color:var(--ink-soft)}
+  .mm-task .mm-task-text{flex:1;min-width:0}
+  .mm-empty{color:var(--ink-soft);font-style:italic;font-size:13.5px;text-align:center;padding:26px 12px;line-height:1.55}
+  .mm-empty{color:var(--ink-soft);font-style:italic;text-align:center;padding:30px 12px;font-size:14px;line-height:1.5}
+  .mm-entry-edit{font-size:12px;font-weight:700;color:var(--accent);border:1px solid #cfdcff;background:#eef3ff;border-radius:7px;padding:4px 10px;display:inline-flex;align-items:center;gap:5px;flex:none}
+  .mm-entry-edit:hover{background:#e0e9ff}
+  .mm-entry-edit svg{width:13px;height:13px}
+
+  /* ===================== Note balloon — two columns + checklist ===================== */
+  .note-balloon.wide{width:560px;max-width:92vw}
+  .note-balloon .nb-cols{display:flex;gap:16px}
+  .note-balloon .nb-col{flex:1;min-width:0}
+  .note-balloon .nb-col.right{border-left:1px solid var(--line);padding-left:16px}
+  .note-balloon .nb-check{display:flex;align-items:flex-start;gap:8px;padding:4px 2px}
+  .note-balloon .nb-check input{width:15px;height:15px;flex:none;margin-top:2px;accent-color:var(--accent);cursor:pointer}
+  .note-balloon .nb-check .nbc-text{flex:1;min-width:0;font-size:13px;word-break:break-word}
+  .note-balloon .nb-check.done .nbc-text{text-decoration:line-through;text-decoration-color:var(--done);color:var(--ink-soft)}
+  .note-balloon .nb-check.abandoned .nbc-text{text-decoration:line-through;text-decoration-color:var(--abandon);text-decoration-thickness:2px;color:var(--abandon)}
+  .note-balloon .nbc-who{display:inline-flex;gap:3px;margin-left:2px;flex:none}
+  .note-balloon .nbc-who .ini-chip{font-size:9px;min-width:16px;height:16px;padding:0 4px}
+  
+  /* flash a task row when opened from the Assigned-to-me list */
+  .node-row.flash-highlight{animation:nodeFlash 1.6s ease;border-radius:8px}
+  @keyframes nodeFlash{
+    0%,30%{background:#eef3ff;box-shadow:0 0 0 2px var(--accent) inset}
+    100%{background:transparent;box-shadow:none}
+  }
+
 </style>
 </head>
 <body>
@@ -701,6 +802,10 @@ let guideEditing = false;
 let activeTab = 'personal';
 
 function isGuideActive(){ return state.activeProjectId === GUIDE_ID; }
+
+/* ---- meeting minutes + realtime state ---- */
+let mmProjectId=null, mmEditingId=null;
+let rtChannels=[], lastTodosJSON='', pendingProj={}, pendingTodos=null;
 function myId(){ return currentUser ? currentUser.id : null; }
 function profileOf(uid){ return memberMap[uid] || null; }
 function initialsOf(uid){
@@ -806,6 +911,7 @@ function ensureProjects(){
     if(typeof p.name!=='string' || !p.name.trim()) p.name='Untitled project';
     if(!Array.isArray(p.tree)) p.tree=[];
     if(!p.calendarSelection || typeof p.calendarSelection!=='object') p.calendarSelection={};
+    if(!Array.isArray(p.meetings)) p.meetings=[];
     p.archived = !!p.archived;
   });
   // The built-in guide page is always a valid place to be.
@@ -821,7 +927,7 @@ function ensureProjects(){
     state.activeProjectId = actives[0].id;
   }
 }
-function guideProject(){ return {id:GUIDE_ID, name:'Start here / Guide', tree:[], calendarSelection:{}, archived:false, _guide:true}; }
+function guideProject(){ return {id:GUIDE_ID, name:'Start here / Guide', tree:[], calendarSelection:{}, meetings:[], archived:false, _guide:true}; }
 function activeProject(){
   ensureProjects();
   if(isGuideActive()) return guideProject();
@@ -877,7 +983,8 @@ function rowToProject(r){
     name: r.name || 'Untitled project',
     archived: !!r.archived,
     tree: Array.isArray(d.tree) ? d.tree : [],
-    calendarSelection: (d.calendarSelection && typeof d.calendarSelection==='object') ? d.calendarSelection : {}
+    calendarSelection: (d.calendarSelection && typeof d.calendarSelection==='object') ? d.calendarSelection : {},
+    meetings: Array.isArray(d.meetings) ? d.meetings : []
   };
 }
 
@@ -906,7 +1013,7 @@ async function pushNow(){
    concurrent edit. Each project's tree is one document, so true simultaneous
    edits to the SAME project are still last-write-wins. */
 let lastProjData = {};
-function projDataJSON(p){ return JSON.stringify(strip({ tree:p.tree, calendarSelection:p.calendarSelection })); }
+function projDataJSON(p){ return JSON.stringify(strip({ tree:p.tree, calendarSelection:p.calendarSelection, meetings:p.meetings || [] })); }
 function rememberProjData(p){ if(p) lastProjData[p.id] = projDataJSON(p); }
 
 /* Save a project's CONTENTS (the `data` column only). Allowed for anyone who
@@ -937,6 +1044,7 @@ async function supaSaveProjectMeta(p){
    items aren't rolled forward again after a reload on another device. */
 async function supaSaveTodos(){
   if(!sb || !currentUser) return;
+  lastTodosJSON = JSON.stringify(state.todos);     // remember our own write (realtime echo guard)
   const { error } = await sb.from('user_todos')
     .upsert({ user_id: currentUser.id, data: state.todos }, { onConflict:'user_id' });
   if(error){ toast('To-do save failed: '+error.message); setSyncStatus('Save error'); }
@@ -1283,7 +1391,7 @@ function buildAssignEditor(item){
     cb.onchange=()=>{
       if(cb.checked){ if(item.assignees.indexOf(uid)<0) item.assignees.push(uid); }
       else item.assignees=item.assignees.filter(x=>x!==uid);
-      renderChecklist();
+      renderChecklist(); persistChecklistLive();
     };
     const ini=document.createElement('span'); ini.className='ao-ini'; ini.textContent=initialsOf(uid);
     const nm=document.createElement('span'); nm.className='ao-name'; nm.textContent=nameOf(uid)+(uid===myId()?' (you)':'');
@@ -1348,7 +1456,7 @@ function pullToTodos(it){
   });
   toast('Added to your to-dos.');
   renderAssigned();
-  if(activeTab==='personal') renderTodos();
+  renderTodos();
   scheduleSave();
 }
 
@@ -1361,6 +1469,34 @@ async function setAssignedDone(it, done){
   renderAssigned();
   renderTodos();   // keep any linked personal copy in sync
   await saveProjectById(it.projectId);
+}
+
+/* jump to + briefly highlight a task in the tree (used by the Assigned-to-me list) */
+function expandTo(nodeId){
+  let found=false;
+  (function walk(list, ancestors){
+    (list||[]).forEach(n=>{
+      if(found) return;
+      if(n.id===nodeId){ ancestors.forEach(a=>a.collapsed=false); found=true; return; }
+      walk(n.children, ancestors.concat(n));
+    });
+  })(activeTree(), []);
+  return found;
+}
+function revealNodeInTree(projectId, nodeId){
+  if(state.activeProjectId!==projectId) switchProject(projectId);
+  expandTo(nodeId);
+  renderTree();
+  requestAnimationFrame(()=>{
+    const wrap=Array.from(projContainer.querySelectorAll('.node')).find(el=>el.dataset.id===nodeId);
+    const row=wrap && wrap.querySelector('.node-row');
+    if(row){
+      row.scrollIntoView({block:'center',behavior:'smooth'});
+      row.classList.remove('flash-highlight'); void row.offsetWidth;
+      row.classList.add('flash-highlight');
+      setTimeout(()=>row.classList.remove('flash-highlight'),1700);
+    }
+  });
 }
 
 function renderAssigned(){
@@ -1398,6 +1534,9 @@ function renderAssigned(){
         c.textContent=initialsOf(uid); c.title=nameOf(uid); who.appendChild(c);
       });
       main.appendChild(txt); main.appendChild(path); main.appendChild(who);
+	  main.style.cursor='pointer';
+      main.title='Show this task in the project tree';
+      main.onclick=()=>revealNodeInTree(it.projectId, it.nodeId);
 
       const pull=document.createElement('button');
       const added=todoLinkExists(viewDate, it.projectId, it.nodeId, it.checkId);
@@ -1485,21 +1624,64 @@ function restoreAbandon(){
 function openNoteBalloon(nodeId, anchorEl){
   closeNoteBalloon();
   const f=findNode(nodeId); if(!f) return;
-  const t=f.node.task||{};
+  const node=f.node;
+  const t=node.task||{};
   const details=(t.details||'').trim(), notes=(t.notes||'').trim();
   const fmt=s=>escapeHtml(s).replace(/\n/g,'<br>');
-  const bal=document.createElement('div'); bal.className='note-balloon'; bal.id='noteBalloon';
-  bal.innerHTML =
-    '<div class="nb-title">'+escapeHtml(f.node.name||'Task')+'</div>'+
+  const list=Array.isArray(node.checklist)?node.checklist:[];
+
+  const bal=document.createElement('div'); bal.className='note-balloon wide'; bal.id='noteBalloon';
+  const cols=document.createElement('div'); cols.className='nb-cols';
+
+  // left column — details + notes
+  const lc=document.createElement('div'); lc.className='nb-col';
+  lc.innerHTML =
+    '<div class="nb-title">'+escapeHtml(node.name||'Task')+'</div>'+
     '<div class="nb-sec"><div class="nb-h">Details</div><div class="nb-body">'+(details?fmt(details):'<span class="nb-empty">No details yet.</span>')+'</div></div>'+
     '<div class="nb-sec"><div class="nb-h">Notes</div><div class="nb-body">'+(notes?fmt(notes):'<span class="nb-empty">No notes yet.</span>')+'</div></div>';
+
+  // right column — live, interactive checklist
+  const rc=document.createElement('div'); rc.className='nb-col right';
+  const rh=document.createElement('div'); rh.className='nb-h'; rh.textContent='To-do'; rc.appendChild(rh);
+  if(!list.length){
+    const e=document.createElement('div'); e.className='nb-empty'; e.style.fontSize='13px'; e.textContent='No checklist items.';
+    rc.appendChild(e);
+  }else{
+    const editable=canEditProjectId(activeProject().id);
+    list.forEach(item=>{
+      if(!Array.isArray(item.assignees)) item.assignees=[];
+      const rowc=document.createElement('div');
+      rowc.className='nb-check'+(item.done?' done':'')+(item.abandoned?' abandoned':'');
+      const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=!!item.done;
+      cb.disabled=!!item.abandoned || !editable;
+      cb.title=item.abandoned?'Abandoned':(editable?'Tick to mark done':'View only');
+      cb.onchange=()=>{
+        item.done=cb.checked;
+        rowc.classList.toggle('done',cb.checked);
+        renderTree(); renderCalendar(); renderAssigned(); renderTodos(); scheduleSave();
+      };
+      const tx=document.createElement('span'); tx.className='nbc-text'; tx.textContent=item.text||'';
+      rowc.appendChild(cb); rowc.appendChild(tx);
+      if(item.assignees.length){
+        const who=document.createElement('span'); who.className='nbc-who';
+        item.assignees.forEach(u=>{ const c=document.createElement('span'); c.className='ini-chip'+(u===myId()?' mine':' muted'); c.textContent=initialsOf(u); c.title=nameOf(u); who.appendChild(c); });
+        rowc.appendChild(who);
+      }
+      if(item.abandoned && item.abandonReason) rowc.title='Abandoned — '+item.abandonReason;
+      rc.appendChild(rowc);
+    });
+  }
+
+  cols.appendChild(lc); cols.appendChild(rc);
+  bal.appendChild(cols);
   document.body.appendChild(bal);
+
   const r=anchorEl.getBoundingClientRect();
   const bw=bal.offsetWidth, bh=bal.offsetHeight;
-  let left=r.right+8, top=r.top;
-  if(left+bw>window.innerWidth-10) left=Math.max(10, r.left-bw-8);
-  if(top+bh>window.innerHeight-10)  top=Math.max(10, window.innerHeight-bh-10);
-  bal.style.left=left+'px'; bal.style.top=top+'px';
+  let bx=r.right+8, by=r.top;
+  if(bx+bw>window.innerWidth-10) bx=Math.max(10, r.left-bw-8);
+  if(by+bh>window.innerHeight-10)  by=Math.max(10, window.innerHeight-bh-10);
+  bal.style.left=bx+'px'; bal.style.top=by+'px';
   setTimeout(()=>{ document.addEventListener('mousedown',noteBalloonOutside,true); document.addEventListener('keydown',noteBalloonEsc,true); },0);
 }
 function noteBalloonOutside(e){ const b=document.getElementById('noteBalloon'); if(b && !b.contains(e.target)) closeNoteBalloon(); }
@@ -1508,6 +1690,260 @@ function closeNoteBalloon(){
   const b=document.getElementById('noteBalloon'); if(b) b.remove();
   document.removeEventListener('mousedown',noteBalloonOutside,true);
   document.removeEventListener('keydown',noteBalloonEsc,true);
+}
+
+/* ============================================================
+   MEETING MINUTES  (per-project, kept inside the project's data so
+   they ride realtime + backups). Saved entries are EDITABLE, not
+   deleted — load one back into the editor and re-save to revise it.
+   ============================================================ */
+function meetingsOf(pid){
+  const p=state.projects.find(x=>x.id===pid);
+  if(!p) return [];
+  if(!Array.isArray(p.meetings)) p.meetings=[];
+  return p.meetings;
+}
+function fmtStamp(iso){
+  if(!iso) return '';
+  const d=new Date(iso); if(isNaN(d.getTime())) return '';
+  return d.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})+' · '+
+         d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+}
+function openMeetingMinutes(){
+  if(isGuideActive()){ toast('Open a project to keep meeting minutes.'); return; }
+  const p=activeProject(); if(!p) return;
+  mmProjectId=p.id; mmEditingId=null;
+  const ttl=document.getElementById('minTitle'); if(ttl) ttl.textContent='Meeting minutes — '+(p.name||'Project');
+  mmNewEntry();
+  renderMinutesList();
+  document.getElementById('minScrim').classList.add('open');
+  setTimeout(()=>{ const el=document.getElementById('mmTitleInput'); if(el) el.focus(); },40);
+}
+function closeMeetingMinutes(){
+  document.getElementById('minScrim').classList.remove('open');
+  mmProjectId=null; mmEditingId=null;
+  flushPendingRealtime();
+}
+function mmNewEntry(){
+  mmEditingId=null;
+  const ti=document.getElementById('mmTitleInput'); if(ti) ti.value='';
+  const ed=document.getElementById('mmEditor'); if(ed) ed.innerHTML='';
+  const left=document.querySelector('#minScrim .mm-left'); if(left) left.classList.remove('mm-editing');
+}
+function loadMinutesForEdit(id){
+  if(!canEditProjectId(mmProjectId)){ toast('View only — projects are managed by a manager.'); return; }
+  const m=meetingsOf(mmProjectId).find(x=>x.id===id); if(!m) return;
+  mmEditingId=id;
+  document.getElementById('mmTitleInput').value=m.title||'';
+  document.getElementById('mmEditor').innerHTML=sanitizeHtml(m.body||'');
+  const left=document.querySelector('#minScrim .mm-left'); if(left) left.classList.add('mm-editing');
+  const ti=document.getElementById('mmTitleInput'); if(ti) ti.focus();
+}
+function saveCurrentMinutes(){
+  if(!mmProjectId) return;
+  if(!canEditProjectId(mmProjectId)){ toast('View only — projects are managed by a manager.'); return; }
+  const title=(document.getElementById('mmTitleInput').value||'').trim();
+  const bodyHtml=sanitizeHtml(document.getElementById('mmEditor').innerHTML||'');
+  const plain=stripTags(bodyHtml).trim();
+  if(!title && !plain){ toast('Add a title or some notes first.'); return; }
+  const arr=meetingsOf(mmProjectId);
+  const now=new Date().toISOString();
+  const me=myId()||null;
+  if(mmEditingId){
+    const m=arr.find(x=>x.id===mmEditingId);
+    if(m){ m.title=title; m.body=bodyHtml; m.updatedAt=now; m.updatedBy=me; }
+    toast('Minutes updated.');
+  }else{
+    arr.push({ id:uid(), title:title, body:bodyHtml, createdAt:now, createdBy:me, updatedAt:now, updatedBy:me });
+    toast('Minutes saved.');
+  }
+  saveProjectById(mmProjectId);
+  mmNewEntry();
+  renderMinutesList();
+}
+function renderMinutesList(){
+  const box=document.getElementById('mmList'); if(!box) return;
+  box.innerHTML='';
+  const arr=meetingsOf(mmProjectId);
+  if(!arr.length){
+    box.innerHTML='<div class="mm-empty">No minutes yet.<br>Write the first entry on the left and press “Save minutes”.</div>';
+    return;
+  }
+  const editable=canEditProjectId(mmProjectId);
+  // newest first; the friendly "Meeting #N" follows chronological order
+  arr.map((m,i)=>({m, num:i+1})).reverse().forEach(({m,num})=>{
+    const entry=document.createElement('div'); entry.className='mm-entry';
+    const head=document.createElement('div'); head.className='mm-entry-head';
+    const idtag=document.createElement('span'); idtag.className='mm-id'; idtag.textContent='Meeting #'+num;
+    const titles=document.createElement('div'); titles.className='mm-entry-titles';
+    const tt=document.createElement('div'); tt.className='mm-entry-title'; tt.textContent=m.title||'Untitled meeting';
+    const meta=document.createElement('div'); meta.className='mm-entry-meta';
+    let metaTxt=fmtStamp(m.createdAt);
+    const who=m.createdBy?nameOf(m.createdBy):''; if(who) metaTxt+=' · '+who;
+    if(m.updatedAt && m.updatedAt!==m.createdAt) metaTxt+=' · edited '+fmtStamp(m.updatedAt);
+    meta.textContent=metaTxt;
+    titles.appendChild(tt); titles.appendChild(meta);
+    head.appendChild(idtag); head.appendChild(titles);
+    if(editable){
+      const ed=document.createElement('button'); ed.className='mm-entry-edit'; ed.innerHTML=svg('edit')+'Edit';
+      ed.title='Load this entry into the editor to revise it'; ed.onclick=()=>loadMinutesForEdit(m.id);
+      head.appendChild(ed);
+    }
+    const body=document.createElement('div'); body.className='mm-entry-body'; body.dataset.mid=m.id;
+    body.innerHTML=sanitizeHtml(m.body||'')||'<span class="nb-empty" style="font-style:italic">No notes.</span>';
+    entry.appendChild(head); entry.appendChild(body);
+    box.appendChild(entry);
+  });
+}
+/* whitelist sanitiser for stored minutes HTML */
+function sanitizeHtml(html){
+  const tpl=document.createElement('div'); tpl.innerHTML=String(html||'');
+  const ALLOWED={B:1,STRONG:1,I:1,EM:1,U:1,UL:1,OL:1,LI:1,DIV:1,BR:1,SPAN:1,H3:1,P:1,A:1};
+  const DROP={SCRIPT:1,STYLE:1,IFRAME:1,OBJECT:1,EMBED:1,TEMPLATE:1,NOSCRIPT:1,LINK:1,META:1,HEAD:1,TITLE:1,SVG:1};
+  (function walk(node){
+    Array.prototype.slice.call(node.childNodes).forEach(ch=>{
+      if(ch.nodeType===8){ node.removeChild(ch); return; }   // strip comments
+      if(ch.nodeType!==1) return;                            // keep text nodes
+      if(DROP[ch.tagName]){ node.removeChild(ch); return; }  // drop these wholesale (content too)
+      walk(ch);                                              // clean descendants first
+      if(!ALLOWED[ch.tagName]){                              // unwrap other unknown elements
+        while(ch.firstChild) node.insertBefore(ch.firstChild, ch);
+        node.removeChild(ch);
+        return;
+      }
+      Array.prototype.slice.call(ch.attributes).forEach(a=>{
+        const n=a.name.toLowerCase(), v=String(a.value||'');
+        const keepClass = (n==='class' && /^(mm-task|mm-box|mm-task-text)(\s+(mm-task|mm-box|mm-task-text))*$/.test(v.trim()));
+        const keepData  = (n==='data-done');
+        const keepCE    = (n==='contenteditable');
+        const keepHref  = (ch.tagName==='A' && n==='href' && /^(https?:|mailto:)/i.test(v.trim()));
+        if(!(keepClass||keepData||keepCE||keepHref)) ch.removeAttribute(a.name);
+      });
+      if(ch.tagName==='A'){ ch.setAttribute('target','_blank'); ch.setAttribute('rel','noopener noreferrer'); }
+    });
+  })(tpl);
+  return tpl.innerHTML;
+}
+function stripTags(html){ const d=document.createElement('div'); d.innerHTML=String(html||''); return d.textContent||d.innerText||''; }
+function mmExec(cmd){
+  const ed=document.getElementById('mmEditor'); if(!ed) return;
+  ed.focus();
+  switch(cmd){
+    case 'bold':   document.execCommand('bold'); break;
+    case 'italic': document.execCommand('italic'); break;
+    case 'h3':     document.execCommand('formatBlock', false, 'H3'); break;
+    case 'ul':     document.execCommand('insertUnorderedList'); break;
+    case 'ol':     document.execCommand('insertOrderedList'); break;
+    case 'date':   document.execCommand('insertText', false, new Date().toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})); break;
+    case 'check':  document.execCommand('insertHTML', false,
+      '<div class="mm-task" data-done="0"><span class="mm-box" contenteditable="false"></span><span class="mm-task-text">\u200b</span></div>'); break;
+  }
+}
+
+/* ============================================================
+   REALTIME SYNC  (Supabase) — patches the screen in place when a
+   teammate changes a project or this user's to-dos change elsewhere,
+   without reloading and without disturbing what's being edited here.
+   Requires the projects + user_todos tables to be in the
+   supabase_realtime publication (see the setup notes).
+   ============================================================ */
+function isModalOpen(id){ const m=document.getElementById(id); return !!(m && m.classList.contains('open')); }
+function isAnyEditorOpen(){
+  if(isModalOpen('taskScrim') || isModalOpen('minScrim')) return true;
+  const ae=document.activeElement;
+  return !!(ae && (ae.isContentEditable || ae.tagName==='INPUT' || ae.tagName==='TEXTAREA'));
+}
+function lockedProjectIds(){
+  const ids=new Set();
+  if(isModalOpen('taskScrim') && modalNodeId && !isGuideActive()) ids.add(activeProject().id);
+  if(isModalOpen('minScrim') && mmProjectId) ids.add(mmProjectId);
+  const ae=document.activeElement;
+  if(ae && ae.isContentEditable && !isGuideActive()) ids.add(activeProject().id);   // inline rename / typing in the tree
+  return ids;
+}
+function projectIsLocked(pid){ return lockedProjectIds().has(pid); }
+
+function applyProjectRow(row){
+  const incoming=rowToProject(row);
+  const idx=state.projects.findIndex(p=>p.id===incoming.id);
+  if(idx<0){
+    state.projects.push(incoming); dbProjectIds.add(incoming.id);
+    rememberProjData(incoming);
+    renderProjectSelect();
+    return;
+  }
+  const cur=state.projects[idx];
+  cur.name=incoming.name; cur.archived=incoming.archived;
+  cur.tree=incoming.tree; cur.calendarSelection=incoming.calendarSelection; cur.meetings=incoming.meetings;
+  rememberProjData(cur);
+  renderProjectSelect();
+  if(state.activeProjectId===cur.id){ renderTree(); renderCalendar(); }
+  renderAssigned();
+  if(isModalOpen('minScrim') && mmProjectId===cur.id && !mmEditingId) renderMinutesList();
+}
+
+function onProjectChange(payload){
+  const evt=payload.eventType||payload.event;
+  if(evt==='DELETE'){
+    const id=payload.old && payload.old.id; if(!id) return;
+    const wasActive=(state.activeProjectId===id);
+    state.projects=state.projects.filter(p=>p.id!==id);
+    dbProjectIds.delete(id); delete lastProjData[id]; delete pendingProj[id];
+    if(wasActive) state.activeProjectId=null;
+    renderProjectSelect();
+    if(wasActive){ renderTree(); renderCalendar(); }
+    renderAssigned();
+    return;
+  }
+  const row=payload.new; if(!row || !row.id) return;
+  const d=(row.data && typeof row.data==='object') ? row.data : {};
+  const incomingJSON=JSON.stringify(strip({ tree:Array.isArray(d.tree)?d.tree:[], calendarSelection:(d.calendarSelection&&typeof d.calendarSelection==='object')?d.calendarSelection:{}, meetings:Array.isArray(d.meetings)?d.meetings:[] }));
+  const cur=state.projects.find(p=>p.id===row.id);
+  const sameData=(lastProjData[row.id]===incomingJSON);
+  const sameMeta=cur && cur.name===(row.name||'Untitled project') && (!!cur.archived===!!row.archived);
+  if(sameData && sameMeta) return;                       // our own echo / nothing new
+  if(projectIsLocked(row.id)){ pendingProj[row.id]=row; return; }   // don't clobber an open editor
+  applyProjectRow(row);
+}
+
+function onTodoChange(payload){
+  const row=payload.new; if(!row) return;
+  const data=(row.data && typeof row.data==='object') ? row.data : {};
+  const incomingJSON=JSON.stringify(data);
+  if(incomingJSON===lastTodosJSON) return;               // our own echo
+  const ae=document.activeElement;
+  if(isModalOpen('taskScrim') || (ae && ae.id==='todoInput')){ pendingTodos=data; return; }
+  state.todos=data; lastTodosJSON=incomingJSON;
+  renderTodos(); renderAssigned();
+}
+
+function flushPendingRealtime(){
+  if(isAnyEditorOpen()) return;
+  Object.keys(pendingProj).forEach(id=>{
+    const row=pendingProj[id];
+    if(row && !projectIsLocked(id)){ applyProjectRow(row); delete pendingProj[id]; }
+  });
+  if(pendingTodos){
+    state.todos=pendingTodos; lastTodosJSON=JSON.stringify(pendingTodos); pendingTodos=null;
+    renderTodos(); renderAssigned();
+  }
+}
+
+function stopRealtime(){ rtChannels.forEach(ch=>{ try{ sb.removeChannel(ch); }catch(e){} }); rtChannels=[]; }
+function startRealtime(){
+  if(!sb || !currentUser) return;
+  stopRealtime();
+  lastTodosJSON=JSON.stringify(state.todos||{});
+  try{
+    const projCh=sb.channel('rt-projects')
+      .on('postgres_changes', { event:'*', schema:'public', table:'projects' }, onProjectChange)
+      .subscribe();
+    rtChannels.push(projCh);
+    const todoCh=sb.channel('rt-todos')
+      .on('postgres_changes', { event:'*', schema:'public', table:'user_todos', filter:'user_id=eq.'+currentUser.id }, onTodoChange)
+      .subscribe();
+    rtChannels.push(todoCh);
+  }catch(e){ /* realtime not enabled yet — the app still works, just without live updates */ }
 }
 
 /* ---------- load (after login) ---------- */
@@ -1561,6 +1997,7 @@ async function supaLoad(){
   renderAll();
   reflectPermissions();
   supaSaveTodos();          // persist any roll-forward changes
+  startRealtime();          // live updates from teammates (no page reloads)
   setSyncStatus('Synced');
 }
 
@@ -1641,21 +2078,97 @@ let projContainer;
    The to-do panel is shared and does not change with the project.
    ============================================================ */
 
-/* the dropdown that switches the active project (active = non-archived) */
+/* the project tab strip (active = non-archived); the Guide tab is always first.
+   Kept named renderProjectSelect so all existing callers keep working. */
 function renderProjectSelect(){
-  const sel=document.getElementById('projSelect');
-  if(!sel) return;
   ensureProjects();
-  sel.innerHTML='';
-  const og=document.createElement('option');
-  og.value=GUIDE_ID; og.textContent='Start here / Guide';
-  sel.appendChild(og);
-  state.projects.filter(p=>!p.archived).forEach(p=>{
-    const o=document.createElement('option');
-    o.value=p.id; o.textContent=p.name;
-    sel.appendChild(o);
+  const scroll=document.getElementById('ptScroll');
+  const nameEl=document.getElementById('activeProjName');
+  if(nameEl) nameEl.textContent = isGuideActive() ? 'Start here / Guide' : (activeProject().name||'Project');
+  const bMin=document.getElementById('btnMinutes');
+  if(bMin) bMin.style.display = isGuideActive() ? 'none' : '';
+  if(!scroll) return;
+  scroll.innerHTML='';
+  const manager=canManageProjects();
+
+  function tab(id, label, isGuide){
+    const t=document.createElement('button');
+    t.className='pt-tab'+(isGuide?' guide':'')+(state.activeProjectId===id?' active':'');
+    t.dataset.pid=id;
+    const dot=document.createElement('span'); dot.className='pt-dot';
+    const nm=document.createElement('span'); nm.className='pt-name'; nm.textContent=label; nm.title=label;
+    t.appendChild(dot); t.appendChild(nm);
+    t.onclick=()=>switchProject(id);
+    if(!isGuide && manager) setupTabDrag(t, id);
+    scroll.appendChild(t);
+  }
+
+  tab(GUIDE_ID, 'Start here / Guide', true);
+  state.projects.filter(p=>!p.archived).forEach(p=> tab(p.id, p.name||'Untitled project', false));
+
+  setTimeout(()=>{
+    const act=scroll.querySelector('.pt-tab.active');
+    if(act && act.scrollIntoView) act.scrollIntoView({inline:'nearest',block:'nearest'});
+    updateTabArrows();
+  },0);
+}
+
+function updateTabArrows(){
+  const scroll=document.getElementById('ptScroll');
+  const l=document.getElementById('ptLeft'), r=document.getElementById('ptRight');
+  if(!scroll||!l||!r) return;
+  const overflow = scroll.scrollWidth > scroll.clientWidth + 2;
+  l.classList.toggle('show', overflow && scroll.scrollLeft > 2);
+  r.classList.toggle('show', overflow && (scroll.scrollLeft + scroll.clientWidth) < (scroll.scrollWidth - 2));
+}
+
+/* ---- drag-to-reorder project tabs (manager-only) ---- */
+let tabDragId=null;
+function clearTabMarks(){
+  document.querySelectorAll('#ptScroll .pt-tab').forEach(t=>t.classList.remove('drop-before','drop-after'));
+}
+function setupTabDrag(tab, id){
+  tab.draggable=true;
+  tab.addEventListener('dragstart',e=>{ tabDragId=id; e.dataTransfer.effectAllowed='move'; try{e.dataTransfer.setData('text/plain',id);}catch(_){} tab.classList.add('dragging'); });
+  tab.addEventListener('dragend',()=>{ tabDragId=null; tab.classList.remove('dragging'); clearTabMarks(); });
+  tab.addEventListener('dragover',e=>{
+    if(!tabDragId||tabDragId===id) return;
+    e.preventDefault();
+    const r=tab.getBoundingClientRect();
+    const after=(e.clientX - r.left) > r.width/2;
+    clearTabMarks();
+    tab.classList.add(after?'drop-after':'drop-before');
   });
-  sel.value=state.activeProjectId;
+  tab.addEventListener('dragleave',()=>tab.classList.remove('drop-before','drop-after'));
+  tab.addEventListener('drop',e=>{
+    if(!tabDragId||tabDragId===id) return;
+    e.preventDefault();
+    const r=tab.getBoundingClientRect();
+    const after=(e.clientX - r.left) > r.width/2;
+    moveProjectTab(tabDragId, id, after);
+    clearTabMarks();
+  });
+}
+function moveProjectTab(dragId, targetId, after){
+  if(!canManageProjects()) return;
+  if(dragId===GUIDE_ID || targetId===GUIDE_ID) return;   // the guide tab stays first
+  const arr=state.projects;
+  const from=arr.findIndex(p=>p.id===dragId); if(from<0) return;
+  const moved=arr.splice(from,1)[0];
+  let to=arr.findIndex(p=>p.id===targetId);
+  if(to<0){ arr.splice(from,0,moved); return; }
+  if(after) to+=1;
+  arr.splice(to,0,moved);
+  renderProjectSelect();
+  supaSaveProjectOrder();
+}
+async function supaSaveProjectOrder(){
+  if(!sb || !canManageProjects()) return;
+  const updates=state.projects.map((p,i)=>({ id:p.id, position:i })).filter(u=>dbProjectIds.has(u.id));
+  for(const u of updates){
+    const { error } = await sb.from('projects').update({ position:u.position }).eq('id', u.id);
+    if(error){ toast('Could not save tab order: '+error.message); break; }
+  }
 }
 
 function switchProject(id){
@@ -1806,7 +2319,7 @@ function addHeading(afterId){
     const f=findNode(afterId);
     f.list.splice(f.index+1,0,node);
   }
-  renderTree(); scheduleSave(); focusLabel(node.id);
+  renderTree(); scheduleSave(); openTaskModal(node.id);
 }
 /* add a child (subheading) under the given node */
 function addSubheading(parentId){
@@ -1815,7 +2328,7 @@ function addSubheading(parentId){
   f.node.collapsed=false;
   const node=makeNode('New subheading');
   f.node.children.push(node);
-  renderTree(); scheduleSave(); focusLabel(node.id);
+  renderTree(); scheduleSave(); openTaskModal(node.id);
 }
 function deleteNode(id){
   if(!requireProjectEdit()) return;
@@ -2029,18 +2542,21 @@ function renderNode(node, depth){
   cdot.className='node-dot'; cdot.style.background=node._color;
   cdot.title='Calendar colour for this branch';
 
-  /* editable label (read-only for members when projects are manager-only) */
+  /* label — read-only by default; double-click opens the task, the pencil renames in place */
   const label=document.createElement('div');
   label.className='node-label';
-  label.contentEditable = canEditProjects() ? 'true' : 'false';
+  label.contentEditable='false';
   label.spellcheck=false;
   label.dataset.label=node.id;
   label.textContent=node.name;
-  if(canEditProjects()) label.title='Click to rename';
+  label.title='Double-click to open · use the pencil to rename';
+  label.addEventListener('dblclick',()=>openTaskModal(node.id));
   label.addEventListener('blur',()=>{
-    if(!canEditProjects()){ label.textContent=node.name; return; }
-    const v=label.textContent.trim()||'Untitled';
-    label.textContent=v; node.name=v; scheduleSave();
+    label.contentEditable='false';
+    const v=label.textContent.trim();
+    if(!v){ label.textContent=node.name; return; }      // never accept an empty name
+    if(v!==node.name){ node.name=v; scheduleSave(); renderProjectSelect(); }
+    label.textContent=node.name;
   });
   label.addEventListener('keydown',e=>{
     if(e.key==='Enter'){ e.preventDefault(); label.blur(); }
@@ -2081,13 +2597,13 @@ function renderNode(node, depth){
       : 'Task start / end dates';
   }
 
-  /* action buttons: [+] heading  [J] subheading  [O] open task */
+  /* action buttons: [+] heading  [⤶] subheading  [✎] rename  [🗒] preview */
   const actions=document.createElement('div');
   actions.className='node-actions';
   actions.appendChild(iconBtn('plus','Add heading below','accent',()=>addHeading(node.id)));
   actions.appendChild(iconBtn('subPlus','Add subheading','accent',()=>addSubheading(node.id)));
-  actions.appendChild(iconBtn('gear','Open task details','accent',()=>openTaskModal(node.id)));
-  const noteBtn=iconBtn('notepad','View details & notes','accent',()=>{});
+  actions.appendChild(iconBtn('edit','Rename','accent',()=>startRename(node.id)));
+  const noteBtn=iconBtn('notepad','View details, notes & to-dos','accent',()=>{});
   noteBtn.onclick=()=>openNoteBalloon(node.id, noteBtn);
   actions.appendChild(noteBtn);
 
@@ -2116,6 +2632,16 @@ function iconBtn(icon,title,cls,fn){
   const b=document.createElement('button');
   b.className='ibtn '+(cls||''); b.title=title; b.innerHTML=svg(icon);
   b.onclick=fn; return b;
+}
+/* enter inline rename on a tree label (rejects an empty name on blur) */
+function startRename(id){
+  if(!requireProjectEdit()) return;
+  const el=document.querySelector('.node-label[data-label="'+id+'"]');
+  if(!el) return;
+  el.contentEditable='true';
+  el.focus();
+  const r=document.createRange(); r.selectNodeContents(el);
+  const sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
 }
 
 /* ---------- drag & drop reordering ---------- */
@@ -2183,7 +2709,13 @@ function moveNode(dragId, targetId, mode){
    ============================================================ */
 let modalNodeId=null;
 let modalColor='';                 // current colour override for the open modal ('' = automatic)
-let modalChecklist=[];             // working copy of the task's to-do list while the modal is open
+let modalChecklist=[];             // LIVE reference to the open task's checklist (edits save immediately)
+
+/* checklist edits save the instant they happen, so nothing is lost if the
+   modal is closed without pressing Save (the rest of the fields still use Save). */
+function persistChecklistLive(){
+  renderTree(); renderCalendar(); renderAssigned(); scheduleSave();
+}
 
 function renderChecklist(){
   const box=document.getElementById('tmChecklist');
@@ -2201,12 +2733,17 @@ function buildCheckItem(item){
 
   const cb=document.createElement('input');
   cb.type='checkbox'; cb.checked=!!item.done;
-  cb.onchange=()=>{ item.done=cb.checked; row.classList.toggle('done',cb.checked); };
+  cb.onchange=()=>{ item.done=cb.checked; row.classList.toggle('done',cb.checked); persistChecklistLive(); };
 
   const txt=document.createElement('div');
   txt.className='ci-text'; txt.contentEditable='true'; txt.spellcheck=false;
   txt.textContent=item.text;
   txt.addEventListener('input',()=>{ item.text=txt.textContent; });
+  txt.addEventListener('blur',()=>{
+    item.text=txt.textContent.trim();
+    if(!item.text){ const i=modalChecklist.indexOf(item); if(i>=0) modalChecklist.splice(i,1); renderChecklist(); }
+    persistChecklistLive();
+  });
   txt.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); txt.blur(); } });
 
   const who=document.createElement('span'); who.className='assignees';
@@ -2227,7 +2764,7 @@ function buildCheckItem(item){
   rem.onclick=()=>{
     const i=modalChecklist.indexOf(item);
     if(i>=0) modalChecklist.splice(i,1);
-    renderChecklist();
+    renderChecklist(); persistChecklistLive();
   };
 
   row.appendChild(cb); row.appendChild(txt); row.appendChild(who); row.appendChild(ab); row.appendChild(rem);
@@ -2240,6 +2777,7 @@ function addCheckItem(){
   modalChecklist.push({id:uid(), text:t, done:false, assignees: myId()?[myId()]:[]});  // creator is the default assignee
   renderChecklist();
   inp.value=''; inp.focus();
+  persistChecklistLive();
 }
 
 function setTimeVisible(on){
@@ -2265,17 +2803,20 @@ function openTaskModal(id){
   document.getElementById('tmColor').value = effColor;
   document.getElementById('tmColorBtn').style.background = effColor;
   document.getElementById('tmColorReset').style.display = modalColor ? '' : 'none';
-  modalChecklist = (f.node.checklist||[]).map(c=>({id:c.id||uid(), text:c.text||'', done:!!c.done, assignees:Array.isArray(c.assignees)?c.assignees.slice():[], abandoned:!!c.abandoned, abandonReason:c.abandonReason||'', abandonText:c.abandonText}));
+  if(!Array.isArray(f.node.checklist)) f.node.checklist=[];
+  f.node.checklist.forEach(c=>{ if(!c.id) c.id=uid(); if(!Array.isArray(c.assignees)) c.assignees=[]; delete c._editAssignees; });
+  modalChecklist = f.node.checklist;                 // edit the live array directly (saves immediately)
   renderChecklist();
   document.getElementById('tmCompletion').value=t.completionNote||'';
   document.getElementById('tmReason').value=t.reason||'';
   setModalState(t.state||'open');
   document.getElementById('taskScrim').classList.add('open');
-  document.getElementById('tmName').focus();
+  const nm=document.getElementById('tmName'); nm.focus(); nm.select();
 }
 function closeTaskModal(){
   document.getElementById('taskScrim').classList.remove('open');
   modalNodeId=null;
+  flushPendingRealtime();
 }
 let modalState='open';
 function setModalState(s){
@@ -2311,9 +2852,9 @@ function saveTaskModal(){
   n.task.reason = document.getElementById('tmReason').value;
   n.task.state = modalState;
   n.color = modalColor;
-  n.checklist = modalChecklist.filter(c=>c.text.trim()).map(c=>({id:c.id, text:c.text.trim(), done:!!c.done, assignees:Array.isArray(c.assignees)?c.assignees.slice():[], abandoned:!!c.abandoned, abandonReason:c.abandonReason||'', abandonText:c.abandonText}));
-  renderTree(); renderCalendar(); scheduleSave(); closeTaskModal();
-  if(activeTab==='assigned') renderAssigned();
+  // the checklist already lives on the node and saves on the fly — just tidy empty items
+  n.checklist = (n.checklist||[]).filter(c=>(c.text||'').trim());
+  renderTree(); renderCalendar(); renderAssigned(); scheduleSave(); closeTaskModal();
   toast('Task saved.');
 }
 
@@ -2705,47 +3246,56 @@ function buildShell(){
     </div>
   </div>
 
+  <!-- PROJECT TABS -->
+  <div class="projtabs" id="projTabs">
+    <button class="pt-arrow" id="ptLeft" title="Scroll tabs left">${svg('chevL')}</button>
+    <div class="pt-scroll" id="ptScroll"></div>
+    <button class="pt-arrow" id="ptRight" title="Scroll tabs right">${svg('chevR')}</button>
+  </div>
+
   <div class="layout">
     <!-- LEFT : projects -->
     <section class="panel" id="projectPanel">
       <div class="panel-head">
-        <div class="title"><span class="dot" style="background:var(--accent)"></span><select id="projSelect" class="proj-select" title="Switch project"></select></div>
+        <div class="title"><span class="dot" style="background:var(--accent)"></span><span id="activeProjName">Project</span></div>
         <span id="roBanner" class="ro-pill" style="display:none">${svg('layers')}View only · managed by a manager</span>
         <div class="spacer"></div>
+        <button class="btn" id="btnMinutes" title="Meeting minutes for this project" style="display:none">${svg('notepad')}Meeting minutes</button>
         <button class="btn primary" id="btnAddRoot" title="Add a top-level heading to this project" style="display:none">${svg('plus')}Add heading</button>
       </div>
       <div class="panel-body" id="projContainer"></div>
     </section>
 
-    <!-- TOP RIGHT : personal space (to-do + assigned) -->
+    <!-- TOP RIGHT : personal space (to-do + assigned, side by side) -->
     <section class="panel" id="todoPanel">
-      <div class="panel-head">
-        <div class="todo-tabs">
-          <button id="tabPersonal" class="active" title="Your own daily to-do list">${svg('list')}Personal</button>
-          <button id="tabAssigned" title="Checklist items assigned to you across your projects">${svg('users')}Assigned to me <span id="assignedPill" class="pill" style="display:none">0</span></button>
-        </div>
-        <div class="spacer"></div>
-        <span id="todoDateLabel" class="todo-date"></span>
-        <button class="ibtn accent" id="btnHistory" title="See all past tasks" style="margin-left:8px">${svg('history')}</button>
-      </div>
-      <div class="panel-body">
-        <div id="todoPersonal">
-          <div id="viewingBanner" class="viewing-banner" style="display:none">
-            ${svg('calendar')}<span></span>
-            <button class="btn ghost" id="btnBackToday" style="padding:3px 9px;font-size:12px">Back to today</button>
+      <div class="todo-split">
+        <div class="todo-col" id="colPersonal">
+          <div class="tc-head">
+            <div class="tc-title"><span class="dot" style="background:var(--accent)"></span>${svg('list')}Personal</div>
+            <div class="spacer"></div>
+            <span id="todoDateLabel" class="todo-date"></span>
+            <button class="ibtn accent" id="btnHistory" title="See all past tasks" style="margin-left:4px">${svg('history')}</button>
           </div>
-          <div class="todo-add">
-            <input id="todoInput" type="text" placeholder="Add a task and press Enter…" autocomplete="off">
-            <button class="btn primary" id="btnAddTodo">${svg('plus')}Add</button>
-          </div>
-          <ul id="todoList" class="todo-list"></ul>
-          <div class="legend">
-            <span><i style="background:var(--done)"></i>Completed</span>
-            <span><i style="background:var(--postpone)"></i>Deferred to next day</span>
-            <span><i style="background:var(--abandon)"></i>Abandoned</span>
+          <div class="tc-body">
+            <div id="viewingBanner" class="viewing-banner" style="display:none">
+              ${svg('calendar')}<span></span>
+              <button class="btn ghost" id="btnBackToday" style="padding:3px 9px;font-size:12px">Back to today</button>
+            </div>
+            <div class="todo-add">
+              <input id="todoInput" type="text" placeholder="Add a task and press Enter…" autocomplete="off">
+              <button class="btn primary" id="btnAddTodo">${svg('plus')}Add</button>
+            </div>
+            <ul id="todoList" class="todo-list"></ul>
           </div>
         </div>
-        <div id="todoAssigned" style="display:none"></div>
+        <div class="todo-col" id="colAssigned">
+          <div class="tc-head">
+            <div class="tc-title"><span class="dot" style="background:var(--teal)"></span>${svg('users')}Assigned to me</div>
+            <div class="spacer"></div>
+            <span id="assignedPill" class="pill" style="display:none">0</span>
+          </div>
+          <div class="tc-body" id="todoAssigned"></div>
+        </div>
       </div>
     </section>
 
@@ -2935,6 +3485,39 @@ function buildShell(){
       </div>
     </div>
   </div>
+  <!-- MEETING MINUTES MODAL -->
+  <div class="scrim" id="minScrim">
+    <div class="modal">
+      <div class="modal-head"><h3 id="minTitle">Meeting minutes</h3><div class="spacer"></div>
+        <button class="ibtn" id="minClose">${svg('x')}</button></div>
+      <div class="modal-body">
+        <div class="mm-left">
+          <div class="mm-h">New meeting</div>
+          <input type="text" id="mmTitleInput" class="mm-title-input" placeholder="Meeting title (e.g. Weekly sync — design)" autocomplete="off">
+          <div class="mm-toolbar" id="mmToolbar">
+            <button class="mm-tool" type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+            <button class="mm-tool" type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+            <button class="mm-tool" type="button" data-cmd="h3" title="Heading">H</button>
+            <button class="mm-tool" type="button" data-cmd="ul" title="Bullet list">${svg('list')}</button>
+            <button class="mm-tool" type="button" data-cmd="ol" title="Numbered list">1.</button>
+            <button class="mm-tool" type="button" data-cmd="check" title="Checklist item">${svg('check')}</button>
+            <button class="mm-tool" type="button" data-cmd="date" title="Insert today's date">${svg('calendar')}</button>
+          </div>
+          <div class="mm-editor" id="mmEditor" contenteditable="true" data-ph="Type the meeting minutes here…"></div>
+          <div class="mm-save-row">
+            <button class="btn ghost" id="mmNew" title="Clear the editor for a new meeting">${svg('plus')}New</button>
+            <span class="mm-editing-pill" id="mmEditingPill">${svg('edit')}Editing an existing entry</span>
+            <div class="spacer"></div>
+            <button class="btn primary" id="mmSave">${svg('save')}Save minutes</button>
+          </div>
+        </div>
+        <div class="mm-right">
+          <div class="mm-list-head"><div class="mm-h" style="margin:0">Saved minutes</div></div>
+          <div class="mm-list" id="mmList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
   `;
 }
 
@@ -2962,8 +3545,13 @@ function wire(){
   // projects  (manager-only visibility is applied later by reflectPermissions(),
   //            once the signed-in user's role is known)
   document.getElementById('btnAddRoot').onclick=()=>addHeading(null);
-  const projSel=document.getElementById('projSelect');
-  if(projSel) projSel.onchange=()=>switchProject(projSel.value);
+  const bMin=document.getElementById('btnMinutes'); if(bMin) bMin.onclick=openMeetingMinutes;
+  // project tab strip: scroll arrows + keep the overflow arrows in sync
+  const ptL=document.getElementById('ptLeft'), ptR=document.getElementById('ptRight'), ptS=document.getElementById('ptScroll');
+  if(ptL) ptL.onclick=()=>{ if(ptS) ptS.scrollBy({left:-240,behavior:'smooth'}); };
+  if(ptR) ptR.onclick=()=>{ if(ptS) ptS.scrollBy({left:240,behavior:'smooth'}); };
+  if(ptS) ptS.addEventListener('scroll',updateTabArrows);
+  window.addEventListener('resize',updateTabArrows);
   const btnProjects=document.getElementById('btnProjects');
   if(btnProjects) btnProjects.onclick=openProjectManager;
   const btnPeople=document.getElementById('btnPeople');
@@ -2984,9 +3572,32 @@ function wire(){
   document.getElementById('btnHistory').onclick=openHistory;
   document.getElementById('btnBackToday').onclick=()=>{ selectDate(todayKey()); };
 
-  // panel tabs
-  document.getElementById('tabPersonal').onclick=()=>setPanelTab('personal');
-  document.getElementById('tabAssigned').onclick=()=>setPanelTab('assigned');
+  // meeting minutes
+  document.getElementById('minClose').onclick=closeMeetingMinutes;
+  document.getElementById('mmSave').onclick=saveCurrentMinutes;
+  document.getElementById('mmNew').onclick=mmNewEntry;
+  document.getElementById('mmToolbar').addEventListener('mousedown',e=>{
+    const b=e.target.closest('.mm-tool'); if(!b) return;
+    e.preventDefault();                       // keep the caret in the editor
+    mmExec(b.dataset.cmd);
+  });
+  // tick checklist boxes inside the draft editor…
+  document.getElementById('mmEditor').addEventListener('click',e=>{
+    const box=e.target.closest('.mm-box'); if(!box) return;
+    const task=box.closest('.mm-task'); if(!task) return;
+    task.dataset.done = task.dataset.done==='1' ? '0' : '1';
+  });
+  // …and inside a saved entry (persists just that entry)
+  document.getElementById('mmList').addEventListener('click',e=>{
+    const box=e.target.closest('.mm-box'); if(!box) return;
+    const task=box.closest('.mm-task'); if(!task) return;
+    task.dataset.done = task.dataset.done==='1' ? '0' : '1';
+    const bodyEl=box.closest('.mm-entry-body');
+    if(bodyEl && bodyEl.dataset.mid && mmProjectId){
+      const m=meetingsOf(mmProjectId).find(x=>x.id===bodyEl.dataset.mid);
+      if(m){ m.body=sanitizeHtml(bodyEl.innerHTML); saveProjectById(mmProjectId); }
+    }
+  });
 
   // people modal
   document.getElementById('memClose').onclick=closeMembersModal;
@@ -3052,19 +3663,21 @@ function wire(){
   // history modal
   document.getElementById('histClose').onclick=closeHistory;
 
-  // close modals on scrim click / Esc
+  // close modals on scrim click / Esc (the minutes editor is protected so a draft isn't lost)
   document.querySelectorAll('.scrim').forEach(s=>{
-    s.addEventListener('mousedown',e=>{ if(e.target===s) s.classList.remove('open'); });
+    s.addEventListener('mousedown',e=>{ if(s.id==='minScrim') return; if(e.target===s) s.classList.remove('open'); });
   });
   document.addEventListener('keydown',e=>{
-    if(e.key==='Escape') document.querySelectorAll('.scrim.open').forEach(s=>s.classList.remove('open'));
+    if(e.key==='Escape') document.querySelectorAll('.scrim.open').forEach(s=>{ if(s.id!=='minScrim') s.classList.remove('open'); });
   });
+
+  // when focus leaves an editor, apply any realtime updates that were deferred
+  document.addEventListener('focusout',()=>setTimeout(flushPendingRealtime,60));
 }
 
 function renderAll(){
   renderProjectSelect(); renderTree(); renderCalendar();
   renderTodos(); renderAssigned();
-  setPanelTab(activeTab);
 }
 
 async function init(){
